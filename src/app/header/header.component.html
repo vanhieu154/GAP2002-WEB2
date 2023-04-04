@@ -1,0 +1,110 @@
+<nav class="header" id="header">
+  <div class="top_header">
+      <p><i class="fa-solid fa-truck"></i>  Miễn phí vận chuyển đơn từ 300k</p>
+  </div>
+  <div class="container-fluid   ">
+      <div class="header__container">
+          <div class="header__list">
+              <button class="header__list-icon" onclick="showHeaderList()">
+                  <i class="fa-solid fa-bars"></i>
+              </button>
+              <div id="header__list-container" class="header__list-container">
+                  <ul >
+                      <li><a href="./trangchu.html">Trang chủ</a></li>
+                      <li class="">
+                          <button class="header__list__sub-nav-link js-header__list__sub-nav-link" onclick="showSubnav()" >Sản Phẩm <i class="fa-solid fa-chevron-down"></i></button>
+                          <ul id="showSubnav" class="sub-nav-menu js-sub-nav-menu">
+                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(0)">Quần</a></li>
+                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(1)">Áo</a></li>
+                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(2)">Phụ kiện</a></li>
+                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(3)">Đầm</a></li>
+                          </ul>
+                      </li>
+                      <li><a href="">Blog</a></li>
+                      <li><a href="./khuyenmai.html">Khuyến mãi</a></li>
+                      <li><a href="./gioithieu.html">Giới thiệu</a></li>
+                      <li><a href="./lienhe.html">Liên hệ</a></li>
+                  </ul>
+              </div>
+          </div>
+          <div class="header__logo">
+              <a href="./trangchu.html">
+                  <img class="logo" src="./access/Img/Gap-Logo.webp" alt="">
+              </a>
+          </div>
+          <nav class="header__navbar">
+                  <ul >
+                      <li><a routerLink="/">Trang chủ</a></li>
+                      <li>
+                          <div class="">
+                              <a routerLink="/trangsp">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a>
+                              <ul class="header__subnavbar">
+                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(0)">Quần</a></li>
+                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(1)">Áo</a></li>
+                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(2)">Phụ kiện</a></li>
+                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(3)">Đầm</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li><a href="./Blog.html">Blog</a></li>
+                      <li><a href="./khuyenmai.html">Khuyến mãi</a></li>
+                      <li><a href="./gioithieu.html">Giới thiệu</a></li>
+                      <li><a href="./lienhe.html">Liên hệ</a></li>
+                  </ul>
+          </nav>
+          <div class="header__icon">
+              <div class="header__icon-wrap">
+                  <div class="header__icon__search dropdown-center">
+                      <button class=" box-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <span style="font-size: 2.5rem" class="  fa-solid fa-magnifying-glass"></span>
+                      </button >
+                      <div class="dropdown-menu header__search ">
+                          <form action="./trangsp.html" method="get" class="" id="searchProduct">
+                              <h2>TÌM KIẾM</h2>
+                              <hr>
+                              <div class="header__search__search-bar">
+                                  <input type="text" class="search-bar__input" placeholder="Tìm kiếm sản phẩm" id="search-bar__input" name="search-bar__input">
+                                  <button class="search-bar__btn" id="search-bar__btn" type="submit" onclick="pSearch()">
+                                      <i class="search-bar__icon  fa-solid fa-magnifying-glass"></i>
+                                  </button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="header__icon__login ">
+                      <button class="box-icon" onclick="showLogin()">
+                          <span style="font-size: 2.5rem" class="fa-solid fa-circle-user"></span>
+                      </button>
+                      <div id="header__login-container" class="header__login-container"></div>
+                  </div>
+                  <div class="header__icon__cart" id="header__icon__cart" >
+                      <button class="box-icon" onclick="showCart()" >
+                          <span style="font-size: 2.5rem" class="fa-solid fa-cart-shopping"></span>
+                      </button>
+                  </div>
+                  <div class="header__cart" id="header__cart">
+                      <h2>Giỏ hàng</h2>
+                      <div class="header__cart-container" id="header__cart-container">
+                      </div>
+                      <div class="header__cart-money">
+                       <p>Tổng tiền</p>
+                       <p class="home-product-item__price-current" id="home-product-item__price-current"></p>
+                      </div>
+                      <div class="header__cart_container-btn">
+                       <button class="btn-header" onclick="toGioHang()"><a >Xem giỏ hàng</a></button>
+                       <button class="btn-header" onclick="toThanhToan()"><a >Thanh toán</a></button>
+                      </div>
+                   </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="header__search-bar">
+          <input type="text" class="search-bar__input" id="search-bar__input1" placeholder="Tìm kiếm sản phẩm">
+          <button class="search-bar__btn" onclick="pSearch1()">
+              <i class="search-bar__icon  fa-solid fa-magnifying-glass"></i>
+          </button>
+      </div>
+
+  </div>
+</nav>

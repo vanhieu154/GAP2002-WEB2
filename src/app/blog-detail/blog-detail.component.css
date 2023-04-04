@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+}
+:root {
+  --darkpink: #b8a898;
+  --lightpink: #d2beb4;
+  --darkbrown: #6B4932;
+  --black: black;
+  --white: #ffffff;
+  --green: rgb(82, 155, 115);
+}
+body{
+  text-align: justify;
+}
+.breadcrumb{
+  background-color: var(--lightpink);
+  padding: 5px ;
+  font-size: 12px;
+  padding-left: 70px;
+  margin-top: 92px;
+}
+.breadcrumb>li,.breadcrumb>li a{
+  font-size: 1.2rem;
+}
+.fontweight__bolder{
+  font-weight: bold;
+}
+.row-blog {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.side {
+  -ms-flex: 30%;
+  flex: 30%;
+  padding: 50px;
+}
+
+.list-blog{
+  -ms-flex: 70%;
+  flex: 70%;
+  padding: 20px;
+}
+h5{
+  text-align: center;
+}
+a{
+  color: var(--black);
+  text-decoration: none;
+}
+.title__left{
+  position: relative;
+  font-size:  1.4rem;
+}
+.title__left::after{
+  content: "";
+  border: 1px solid;
+  display: block;
+  margin-top: 5px;
+  min-width: 50px;
+}
+.col__left__list{
+  margin-top: 30px;
+}
+.title__blog--size{
+  font-size: 1rem;
+}
+.box::after{
+  content: "";
+  border: 0.5px solid var(--lightpink);
+  display: block;
+  margin-top: 5px;
+  min-width: 50px;
+}
+
+.img{
+  float: left;
+  width: 25%;
+  margin-bottom:px;
+}
+.title__blog{
+  color: var(--lightpink);
+}
+
+.col__right{
+  padding-left: 30px;
+  padding-right: 60px;
+}
+.title__tinTuc{
+  font-weight: bolder;
+  color: var(--darkbrown);
+  font-size: 2.4rem;
+}
+.blog{
+  padding-top: 20px;
+}
+.content__blog{
+  padding-top: 10px;
+  font-size: 1rem;
+}
+.title__blog--large{
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: green;
+}
+
+.img--large{
+  display: block;
+  margin-left: auto;  margin-right: auto;
+  width: 40%;
+}
+.title__right{
+  font-size:  1.2rem;
+}
+
+
+
+.color--green{
+  color: var(--green);
+}
+
+.gioithieu{
+  font-weight: bold;
+}
+@media (max-width: 1023px) and (min-width: 740px) {
+  .breadcrumb{
+      margin-top: 128px;
+  }
+}
+
+/*mobile*/
+@media (max-width: 740px) {
+  .breadcrumb{
+      margin-top: 128px;
+  }
+}

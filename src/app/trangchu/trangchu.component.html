@@ -1,0 +1,182 @@
+
+    <div class="app">
+        <nav class="navbar"></nav>
+        <div class="header__slider">
+            <div class="slider-container__1" >
+                <div id="carouselExampleDark" class="carousel carousel-dark slide " data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <a href="./trangsp.html">
+                        <div class="carousel-item active" data-bs-interval="5000">
+                          <img src="{{a}}" class="d-block w-100" alt="">
+
+                        </div>
+                      </a>
+                      <a href="./trangsp.html">
+                        <div class="carousel-item" data-bs-interval="5000">
+                          <img src="/access/Img/slider2.png" class="d-block w-100" alt="">
+                        </div>
+                      </a>
+                      <a href="./trangsp.html">
+                        <div class="carousel-item" data-bs-interval="5000">
+                          <img src="/access/Img/slider3.png" class="d-block w-100" alt="">
+                        </div>
+                      </a>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <!-- start slider 2 -->
+            <div class="slider-container__2">
+                <div class="slider">
+                    <div class="slides" id="slides">
+                      <div class="slide__down">
+                        <img src="/src/assets/Img/prodduct-slider/quan.jpg" class="w-100">
+                        <div class="slider__btn-container w-100">
+                            <div class="category">
+                                <h2>Quần</h2>
+                                <button class="btn-header" onclick="toProductPage(0)">Xem ngay</button>
+                            </div>
+                        </div>
+
+                      </div>
+                      <div class="slide__down">
+                        <img src="/src/assets/Img/prodduct-slider/quan.jpg" class="w-100">
+                        <div class="slider__btn-container w-100">
+                            <div class="category">
+                                <h2>Áo</h2>
+                                <button class="btn-header" onclick="toProductPage(1)">Xem ngay</button>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="slide__down">
+                        <img src="/src/assets/Img/prodduct-slider/quan.jpg" class="w-100">
+                        <div class="slider__btn-container w-100">
+                            <div class="category">
+                                <h2>Phụ kiện</h2>
+                                <button class="btn-header" onclick="toProductPage(2)">Xem ngay</button>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="slide__down">
+                        <img src="/src/assets/Img/prodduct-slider/quan.jpg" class="w-100">
+                        <div class="slider__btn-container w-100">
+                            <div class="category">
+                                <h2>Váy</h2>
+                                <button class="btn-header" onclick="toProductPage(3)">Xem ngay</button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                        <a id="prev" class="prev">
+                            <i class="fas fa-caret-left"></i>
+                        </a>
+                        <a id="next" class="next">
+                            <i class="fas fa-caret-right"></i>
+                        </a>
+                  </div>
+            </div>
+            <!-- end slider 2 -->
+        </div>
+        <!-- Body -->
+        <div class="container home-product-item-wrapper">
+            <form id="showSP" action="./chitietsp.html" method="get">
+                <h1 class="product__header">Sản phẩm mới</h1>
+                <div class="row " id="new_product"></div>
+                <h1 class="product__header">Sản phẩm khuyến mãi</h1>
+                <div class="row" id="discount_product"></div>
+            </form>
+        </div>
+        <!-- end body -->
+        <!--start about us -->
+        <div class="container-fluid about-us">
+            <div class="row ">
+                <div class="col-md-6 col-sm-12 col-xs-12 info-img">
+                    <img class="col-md-6 col-sm-12 col-xs-12 w-100 container-background" src="./access/Img/about_us.jpg" alt="">
+                    <div class="box-banner-info">
+                        <div class="">
+                            <h1 class="info-header">Về chúng tôi</h1>
+                        </div>
+                        <a class="btn-header w-50" href="./gioithieu.html">Xem ngay</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 info-text">
+                    GAP 2002 là doanh nghiệp chuyên kinh doanh phân phối các sản phẩm thời trang thanh lý từ các nhãn hàng local brand bình dân đến các mặt hàng thời trang cao cấp của các các nhãn hàng nổi tiếng như H&M, Yody, Uniqlo… Với 10 chi nhánh phân bổ tập trung chủ yếu ở các quận trung tâm của Thành phố Hồ Chí Minh và đang có kế hoạch phát triển lan rộng ra khu vực trên toàn quốc. GAP 2002 tự tin với sự hiện diện của bản thân trong đời sống để đồng hành cùng khách hàng trong chặng đường làm đẹp cho bản thân nhưng vẫn bảo vệ môi trường.
+                </div>
+
+            </div>
+        </div>
+        <!-- end about us -->
+        <!--start register -->
+        <div class="container-fluid contact-us">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8">
+                    <div class="contact-email">
+                        <div class="title-contact">
+                            <i class="fa-solid fa-envelope-open-text contact-icon"></i>
+                            <h4>Đăng kí nhận tin</h4>
+                        </div>
+                        <form action="" class="input-group">
+                            <input class="form__input-email" type="email" placeholder="Nhập email của bạn">
+                            <button type="submit" class="form-btn">ĐĂNG KÍ</button>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 contact-number">
+                    <i class="fa-solid fa-phone contact-icon"></i>
+                    <p>Hỗ trợ / Mua hàng:</p>
+                    <a href="0946985615">0946985615</a>
+                </div>
+            </div>
+        </div>
+        <!-- end register -->
+        <!-- Footer -->
+        <div class="footer"></div>
+    </div>
+
+
+
+    <!-- modal layout -->
+    <div class="modal ">
+        <div class="modal_container ">
+          <div class="modal_form__container">
+            <div class="modal_close ">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="modal_body">
+                <div class="modal_info-container">
+                    <h3>Đăng ký nhận thông tin</h3>
+                    <div class="modal_info">
+                        <p>Chúng tôi sẽ cập nhật các chương trình khuyến mãi đến bạn</p>
+                        <ul>
+                            <li>Giảm giá các sản phẩm</li>
+                            <li>Ưu đãi sinh nhật</li>
+                            <li>Sản phẩm mới</li>
+                        </ul>
+                    </div>
+                </div>
+                <form action="">
+                      <input
+                        id="tickets-email"
+                        type="text"
+                        class="modal_input"
+                        placeholder="Nhập Email của bạn"
+                      />
+                      <!-- <input type="submit" id="modal__register" value="Đăng Kí"></input> -->
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>

@@ -1,0 +1,119 @@
+<div class="body" >
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb ">
+      <li class="breadcrumb-item"><a href="/trangchu.html">Trang chủ</a></li>
+      <li class="breadcrumb-item"><a href="/trangsp.html">Sản Phẩm</a></li>
+      <li class="breadcrumb-item active" aria-current="page" id="curent_product"></li>
+    </ol>
+</nav>
+<div class="container">
+  <div class="row " >
+    <div class="col-7 row carousel carousel-dark slide" id="carouselExampleDark"  data-bs-ride="carousel">
+      <div class="col-2">
+        <div id="items">
+          <!-- <div class="item "  data-bs-target="#carouselExampleDark" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" alt="">
+            <img class="w-100 " src="./access/Img/sanpham/gap01/gap01_1.webp" />
+          </div>
+          <div class="item" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2" alt="" >
+            <img class="w-100" src="./access/Img/sanpham/gap01/gap01_2.webp" />
+          </div>
+          <div class="item" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3" alt="" >
+            <img class="w-100" src="./access/Img/sanpham/gap01/gap01_3.webp" />
+          </div>
+          <div class="item" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4" alt="">
+            <img class="w-100" src="./access/Img/sanpham/gap01/gap01_4.webp" />
+          </div> -->
+        </div>
+      </div>
+      <div  class=" col-10" >
+        <div class="carousel-inner">
+            <div id="slider">
+                <!-- <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="./access/Img/sanpham/gap01/gap01_1.webp" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="./access/Img/sanpham/gap01/gap01_2.webp" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="./access/Img/sanpham/gap01/gap01_3.webp" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="./access/Img/sanpham/gap01/gap01_4.webp" class="d-block w-100" alt="">
+                </div> -->
+            </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 product-detial-container">
+      <h1 id="product-name">
+        <!-- Áo sơ mi nữ cao cấp thắt nơ nút phía trước màu trơn -->
+      </h1>
+      <h3 id="product-brand">
+        <!-- Dazy-Less -->
+      </h3>
+      <hr>
+      <div id="product__price">
+        <!-- <span class="product__discount" >-30%</span>
+        <span class="product__price-current">999.000đ</span>
+        <span class="product__price-old">1.200.000đ</span> -->
+      </div>
+      <hr>
+      <div class="product__size-container">
+        <span class="product__size-label">Kích thước:</span>
+        <button disabled class="product__size-size" id="product__size-size">L</button>
+      </div>
+      <div class="product__quantity-container">
+        <span class="product__quantity-label">Số lượng:</span>
+        <div class="product__quantity-quantity ">
+          <span id="minusProduct" onclick="handleMinus()"><i class="fa-solid fa-minus"></i></span>
+          <input  type="number" min="1" name="amount" id="amount" value="1">
+          <span id="plusProduct"><i class="fa-solid fa-plus"></i></span>
+        </div>
+      </div>
+      <div class="product__btn-add-container" >
+        <button class="product__btn-add" id="product__btn-add" >Thêm vào giỏ hàng</button>
+        <span class="product__liked"><i class="fa-solid fa-heart"></i></span>
+      </div>
+      <div class="product__description-container">
+        <div class="product__description-header-container" onclick="showDescription()">
+          <span class="product__description-header" >Mô tả</span>
+          <span class="product__description-header-dot"><i id="minus-icon-1" class="fa-solid fa-minus"></i><i id="plus-icon-1" class="fa-solid fa-plus"></i></span>
+        </div>
+        <div class="product__description" id="product__description-detail"></div>
+      </div>
+      <div class="product__description-container">
+        <div class="product__description-header-container" onclick="showEvaluate()">
+          <span class="product__description-header">Đánh giá độ mới</span>
+          <span class="product__description-header-dot"><i id="minus-icon-2" class="fa-solid fa-minus"></i><i id="plus-icon-2" class="fa-solid fa-plus"></i></span>
+        </div>
+        <div class="product__description" id="product-evaluate">
+          Độ mới được đánh giá theo tiêu chuẩn quy định trước như sau:
+          <ul>
+            <li>Quần áo còn tag, còn màu nguyên bản, không có chỗ hỏng, rách: mới 95% - 90%.</li>
+            <li>Quần áo còn tag, còn màu nguyên bản, có 1-2 chỗ hỏng nhỏ:  mới 90% - 85%.</li>
+            <li>Quần áo không còn tag, không còn màu nguyên bản, không/ 1-2 chỗ hỏng nhỏ: mới 85% - 80%</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="relative-product-container" style="overflow: hidden">
+    <h2>Sản phẩm có liên quan</h2>
+    <div class="contaier ">
+        <div class=" home-product-item-wrapper">
+            <form id="showSP" action="./chitietsp.html" method="get">
+                <div class="row " id="total_product"></div>
+            </form>
+        </div>
+    </div>
+</div>

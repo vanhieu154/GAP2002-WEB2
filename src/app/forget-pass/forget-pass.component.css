@@ -1,0 +1,148 @@
+body {
+  background: linear-gradient(to right, #724f36e4, #D2BEB4);
+  font-size: 1.6rem;
+}
+.h2, h2 {
+  font-size: calc(1.325rem + .9vw);
+}
+.h3, h3 {
+  font-size: calc(1.3rem + .6vw);
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.header{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  top: 0;
+  background-color: var(--white-color);
+  transition: top 0.8s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+.logo-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/* Login Card Header */
+.input-phonenumber-header {
+  margin-bottom: 2rem;
+}
+
+.input-phonenumber-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+
+.input-phonenumber-header h1+div {
+  /* font-size: calc(1rem * .8); */
+  opacity: .8;
+  text-align: center;
+}
+
+.input-phonenumber-container{
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .5);
+  padding: 4rem;
+  margin: 130px auto 40px;
+  max-width: 400px;
+  text-align: center;
+}
+.input-phonenumber-container::after{
+  background: rgba(255, 255, 255, .15);
+}
+
+/* ---input--- */
+input{
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, .3);
+  padding: 1rem 1.5rem;
+  padding-left: calc(1rem * 3.5);
+  border-radius: 5px;
+  width: 100%;
+  transition: background .5s;
+}
+
+input:focus {
+  background: white;
+}
+
+button {
+  background: #6B4932;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: background .5s;
+}
+
+button a{
+  text-decoration: none;
+  color: white;
+  font-weight: boldẻ;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+button:hover a{
+  color: #fff;
+}
+
+/* ---input, button */
+
+/* Login Card Form */
+.input-phonenumber-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-phonenumber-form .form-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: calc(1rem * .8);
+  margin-bottom: .5rem;
+}
+/*
+.input-phonenumber-form .form-item {
+  width: 50%;
+} */
+
+.input-phonenumber-form .form-item .form-item-icon {
+  position: absolute;
+  top: .82rem;
+  left: 1.4rem;
+  font-size: 1.6rem;
+  opacity: .4;
+}
+#phonenumber{
+  font-size: 1.6rem;
+}
+a{
+  text-decoration: none;
+  color: #333;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .input-phonenumber-container {
+      width: 250px;
+      padding: 2rem;
+  }
+}

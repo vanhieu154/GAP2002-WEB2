@@ -1,0 +1,279 @@
+<div class="row w-100 body">
+  <div  class="col-6 col--left success-order">
+      <h5 class=""> GAP2002 </h5>
+      <div class="icon__check">
+      <!-- <iconify-icon icon="material-symbols:check-circle-rounded" width="80px"></iconify-icon> -->
+
+  </div>
+  <div class="container text-center">
+      <h4>   Đặt hàng thành công </h4>
+    <span>  Mã đơn hàng: #000001 </span>  <br>
+     <span>    Cám ơn bạn đã mua hàng! </span>
+    </div>
+    <br>
+    <div class="text-center box__border">
+      <h4> Thông tin đơn hàng</h4> <br>
+      <div class="row ">
+          <div class="col thongtin"><span>Thông tin giao hàng  </span> <br>
+            <span>Số điện thoại: <span id="confirmPhone"></span></span> <br>
+            <span>Mã Huyện: <span id="confirmCity">HUYEN</span></span> <br>
+            <span>Mã Tỉnh: <span id="confirmDis">TINH</span></span> <br>
+            <span>Việt Nam</span> <br>
+          </div>
+          <div class="col thongtin__textleft">
+            <span>Phương thức thanh toán</span> <br>
+            <span id="paymentMethod"></span> <br>
+          </div>
+      </div>
+    </div>
+
+      <div class="lienhe">
+
+          <!-- <iconify-icon icon="majesticons:question-circle" style="color: #6b4932;" width="30px"> </iconify-icon>  -->
+         <span>Cần hỗ trợ?<a href="./lienhe.html"> Liên hệ chúng tôi </a>  </span>
+
+          <button class="button--muahang" ><a href="./trangchu.html">Tiếp tục mua hàng</a> </button>
+      </div>
+  </div>
+  <div class="col-6 col--left delivery-info" >
+      <h5 class=""> GAP2002 </h5>
+      <div class="row text-center">
+          <h4> Thông tin giao hàng</h4>
+          <nav class=""></nav>
+            <div class="" >
+              <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="./giohangtrong.html">Giỏ hàng </a></li>
+                  <li class="breadcrumb-item active" aria-current="page">  Thông tin giao hàng  </li>
+                  <li class="breadcrumb-item active" aria-current="page">  Phương thức thanh toán </li>
+                </ol>
+              </nav>
+    <form >
+      <div class="col ">
+        <div class=" mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"> </label>
+            <textarea class="form-control form-select-lg" id="hoten" name="hoten" rows="1" placeholder="Họ và tên"></textarea>
+          </div>
+      </div>
+      <div class="col">
+        <div class="row justify-content-start">
+            <div class="col-8">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"> </label>
+                <input type="email" class="form-control form-select-lg" id="email" name="email" placeholder="Email">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"></label>
+                <input type="tel" class="form-control form-select-lg" name="sdt" id="sdt" placeholder="Số điện thoại" >
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"> </label>
+            <textarea class="form-control form-select-lg" id="diachi" name="diachi" rows="1" placeholder="Địa chỉ"></textarea>
+          </div>
+      </div>
+      <div class="col">
+        <div class="row justify-content-start">
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"> </label>
+                <div>
+                  <select class="form-select form-select-lg mb-3" id="city" aria-label=".form-select-sm">
+                  <option value="tinh/thanh" selected>Tỉnh/ thành</option>
+                  </select>
+                   </div>
+
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"></label>
+                <select class="form-select form-select-lg mb-3" id="district" aria-label=".form-select-sm">
+                  <option value="quan/huyen" selected>Quận/ huyện</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+    <div class="button--gui__position">
+      <!-- <input class="btn-primary button--gui delivery w-100" onclick="tohowtopay()" style="text-align: center; margin-top: 30px; cursor: pointer;" value="Tiếp tục đến phương thức thanh toán "> -->
+      <button class=" button--gui w-100" onclick="tohowtopay()" style="text-align: center; margin-top: 30px; cursor: pointer;">Tiếp tục đến phương thức thanh toán</button>
+    </div>
+</div>
+  </div>
+  <div class="col-6 col--left delivery-info2">
+      <h5 class=""> GAP2002 </h5>
+      <div class="container ">
+          <h4 class="text-center"> Thông tin giao hàng</h4>
+          <nav class=""></nav>
+            <div class="" >
+              <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Giỏ hàng </a></li>
+                  <li class="breadcrumb-item"><a href="#" id="back">Thông tin giao hàng </a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Phương thức thanh toán </li>
+                </ol>
+              </nav>
+  <form action="#" method="get" name="howToPay">
+    <div class="box__border">
+          <div class="form-check" >
+            <input class="form-check-input" type="radio" name="deliveryPrice"  id="deliveryPrice1" value="20000" onclick="dP(20000)" >
+            <label class="form-check-label w-100" for="deliveryPrice2">
+            <div class="row">
+              <div class="col">Giao hàng trong tỉnh</div>
+              <div class="col">20,000 đ</div>
+            </div>
+
+            </label>
+          </div> <hr>
+          <div class="form-check" >
+            <input class="form-check-input" type="radio" name="deliveryPrice" id="deliveryPrice2" value="40000" onclick="dP(40000)">
+            <label class="form-check-label w-100" for="deliveryPrice1">
+
+              <div class="row ">
+                <div class="col">Giao hàng ngoài tỉnh </div>
+                <div class="col">40,000 đ</div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <br>
+          <div class="box__border">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" onclick="showEwallet(0)">
+            <label class="form-check-label" for="howtopay">
+            Thanh toán khi nhận hàng (COD)
+            </label>
+          </div> <hr>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" onclick="showEwallet(1)"  data-bs-toggle="modal" data-bs-target="#showVisa">
+            <label class="form-check-label" for="howtopay">
+              Chuyển khoản qua ngân hàng
+            </label>
+          </div> <hr>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" onclick="showEwallet(2)">
+            <label class="form-check-label" for="howtopay">
+              Ví điện tử
+            </label>
+          </div>
+
+        </div>
+      <!-- <div class="icon__qr" style="display: none"><iconify-icon icon="bi:qr-code-scan" width="150px"></iconify-icon></div> -->
+      <br>
+      <div class="w-100 button--gui__position ">
+        <input class="btn-primary button--gui button delivery2 w-100" style="cursor:pointer " value="Hoàn tất đơn hàng">
+      </div>
+</form>
+</div>
+  </div>
+  <div class="col-5 col--right">
+      <div class="container ">
+        <div id="cart__product-container"></div>
+          <hr>
+          <div id="priceCal">
+            <div class=" row container " >
+              <div class="sudungmagiamgia col-10">
+                <textarea class="form-control form-select-lg" id="magiamgia" name="magiamgia" rows="1" placeholder="Mã giảm giá" style="padding: 10px;"></textarea>
+                <DIV class="col" style="padding-right: 20px;">   </DIV>
+                <div class="col-1 " >
+               <input class="btn-primary button--gui" style="border-radius: 5px;" type="submit" value=" Sử dụng" onclick="voucherDiscount()">
+             </div>
+              </div>
+            </div>
+            <hr>
+
+              <div class=" row text-left" >
+                <div class="col-8">Tạm tính</div>
+                <div class="col-4 text-right color--gia"><span id="productPrice"></span><u>đ</u></div>
+              </div>
+              <div class="row" id="discount-code" ></div>
+              <div class=" row">
+                <div class="col-8">Phí vận chuyển</div>
+                <div class="col-4 text-right"><span id="deliveryP">---------</span><u>đ</u> </div>
+              </div>
+              <hr>
+            </div>
+          <div class=" row">
+              <div class="col-8 text-left">Tổng cộng</div>
+                <h2 class="col-4 text-right color--gia" style="font-weight: bolder;"><span id="totalPrice">---------</span><u>đ</u></h2>
+              </div>
+          </div>
+  </div>
+  <div class="modal fade" id="showVisa" tabindex="-1" aria-labelledby="showVisaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="showVisaLabel">Thanh toán bằng thẻ ngân hàng</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >
+          <div class="modal-img">
+            <img style="max-height: 100px" src="./access/Img/visa.png" alt="" >
+          </div>
+          <div class="mb-3">
+            <label for="creditCardNumber" class="form-label">CREDIT CARD NUMBER</label>
+            <input type="number" class="form-control" id="creditCardNumber" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="cardHolder" class="form-label">CARD HOLDER</label>
+            <input type="text" class="form-control" id="cardHolder">
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="creditCardNumber" class="form-label">CREDIT CARD NUMBER</label>
+                <input type="number" class="form-control" id="creditCardNumber" aria-describedby="emailHelp">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="creditCardNumber" class="form-label">CREDIT CARD NUMBER</label>
+                <input type="number" class="form-control" id="creditCardNumber" aria-describedby="emailHelp">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">PURCHASE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Nhập mã otp:</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1>Vui lòng nhập mã otp để xác minh</h1>
+          <div class="mb-6 text-center">
+            <div id="otp" class="row" style="justify-content: center;margin: 30px;">
+              <input class=" text-center col-1" type="number" id="first" maxlength="1" autofocus required/>
+              <input class=" text-center col-1" type="number" id="second" maxlength="1" pattern="[0-9]*" required/>
+              <input class=" text-center col-1" type="number" id="third" maxlength="1" required/>
+              <input class=" text-center col-1" type="number" id="fourth" maxlength="1" required/>
+              <input class=" text-center col-1" type="number" id="fifth" maxlength="1" required/>
+              <input class=" text-center col-1" type="number" id="sixth" maxlength="1" required/>
+            </div>
+        </div>
+        <div >Bạn vẫn chưa nhận được?
+            <a href="#">Gửi lại</a>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
