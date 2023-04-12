@@ -3,6 +3,18 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "default":{
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "options": {
+            "port": 4001,
+            "proxyConfig": "./proxy.conf.json"
+          }
+        }
+      },
+      "root": "src"
+    },
     "Test-app-gap": {
       "projectType": "application",
       "schematics": {},
@@ -63,6 +75,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "my-app:build",
+            "port": 4001,
+            "proxyConfig": "src/proxy.conf.json"
+            },
           "configurations": {
             "production": {
               "browserTarget": "Test-app-gap:build:production"

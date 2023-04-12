@@ -1,40 +1,40 @@
-<nav class="header" id="header">
+<nav class="header" id="header" #header>
   <div class="top_header">
       <p><i class="fa-solid fa-truck"></i>  Miễn phí vận chuyển đơn từ 300k</p>
   </div>
   <div class="container-fluid   ">
       <div class="header__container">
           <div class="header__list">
-              <button class="header__list-icon" onclick="showHeaderList()">
+              <button class="header__list-icon"(click)="showHeaderList()">
                   <i class="fa-solid fa-bars"></i>
               </button>
               <div id="header__list-container" class="header__list-container">
                   <ul >
-                      <li><a href="./trangchu.html">Trang chủ</a></li>
+                      <li><a routerLink="">Trang chủ</a></li>
                       <li class="">
-                          <button class="header__list__sub-nav-link js-header__list__sub-nav-link" onclick="showSubnav()" >Sản Phẩm <i class="fa-solid fa-chevron-down"></i></button>
+                          <button class="header__list__sub-nav-link js-header__list__sub-nav-link" (click)="showSubnav()" >Sản Phẩm <i class="fa-solid fa-chevron-down"></i></button>
                           <ul id="showSubnav" class="sub-nav-menu js-sub-nav-menu">
-                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(0)">Quần</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(1)">Áo</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(2)">Phụ kiện</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" onclick="toProductPage(3)">Đầm</a></li>
+                              <!-- <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(0)">Quần</a></li>
+                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(1)">Áo</a></li>
+                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(2)">Phụ kiện</a></li>
+                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(3)">Đầm</a></li> -->
                           </ul>
                       </li>
-                      <li><a href="">Blog</a></li>
-                      <li><a href="./khuyenmai.html">Khuyến mãi</a></li>
-                      <li><a href="./gioithieu.html">Giới thiệu</a></li>
-                      <li><a href="./lienhe.html">Liên hệ</a></li>
+                      <li><a  routerLink="Blog">Blog</a></li>
+                      <li><a routerLink="PromotionPage">Khuyến mãi</a></li>
+                      <li><a routerLink="IntroPage">Giới thiệu</a></li>
+                      <li><a routerLink="ContactPage">Liên hệ</a></li>
                   </ul>
               </div>
           </div>
           <div class="header__logo">
-              <a href="./trangchu.html">
-                  <img class="logo" src="./access/Img/Gap-Logo.webp" alt="">
+              <a  routerLink="">
+                  <img class="logo" src="./assets/Img/Gap-Logo.webp" alt="">
               </a>
           </div>
           <nav class="header__navbar">
                   <ul >
-                      <li><a routerLink="/">Trang chủ</a></li>
+                      <li><a routerLink="">Trang chủ</a></li>
                       <li>
                           <div class="">
                               <a routerLink="/trangsp">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a>
@@ -46,10 +46,10 @@
                               </ul>
                           </div>
                       </li>
-                      <li><a href="./Blog.html">Blog</a></li>
-                      <li><a href="./khuyenmai.html">Khuyến mãi</a></li>
-                      <li><a href="./gioithieu.html">Giới thiệu</a></li>
-                      <li><a href="./lienhe.html">Liên hệ</a></li>
+                      <li><a  routerLink="Blog">Blog</a></li>
+                      <li><a routerLink="PromotionPage">Khuyến mãi</a></li>
+                      <li><a routerLink="IntroPage">Giới thiệu</a></li>
+                      <li><a routerLink="ContactPage">Liên hệ</a></li>
                   </ul>
           </nav>
           <div class="header__icon">
@@ -72,10 +72,65 @@
                       </div>
                   </div>
                   <div class="header__icon__login ">
-                      <button class="box-icon" onclick="showLogin()">
+                      <button class="box-icon" (click)="showLogin()">
                           <span style="font-size: 2.5rem" class="fa-solid fa-circle-user"></span>
                       </button>
-                      <div id="header__login-container" class="header__login-container"></div>
+                      <div id="header__login-container" class="header__login-container">
+                        <div *ngIf="isLoggedIn">
+                         <div class="header__login2">
+                           <ul>
+                            <li><a class="header__login-item" href="./myaccount.html"> Tài khoản của tôi</a></li>
+                            <li><a class="header__login-item" href="./myaccount.html"> Đơn hàng</a></li>
+                            <li><a class="header__login-item" href="./myaccount.html"> Thông báo</a></li>
+                            <li><a class="header__login-item" href="./myaccount.html"> Kho voucher</a></li>
+                            <li><a class="header__login-item" onclick="dangxuat()" href="#"> Đăng xuất</a></li>
+                           </ul>
+                          </div>
+                        </div>
+
+                        <div *ngIf="!isLoggedIn">
+                          <div class="header__login">
+                              <!-- <form > -->
+                                <h2>ĐĂNG NHẬP TÀI KHOẢN</h2>
+                                <p>Nhập tài khoản và mật khẩu của bạn</p>
+                                <div class="header__login__nor">
+                                  <input type="text" placeholder="Tài khoản" id="user" malgength="128">
+                                </div>
+                                <div class="header__login__nor">
+                                  <input type="password"  placeholder="Mật khẩu" id="password">
+                                </div>
+                                <!-- <div class="btn-wrap header__login__confirm"> -->
+                                <button class="btn-header"  onclick="login()">Đăng nhập</button>
+                                <!-- </div> -->
+                                <div class="header__or">
+                                  <div class="line"></div>
+                                  <span class="or">hoặc</span>
+                                  <div class="line"></div>
+                                </div>
+                                <div class="btn-wrap">
+                                  <button class="btn-header">
+                                    <div class="socials-icon  ">
+                                      <i class="fa-brands fa-facebook"></i>
+                                    </div>
+                                    <div class="fb"><a href="https://www.facebook.com.vn">Facebook</a></div>
+                                  </button>
+                                  <button class="btn-header">
+                                    <div class="socials-icon">
+                                      <i class="fa-brands fa-google"></i>
+                                    </div>
+                                    <div class="gg"><a href="https://www.google.com.vn">Google</a></div>
+                                  </button>
+                                </div>
+                                <div class="header__login__footer">
+                                  Khách hàng mới? <a class="create-account" href="./dangky.html">Tạo tài khoản</a>
+                                </div>
+                                <div class="header__login__footer">
+                                  Quên mật khẩu? <a href="./quenmatkhau.html" class="restore-pass">Khôi phục mật khẩu</a>
+                                </div>
+                              <!-- </form> -->
+                            </div>
+                        </div>
+                      </div>
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
                       <button class="box-icon" onclick="showCart()" >

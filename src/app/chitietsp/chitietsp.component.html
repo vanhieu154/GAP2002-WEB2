@@ -1,8 +1,8 @@
 <div class="body" >
   <nav aria-label="breadcrumb ">
     <ol class="breadcrumb ">
-      <li class="breadcrumb-item"><a href="/trangchu.html">Trang chủ</a></li>
-      <li class="breadcrumb-item"><a href="/trangsp.html">Sản Phẩm</a></li>
+      <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+      <li class="breadcrumb-item"><a routerLink="/trangsp">Sản Phẩm</a></li>
       <li class="breadcrumb-item active" aria-current="page" id="curent_product"></li>
     </ol>
 </nav>
@@ -11,34 +11,43 @@
     <div class="col-7 row carousel carousel-dark slide" id="carouselExampleDark"  data-bs-ride="carousel">
       <div class="col-2">
         <div id="items">
-          <!-- <div class="item "  data-bs-target="#carouselExampleDark" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" alt="">
-            <img class="w-100 " src="./access/Img/sanpham/gap01/gap01_1.webp" />
+          <div class='item'  data-bs-target='#carouselExampleDark' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1' alt=''>
+            <img class='w-100' src="./assets/Img/sanpham/{{product.Hinhanh[0]}}" />
           </div>
-          <div class="item" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2" alt="" >
-            <img class="w-100" src="./access/Img/sanpham/gap01/gap01_2.webp" />
-          </div>
-          <div class="item" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3" alt="" >
-            <img class="w-100" src="./access/Img/sanpham/gap01/gap01_3.webp" />
-          </div>
-          <div class="item" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4" alt="">
-            <img class="w-100" src="./access/Img/sanpham/gap01/gap01_4.webp" />
-          </div> -->
+
+          <ng-container *ngFor="let item of product.Hinhanh; let i=index">
+            <div *ngIf="i>0"   class='item' [attr.data-bs-target]="'#carouselExampleDark'" [attr.data-bs-slide-to]="i" [attr.aria-label]="'Slide ' + (i+1)" alt=''>
+              <img  class='w-100' src="./assets/Img/sanpham/{{product.Hinhanh[i]}}" />
+            </div>
+          </ng-container>
+
         </div>
       </div>
       <div  class=" col-10" >
         <div class="carousel-inner">
             <div id="slider">
+
+              <div class='carousel-item active' data-bs-interval='5000'>
+                <img src="./assets/Img/sanpham/{{product.Hinhanh[0]}}" class='d-block w-100' alt=''>
+              </div>
+
+              <ng-container *ngFor="let item of product.Hinhanh; let i=index">
+                <div *ngIf="i>0"  class='carousel-item' data-bs-interval='5000'>
+                  <img src="./assets/Img/sanpham/{{product.Hinhanh[i]}}" class='d-block w-100' alt=''>
+                </div>
+              </ng-container>
+
                 <!-- <div class="carousel-item active" data-bs-interval="5000">
-                    <img src="./access/Img/sanpham/gap01/gap01_1.webp" class="d-block w-100" alt="">
+                    <img src="./assets/Img/sanpham/gap01/gap01_1.webp" class="d-block w-100" alt="">
                 </div>
                 <div class="carousel-item" data-bs-interval="5000">
-                    <img src="./access/Img/sanpham/gap01/gap01_2.webp" class="d-block w-100" alt="">
+                    <img src="./assets/Img/sanpham/gap01/gap01_2.webp" class="d-block w-100" alt="">
                 </div>
                 <div class="carousel-item" data-bs-interval="5000">
-                    <img src="./access/Img/sanpham/gap01/gap01_3.webp" class="d-block w-100" alt="">
+                    <img src="./assets/Img/sanpham/gap01/gap01_3.webp" class="d-block w-100" alt="">
                 </div>
                 <div class="carousel-item" data-bs-interval="5000">
-                    <img src="./access/Img/sanpham/gap01/gap01_4.webp" class="d-block w-100" alt="">
+                    <img src="./assets/Img/sanpham/gap01/gap01_4.webp" class="d-block w-100" alt="">
                 </div> -->
             </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

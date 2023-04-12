@@ -22,16 +22,17 @@ import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { PaymentComponent } from './payment/payment.component';
 import { SetUpPasswordComponent } from './set-up-password/set-up-password.component';
 import { DeliveryInfoComponent } from './delivery-info/delivery-info.component';
+import { ChangeSuccessComponent } from './change-success/change-success.component';
 
 const routes: Routes = [
   {
-    path:"/",component:TrangchuComponent
+    path:"",component:TrangchuComponent
   },
   {
     path:"trangsp",component:TrangspComponent
   },
   {
-    path:"chitietsp",component:ChitietspComponent
+    path:"chitietsp/:id",component:ChitietspComponent
   },
   {
     path:"Page404",component:Page404Component
@@ -87,6 +88,10 @@ const routes: Routes = [
   {
     path:"DeliveryInfor",component:DeliveryInfoComponent
   },
+  {
+    path:"ChangeSuccess",component:ChangeSuccessComponent
+  },
+
 ];
 
 

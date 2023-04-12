@@ -29,7 +29,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { SetUpPasswordComponent } from './set-up-password/set-up-password.component';
 import { DeliveryInfoComponent } from './delivery-info/delivery-info.component';
 import { ChangeSuccessComponent } from './change-success/change-success.component';
-
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -68,7 +68,8 @@ import { ChangeSuccessComponent } from './change-success/change-success.componen
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
-    IconModule
+    IconModule,
+    // NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
