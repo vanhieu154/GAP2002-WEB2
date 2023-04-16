@@ -20,7 +20,7 @@ body{
   background-color: var(--lightpink);
   padding: 5px ;
   padding-left: 70px;
-  margin-top: 92px;
+  margin-top: 77px;
 }
 .breadcrumb>li a{
   font-size: 1.2rem;
@@ -74,6 +74,7 @@ a{
   font-weight: bolder;
   color: var(--darkbrown);
   margin-top: 20px;
+  font-size: larger;
 }
 .chinhsach > li{
   font-weight: bold;
