@@ -87,3 +87,9 @@ box-shadow: 0 0 0 0.25rem rgb(210 190 180/55%);
   color: var(--white-color);
   background-color: var(--btn-color);
 }
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: #6b4932 !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

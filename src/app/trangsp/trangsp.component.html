@@ -13,35 +13,37 @@
                       <li class="category_list">
                           <a>Sản phẩm - </a>
                           <ul>
-                              <li class="category_item"><button class="type_category">Váy -</button></li>
-                              <li class="category_item"><button class="type_category">Áo -</button></li>
-                              <li class="category_item"><button class="type_category">Phụ kiện -</button></li>
-                              <li class="category_item"><button class="type_category">Quần -</button></li>
+                              <li class="category_item"><button class="type_category" (click)="showTypeProducts('Váy')">Váy -</button></li>
+                              <li class="category_item"><button class="type_category" (click)="showTypeProducts('Áo')">Áo -</button></li>
+                              <li class="category_item"><button class="type_category" (click)="showTypeProducts('Phụ kiện')">Phụ kiện -</button></li>
+                              <li class="category_item"><button class="type_category" (click)="showTypeProducts('Quần')">Quần -</button></li>
                           </ul>
                       </li>
                       <li class="category_list">
                           <a>Thương hiệu - </a>
                           <ul>
-                              <li class="category_item"><input  class="brand_category" value="SHEIN" type="checkbox" ><span class="checkbox_label">SHEIN -</span></li>
-                              <li class="category_item"><input  class="brand_category" value="ZARA" type="checkbox" ><span class="checkbox_label">ZARA -</span></li>
-                              <li class="category_item"><input  class="brand_category" value="H&M" type="checkbox" ><span class="checkbox_label">H&M -</span></li>
-                              <li class="category_item"><input  class="brand_category" value="ELGE" type="checkbox" ><span class="checkbox_label">ELGE -</span></li>
-                              <li class="category_item"><input  class="brand_category" value="JUNO" type="checkbox" ><span class="checkbox_label">JUNO -</span></li>
-                              <li class="category_item"><input  class="brand_category" value="LABB" type="checkbox" ><span class="checkbox_label">LABB -</span></li>
-                              <li class="category_item"><input  class="brand_category" value="MWC" type="checkbox" ><span class="checkbox_label">MWC -</span></li>
+                              <!-- <li class="category_item" *ngFor="let b of brands">
+                                <input  class="brand_category"   type="checkbox" [(ngModel)]="selectedBrands[b]">
+                                <span class="checkbox_label">{{b}} -</span>
+                              </li> -->
+                              <li class="category_item" *ngFor="let b of brands">
+                                <mat-checkbox class="brand_category" [(ngModel)]="selectedBrands[b]">
+                                  <span class="checkbox_label">{{b}} -</span>
+                                </mat-checkbox>
+                              </li>
                           </ul>
                       </li>
                       <li class="category_list">
                           <a>Giá sản phẩm - </a>
                           <ul>
-                              <li class="category_item"><input  class="price_category" value="100000" type="checkbox" ><span class="checkbox_label">Dưới 100.000<u>đ</u> -</span></li>
-                              <li class="category_item"><input  class="price_category" value="200000" type="checkbox" ><span class="checkbox_label">100.000<u>đ</u> - 200.000<u>đ</u> -</span></li>
-                              <li class="category_item"><input  class="price_category" value="300000" type="checkbox" ><span class="checkbox_label">200.000<u>đ</u> - 300.000<u>đ</u> -</span></li>
-                              <li class="category_item"><input  class="price_category" value="400000" type="checkbox" ><span class="checkbox_label">300.000<u>đ</u> - 400.000<u>đ</u> -</span></li>
+                              <li class="category_item"><input  class="price_category" value="100000" type="checkbox" [(ngModel)]="selectedPrices[0]"><span class="checkbox_label">Dưới 100.000<u>đ</u> -</span></li>
+                              <li class="category_item"><input  class="price_category" value="200000" type="checkbox" [(ngModel)]="selectedPrices[1]"><span class="checkbox_label">100.000<u>đ</u> - 200.000<u>đ</u> -</span></li>
+                              <li class="category_item"><input  class="price_category" value="300000" type="checkbox" [(ngModel)]="selectedPrices[2]"><span class="checkbox_label">200.000<u>đ</u> - 300.000<u>đ</u> -</span></li>
+                              <li class="category_item"><input  class="price_category" value="400000" type="checkbox" [(ngModel)]="selectedPrices[3]"><span class="checkbox_label">300.000<u>đ</u> - 400.000<u>đ</u> -</span></li>
                           </ul>
                       </li>
                       <li class="btn_list_container">
-                          <button id="btn_list" >Lọc sản phẩm</button>
+                          <button id="btn_list" (click)="productsFilter()">Lọc sản phẩm</button>
                       </li>
                   </ul>
               </div>
@@ -50,57 +52,76 @@
               <div class="col_right">
                   <div class="product__container">
                       <div class="product__container__header">
-                          <h3 id="Product__header-title" class="category_item"><button id="all-product">Tất cả sản phẩm</button></h3>
+                          <h3 id="Product__header-title" class="category_item"><button id="all-product" (click)="showAllProducts()">Tất cả sản phẩm</button></h3>
                       </div>
                       <div class="container home-product-item-wrapper">
-                          <form id="showSP" action="./chitietsp.html" method="get">
-                              <div class="row" id="total_product">
-                                <!-- <ng-container> -->
-                                    <div class="col-xl-2 col-lg-3 col-4 product"  *ngFor="let p of products">
-                                      <button class="home-product-item w-100"  type="submit" name="maSp" id="{{p.MaSP}}" value="{{p.MaSP}}">
-                                        <div class="home-product-item__img" style="background-image: url('./assets/Img/sanpham/{{ p.Hinhanh[0] }}')"></div>
-                                        <h4 class="home-product-item__name">{{p.TenSP}}</h4>
-                                        <div *ngIf="p.Discount==0">
-                                          <div class="home-product-item__price">
-                                            <span class="home-product-item__price-no-discount">{{p.Price}}đ</span>
-                                          </div>
-                                        </div>
-                                        <div *ngIf="p.Discount > 0">
-                                          <div class="home-product-item__price">
-                                            <span class="home-product-item__price-current">{{p.Price - p.Discount*p.Price/100}}đ</span>
-                                            <span class="home-product-item__price-old">{{p.Price}}đ</span>
-                                          </div>
-                                        </div>
-                                        <div class="home-product-item__action">
-                                          <span class="home-product-item__like home-product-item__like--liked">
-                                            <i class="home-product-item__like-icon-emty fa-regular fa-heart"></i>
-                                            <i class="home-product-item__like-icon-fil fa-solid fa-heart"></i>
-                                          </span>
-                                        </div>
-                                        <div class="home-product-item__origin">
-                                          <div class="home-product-item__grand">{{p.Hang}}</div>
-                                            <div class="home-product-item__origin-name">Nhật bản</div>
-                                        </div>
-                                        <div class="home-product-item__favor">
-                                          <i class="fa-solid fa-check"></i>
-                                          <span>Yêu thích</span>
-                                        </div>
-                                        <div *ngIf="p.Discount > 0">
-                                          <div class="home-product-item__sale-off">
-                                            <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
-                                            <div class="home-product-item__sale-off-label">GIẢM</div>
-                                          </div>
-                                        </div>
-                                      </button>
+                        <div class="row" id="total_product">
+                          <!-- <ng-container > -->
+                              <div class="col-xl-2 col-lg-3 col-4 product"  *ngFor="let p of showProducts">
+                                <button class="home-product-item w-100"  name="maSp" id="{{p.MaSP}}" value="{{p.MaSP}}" (click)="Detail(p)">
+                                  <div class="home-product-item__img" style="background-image: url('./assets/Img/sanpham/{{ p.Hinhanh[0] }}')"></div>
+                                  <h4 class="home-product-item__name">{{p.TenSP}}</h4>
+                                  <div *ngIf="p.Discount==0">
+                                    <div class="home-product-item__price">
+                                      <span class="home-product-item__price-no-discount">{{p.Price}}đ</span>
                                     </div>
-                                <!-- </ng-container> -->
-                              <!-- <div class="row product-not-found">
-                                  fadf
-                              </div> -->
+                                  </div>
+                                  <div *ngIf="p.Discount > 0">
+                                    <div class="home-product-item__price">
+                                      <span class="home-product-item__price-current">{{p.Price - p.Discount*p.Price/100}}đ</span>
+                                      <span class="home-product-item__price-old">{{p.Price}}đ</span>
+                                    </div>
+                                  </div>
+                                  <div class="home-product-item__action">
+                                    <span class="home-product-item__like home-product-item__like--liked">
+                                      <i class="home-product-item__like-icon-emty fa-regular fa-heart"></i>
+                                      <i class="home-product-item__like-icon-fil fa-solid fa-heart"></i>
+                                    </span>
+                                  </div>
+                                  <div class="home-product-item__origin">
+                                    <div class="home-product-item__grand">{{p.Hang}}</div>
+                                      <div class="home-product-item__origin-name">Nhật bản</div>
+                                  </div>
+                                  <div class="home-product-item__favor">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>Yêu thích</span>
+                                  </div>
+                                  <div *ngIf="p.Discount > 0">
+                                    <div class="home-product-item__sale-off">
+                                      <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
+                                      <div class="home-product-item__sale-off-label">GIẢM</div>
+                                    </div>
+                                  </div>
+                                </button>
                               </div>
-                          </form>
+                          <!-- </ng-container> -->
+                        <!-- <div class="row product-not-found">
+                            fadf
+                        </div> -->
+                        </div>
                       </div>
                   </div>
+                  <nav aria-label="Page navigation ">
+                    <ul class="pagination">
+                      <li class="page-item" [ngClass]="{'disabled':numPage==1}" (click)="prevPage()">
+                        <a class="page-link" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+
+                      <ng-container *ngFor="let a of allPage; let i = index;">
+                        <li class="page-item" (click)="showProduct(a,tempProducts)" [ngClass]="{'active':a==numPage}">
+                          <a  class="page-link" >{{a}}</a>
+                        </li>
+                      </ng-container>
+
+                      <li class="page-item" [ngClass]="{'disabled':numPage==page}" (click)="nextPage()">
+                        <a class="page-link" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
               </div>
           </div>
       </div>
