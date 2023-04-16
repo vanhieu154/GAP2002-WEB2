@@ -21,7 +21,9 @@
   padding: 5px ;
   font-size: 1.6rem;
   padding-left: 70px;
-  margin-top: 92px;
+  margin-top: 101px;
+
+
 }
 .breadcrumb>li a{
   font-size: 1.2rem;
@@ -45,6 +47,7 @@ a{
 
 .map{
   margin-top: 35px;
+  margin-left: 2%;
 }
 a{
   color: black;
@@ -61,10 +64,10 @@ a{
   font-weight: bold;
   margin-left: auto;
   border: 1px solid  var(--darkbrown);
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .form__guingay:hover{
   background-color: var(--darkbrown);
