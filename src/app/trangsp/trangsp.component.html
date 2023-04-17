@@ -22,12 +22,8 @@
                       <li class="category_list">
                           <a>Thương hiệu - </a>
                           <ul>
-                              <!-- <li class="category_item" *ngFor="let b of brands">
-                                <input  class="brand_category"   type="checkbox" [(ngModel)]="selectedBrands[b]">
-                                <span class="checkbox_label">{{b}} -</span>
-                              </li> -->
                               <li class="category_item" *ngFor="let b of brands">
-                                <mat-checkbox class="brand_category" [(ngModel)]="selectedBrands[b]">
+                                <mat-checkbox checked  class="brand_category" [(ngModel)]="selectedBrands[b]" [checked]="isBrandFiltered(b)" >
                                   <span class="checkbox_label">{{b}} -</span>
                                 </mat-checkbox>
                               </li>
@@ -36,10 +32,26 @@
                       <li class="category_list">
                           <a>Giá sản phẩm - </a>
                           <ul>
-                              <li class="category_item"><input  class="price_category" value="100000" type="checkbox" [(ngModel)]="selectedPrices[0]"><span class="checkbox_label">Dưới 100.000<u>đ</u> -</span></li>
-                              <li class="category_item"><input  class="price_category" value="200000" type="checkbox" [(ngModel)]="selectedPrices[1]"><span class="checkbox_label">100.000<u>đ</u> - 200.000<u>đ</u> -</span></li>
-                              <li class="category_item"><input  class="price_category" value="300000" type="checkbox" [(ngModel)]="selectedPrices[2]"><span class="checkbox_label">200.000<u>đ</u> - 300.000<u>đ</u> -</span></li>
-                              <li class="category_item"><input  class="price_category" value="400000" type="checkbox" [(ngModel)]="selectedPrices[3]"><span class="checkbox_label">300.000<u>đ</u> - 400.000<u>đ</u> -</span></li>
+                              <li class="category_item">
+                                <mat-checkbox [checked]="isPriceFiltered(100000)" class="price_category" value="100000" type="checkbox" [(ngModel)]="selectedPrices[100000]">
+                                  <span class="checkbox_label">Dưới 100.000<u>đ</u> -</span>
+                                </mat-checkbox>
+                              </li>
+                              <li class="category_item">
+                                <mat-checkbox [checked]="isPriceFiltered(200000)" class="price_category" value="200000" type="checkbox" [(ngModel)]="selectedPrices[200000]">
+                                  <span class="checkbox_label">100.000<u>đ</u> - 200.000<u>đ</u> -</span>
+                                </mat-checkbox>
+                              </li>
+                              <li class="category_item">
+                                <mat-checkbox [checked]="isPriceFiltered(300000)" class="price_category" value="300000" type="checkbox" [(ngModel)]="selectedPrices[300000]">
+                                  <span class="checkbox_label">200.000<u>đ</u> - 300.000<u>đ</u> -</span>
+                                </mat-checkbox>
+                              </li>
+                              <li class="category_item">
+                                <mat-checkbox [checked]="isPriceFiltered(400000)" class="price_category" value="400000" type="checkbox" [(ngModel)]="selectedPrices[400000]">
+                                  <span class="checkbox_label">300.000<u>đ</u> - 400.000<u>đ</u> -</span>
+                                </mat-checkbox>
+                              </li>
                           </ul>
                       </li>
                       <li class="btn_list_container">
@@ -63,13 +75,13 @@
                                   <h4 class="home-product-item__name">{{p.TenSP}}</h4>
                                   <div *ngIf="p.Discount==0">
                                     <div class="home-product-item__price">
-                                      <span class="home-product-item__price-no-discount">{{p.Price}}đ</span>
+                                      <span class="home-product-item__price-no-discount">{{p.Price.toLocaleString('vi-VN') }}đ</span>
                                     </div>
                                   </div>
                                   <div *ngIf="p.Discount > 0">
                                     <div class="home-product-item__price">
-                                      <span class="home-product-item__price-current">{{p.Price - p.Discount*p.Price/100}}đ</span>
-                                      <span class="home-product-item__price-old">{{p.Price}}đ</span>
+                                      <span class="home-product-item__price-current">{{(p.Price - p.Discount*p.Price/100).toLocaleString('vi-VN') }}đ</span>
+                                      <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN') }}đ</span>
                                     </div>
                                   </div>
                                   <div class="home-product-item__action">

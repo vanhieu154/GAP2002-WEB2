@@ -23,7 +23,6 @@ export class TrangspComponent implements OnInit{
   brands:any=[];
   selectedBrands: any = [];
   selectedPrices: any = [];
-
   constructor(private _service: ProductService,private router:Router){
     this._service.getProducts().subscribe({
       next:(data:IProduct[])=>{
@@ -33,24 +32,27 @@ export class TrangspComponent implements OnInit{
         for (let index = 0; index < this.page; index++) {
           this.allPage.push(index+1);
         }
-
         this.tempProducts=this.products
-        for (let i = 0; i < this.products.length; i++) {
-          this.brands.push(this.products[i].Hang);
-        }
         this.brands = [...new Set(this.products.map(item => item.Hang))];
-        console.log(this.brands);
-
-
-
+        this.brands.forEach((brand: string ) => {
+          this.selectedBrands[brand] = true;
+        });
       },
       error:(err)=>{this.errMessage=err}
     })
   }
   ngOnInit(): void {
-    // this.selectedBrands = {};
-  }
+    this.checkAllPriceFilters();
 
+  }
+  checkAllPriceFilters() {
+    this.selectedPrices = {
+      100000: true,
+      200000: true,
+      300000: true,
+      400000: true
+    };
+  }
 
   showAllProducts(){
     this.tempProducts=this.products;
@@ -77,14 +79,33 @@ export class TrangspComponent implements OnInit{
     }
   }
 
+  isBrandFiltered(brand: string): boolean {
+    return this.selectedBrands.hasOwnProperty(brand);
+  }
 
+  isPriceFiltered(price: number): boolean {
+    return this.selectedPrices.hasOwnProperty(price);
+  }
 
   productsFilter(){
-    this.selectedBrands = Object.keys(this.selectedBrands).filter(brand => this.selectedBrands[brand]);
-    console.log(this.selectedBrands); // mảng chứa các brand có giá trị true
+    console.log(this.selectedBrands);
+    console.log(this.selectedPrices);
+
+    const selectedBrandsCopy = {...this.selectedBrands};
+    const selectedBrands = Object.keys(selectedBrandsCopy).filter(brand => selectedBrandsCopy[brand]);
+    // this.selectedPrices = {...this.selectedPricesSnapshot};
+    // const selectedPricesCopy={...this.selectedPrices}
+    // const selectedPrices = Object.keys(this.selectedPrices).filter(price => this.selectedPrices[price]);
+    const priceFilters = Object.keys(this.selectedPrices).filter(price => this.selectedPrices[price]).map(Number);
+    this.tempProducts = this.products.filter(product => {
+      return selectedBrands.includes(product.Hang) && priceFilters.some((price: number) => price >= product.Price && price < product.Price + 100000);
+    });
+    this.showProduct(1, this.tempProducts);
+    console.log(this.selectedBrands);
 
 
   }
+
 
   nextPage(){
     if(this.numPage<this.page){

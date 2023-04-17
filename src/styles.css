@@ -87,9 +87,17 @@ box-shadow: 0 0 0 0.25rem rgb(210 190 180/55%);
   color: var(--white-color);
   background-color: var(--btn-color);
 }
-::ng-deep .mat-checkbox-checked .mat-checkbox-background {
-  background-color: #6b4932 !important;
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-checkmark-color: #fff;
+  --mdc-checkbox-selected-focus-icon-color: #6b4932;
+  --mdc-checkbox-selected-hover-icon-color: #6b4932;
+  --mdc-checkbox-selected-icon-color: #6b4932;
+  --mdc-checkbox-selected-pressed-icon-color: #6b4932;
+  --mdc-checkbox-unselected-focus-icon-color: #212121;
+  --mdc-checkbox-unselected-hover-icon-color: #212121;
+  --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
