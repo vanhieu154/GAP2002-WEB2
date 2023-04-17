@@ -11,7 +11,9 @@
       <!-- <div class="col icon-account"><iconify-icon icon="carbon:user-avatar-filled-alt" style="color: #b8a898" witdh="80px" height="80px"></iconify-icon></div> -->
       <div class="col icon-account-content">
           <p id="accName">Tên tài khoản</p>
-          <!-- <p><iconify-icon icon="material-symbols:edit" witdh="20px" height="20px"></iconify-icon> Sửa hồ sơ</p></div> -->
+          <p>
+            <!-- <iconify-icon icon="material-symbols:edit" witdh="20px" height="20px"></iconify-icon> -->
+            Sửa hồ sơ</p></div>
     </div>
     <div class="col myaccount-body-left-2">
           <div class="tai-khoan-cua-toi">
@@ -21,9 +23,15 @@
                     </button>
                   </li>
                       <ul class="btn-content">
-                          <!-- <li class="content-detail hoso"><iconify-icon icon="mdi:account"></iconify-icon> Hồ sơ</li>
-                          <li class="content-detail diachi"><iconify-icon icon="mdi:address-marker"></iconify-icon> Địa chỉ</li>
-                          <li class="content-detail doi-mat-khau"><iconify-icon icon="material-symbols:security"></iconify-icon> Đổi mật khẩu</li> -->
+                          <li class="content-detail hoso">
+                            <!-- <iconify-icon icon="mdi:account"></iconify-icon> -->
+                             Hồ sơ</li>
+                          <li class="content-detail diachi">
+                            <!-- <iconify-icon icon="mdi:address-marker"></iconify-icon> -->
+                            Địa chỉ</li>
+                          <li class="content-detail doi-mat-khau">
+                            <!-- <iconify-icon icon="material-symbols:security"></iconify-icon> -->
+                             Đổi mật khẩu</li>
                       </ul>
               </ul>
           </div>
@@ -73,7 +81,7 @@
       <!-- Hồ sơ của tôi -->
 <div class="body__container--hosocuatoi">
 <div container text-center >
-  <div style="display: none" class="myaccount-body-right-ho-so-cua-toi">
+  <div  class="myaccount-body-right-ho-so-cua-toi">
       <h2 style="font-size:32px ;">Hồ sơ của tôi</h2> <br><br>
       <form action="/action_page.php" autocomplete="on" method="post">
           <div class="row hs">
@@ -81,7 +89,7 @@
                   <label for="tendangnhap">Tên đăng nhập:</label>
               </div>
               <div class="col">
-                <!-- <input type="text" class="form-control" id="tendangnhap" placeholder="Nhập tên đăng nhập" name="tendangnhap"> -->
+                <input type="text" class="form-control" id="tendangnhap" placeholder="Nhập tên đăng nhập" name="tendangnhap">
                   <p id="tendangnhap"></p>
               </div>
           </div>
@@ -106,7 +114,7 @@
                   <label for="phone">Số điện thoại:</label>
               </div>
               <div class="col">
-                <!-- <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" name="phone"> -->
+                <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" name="phone">
                 <p id="phone"></p>
               </div>
           </div>
@@ -146,11 +154,14 @@
   </div>
 </div>
 <!-- Địa chỉ của tôi -->
-<div class="container address " style="display: none">
+<div class="container address " >
+  <!-- style="display: none" -->
 <div class="row">
     <div class="col dia-chi-cua-toi"><h1>Địa chỉ của tôi</h1></div>
     <div class="col-4 " onclick="showModal()">
-        <!-- <button type="button" class="btn btn-Themdiachi"><iconify-icon [icon]="ic:baseline-plus" ></iconify-icon> Thêm địa chỉ</button> -->
+        <button type="button" class="btn btn-Themdiachi">
+          <!-- <iconify-icon [icon]="ic:baseline-plus" ></iconify-icon> -->
+          Thêm địa chỉ</button>
     </div>
     <hr>
 </div>
@@ -244,7 +255,8 @@ modal.classList.remove("open")
 }
 </script>
 <!-- Đổi mật khẩu -->
-<div class="container body__container-doi-mat-khau" style="display: none">
+<div class="container body__container-doi-mat-khau" >
+  <!-- style="display: none" -->
     <form action="/action_page.php" method="get">
         <div class="row cachdeu">
             <span style="font-size: 32pt; font-weight:bold">Đổi mật khẩu</span>
@@ -292,7 +304,8 @@ modal.classList.remove("open")
 </div>
 
 <!--Order  -->
-<div class="body__container--Order" style="display: none;">
+<div class="body__container--Order" >
+  <!-- style="display: none;" -->
 <!-- top -->
 <div class="top--header">
 <div class="row myaccount-body-right-top">
@@ -320,7 +333,9 @@ modal.classList.remove("open")
     <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
   </div>
   <div class="col">
-    <!-- <p style="text-align: right;margin-right:20%;margin-top:10%"><iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon>Lấy hàng thành công | <span style="font-weight: bold;">Chờ lấy hàng</span></p> -->
+    <p style="text-align: right;margin-right:20%;margin-top:10%">
+      <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+      Lấy hàng thành công | <span style="font-weight: bold;">Chờ lấy hàng</span></p>
   </div>
 </div>
 <hr class="hr_style">
@@ -352,7 +367,9 @@ modal.classList.remove("open")
     <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
   </div>
   <div class="col">
-    <!-- <p style="text-align: right;margin-right:20%;margin-top:10%"><iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon>Lấy hàng thành công | <span style="font-weight: bold;">Đang giao</span></p> -->
+    <p style="text-align: right;margin-right:20%;margin-top:10%">
+      <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+      Lấy hàng thành công | <span style="font-weight: bold;">Đang giao</span></p>
   </div>
 </div>
 <hr class="hr_style">
@@ -383,7 +400,9 @@ modal.classList.remove("open")
     <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
   </div>
   <div class="col">
-    <!-- <p style="text-align: right;margin-right:20%;margin-top:10%"><iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon>Lấy hàng thành công | <span style="font-weight: bold;">Đã giao</span></p> -->
+    <p style="text-align: right;margin-right:20%;margin-top:10%">
+      <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+      Lấy hàng thành công | <span style="font-weight: bold;">Đã giao</span></p>
   </div>
 </div>
 <hr class="hr_style">
@@ -439,7 +458,8 @@ modal.classList.remove("open")
 </div>
 </div>
 </div>
-<div class="body__container--thongbao" style="display: none;">
+<div class="body__container--thongbao" >
+  <!-- style="display: none;" -->
 <!-- Thông báo -->
 <div class="row top-1">
 <p>Đánh dấu đã đọc tất cả</p>
@@ -476,10 +496,13 @@ modal.classList.remove("open")
 </div>
 </div>
 <!-- Xem chi tiết đơn hàng -->
-<div class="row body__container--OrderDetail" style="display: none;">
+<div class="row body__container--OrderDetail" >
+  <!-- style="display: none;" -->
   <div class="row">
     <div class="col return--orderdetail">
-      <!-- <p><iconify-icon icon="material-symbols:arrow-back-ios-rounded"></iconify-icon> Trở lại</p> -->
+      <p>
+        <!-- <iconify-icon icon="material-symbols:arrow-back-ios-rounded"></iconify-icon> -->
+         Trở lại</p>
     </div>
     <div class="col-5">
       <p>Mã đơn hàng:#000001 | <span style="color:red ;">ĐƠN HÀNG ĐÃ GIAO</span></p>

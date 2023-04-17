@@ -91,6 +91,9 @@ const routes: Routes = [
   {
     path:"ChangeSuccess",component:ChangeSuccessComponent
   },
+  {
+    path:"payment",component:PaymentComponent
+  },
 
 ];
 

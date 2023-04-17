@@ -172,12 +172,12 @@ margin-top: -10px;
 .success-order{
   display: none;
 }
-.delivery-info{
-  /* display: none; */
+/* .delivery-info{
+  display: none;
 }
 .delivery-info2{
   display: none;
-}
+} */
 .form-check-input:focus{
   box-shadow: 0 0 0 0.25rem rgb(210 190 180)
 }
