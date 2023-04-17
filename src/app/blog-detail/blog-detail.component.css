@@ -1,6 +1,4 @@
 * {
-  margin: 0;
-  padding: 0;
   font-size: 1.6rem;
 }
 :root {
@@ -27,23 +25,7 @@ body{
 .fontweight__bolder{
   font-weight: bold;
 }
-.row-blog {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-.side {
-  -ms-flex: 30%;
-  flex: 30%;
-  padding: 50px;
-}
 
-.list-blog{
-  -ms-flex: 70%;
-  flex: 70%;
-  padding: 20px;
-}
 h5{
   text-align: center;
 }
@@ -115,9 +97,31 @@ a{
 .title__right{
   font-size:  1.2rem;
 }
-
-
-
+.hr__style{
+  width: 90%;
+  border-bottom: 2px dashed var(--black);
+  margin-left: 5%;
+  background-color: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.img__blog{
+  width: 100%;
+  cursor: pointer;
+}
+.img--blog{
+  margin-left: 5%;
+}
+.hr_style{
+  margin-top: 20px;
+  width: 90%;
+  margin-left: 5%;
+  border-width: 2px solid var(--darkpink);
+}
+.brown{
+  color: #B8A898;
+  font-size: large;
+}
 .color--green{
   color: var(--green);
 }
