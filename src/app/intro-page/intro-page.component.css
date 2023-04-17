@@ -20,7 +20,7 @@ body{
   background-color: var(--lightpink);
   padding: 5px ;
   padding-left: 70px;
-  margin-top: 92px;
+  margin-top: 100px
 }
 .breadcrumb>li a{
   font-size: 1.2rem;
