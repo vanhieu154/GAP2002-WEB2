@@ -1,15 +1,32 @@
+<p>cart works!</p>
+
 <div class="body">
   <div class="row text-center">
     <div class="col ">
-   <h1 class= "text-left cart__header">Giỏ hàng của bạn </h1>
+    <h1 class= "text-left cart__header">Giỏ hàng của bạn </h1>
     <p> Có <span class="sosanpham" id="sosanpham">0 sản phẩm</span>  trong giỏ hàng</p>
     <div class="bar"></div>
   </div>
   </div>
-  <div class="row cart__container" >
-  <div class="col-6 row" id="cart__item__container">
 
+  <div class="row cart__container" >
+
+  <div class="col-6" id="cart__item__container">
+    <div class="row box" style="height: 60px;">
+        <div class="col cart__item--top" style="margin-left: 30px;">
+          <label for="">
+            <input type="checkbox" >
+          </label>
+        </div>
+        <div class="col cart__item--top" >Sản phẩm</div>
+        <div class="col cart__item--top">Đơn giá</div>
+        <div class="col cart__item--top">Số lượng</div>
+        <div class="col cart__item--top">Số tiền</div>
+    </div>
+
+    <div class=" row box cart__item"></div>
   </div>
+
   <div class="col-6 cart-info__container"  >
     <div class="borderbox order-infor">
       <h2 class="title" style="margin-bottom: 30px">Thông tin đơn hàng </h2>
@@ -30,5 +47,4 @@
     </div>
   </div>
   </div>
-
 </div>
