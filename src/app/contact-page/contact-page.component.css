@@ -49,12 +49,19 @@ a{
 a{
   color: black;
 }
-.bar{
+.bar--top{
   position: absolute;
-  width: 50px;
+  width: 90px;
   height: 0px;
   margin-top: 2px;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
+}
+.bar--bottom{
+  position: absolute;
+  width: 350px;
+  height: 0px;
+  margin-top: 2px;
+  border: 1px solid #000000;
 }
 .form__guingay{
   background-color: initial;
