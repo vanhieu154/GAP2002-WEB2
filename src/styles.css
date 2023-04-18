@@ -101,3 +101,6 @@ box-shadow: 0 0 0 0.25rem rgb(210 190 180/55%);
   --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

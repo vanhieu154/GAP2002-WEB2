@@ -20,7 +20,7 @@
     background-color: var(--lightpink);
     padding: 5px ;
     padding-left: 70px;
-    margin-top: 101px;
+    margin-top: 102px;
     font-size: 1.6rem;
 }
 .breadcrumb>li a{
@@ -83,13 +83,13 @@ a{
 }
 @media (max-width: 1023px) and (min-width: 740px) {
     .breadcrumb{
-        margin-top: 128px;
+        margin-top: 138px;
     }
 }
 
 /*mobile*/
 @media (max-width: 740px) {
     .breadcrumb{
-        margin-top: 128px;
+        margin-top: 138px;
     }
 }
