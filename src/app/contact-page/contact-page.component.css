@@ -1,9 +1,8 @@
 * {
-  margin-top: 0;
-  padding: 0;
   font-size: 1.6rem;;
   font-family: Quicksand;
 }
+
 :root {
   --darkpink: #b8a898;
   --lightpink: #d2beb4;
@@ -22,8 +21,6 @@
   font-size: 1.6rem;
   padding-left: 70px;
   margin-top: 101px;
-
-
 }
 .breadcrumb>li a{
   font-size: 1.2rem;
@@ -52,12 +49,19 @@ a{
 a{
   color: black;
 }
-.bar{
+.bar--top{
   position: absolute;
-  width: 50px;
+  width: 90px;
   height: 0px;
   margin-top: 2px;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
+}
+.bar--bottom{
+  position: absolute;
+  width: 350px;
+  height: 0px;
+  margin-top: 2px;
+  border: 1px solid #000000;
 }
 .form__guingay{
   background-color: initial;
@@ -85,13 +89,13 @@ a{
 }
 @media (max-width: 1023px) and (min-width: 740px) {
   .breadcrumb{
-      margin-top: 128px;
+      margin-top: 138px;
   }
 }
 
 /*mobile*/
 @media (max-width: 740px) {
   .breadcrumb{
-      margin-top: 128px;
+      margin-top: 138px;
   }
 }
