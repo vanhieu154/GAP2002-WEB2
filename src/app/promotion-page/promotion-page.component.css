@@ -95,7 +95,8 @@ a{
   margin: 14px 10px;
   font-size: 4.5rem;
   font-weight: 700;
-  /* padding: 5px px; */
+  text-align: center !important;
+  /* padding: 5px; */
 }
 
 

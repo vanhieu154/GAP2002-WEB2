@@ -72,11 +72,11 @@
                       </div>
                   </div>
                   <div class="header__icon__login ">
-                      <button class="box-icon" (click)="showLogin()">
+                      <button class="box-icon" (click)="showLogin()" id="login" >
                           <span style="font-size: 2.5rem" class="fa-solid fa-circle-user"></span>
                       </button>
-                      <div id="header__login-container" class="header__login-container">
-                        <div *ngIf="isLoggedIn">
+                      <div  (clickOutside)="hideLogin()" clickOutside id="header__login-container" class="header__login-container"   [class.activate]="showLoginBox">
+                        <div *ngIf="isLoggedIn" >
                          <div class="header__login2">
                            <ul>
                             <li><a class="header__login-item" href="./myaccount.html"> Tài khoản của tôi</a></li>
@@ -88,7 +88,7 @@
                           </div>
                         </div>
 
-                        <div *ngIf="!isLoggedIn">
+                        <div *ngIf="!isLoggedIn" >
                           <div class="header__login">
                               <!-- <form > -->
                                 <h2>ĐĂNG NHẬP TÀI KHOẢN</h2>

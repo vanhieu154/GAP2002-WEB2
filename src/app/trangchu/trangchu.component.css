@@ -196,8 +196,8 @@ a{
 .slider__btn-container{
   position: absolute;
   text-align: center;
-  height: 40%;
-  bottom: 0;
+  /* height: 40%; */
+  bottom: 5px;
   padding-left: auto;
   background-color: var(--slider-2-color)
 }
@@ -525,39 +525,7 @@ a{
 }
 
 /* ----------------------footer---------------- */
-.footer{
-  width: 100%;
-  /* padding: 20px 120px 0; */
-  background-color: var(--white-color);
-  padding: 20px 50px;
-  /* position: relative;
-  z-index: 2; */
-}
-.footer ul{
-  list-style-type: none;
-  padding: 0;
-}
-.footer ul li {
-  margin: 5px 0;
-}
-.footer__header{
-  color: var(--main-color);
-  margin: 20px 0;
-  font-size: 2.5rem;
-}
-.footer a{
-  color: var(--text-color);
-  font-size: 1.4rem;
-}
-.footer p{
-  font-size: 1.4rem;
-}
-.footer__icon-wrap{
-  margin: 10px;
-}
-.footer__icon{
-  margin: 10px;
-}
+
 
 
 /*---------------- RESPONSIVE ------------------------*/

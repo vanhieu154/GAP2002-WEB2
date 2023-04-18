@@ -88,22 +88,21 @@ export class TrangspComponent implements OnInit{
   }
 
   productsFilter(){
-    console.log(this.selectedBrands);
-    console.log(this.selectedPrices);
-
     const selectedBrandsCopy = {...this.selectedBrands};
     const selectedBrands = Object.keys(selectedBrandsCopy).filter(brand => selectedBrandsCopy[brand]);
     // this.selectedPrices = {...this.selectedPricesSnapshot};
     // const selectedPricesCopy={...this.selectedPrices}
     // const selectedPrices = Object.keys(this.selectedPrices).filter(price => this.selectedPrices[price]);
     const priceFilters = Object.keys(this.selectedPrices).filter(price => this.selectedPrices[price]).map(Number);
+    // console.log(priceFilters);
+    // if(priceFilters==null){
+
+    // }
+
     this.tempProducts = this.products.filter(product => {
       return selectedBrands.includes(product.Hang) && priceFilters.some((price: number) => price >= product.Price && price < product.Price + 100000);
     });
     this.showProduct(1, this.tempProducts);
-    console.log(this.selectedBrands);
-
-
   }
 
 
