@@ -20,7 +20,7 @@ body{
   padding: 5px ;
   font-size: 1.2rem;
   padding-left: 70px;
-  margin-top: 92px;
+  margin-top: 100px;
 }
 .breadcrumb>li{
   font-size: 1.2rem;
@@ -98,9 +98,9 @@ a{
 .content-detail:hover{
   color: #a5704d;
 }
-.activeB{
+/* .activeB{
   display: none;
-}
+} */
 /* right form tài khoản của tôi*/
 .hs{
   margin-bottom: 10px;
@@ -211,7 +211,7 @@ margin-bottom: 10px;
   bottom: 0;
   left: 0;
   animation: linear 0.1s;
-  display: none;
+  /* display: none; */
 
 }
 .modal.open{
@@ -309,7 +309,7 @@ margin-bottom: 10px;
 
 /* Chờ xác nhận */
 .myaccount-body-right-top-wait-confirm{
-  display: none;
+  /* display: none; */
   margin: 30px;
 
 }

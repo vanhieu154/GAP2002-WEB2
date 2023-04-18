@@ -6,7 +6,7 @@ body{
   padding: 5px ;
   font-size: 12px;
   padding-left: 70px;
-  margin-top: 92px;
+  margin-top: 102px;
 }
 .breadcrumb>li{
   font-size: 1.2rem;
@@ -29,9 +29,11 @@ a{
 }
 
 .row{
+
   justify-content: center;
   /* align-items: center; */
-  overflow: hidden;
+  overflow-x: hidden;
+  max-width: 99vw ;
 }
 .voucher-hot__100k{
   margin-top: 30px ;
@@ -308,7 +310,7 @@ a{
 .voucher-today-container{
   margin-top: 30px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .voucher-today-img{
   padding: 5px;

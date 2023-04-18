@@ -29,8 +29,10 @@ import { PaymentComponent } from './payment/payment.component';
 import { SetUpPasswordComponent } from './set-up-password/set-up-password.component';
 import { DeliveryInfoComponent } from './delivery-info/delivery-info.component';
 import { ChangeSuccessComponent } from './change-success/change-success.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -70,6 +72,10 @@ import { ChangeSuccessComponent } from './change-success/change-success.componen
     HttpClientModule,
     IconModule,
     // NgbModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

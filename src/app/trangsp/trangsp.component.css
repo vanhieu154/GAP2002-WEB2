@@ -19,7 +19,7 @@
 /* body */
 
 .body{
-  margin-top: 92px;
+  margin-top: 102px;
 }
 u{
   margin: 0 2px;
@@ -75,6 +75,12 @@ li{
 }
 .btn_list_container{
   text-align: right;
+}
+
+
+.active>.page-link{
+  background-color: var(--btn-color);
+  border-color: var(--btn-color);
 }
 #btn_list{
   border: none;

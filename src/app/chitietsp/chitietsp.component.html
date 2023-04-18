@@ -3,20 +3,18 @@
     <ol class="breadcrumb ">
       <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
       <li class="breadcrumb-item"><a routerLink="/trangsp">Sản Phẩm</a></li>
-      <li class="breadcrumb-item active" aria-current="page" id="curent_product"></li>
+      <li class="breadcrumb-item active" aria-current="page" >{{product.TenSP}}</li>
     </ol>
 </nav>
 <div class="container">
   <div class="row " >
-    <div class="col-7 row carousel carousel-dark slide" id="carouselExampleDark"  data-bs-ride="carousel">
+    <div class="col-7 row carousel carousel-dark slide" id="productDetailSlider"  data-bs-ride="carousel">
+
       <div class="col-2">
-        <div id="items">
-          <div class='item'  data-bs-target='#carouselExampleDark' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1' alt=''>
-            <img class='w-100' src="./assets/Img/sanpham/{{product.Hinhanh[0]}}" />
-          </div>
+        <div id="items carousel-indicators">
 
           <ng-container *ngFor="let item of product.Hinhanh; let i=index">
-            <div *ngIf="i>0"   class='item' [attr.data-bs-target]="'#carouselExampleDark'" [attr.data-bs-slide-to]="i" [attr.aria-label]="'Slide ' + (i+1)" alt=''>
+            <div [ngClass]="{'active' :i==0}" class='item' [attr.data-bs-target]="'#productDetailSlider'" [attr.data-bs-slide-to]="i" [attr.aria-label]="'Slide ' + (i+1)" alt=''>
               <img  class='w-100' src="./assets/Img/sanpham/{{product.Hinhanh[i]}}" />
             </div>
           </ng-container>
@@ -27,64 +25,57 @@
         <div class="carousel-inner">
             <div id="slider">
 
-              <div class='carousel-item active' data-bs-interval='5000'>
-                <img src="./assets/Img/sanpham/{{product.Hinhanh[0]}}" class='d-block w-100' alt=''>
-              </div>
-
               <ng-container *ngFor="let item of product.Hinhanh; let i=index">
-                <div *ngIf="i>0"  class='carousel-item' data-bs-interval='5000'>
+                <div [ngClass]="{'active' :i==0}"  class='carousel-item'  data-bs-interval='5000'>
                   <img src="./assets/Img/sanpham/{{product.Hinhanh[i]}}" class='d-block w-100' alt=''>
                 </div>
               </ng-container>
 
-                <!-- <div class="carousel-item active" data-bs-interval="5000">
-                    <img src="./assets/Img/sanpham/gap01/gap01_1.webp" class="d-block w-100" alt="">
-                </div>
-                <div class="carousel-item" data-bs-interval="5000">
-                    <img src="./assets/Img/sanpham/gap01/gap01_2.webp" class="d-block w-100" alt="">
-                </div>
-                <div class="carousel-item" data-bs-interval="5000">
-                    <img src="./assets/Img/sanpham/gap01/gap01_3.webp" class="d-block w-100" alt="">
-                </div>
-                <div class="carousel-item" data-bs-interval="5000">
-                    <img src="./assets/Img/sanpham/gap01/gap01_4.webp" class="d-block w-100" alt="">
-                </div> -->
             </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#productDetailSlider" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#productDetailSlider" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
         </div>
       </div>
+
     </div>
     <div class="col-5 product-detial-container">
       <h1 id="product-name">
+        {{product.TenSP}}
         <!-- Áo sơ mi nữ cao cấp thắt nơ nút phía trước màu trơn -->
       </h1>
       <h3 id="product-brand">
+        {{product.Hang}}
         <!-- Dazy-Less -->
       </h3>
       <hr>
       <div id="product__price">
-        <!-- <span class="product__discount" >-30%</span>
-        <span class="product__price-current">999.000đ</span>
-        <span class="product__price-old">1.200.000đ</span> -->
+
+        <div *ngIf="product.Discount >0">
+          <span class="product__discount" >-{{product.Discount}}%</span>
+          <span class="product__price-current">{{(product.Price - product.Discount*product.Price/100).toLocaleString('vi-VN')}}đ</span>
+          <span class="product__price-old">{{product.Price.toLocaleString('vi-VN')}}đ</span>
+        </div>
+        <div *ngIf="product.Discount ==0">
+          <span class="product__price-current">{{product.Price.toLocaleString('vi-VN')}}đ</span>
+        </div>
       </div>
       <hr>
       <div class="product__size-container">
         <span class="product__size-label">Kích thước:</span>
-        <button disabled class="product__size-size" id="product__size-size">L</button>
+        <button disabled class="product__size-size" id="product__size-size">{{product.Size}}</button>
       </div>
       <div class="product__quantity-container">
         <span class="product__quantity-label">Số lượng:</span>
         <div class="product__quantity-quantity ">
-          <span id="minusProduct" onclick="handleMinus()"><i class="fa-solid fa-minus"></i></span>
-          <input  type="number" min="1" name="amount" id="amount" value="1">
-          <span id="plusProduct"><i class="fa-solid fa-plus"></i></span>
+          <span id="minusProduct" (click)="handleMinus()"><i class="fa-solid fa-minus"></i></span>
+          <input  type="number" min="1" name="amount" id="amount" value="{{a}}">
+          <span id="plusProduct" (click)="handlePlus()"><i class="fa-solid fa-plus"></i></span>
         </div>
       </div>
       <div class="product__btn-add-container" >
@@ -92,14 +83,16 @@
         <span class="product__liked"><i class="fa-solid fa-heart"></i></span>
       </div>
       <div class="product__description-container">
-        <div class="product__description-header-container" onclick="showDescription()">
+        <div class="product__description-header-container" (click)="showDescription()">
           <span class="product__description-header" >Mô tả</span>
           <span class="product__description-header-dot"><i id="minus-icon-1" class="fa-solid fa-minus"></i><i id="plus-icon-1" class="fa-solid fa-plus"></i></span>
         </div>
-        <div class="product__description" id="product__description-detail"></div>
+        <div class="product__description" id="product__description-detail">
+          <p *ngFor="let d of product.Mota">{{d}}</p>
+        </div>
       </div>
       <div class="product__description-container">
-        <div class="product__description-header-container" onclick="showEvaluate()">
+        <div class="product__description-header-container" (click)="showEvaluate()">
           <span class="product__description-header">Đánh giá độ mới</span>
           <span class="product__description-header-dot"><i id="minus-icon-2" class="fa-solid fa-minus"></i><i id="plus-icon-2" class="fa-solid fa-plus"></i></span>
         </div>
@@ -120,9 +113,45 @@
     <h2>Sản phẩm có liên quan</h2>
     <div class="contaier ">
         <div class=" home-product-item-wrapper">
-            <form id="showSP" action="./chitietsp.html" method="get">
-                <div class="row " id="total_product"></div>
-            </form>
+          <div class="row " id="total_product">
+            <div class="col-xl-2 col-lg-3 col-4 product"  *ngFor="let p of products">
+              <button class="home-product-item w-100"  name="maSp" id="{{p.MaSP}}" value="{{p.MaSP}}" (click)="Detail(p)">
+                <div class="home-product-item__img" style="background-image: url('./assets/Img/sanpham/{{ p.Hinhanh[0] }}')"></div>
+                <h4 class="home-product-item__name">{{p.TenSP}}</h4>
+                <div *ngIf="p.Discount==0">
+                  <div class="home-product-item__price">
+                    <span class="home-product-item__price-no-discount">{{p.Price.toLocaleString('vi-VN')}}đ</span>
+                  </div>
+                </div>
+                <div *ngIf="p.Discount > 0">
+                  <div class="home-product-item__price">
+                    <span class="home-product-item__price-current">{{(p.Price - p.Discount*p.Price/100).toLocaleString('vi-VN')}}đ</span>
+                    <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN')}}đ</span>
+                  </div>
+                </div>
+                <div class="home-product-item__action">
+                  <span class="home-product-item__like home-product-item__like--liked">
+                    <i class="home-product-item__like-icon-emty fa-regular fa-heart"></i>
+                    <i class="home-product-item__like-icon-fil fa-solid fa-heart"></i>
+                  </span>
+                </div>
+                <div class="home-product-item__origin">
+                  <div class="home-product-item__grand">{{p.Hang}}</div>
+                    <div class="home-product-item__origin-name">Nhật bản</div>
+                </div>
+                <div class="home-product-item__favor">
+                  <i class="fa-solid fa-check"></i>
+                  <span>Yêu thích</span>
+                </div>
+                <div *ngIf="p.Discount > 0">
+                  <div class="home-product-item__sale-off">
+                    <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
+                    <div class="home-product-item__sale-off-label">GIẢM</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
     </div>
 </div>

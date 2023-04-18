@@ -187,5 +187,6 @@ export class TrangchuComponent implements OnInit{
 
   Detail(p:any){
     this.router.navigate(['chitietsp',p._id])
+    window.scrollTo(0, 0);
   }
 }

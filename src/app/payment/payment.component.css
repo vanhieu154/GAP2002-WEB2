@@ -11,7 +11,7 @@ textarea.form-control,input.form-control,select.form-select {
   text-align: right;
 }
 .body{
-  margin-top: 92px;
+  margin-top: 100px;
 }
 .col--left{
   padding-left: 70px;
@@ -83,9 +83,9 @@ border-radius: 10px;
 padding-left: 20px;
 padding-right: 20px;
 }
-.ship-infor{
+/* .ship-infor{
   display: none;
-}
+} */
 .icon__qr{
   /* display: none; */
   color: var(--black);
@@ -169,15 +169,15 @@ margin-top: -10px;
 .button--hoantatdon{
   text-align: right;
 }
-.success-order{
+/* .success-order{
   display: none;
-}
-.delivery-info{
-  /* display: none; */
+} */
+/* .delivery-info{
+  display: none;
 }
 .delivery-info2{
   display: none;
-}
+} */
 .form-check-input:focus{
   box-shadow: 0 0 0 0.25rem rgb(210 190 180)
 }

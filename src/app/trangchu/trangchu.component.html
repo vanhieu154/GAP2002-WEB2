@@ -100,13 +100,13 @@
                       <h4 class="home-product-item__name">{{p.TenSP}}</h4>
                       <div *ngIf="p.Discount==0">
                         <div class="home-product-item__price">
-                          <span class="home-product-item__price-no-discount">{{p.Price}}đ</span>
+                          <span class="home-product-item__price-no-discount">{{p.Price.toLocaleString('vi-VN')}}đ</span>
                         </div>
                       </div>
                       <div *ngIf="p.Discount > 0">
                         <div class="home-product-item__price">
-                          <span class="home-product-item__price-current">{{p.Price - p.Discount*p.Price/100}}đ</span>
-                          <span class="home-product-item__price-old">{{p.Price}}đ</span>
+                          <span class="home-product-item__price-current">{{(p.Price - p.Discount*p.Price/100).toLocaleString('vi-VN')}}đ</span>
+                          <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN')}}đ</span>
                         </div>
                       </div>
                       <div class="home-product-item__action">
@@ -140,12 +140,12 @@
                 <h1 class="product__header">Sản phẩm khuyến mãi</h1>
                 <div class="row" id="discount_product">
                   <div class="col-xl-2 col-lg-3 col-4 product"  *ngFor="let p of discountProduct">
-                    <button class="home-product-item w-100"  type="submit" name="maSp" id="{{p.MaSP}}" value="{{p.MaSP}}">
+                    <button class="home-product-item w-100"  name="maSp" id="{{p.MaSP}}" value="{{p.MaSP}}" (click)="Detail(p)">
                       <div class="home-product-item__img" style="background-image: url('./assets/Img/sanpham/{{ p.Hinhanh[0] }}')"></div>
                       <h4 class="home-product-item__name">{{p.TenSP}}</h4>
                         <div class="home-product-item__price">
-                          <span class="home-product-item__price-current">{{p.Price - p.Discount*p.Price/100}}đ</span>
-                          <span class="home-product-item__price-old">{{p.Price}}đ</span>
+                          <span class="home-product-item__price-current">{{(p.Price - p.Discount*p.Price/100).toLocaleString('vi-VN')}}đ</span>
+                          <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN')}}đ</span>
                         </div>
                       <div class="home-product-item__action">
                         <span class="home-product-item__like home-product-item__like--liked">
