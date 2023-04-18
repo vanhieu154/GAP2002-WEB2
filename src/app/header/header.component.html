@@ -56,7 +56,7 @@
               <div class="header__icon-wrap">
                   <div class="header__icon__search dropdown-center">
                       <button class=" box-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span style="font-size: 2.5rem" class="  fa-solid fa-magnifying-glass"></span>
+                          <span  class="  fa-solid fa-magnifying-glass"></span>
                       </button >
                       <div class="dropdown-menu header__search ">
                           <form action="./trangsp.html" method="get" class="" id="searchProduct">
@@ -73,7 +73,7 @@
                   </div>
                   <div class="header__icon__login ">
                       <button class="box-icon" (click)="showLogin()">
-                          <span style="font-size: 2.5rem" class="fa-solid fa-circle-user"></span>
+                          <span  class="fa-solid fa-circle-user"></span>
                       </button>
                       <div id="header__login-container" class="header__login-container">
                         <div *ngIf="isLoggedIn">
@@ -122,10 +122,10 @@
                                   </button>
                                 </div>
                                 <div class="header__login__footer">
-                                  Khách hàng mới? <a class="create-account" href="./dangky.html">Tạo tài khoản</a>
+                                  Khách hàng mới? <a class="create-account"  routerLink="Register">Tạo tài khoản</a>
                                 </div>
                                 <div class="header__login__footer">
-                                  Quên mật khẩu? <a href="./quenmatkhau.html" class="restore-pass">Khôi phục mật khẩu</a>
+                                  Quên mật khẩu? <a  routerLink="forgetPass" class="restore-pass">Khôi phục mật khẩu</a>
                                 </div>
                               <!-- </form> -->
                             </div>
@@ -134,7 +134,7 @@
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
                       <button class="box-icon" onclick="showCart()" >
-                          <span style="font-size: 2.5rem" class="fa-solid fa-cart-shopping"></span>
+                          <span  class="fa-solid fa-cart-shopping"></span>
                       </button>
                   </div>
                   <div class="header__cart" id="header__cart">

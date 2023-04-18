@@ -1,5 +1,5 @@
 body{
-  background: linear-gradient(to right,#724f36e4, #D2BEB4);
+  background: linear-gradient(to right,#724e34e4, #dac5ba);
   font-size: 1.6rem;
 }
 input{
@@ -58,14 +58,6 @@ a{
   flex-direction: row;
   align-items: center;
 }
-
-
-
-
-
-
-
-
 /* body */
 .login-card-container{
   /* font-size: 1.6rem; */
@@ -76,12 +68,15 @@ a{
   align-items: center;
   margin-bottom: 40px;
   margin-top: 92px;
+  background: linear-gradient(to right,#724e34e4, #dac5ba);
+
 }
 
 /* Login Card */
 .login-card {
   width: 450px;
   background: rgba(255, 255, 255, .5);
+  margin-top: 2rem;
   padding: 4rem;
   border-radius: 10px;
   position: relative;
@@ -120,6 +115,10 @@ a{
 .login-card-header h1+div {
   /* font-size: calc(1rem * .8); */
   opacity: .8;
+}
+.login-card-header div {
+  /* font-size: calc(1rem * .8); */
+  font-size: 1.3rem;
 }
 /* ---------- */
 
@@ -165,6 +164,8 @@ a{
   text-align: left;
   padding-inline:10px;
   page-break-inside: 10px;
+  font-size: 1.6rem;
+
 }
 input[type='radio']{
   margin-right: 5px;
@@ -199,6 +200,7 @@ input[type='radio']{
 
 .login-card .button {
   display: flex;
+
   /* background: #6B4932;
   border: none;
   color: white;
@@ -221,6 +223,8 @@ button {
   text-transform: uppercase;
   letter-spacing: 2px;
   transition: background .5s;
+  font-size: 1.6rem;
+
 }
 
 button:hover {
@@ -327,6 +331,8 @@ button:hover {
 
 #back-to-main{
   color: #000007;
+  font-size: 1.6rem;
+
 
 }
 

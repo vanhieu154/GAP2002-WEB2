@@ -48,9 +48,8 @@ input[type="number"] {
   align-items: center;
 }
 
-body {
-  /* height: 100vh; */
-
+.container{
+  height:100vh;
   background: linear-gradient(to right, #724f36e4, #D2BEB4);
   display: flex;
   justify-content: center;
@@ -58,6 +57,7 @@ body {
   font-size: 1.6rem;
   font-family: 'Quicksand';
   flex-direction: column;
+  width: 100%;
 }
 
 .input-otp-container .input-otp-header{
@@ -70,6 +70,8 @@ body {
   padding: 10px 0 10px;
   background-color: white;
   background: rgba(255, 255, 255, .5);
+  /* background: linear-gradient(to right, #724f36e4, #D2BEB4); */
+
   border-radius: 10px;
   width: 600px;
   justify-content: center;

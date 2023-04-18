@@ -1,13 +1,23 @@
+<link rel="preconnect" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700subset=vietnamese">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700subset=vietnamese" as="style">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700subset=vietnamese" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://example.com/access/fonts/fontawesome-free-6.2.0-web/css/all.min.css">
+<link rel="stylesheet" href="https://example.com/access/css/base.css">
+<link rel="icon" href="https://example.com/access/Img/Gap-Logo.webp" type="image/x-icon"/>
+
 <div class="input-phonenumber-container">
-  <div class="input-phonenumber-header">
-      <h1>Đặt lại mật khẩu</h1>
-      <div>Nhập số điện thoại để nhận mã OTP</div>
+  <div class="form-container">
+    <div class="input-phonenumber-header">
+        <h1>Đặt lại mật khẩu</h1>
+        <div>Nhập số điện thoại để nhận mã OTP</div>
+    </div>
+    <form class="input-phonenumber-form">
+        <div class="form-item">
+            <span class="form-item-icon"><i class="fa-solid fa-phone"></i></span>
+            <input type="text"  placeholder="Nhập số điện thoại" id="phonenumber" autofocus required>
+        </div>
+        <button type="submit"><a routerLink="otp_forgetPass"> Gửi mã</a></button>
+    </form>
   </div>
-  <form class="input-phonenumber-form">
-      <div class="form-item">
-          <span class="form-item-icon"><i class="fa-solid fa-phone"></i></span>
-          <input type="text"  placeholder="Nhập số điện thoại" id="phonenumber" autofocus required>
-      </div>
-      <button type="submit"><a routerLink="otp_forgetPass"> Gửi mã</a></button>
-  </form>
 </div>

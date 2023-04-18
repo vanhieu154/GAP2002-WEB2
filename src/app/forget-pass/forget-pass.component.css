@@ -1,7 +1,4 @@
-body {
-  background: linear-gradient(to right, #724f36e4, #D2BEB4);
-  font-size: 1.6rem;
-}
+
 .h2, h2 {
   font-size: calc(1.325rem + .9vw);
 }
@@ -36,11 +33,11 @@ body {
   margin-bottom: 2rem;
 }
 
-.input-phonenumber-header h1 {
+/* .input-phonenumber-header h1 {
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: .5rem;
-}
+} */
 
 .input-phonenumber-header h1+div {
   /* font-size: calc(1rem * .8); */
@@ -48,15 +45,16 @@ body {
   text-align: center;
 }
 
-.input-phonenumber-container{
+.form-container{
   border-radius: 10px;
   background: rgba(255, 255, 255, .5);
-  padding: 4rem;
+  padding: 5rem;
   margin: 130px auto 40px;
   max-width: 400px;
   text-align: center;
+
 }
-.input-phonenumber-container::after{
+.form-container::after{
   background: rgba(255, 255, 255, .15);
 }
 
@@ -144,5 +142,14 @@ a{
   .input-phonenumber-container {
       width: 250px;
       padding: 2rem;
+      height: auto;
   }
+}
+.input-phonenumber-container{
+  background: linear-gradient(to right, #724f36e4, #D2BEB4);
+  font-size: 1.6rem;
+  height: 70%;
+  text-align: center;
+  margin-top: 150px;
+
 }
