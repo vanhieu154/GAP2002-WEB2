@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./account-page.component.css']
 })
 export class AccountPageComponent {
-  myProfile=false;
+  myProfile=true;
   myAddress=false;
   changePass=false;
   myProfileP=true;
 
-  myOrder=true;
+  myOrder=false;
   myOrderDetail=false;
 
   waitConfirmOrder=true;
