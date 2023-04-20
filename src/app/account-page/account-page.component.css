@@ -1,12 +1,14 @@
 body{
   overflow-x: hidden;
   padding-bottom: 100px;
+
 }
 .row{
   justify-content: center;
 }
 *{
   font-size: 1.6rem;
+  font-family: quicksand;
 }
 .my-body__container{
   min-height: 500px;
@@ -54,6 +56,7 @@ a{
 }
 .icon-account{
   cursor: pointer;
+  margin-top: 10px;
 }
 /* Tên tài khoản */
 .myaccount-body{
@@ -82,8 +85,8 @@ a{
   border: none;
 }
 .btn:hover{
-  background-color: #fff;
-  color: #333;
+  background-color: #c691a1;
+  color: #944965;
 }
 .modal-footer{
   justify-content: flex-start ;
@@ -123,12 +126,19 @@ a{
 .myaccount-body-right-ho-so-cua-toi{
   display: none;
 }
+.body__container--hosocuatoi {
+  margin: 0 auto;
+  max-width: 800px; /* Tùy chỉnh kích thước giới hạn của phần tử chứa nội dung */
+}
 .luu2{
   background-color: var(--lightpink);
   text-align: center;
   color: white;
   width: 20%;
   margin-top: 20px;
+}
+.luu2:hover {
+  background-color: var(--darkpink);
 }
 :root {
 --lightpink: #d2beb4;
@@ -160,6 +170,9 @@ margin-bottom: 10px;
 .dia-chi-cua-toi{
   font-size:18px ;
   font-weight: bold;
+}
+.btn-Themdiachi:hover {
+  background-color: #c38a9c;
 }
 .btn-Themdiachi{
   width: 80%;
@@ -263,15 +276,18 @@ margin-bottom: 10px;
 .form-select-sm{
   font-size: 1.4rem;
 }
-.return{
+/* .return{
   text-align: right;
   cursor: pointer;
-}
+} */
 .complete{
-  background-color: #6B4932;
+  background-color:var(--lightpink);
   color: white;
-  width: 50%;
+  width: 100%;
   text-align: center;
+}
+.complete:hover{
+  background-color: #c38a9c;
 }
 .dong-5{
   margin-top: 20px;
@@ -285,13 +301,15 @@ margin-bottom: 10px;
 .body__container--hosocuatoi{
   display: none;
 }
+
+
 /* Đổi mật khẩu */
 .cachdeu{
   margin-bottom: 10px;
 
 }
 .submit{
-  width: 20%;
+  width: 48%;
   background-color: var(--lightpink);
   border: 1px solid var(--lightpink);
   text-align: center;
@@ -340,7 +358,7 @@ margin-bottom: 10px;
   border-radius: 10px;
 }
 .hrr__style{
-  border-top:3px dotted #6B4932;
+  border-top:1px dotted #6B4932;
   width: 90%;
 }
 .col.information{
