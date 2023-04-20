@@ -11,7 +11,7 @@
         <div class="col-4 myaccount-body-left text-center">
             <div class="row myaccount-body-left-1 ">
                 <div class="col icon-account">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" viewBox="0 0 32 32">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 32 32" style="color: #d2beb4;">
                         <path fill="currentColor" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"></path>
                         <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"></path>
                     </svg>
@@ -19,7 +19,7 @@
                 <div class="col icon-account-content">
                     <p id="accName">Tên tài khoản</p>
                     <p>
-                        <i class="fa-solid fa-pen-to-square fa-2xl" style="color: #000000;"></i> Sửa hồ sơ</p>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"style="color: #d2beb4;"><path fill="currentColor" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z"></path></svg> Sửa hồ sơ</p>
                 </div>
             </div>
             <div class="col myaccount-body-left-2">
@@ -32,11 +32,11 @@
                         </li>
                         <ul class="btn-content">
                             <li class="content-detail hoso" (click)="showMyAccount(true,false,false);showMy(true,false,false)">
-                                <i class="fa-solid fa-user fa-xl" style="color: #000000;"></i> Hồ sơ</li>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"></path></svg>Hồ sơ</li>
                             <li class="content-detail diachi" (click)="showMyAccount(false,true,false);showMy(true,false,false)">
-                                <i class="fa-solid fa-address-book fa-xl" style="color: #000000;"></i> Địa chỉ</li>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"></path></svg>Địa chỉ</li>
                             <li class="content-detail doi-mat-khau" (click)="showMyAccount(false,false,true);showMy(true,false,false)">
-                                <i class="fa-solid fa-lock fa-xl" style="color: #000000;"></i> Đổi mật khẩu</li>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 22q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v6.1q0 3.8-2.263 6.913T12 22Zm0-2.1q2.425-.75 4.05-2.963T17.95 12H12V4.125l-6 2.25v5.175q0 .175.05.45H12v7.9Z"></path></svg>Đổi mật khẩu</li>
                         </ul>
                     </ul>
                 </div>
@@ -93,8 +93,7 @@
             <div class="body__container--hosocuatoi" [class.activate]="myProfile">
                 <div container text-center>
                     <div class="myaccount-body-right-ho-so-cua-toi" [class.activate]="myProfileP">
-                        <h2 style="font-size:32px ;">Hồ sơ của tôi</h2>
-                        <br>
+                        <h2 style="font-size:32px ;text-align: center;">Hồ sơ của tôi</h2>
                         <br>
                         <form action="/action_page.php" autocomplete="on" method="post">
                             <div class="row hs">
@@ -176,50 +175,41 @@
                     </div>
                 </div>
                 <!-- Địa chỉ của tôi -->
-                <div class="container address " [class.activate]="myAddress">
-                    <!-- style="display: none" -->
-                    <div class="row">
-                        <div class="col dia-chi-cua-toi">
-                            <h1>Địa chỉ của tôi</h1>
-                        </div>
-                        <div class="col-4 " (click)="showModal()">
-                            <button type="button" class="btn btn-Themdiachi">
-                                <!-- <iconify-icon [icon]="ic:baseline-plus" ></iconify-icon> -->
-                                Thêm địa chỉ</button>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="row dia-chi-1">
-                        <p style="font-weight:bold;font-size:24pt">Địa chỉ</p>
-                        <br>
-                        <div class="col">
-                            <p><span style="font-weight:bold ;">Tên tài khoản</span> | Số điện thoại
-                                <br> Địa chỉ cụ thể </p>
-                            <p class="macdinh">Mặc định</p>
-                        </div>
-                        <div class="col-4">
-                            <br>
-                            <p style="font-size: 1.6rem; color: blue; margin-left: 30%; cursor: pointer;">Cập nhật</p>
-                            <p class="setup">Thiết lập mặc định</p>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="row dia-chi-2">
-                        <div class="col">
-                            <br>
-                            <p><span style="font-weight:bold ;">Tên tài khoản</span> | Số điện thoại
-                                <br> Địa chỉ cụ thể </p>
+                <div class="container address" [class.activate]="myAddress">
+                  <div class="row">
+                      <div class="col-8 dia-chi-cua-toi">
+                          <h1 >Địa chỉ của tôi</h1>
+                      </div>
+                      <div class="col-4">
+                          <button type="button" class="btn btn-Themdiachi" (click)="showModal()">Thêm địa chỉ</button>
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="row dia-chi-1">
+                      <div class="col">
+                          <p class="dia-chi-header"><span class="dia-chi-ten">Tên tài khoản</span> | Số điện thoại</p>
+                          <p class="dia-chi-text">Địa chỉ cụ thể</p>
+                          <p class="macdinh">Mặc định</p>
+                      </div>
+                      <div class="col-4">
+                          <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
+                          <p class="setup">Thiết lập mặc định</p>
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="row dia-chi-2">
+                      <div class="col">
+                          <p class="dia-chi-header"><span class="dia-chi-ten">Tên tài khoản</span> | Số điện thoại</p>
+                          <p class="dia-chi-text">Địa chỉ cụ thể</p>
+                      </div>
+                      <div class="col-4">
+                          <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
+                          <p class="xoa" style="cursor: pointer;">Xóa</p>
+                          <p class="setup">Thiết lập mặc định</p>
+                      </div>
+                  </div>
+              </div>
 
-                        </div>
-                        <div class="col-4">
-                            <br>
-                            <p style="font-size: 1.6rem; color: blue; cursor: pointer;margin-left: 10%;"><span>Cập nhật</span> <span style="margin-left: 30%;">Xóa</span>
-                            </p>
-                            <p class="setup">Thiết lập mặc định</p>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
                 <!-- Modal layout -->
                 <div class="modal" [class.activate]="showmodal">
                     <div class="modal__overlay"></div>
@@ -228,7 +218,8 @@
                             <!-- Form thêm địa chỉ mới -->
                             <div class="container Them-dia-chi">
                                 <form action="/action_page.php" method="get">
-                                    <h3>Địa chỉ mới</h3>
+                                  <br>
+                                    <h1 style="text-align: center;">Địa chỉ mới</h1>
                                     <div class="row dong-1">
                                         <div class="col">
                                             <input type="text" class="form-control" id="hovaten" placeholder="Họ và tên" name="hovaten">
@@ -275,12 +266,12 @@
                                         </div>
                                     </div>
                                     <div class="row dong-6">
-                                        <div class="col return" (click)="hideModal()"><span>Trở lại</span>
-                                        </div>
+                                      <div class="col"><button type="button" class="col complete btn" (click)="hideModal()">Trở lại</button></div>
+
                                         <div class="col">
-                                            <button type="button" class="btn complete">Hoàn thành</button>
+                                            <button type="button" class="btn complete"  (click)="hideModal()">Hoàn thành</button>
                                         </div>
-                                    </div>
+                                    </div><br>
                                 </form>
                             </div>
                         </div>
@@ -291,11 +282,9 @@
                     <!--  -->
                     <form action="/action_page.php" method="get">
                         <div class="row cachdeu">
-                            <span style="font-size: 32pt; font-weight:bold">Đổi mật khẩu</span>
+                            <h1>Đổi mật khẩu</h1><br>
                             <span style="color: red;">*Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác </span>
                         </div>
-                        <br>
-                        <br>
                         <br>
                         <div class="row cachdeu">
                             <div class="col-3">
