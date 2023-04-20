@@ -1,5 +1,4 @@
 body{
-  font-family: Quicksand;
   overflow-x: hidden;
   padding-bottom: 100px;
 }
@@ -121,6 +120,9 @@ a{
   /* margin-top: 10px; */
 }
 /* Hồ sơ của tôi */
+.myaccount-body-right-ho-so-cua-toi{
+  display: none;
+}
 .luu2{
   background-color: var(--lightpink);
   text-align: center;
@@ -171,6 +173,9 @@ margin-bottom: 10px;
   border-radius: 10px;
   margin-left: 10px;
 
+}
+.address{
+  display: none;
 }
 .address p{
   font-size: 16px;
@@ -275,7 +280,10 @@ margin-bottom: 10px;
   margin-top: 30px;
 }
 .activate{
-  display: block;
+  display: block !important
+}
+.body__container--hosocuatoi{
+  display: none;
 }
 /* Đổi mật khẩu */
 .cachdeu{
@@ -361,6 +369,13 @@ margin-bottom: 10px;
   border-radius: 10px;
 }
 /* Thông báo */
+.body__container--thongbao{
+  display: none;
+}
+.body__container--thongbao .activate{
+  display: block;
+}
+
 .top-1{
   justify-content: space-around;
   text-align: center;
@@ -453,6 +468,13 @@ margin-bottom: 10px;
   background-color: rgb(210 190 180);
   border-color: rgb(210 190 180);
 }
+
+
+
+
+
+
+
 
 /* Reponsive */
 @media (max-width: 1023px) and (min-width: 740px) {

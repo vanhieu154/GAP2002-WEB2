@@ -92,11 +92,15 @@ a{
 }
 .countDown-time{
   background-color: #fff;
-  margin: 14px 10px;
+  margin: 15px 10px;
   font-size: 4.5rem;
   font-weight: 700;
   text-align: center !important;
-  /* padding: 5px; */
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
 }
 
 

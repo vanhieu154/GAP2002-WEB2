@@ -54,12 +54,12 @@
           </nav>
           <div class="header__icon">
               <div class="header__icon-wrap">
-                  <div class="header__icon__search dropdown-center">
-                      <button class=" box-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="header__icon__search ">
+                      <button class=" box-icon" type="button" (click)="showBox(false,false,true)">
                           <span style="font-size: 2.5rem" class="  fa-solid fa-magnifying-glass"></span>
                       </button >
-                      <div class="dropdown-menu header__search ">
-                          <form action="./trangsp.html" method="get" class="" id="searchProduct">
+                      <div class=" header__search "  [class.activate]="showSearchBox">
+                          <!-- <form action="./trangsp.html" method="get" class="" id="searchProduct"> -->
                               <h2>TÌM KIẾM</h2>
                               <hr>
                               <div class="header__search__search-bar">
@@ -68,14 +68,14 @@
                                       <i class="search-bar__icon  fa-solid fa-magnifying-glass"></i>
                                   </button>
                               </div>
-                          </form>
+                          <!-- </form> -->
                       </div>
                   </div>
                   <div class="header__icon__login ">
-                      <button class="box-icon" (click)="showLogin()" id="login" >
+                      <button class="box-icon" (click)="showBox(false,true,false)" id="login" >
                           <span style="font-size: 2.5rem" class="fa-solid fa-circle-user"></span>
                       </button>
-                      <div  (clickOutside)="hideLogin()" clickOutside id="header__login-container" class="header__login-container"   [class.activate]="showLoginBox">
+                      <div  id="header__login-container" class="header__login-container"   [class.activate]="showLoginBox">
                         <div *ngIf="isLoggedIn" >
                          <div class="header__login2">
                            <ul>
@@ -133,21 +133,26 @@
                       </div>
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
-                      <button class="box-icon" onclick="showCart()" >
+                      <button class="box-icon" (click)="showBox(true,false,false)" >
                           <span style="font-size: 2.5rem" class="fa-solid fa-cart-shopping"></span>
                       </button>
                   </div>
-                  <div class="header__cart" id="header__cart">
+                  <div class="header__cart" id="header__cart"   [class.activate]="showCartBox">
                       <h2>Giỏ hàng</h2>
                       <div class="header__cart-container" id="header__cart-container">
+                        <svg style='color: var(--background-color)' xmlns='http://www.w3.org/2000/svg' width='50' height='50' fill='currentColor' class='cart-icon bi bi-cart2' viewBox='0 0 16 16'>
+                        <path d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'/>
+                        </svg>
+                        <p>Hiện chưa có sản phẩm</p>
+                        <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
                       </div>
                       <div class="header__cart-money">
                        <p>Tổng tiền</p>
                        <p class="home-product-item__price-current" id="home-product-item__price-current"></p>
                       </div>
                       <div class="header__cart_container-btn">
-                       <button class="btn-header" onclick="toGioHang()"><a >Xem giỏ hàng</a></button>
-                       <button class="btn-header" onclick="toThanhToan()"><a >Thanh toán</a></button>
+                       <button class="btn-header" routerLink="/Cart"><a >Xem giỏ hàng</a></button>
+                       <button class="btn-header" routerLink="/Payment"><a >Thanh toán</a></button>
                       </div>
                    </div>
               </div>
