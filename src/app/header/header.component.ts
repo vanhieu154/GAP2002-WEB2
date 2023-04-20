@@ -15,6 +15,9 @@ export class HeaderComponent  {
   showLoginBox = false;
   showCartBox=false;
   showSearchBox=false;
+  cartProduct=false;
+  products:any;
+  pay:number=0
   showBox(showCartBox: boolean, showLoginBox: boolean,showSearchBox:boolean): void {
     if(this.showCartBox != showCartBox || this.showLoginBox != showLoginBox || this.showSearchBox!=showSearchBox){
       this.showCartBox = showCartBox;
@@ -70,7 +73,21 @@ export class HeaderComponent  {
   //     this.prevScrollpos = currentScrollPos;
   //   };
   // }
+  showCart(){
+    this.products = JSON.parse(sessionStorage.getItem("Cart")!);
+    var cart="";
+    var totalPrice='';
+    if(this.products == null){
+      this.cartProduct=false
+    }else{
+      this.cartProduct=true
+    }
+    this.pay=0
+    for (let i = 0; i < this.products.length; i++) {
+      this.pay=this.pay+this.products[i].total
+    }
 
+  }
 
 
 

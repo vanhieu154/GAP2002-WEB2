@@ -133,18 +133,60 @@
                       </div>
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
-                      <button class="box-icon" (click)="showBox(true,false,false)" >
+                      <button class="box-icon" (click)="showBox(true,false,false);showCart()" >
                           <span style="font-size: 2.5rem" class="fa-solid fa-cart-shopping"></span>
                       </button>
                   </div>
                   <div class="header__cart" id="header__cart"   [class.activate]="showCartBox">
                       <h2>Giỏ hàng</h2>
                       <div class="header__cart-container" id="header__cart-container">
-                        <svg style='color: var(--background-color)' xmlns='http://www.w3.org/2000/svg' width='50' height='50' fill='currentColor' class='cart-icon bi bi-cart2' viewBox='0 0 16 16'>
-                        <path d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'/>
-                        </svg>
-                        <p>Hiện chưa có sản phẩm</p>
-                        <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
+                        <ng-container *ngIf="!cartProduct">
+                          <svg style='color: var(--background-color)' xmlns='http://www.w3.org/2000/svg' width='50' height='50' fill='currentColor' class='cart-icon bi bi-cart2' viewBox='0 0 16 16'>
+                            <path d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'/>
+                          </svg>
+                          <p>Hiện chưa có sản phẩm</p>
+                          <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
+                        </ng-container>
+                        <ng-container *ngIf="cartProduct">
+                          <ng-container *ngFor="let p of products">
+                            <div class='row'>
+                            <div class='col-2'>
+                            <img class='w-100' src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
+                            </div>
+                            <div style='position: relative; text-align: left;' class='col-10'>
+                            <div class='header__cart-item__delete'>
+                            <i class='fa-solid fa-xmark'></i>
+                            </div>
+                            <div class='header__cart-item__infor'>
+                            <div class='header__cart-item__header'>{{p.TenSP}}</div>
+                            <div class='header__cart-item__price-container row'>
+                            <div class='col-7'>
+                            <div class='header__cart-item__price'>
+                              <ng-container *ngIf="p.Discount>0">
+                                <span class='header__cart-item__price-current'>{{((p.Price-p.Price*p.Discount/100)*p.quantity).toLocaleString('vi-VN')}}<u>đ</u></span>
+                                <span class='header__cart-item__price-old'>{{((p.Price)*p.quantity).toLocaleString('vi-VN')}}<u>đ</u></span>
+                              </ng-container>
+                              <ng-container *ngIf="p.Discount==0">
+                                <span class='header__cart-item__price-current'>{{((p.Price)*p.quantity).toLocaleString('vi-VN')}}<u>đ</u></span>
+                              </ng-container>
+                            </div>
+                            <div class='header__cart-item__quantity'>
+                            <span  class='header__cart-item-minus'><i class='fa-solid fa-minus'></i></span>
+                            <input type='number' min='1' name='header__cart-item-amount' class='header__cart-item-amount' value="{{p.quantity}}">
+                            <span  class='header__cart-item-plus' ><i class='fa-solid fa-plus'></i></span>
+                            </div>
+                            </div>
+                            <div class='col-5' style='align-items: center;display:flex;justify-content: flex-end'>
+                            <span class='header__cart-item__price-finnal'>{{p.total.toLocaleString('vi-VN')}}<u>đ</u></span>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
+                          </ng-container>
+                          <span>{{pay.toLocaleString('vi-VN')}}<u>đ</u></span>
+                        </ng-container>
                       </div>
                       <div class="header__cart-money">
                        <p>Tổng tiền</p>

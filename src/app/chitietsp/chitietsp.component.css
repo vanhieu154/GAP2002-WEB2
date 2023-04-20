@@ -161,10 +161,17 @@ a{
   justify-content: space-between;
   align-items: center;
   padding: 10px ;
+  background-color: #fff !important;
+}
+
+.mat-expansion-indicator::after {
+  color: #333 !important;
+
 }
 .product__description-header{
   font-size: 1.8rem;
   font-weight: 700;
+  color: #333 !important;
 
 }
 .product__description-header-dot{
@@ -172,22 +179,21 @@ a{
   font-weight: 900;
 }
 .product__description{
-  background-color: #ccc;
+  background-color: #fff;
   font-size: 1.4rem;
-  padding: 15px;
-  display: none;
+  color: #333;
+}
+.product__description__line{
+  padding: 5px;
 }
 .product__description-header-container:hover{
   cursor: pointer;
-  background-color: #ededed;
+  background-color: #ededed !important;
 }
 #product__description-detail.activate{
   display: block;
   /* transition: top 5s ease-in-out 5s; */
 
-}
-.product__description p{
-  margin: 0;
 }
 #minus-icon-1.deactivate{
   display: none;

@@ -28,3 +28,4 @@ export interface IProduct {
    Size: string
    cDate: Date
 }
+

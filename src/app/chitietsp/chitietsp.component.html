@@ -79,33 +79,42 @@
         </div>
       </div>
       <div class="product__btn-add-container" >
-        <button class="product__btn-add" id="product__btn-add" >Thêm vào giỏ hàng</button>
+        <button class="product__btn-add" id="product__btn-add" (click)="addProduct()">Thêm vào giỏ hàng</button>
         <span class="product__liked"><i class="fa-solid fa-heart"></i></span>
       </div>
       <div class="product__description-container">
-        <div class="product__description-header-container" (click)="showDescription()">
-          <span class="product__description-header" >Mô tả</span>
-          <span class="product__description-header-dot"><i id="minus-icon-1" class="fa-solid fa-minus"></i><i id="plus-icon-1" class="fa-solid fa-plus"></i></span>
-        </div>
-        <div class="product__description" id="product__description-detail">
-          <p *ngFor="let d of product.Mota">{{d}}</p>
-        </div>
+        <mat-accordion >
+          <mat-expansion-panel  class="product__description">
+            <mat-expansion-panel-header class="product__description-header-container">
+              <mat-panel-title class="product__description-header">
+                Mô tả
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="product__description">
+              <p style="margin: 3px;" class="product__description__line" *ngFor="let d of product.Mota">{{d}}</p>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
       <div class="product__description-container">
-        <div class="product__description-header-container" (click)="showEvaluate()">
-          <span class="product__description-header">Đánh giá độ mới</span>
-          <span class="product__description-header-dot"><i id="minus-icon-2" class="fa-solid fa-minus"></i><i id="plus-icon-2" class="fa-solid fa-plus"></i></span>
-        </div>
-        <div class="product__description" id="product-evaluate">
-          Độ mới được đánh giá theo tiêu chuẩn quy định trước như sau:
-          <ul>
-            <li>Quần áo còn tag, còn màu nguyên bản, không có chỗ hỏng, rách: mới 95% - 90%.</li>
-            <li>Quần áo còn tag, còn màu nguyên bản, có 1-2 chỗ hỏng nhỏ:  mới 90% - 85%.</li>
-            <li>Quần áo không còn tag, không còn màu nguyên bản, không/ 1-2 chỗ hỏng nhỏ: mới 85% - 80%</li>
-          </ul>
-        </div>
+        <mat-accordion >
+          <mat-expansion-panel  class="product__description">
+            <mat-expansion-panel-header class="product__description-header-container">
+              <mat-panel-title class="product__description-header">
+                Đánh giá độ mới
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="product__description">
+              <p>Độ mới được đánh giá theo tiêu chuẩn quy định trước như sau:</p>
+              <ul>
+                <li><p>Quần áo còn tag, còn màu nguyên bản, không có chỗ hỏng, rách: mới 95% - 90%.</p></li>
+                <li><p>Quần áo còn tag, còn màu nguyên bản, có 1-2 chỗ hỏng nhỏ:  mới 90% - 85%.</p></li>
+                <li><p>Quần áo không còn tag, không còn màu nguyên bản, không/ 1-2 chỗ hỏng nhỏ: mới 85% - 80%.</p></li>
+              </ul>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
-    </div>
   </div>
 </div>
 </div>
