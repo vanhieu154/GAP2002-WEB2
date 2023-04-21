@@ -104,9 +104,6 @@ box-shadow: 0 0 0 0.25rem rgb(210 190 180/55%);
   color: #333;
 }
 
-.my-custom-font {
-  font-family: 'Quicksand', sans-serif;
-}
 
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

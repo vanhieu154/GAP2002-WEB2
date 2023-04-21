@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +10,24 @@ import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angu
 })
 export class HeaderComponent  {
   @ViewChild('header') header!: ElementRef;
-  isLoggedIn = false
   prevScrollpos = 0;
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
+
   showLoginBox = false;
   showCartBox=false;
   showSearchBox=false;
   cartProduct=false;
   products:any;
-  pay:number=0
+  pay:number=0;
+  username = '';
+  password = '';
+  message = '';
+  user:any;
+  errMessage:string=''
+  constructor(private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService) {
+    if (sessionStorage.getItem('checkLogin') === '1') {
+      authService.isLoggedIn=true
+    }
+  }
   showBox(showCartBox: boolean, showLoginBox: boolean,showSearchBox:boolean): void {
     if(this.showCartBox != showCartBox || this.showLoginBox != showLoginBox || this.showSearchBox!=showSearchBox){
       this.showCartBox = showCartBox;
@@ -57,26 +67,8 @@ export class HeaderComponent  {
       }
       this.prevScrollpos = currentScrollPos;
   }
-  // ngAfterViewInit() {
-  //   window.onscroll = () => {
-  //     const currentScrollPos = window.pageYOffset;
-  //     if (this.prevScrollpos > currentScrollPos) {
-  //       if (this.header) {
-  //         this.renderer.setStyle(this.header.nativeElement, 'top', '0');
-  //       }
-  //     } else {
-  //       if (this.header) {
-  //         this.renderer.setStyle(this.header.nativeElement, 'top', '-105px');
-  //         this.renderer.setStyle(this.header.nativeElement, 'marginTop', '0px');
-  //       }
-  //     }
-  //     this.prevScrollpos = currentScrollPos;
-  //   };
-  // }
   showCart(){
     this.products = JSON.parse(sessionStorage.getItem("Cart")!);
-    var cart="";
-    var totalPrice='';
     if(this.products == null){
       this.cartProduct=false
     }else{
@@ -88,6 +80,46 @@ export class HeaderComponent  {
     }
 
   }
+  MinusP(i:number){
+    if(this.products[i].quantity<2) {
+      this.products[i].quantity =1;
+    }else{
+    this.products[i].quantity--;
+    }
+    this.products[i].total=this.products[i].quantity*this.products[i].price
+    this.pay=0
+    for (let i = 0; i < this.products.length; i++) {
+      this.pay=this.pay+this.products[i].total
+    }
+    sessionStorage.setItem("Cart", JSON.stringify(this.products));
+  }
+
+  PlusP(i:number){
+    if(this.products[i].quantity>this.products[i].Soluong-1){
+      this.products[i].quantity=this.products[i].Soluong;
+    }else{
+    this.products[i].quantity++;
+    }
+    this.products[i].total=this.products[i].quantity*this.products[i].price
+    this.pay=0
+    for (let i = 0; i < this.products.length; i++) {
+      this.pay=this.pay+this.products[i].total
+    }
+    sessionStorage.setItem("Cart", JSON.stringify(this.products));
+  }
+
+  onLogin(): void {
+    this.authService.login(this.username, this.password).subscribe({
+      next: (data) => {
+        this.user = data;
+        console.log(this.user);
+      },
+      error: (err) => {
+        this.errMessage = err;
+      }
+    });
+  }
+
 
 
 

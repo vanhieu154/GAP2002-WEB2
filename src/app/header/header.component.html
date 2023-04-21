@@ -76,31 +76,31 @@
                           <span style="font-size: 2.5rem" class="fa-solid fa-circle-user"></span>
                       </button>
                       <div  id="header__login-container" class="header__login-container"   [class.activate]="showLoginBox">
-                        <div *ngIf="isLoggedIn" >
+                        <div *ngIf="authService.isLoggedIn" >
                          <div class="header__login2">
                            <ul>
-                            <li><a class="header__login-item" href="./myaccount.html"> Tài khoản của tôi</a></li>
-                            <li><a class="header__login-item" href="./myaccount.html"> Đơn hàng</a></li>
-                            <li><a class="header__login-item" href="./myaccount.html"> Thông báo</a></li>
-                            <li><a class="header__login-item" href="./myaccount.html"> Kho voucher</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Tài khoản của tôi</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Đơn hàng</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Thông báo</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Kho voucher</a></li>
                             <li><a class="header__login-item" onclick="dangxuat()" href="#"> Đăng xuất</a></li>
                            </ul>
                           </div>
                         </div>
 
-                        <div *ngIf="!isLoggedIn" >
+                        <div *ngIf="!authService.isLoggedIn" >
                           <div class="header__login">
-                              <!-- <form > -->
+                              <form (submit)="onLogin()">
                                 <h2>ĐĂNG NHẬP TÀI KHOẢN</h2>
                                 <p>Nhập tài khoản và mật khẩu của bạn</p>
                                 <div class="header__login__nor">
-                                  <input type="text" placeholder="Tài khoản" id="user" malgength="128">
+                                  <input type="text" placeholder="Tài khoản" id="user" malgength="128" [(ngModel)]="username" name="username">
                                 </div>
                                 <div class="header__login__nor">
-                                  <input type="password"  placeholder="Mật khẩu" id="password">
+                                  <input type="password"  placeholder="Mật khẩu" id="password"  [(ngModel)]="password" name="password">
                                 </div>
                                 <!-- <div class="btn-wrap header__login__confirm"> -->
-                                <button class="btn-header"  onclick="login()">Đăng nhập</button>
+                                <button class="btn-header"  type="submit">Đăng nhập</button>
                                 <!-- </div> -->
                                 <div class="header__or">
                                   <div class="line"></div>
@@ -127,7 +127,8 @@
                                 <div class="header__login__footer">
                                   Quên mật khẩu? <a href="./quenmatkhau.html" class="restore-pass">Khôi phục mật khẩu</a>
                                 </div>
-                              <!-- </form> -->
+                                <p *ngIf="message">{{ message }}</p>
+                              </form>
                             </div>
                         </div>
                       </div>
@@ -148,7 +149,7 @@
                           <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
                         </ng-container>
                         <ng-container *ngIf="cartProduct">
-                          <ng-container *ngFor="let p of products">
+                          <ng-container *ngFor="let p of products;let i=index">
                             <div class='row'>
                             <div class='col-2'>
                             <img class='w-100' src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
@@ -163,17 +164,17 @@
                             <div class='col-7'>
                             <div class='header__cart-item__price'>
                               <ng-container *ngIf="p.Discount>0">
-                                <span class='header__cart-item__price-current'>{{((p.Price-p.Price*p.Discount/100)*p.quantity).toLocaleString('vi-VN')}}<u>đ</u></span>
-                                <span class='header__cart-item__price-old'>{{((p.Price)*p.quantity).toLocaleString('vi-VN')}}<u>đ</u></span>
+                                <span class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}<u>đ</u></span>
+                                <span class='header__cart-item__price-old'>{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span>
                               </ng-container>
                               <ng-container *ngIf="p.Discount==0">
-                                <span class='header__cart-item__price-current'>{{((p.Price)*p.quantity).toLocaleString('vi-VN')}}<u>đ</u></span>
+                                <span class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}}<u>đ</u></span>
                               </ng-container>
                             </div>
                             <div class='header__cart-item__quantity'>
-                            <span  class='header__cart-item-minus'><i class='fa-solid fa-minus'></i></span>
+                            <span  class='header__cart-item-minus' (click)="MinusP(i)" ><i class='fa-solid fa-minus'></i></span>
                             <input type='number' min='1' name='header__cart-item-amount' class='header__cart-item-amount' value="{{p.quantity}}">
-                            <span  class='header__cart-item-plus' ><i class='fa-solid fa-plus'></i></span>
+                            <span  class='header__cart-item-plus' (click)="PlusP(i)" ><i class='fa-solid fa-plus'></i></span>
                             </div>
                             </div>
                             <div class='col-5' style='align-items: center;display:flex;justify-content: flex-end'>
@@ -185,12 +186,12 @@
                             </div>
                             <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
                           </ng-container>
-                          <span>{{pay.toLocaleString('vi-VN')}}<u>đ</u></span>
+
                         </ng-container>
                       </div>
                       <div class="header__cart-money">
                        <p>Tổng tiền</p>
-                       <p class="home-product-item__price-current" id="home-product-item__price-current"></p>
+                       <p class="home-product-item__price-current" id="home-product-item__price-current"><span>{{pay.toLocaleString('vi-VN')}}<u>đ</u></span></p>
                       </div>
                       <div class="header__cart_container-btn">
                        <button class="btn-header" routerLink="/Cart"><a >Xem giỏ hàng</a></button>

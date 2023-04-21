@@ -16,6 +16,7 @@ export class ChitietspComponent implements OnInit{
   products:any;
   items: any[] = [];
   a:number=1;
+  panelOpenState = false;
   constructor(private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router)
   {
     activateRoute.paramMap.subscribe(

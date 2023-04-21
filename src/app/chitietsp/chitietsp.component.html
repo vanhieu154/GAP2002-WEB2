@@ -82,8 +82,9 @@
         <button class="product__btn-add" id="product__btn-add" (click)="addProduct()">Thêm vào giỏ hàng</button>
         <span class="product__liked"><i class="fa-solid fa-heart"></i></span>
       </div>
+      <mat-accordion >
+
       <div class="product__description-container">
-        <mat-accordion >
           <mat-expansion-panel  class="product__description">
             <mat-expansion-panel-header class="product__description-header-container">
               <mat-panel-title class="product__description-header">
@@ -94,11 +95,12 @@
               <p style="margin: 3px;" class="product__description__line" *ngFor="let d of product.Mota">{{d}}</p>
             </div>
           </mat-expansion-panel>
-        </mat-accordion>
+        <!-- </mat-accordion> -->
       </div>
       <div class="product__description-container">
-        <mat-accordion >
-          <mat-expansion-panel  class="product__description">
+        <!-- <mat-accordion > -->
+          <mat-expansion-panel  class="product__description" (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
             <mat-expansion-panel-header class="product__description-header-container">
               <mat-panel-title class="product__description-header">
                 Đánh giá độ mới
@@ -113,8 +115,9 @@
               </ul>
             </div>
           </mat-expansion-panel>
-        </mat-accordion>
       </div>
+    </mat-accordion>
+
   </div>
 </div>
 </div>

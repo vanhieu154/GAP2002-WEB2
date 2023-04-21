@@ -8,7 +8,15 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'GAP 2002';
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (sessionStorage.getItem('checkLogin') !== '1') {
+          sessionStorage.removeItem('checkLogin');
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
