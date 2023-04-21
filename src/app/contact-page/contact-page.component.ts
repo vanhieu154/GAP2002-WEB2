@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./contact-page.component.css']
 })
 export class ContactPageComponent {
-
+  onSubmit(value:string){
+    alert("Cảm ơn " + value + ", thông tin của bạn đã được gửi !" )
+  }
 }
