@@ -64,15 +64,29 @@ export class TrangchuComponent implements OnInit{
     const prev = document.getElementById("prev")!;
     const next = document.getElementById("next")!;
 
-    const firstSlide = allSlides[0];
-    const lastSlide = allSlides[allSlides.length - 1];
-    const secondlastSlide = allSlides[allSlides.length - 2];
-    const thirdlastSlide = allSlides[allSlides.length - 3];
+    const firstSlide = allSlides[0];//0
+    const lastSlide = allSlides[allSlides.length - 1];//3
+    const secondlastSlide = allSlides[allSlides.length - 2];//2
+    const thirdlastSlide = allSlides[allSlides.length - 3];//1
 
     const cloneFirstSlide = firstSlide.cloneNode(true);
     const cloneLastSlide = lastSlide.cloneNode(true);
     const cloneSecondlastSlide = secondlastSlide.cloneNode(true);
     const cloneThirdlastSlide = thirdlastSlide.cloneNode(true);
+
+    cloneFirstSlide.addEventListener("click", () => {
+      this.toProductPage(0);
+    });
+    cloneLastSlide.addEventListener("click", () => {
+      this.toProductPage(3);
+    });
+    cloneSecondlastSlide.addEventListener("click", () => {
+      this.toProductPage(2);
+    });
+    cloneThirdlastSlide.addEventListener("click", () => {
+      this.toProductPage(1);
+    });
+
 
     slides.appendChild(cloneFirstSlide);
     slides.append(cloneThirdlastSlide);
@@ -197,3 +211,5 @@ export class TrangchuComponent implements OnInit{
     this.router.navigate(['trangsp'])
   }
 }
+
+
