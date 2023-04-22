@@ -77,7 +77,9 @@ input.example-right-align::-webkit-inner-spin-button {
 .mat-mdc-radio-button .mdc-form-field {
   color: var(--mdc-theme-text-primary-on-background, rgb(0, 0, 0));
 }
-
+.mat-datepicker-content {
+  color: var(--darkbrown);
+}
 .mat-mdc-radio-button.mat-accent {
   --mdc-radio-disabled-selected-icon-color: #fff;
   --mdc-radio-disabled-unselected-icon-color: #fff;
@@ -93,6 +95,16 @@ input.example-right-align::-webkit-inner-spin-button {
   --mat-mdc-radio-checked-ripple-color:var(--darkbrown);
 }
 
+.mat-calendar-arrow {
+  fill: var(--darkbrown);
+}
+.mat-calendar-body-cell-content, .mat-date-range-input-separator {
+  color: var(--darkbrown);
+  border-color: rgba(0,0,0,0);
+}
+.mat-calendar-table-header, .mat-calendar-body-label {
+  color:var(--darkbrown);
+}
 .mat-datepicker-content {
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   background-color: var(--lightpink);
