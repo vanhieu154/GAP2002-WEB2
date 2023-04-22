@@ -1,50 +1,104 @@
 <p>cart works!</p>
-
-<div class="body">
-  <div class="row text-center">
-    <div class="col ">
-    <h1 class= "text-left cart__header">Giỏ hàng của bạn </h1>
-    <p> Có <span class="sosanpham" id="sosanpham">0 sản phẩm</span>  trong giỏ hàng</p>
-    <div class="bar"></div>
+<!-- Giỏ hàng trống -->
+<!-- <div  class="body" >
+  <div class="row text-center" *ngIf="items.length==0">
+    <img src="./assets/Img/cart-empty.png" alt="" class="cart-empty">
+    <p class="text-empty">Giỏ hàng của bạn trống</p>
+    <button class="muangay" routerLink="/"> MUA NGAY</button>
   </div>
-  </div>
+</div> -->
 
-  <div class="row cart__container" >
-
-  <div class="col-6" id="cart__item__container">
-    <div class="row box" style="height: 60px;">
-        <div class="col cart__item--top" style="margin-left: 30px;">
-          <label for="">
-            <input type="checkbox" >
-          </label>
-        </div>
-        <div class="col cart__item--top" >Sản phẩm</div>
-        <div class="col cart__item--top">Đơn giá</div>
-        <div class="col cart__item--top">Số lượng</div>
-        <div class="col cart__item--top">Số tiền</div>
+<!-- Có sản phẩm trong giỏ hàng  -->
+<div class="body" style=" background-color: #efefef;" *ngIf="items.length==0">
+  <div>
+    <div class="row text-center">
+      <div class="col ">
+      <h1 class= "text-left cart__header">Giỏ hàng của bạn </h1>
+      <p> Có <span class="sosanpham" id="sosanpham">0 sản phẩm</span>  trong giỏ hàng</p>
+      <div class="bar"></div>
+    </div>
     </div>
 
-    <div class=" row box cart__item"></div>
-  </div>
+    <div class="row cart__container" >
 
-  <div class="col-xg-6 col-4 cart-info__container"  >
-    <div class="borderbox order-infor">
-      <h2 class="title" style="margin-bottom: 30px">Thông tin đơn hàng </h2>
-      <hr>
-       <div style="margin: 20px 0"  class="container row">
-          <div class="col-4"> Tổng tiền: </div>
-          <h4 class="col-8 sotien" id="sotien">0<u>đ</u></h4>
-       </div>
-      <hr>
-      <div class="col" style="margin: 20px 0">
-        <p>Phí vận chuyển sẽ được tính ở trang thanh toán.</p>
-        <p>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</p></div> <br>
-      <div class=" col-10 button thanhtoan text-center" style="align-items: center;" ><a routerLink="/Payment"> THANH TOÁN </a></div> <br>
-      <div class="col buy-btn" >
-        <!-- <iconify-icon class="text-right " icon="ion:return-up-back-sharp" width="25" height="25" ></iconify-icon> -->
-         <a routerLink="/trangsp"  class=""> Tiếp tục mua hàng </a>
+    <div class="col-6" id="cart__item__container">
+      <div class="row box" style="height: 60px;">
+          <div class="col-8" style="margin: 10px 0 0 30px; width: 50px;">
+            <mat-checkbox>
+            </mat-checkbox>
+          </div>
+          <div class="col-6 cart__item--top" style="width: 40%;text-align: left;">Sản phẩm</div>
+          <div class="col cart__item--top">Đơn giá</div>
+          <div class="col cart__item--top">Số lượng</div>
+          <div class="col cart__item--top">Số tiền</div>
+          <div class="col cart__item--top">Thao tác</div>
+      </div>
+
+      <!-- hiển thị sản phẩm đc thêm -->
+      <div class=" row box cart__item">
+        <div class="section">
+          <div class="example-list-section">
+            <mat-checkbox
+              class="margin"
+              [checked]="allComplete"
+              [indeterminate]="someComplete()"
+              (change)="setAll($event.checked)"
+            >
+              <b>{{brand.name}}</b>
+            </mat-checkbox>
+          </div>
+          <div class="example-list-section">
+            <div class="brand">
+              <div *ngFor="let product of brand.products" class="row center">
+                <div class="col-8" style="margin: 10px 0 0 30px; width: 50px;"><mat-checkbox
+                  [(ngModel)]="product.completed"
+                  (ngModelChange)="updateAllComplete()"
+                >
+                </mat-checkbox></div>
+                <div class="col-6 cart__item--top row" style="width: 40%; text-align: left;">
+                  <div class="col">
+                    <img [src]="product.hinh" alt="">
+                  </div>
+                  <div class="col-8">
+                    <div class="item-name">
+                      <a style="color: rgb(0, 0, 0);" routerLink="">{{product.name}}</a> <!-- dẫn tới trang chi tiết của sản phẩm đó -->
+                    </div>
+                    <div class="item-size">
+                      Kích thước: {{product.kichthuoc}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col cart__item--top">{{product.dongia}}<u style="font-size: 1.2rem;">đ</u></div>
+                <div class="col cart__item--top">{{product.soluong}}</div>
+                <div class="col cart__item--top">{{product.sotien}}<u style="font-size: 1.2rem;">đ</u></div>
+                <a class="col cart__item--top">Xóa</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
+
+    <div class="col-xg-6 col-4 cart-info__container"  >
+      <div class="borderbox order-infor">
+        <h2 class="title" style="margin-bottom: 30px">Thông tin đơn hàng </h2>
+        <hr>
+         <div style="margin: 20px 0"  class="container row">
+            <div class="col-4"> Tổng tiền: </div>
+            <h4 class="col-8 sotien" id="sotien">0<u>đ</u></h4>
+         </div>
+        <hr>
+        <div class="col" style="margin: 20px 0">
+          <p>Phí vận chuyển sẽ được tính ở trang thanh toán.</p>
+          <p>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</p></div> <br>
+        <button class=" col-10 button thanhtoan text-center" style="align-items: center;" routerLink="/Payment"> THANH TOÁN </button> <br>
+        <div class="col buy-btn" >
+           <!-- <iconify-icon class="text-right " icon="ion:return-up-back-sharp" width="25" height="25" ></iconify-icon> -->
+           <a routerLink="/trangsp"  class=""> Tiếp tục mua hàng </a>
+        </div>
+      </div>
+    </div>
+    </div>
   </div>
 </div>

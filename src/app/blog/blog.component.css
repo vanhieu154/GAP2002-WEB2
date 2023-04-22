@@ -25,6 +25,8 @@ p{
 }
 .blog{
   padding-top: 20px;
+  overflow: hidden;
+
 }
 .hr__style{
     width: 90%;

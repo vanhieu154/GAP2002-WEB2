@@ -78,6 +78,8 @@ a{
 }
 .blog{
   padding-top: 20px;
+  overflow: hidden;
+
 }
 .content__blog{
   padding-top: 10px;
