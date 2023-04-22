@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { IProduct, Product } from '../product';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
+import { NavService } from '../nav.service';
 
 @Component({
   selector: 'app-trangchu',
@@ -15,7 +16,8 @@ export class TrangchuComponent implements OnInit{
 
   errMessage:string=''
   http: any;
-  constructor(private _service: ProductService,private router:Router){
+
+  constructor(private _service: ProductService,private router:Router,private navService:NavService){
     let tempProducts: IProduct[];
     this._service.getProducts().subscribe({
       next:(data: IProduct[])=>{
@@ -188,5 +190,10 @@ export class TrangchuComponent implements OnInit{
   Detail(p:any){
     this.router.navigate(['chitietsp',p._id])
     window.scrollTo(0, 0);
+  }
+
+  toProductPage(i:number){
+    this.navService.productSearch(i);
+    this.router.navigate(['trangsp'])
   }
 }

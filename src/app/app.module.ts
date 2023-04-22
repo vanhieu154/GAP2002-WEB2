@@ -38,7 +38,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -75,11 +75,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FontAwesomeModule,
     HttpClientModule,
     IconModule,
-
-    // BrowserModule,
-    // MatInputModule,
-    // MatFormFieldModule ,
-    // MatSlideToggleModule,
+    MatIconModule,
+    BrowserModule,
+    MatInputModule,
+    MatFormFieldModule ,
+    MatSlideToggleModule,
 
     // NgbModule
     FormsModule,

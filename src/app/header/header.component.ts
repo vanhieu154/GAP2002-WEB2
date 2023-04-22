@@ -1,17 +1,21 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { NavService } from '../nav.service';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent  {
   @ViewChild('header') header!: ElementRef;
+  @Output() searchEvent = new EventEmitter<string>();
   prevScrollpos = 0;
-
+  hide = true;
   showLoginBox = false;
   showCartBox=false;
   showSearchBox=false;
@@ -23,7 +27,7 @@ export class HeaderComponent  {
   message = '';
   user:any;
   errMessage:string=''
-  constructor(private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService) {
+  constructor(private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService) {
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true
     }
@@ -69,7 +73,7 @@ export class HeaderComponent  {
   }
   showCart(){
     this.products = JSON.parse(sessionStorage.getItem("Cart")!);
-    if(this.products == null){
+    if(this.products.length==0){
       this.cartProduct=false
     }else{
       this.cartProduct=true
@@ -119,13 +123,29 @@ export class HeaderComponent  {
       }
     });
   }
+  onLogout():void{
+    this.user='';
+    sessionStorage.removeItem('checkLogin');
+  }
 
-
-
-
-
-
-
+  deleteP(i:number){
+    this.products.splice(i,1);
+    sessionStorage.setItem("Cart", JSON.stringify(this.products));
+  }
+  toProductPage(i:number){
+    this.navService.productSearch(i);
+    this.router.navigate(['trangsp'])
+  }
+  pSearch1(): void {
+    let pS = (document.getElementById('search-bar__input1') as HTMLInputElement).value;
+    this.navService.productSearch(pS);
+    this.router.navigate(['trangsp']);
+  }
+  pSearch(): void {
+    let pS = (document.getElementById('search-bar__input') as HTMLInputElement).value;
+    this.navService.productSearch(pS);
+    this.router.navigate(['trangsp']);
+  }
   showSubnav(): void {
     const element = document.getElementById("showSubnav");
     if (element) {

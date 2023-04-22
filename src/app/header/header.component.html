@@ -14,10 +14,10 @@
                       <li class="">
                           <button class="header__list__sub-nav-link js-header__list__sub-nav-link" (click)="showSubnav()" >Sản Phẩm <i class="fa-solid fa-chevron-down"></i></button>
                           <ul id="showSubnav" class="sub-nav-menu js-sub-nav-menu">
-                              <!-- <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(0)">Quần</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(1)">Áo</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(2)">Phụ kiện</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(3)">Đầm</a></li> -->
+                              <li><a class="sub-nav-item" (click)="toProductPage(0)">Quần</a></li>
+                              <li><a class="sub-nav-item" (click)="toProductPage(1)">Áo</a></li>
+                              <li><a class="sub-nav-item" (click)="toProductPage(2)">Phụ kiện</a></li>
+                              <li><a class="sub-nav-item" (click)="toProductPage(3)">Đầm</a></li>
                           </ul>
                       </li>
                       <li><a  routerLink="Blog">Blog</a></li>
@@ -39,10 +39,10 @@
                           <div class="">
                               <a routerLink="/trangsp">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a>
                               <ul class="header__subnavbar">
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(0)">Quần</a></li>
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(1)">Áo</a></li>
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(2)">Phụ kiện</a></li>
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(3)">Đầm</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(0)">Quần</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(1)">Áo</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(2)">Phụ kiện</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(3)">Đầm</a></li>
                               </ul>
                           </div>
                       </li>
@@ -64,7 +64,7 @@
                               <hr>
                               <div class="header__search__search-bar">
                                   <input type="text" class="search-bar__input" placeholder="Tìm kiếm sản phẩm" id="search-bar__input" name="search-bar__input">
-                                  <button class="search-bar__btn" id="search-bar__btn" type="submit" onclick="pSearch()">
+                                  <button class="search-bar__btn" id="search-bar__btn" type="submit" (click)="pSearch()">
                                       <i class="search-bar__icon  fa-solid fa-magnifying-glass"></i>
                                   </button>
                               </div>
@@ -83,7 +83,7 @@
                             <li><a class="header__login-item" routerLink="/AccountPage"> Đơn hàng</a></li>
                             <li><a class="header__login-item" routerLink="/AccountPage"> Thông báo</a></li>
                             <li><a class="header__login-item" routerLink="/AccountPage"> Kho voucher</a></li>
-                            <li><a class="header__login-item" onclick="dangxuat()" href="#"> Đăng xuất</a></li>
+                            <li><a class="header__login-item" (click)="onLogout()" > Đăng xuất</a></li>
                            </ul>
                           </div>
                         </div>
@@ -96,8 +96,20 @@
                                 <div class="header__login__nor">
                                   <input type="text" placeholder="Tài khoản" id="user" malgength="128" [(ngModel)]="username" name="username">
                                 </div>
+                                <!-- <div class="example-container">
+                                  <mat-form-field appearance="fill" >
+                                    <mat-label>Nhập mật khẩu</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" class="header__login__nor">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                  </mat-form-field>
+                                </div> -->
                                 <div class="header__login__nor">
-                                  <input type="password"  placeholder="Mật khẩu" id="password"  [(ngModel)]="password" name="password">
+                                  <input type="password" matInput [type]="hide ? 'password' : 'text'"  placeholder="Mật khẩu" id="password"  [(ngModel)]="password" name="password">
+                                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>
                                 </div>
                                 <!-- <div class="btn-wrap header__login__confirm"> -->
                                 <button class="btn-header"  type="submit">Đăng nhập</button>
@@ -156,7 +168,7 @@
                             </div>
                             <div style='position: relative; text-align: left;' class='col-10'>
                             <div class='header__cart-item__delete'>
-                            <i class='fa-solid fa-xmark'></i>
+                              <i class='fa-solid fa-xmark' (click)="deleteP(i);showBox(true,false,false);showCart()"></i>
                             </div>
                             <div class='header__cart-item__infor'>
                             <div class='header__cart-item__header'>{{p.TenSP}}</div>
@@ -204,7 +216,7 @@
 
       <div class="header__search-bar">
           <input type="text" class="search-bar__input" id="search-bar__input1" placeholder="Tìm kiếm sản phẩm">
-          <button class="search-bar__btn" onclick="pSearch1()">
+          <button class="search-bar__btn" (click)="pSearch1()">
               <i class="search-bar__icon  fa-solid fa-magnifying-glass"></i>
           </button>
       </div>
