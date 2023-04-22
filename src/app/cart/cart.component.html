@@ -56,8 +56,8 @@
                 >
                 </mat-checkbox></div>
                 <div class="col-6 cart__item--top row" style="width: 42%; text-align: left;">
-                  <div class="col">
-                    <img [src]="product.hinh" alt="">
+                  <div class="col"> <!-- dẫn tới trang chi tiết của sản phẩm đó -->
+                    <a routerLink=""><img [src]="product.hinh" alt=""></a>
                   </div>
                   <div class="col-8">
                     <div class="item-name">
