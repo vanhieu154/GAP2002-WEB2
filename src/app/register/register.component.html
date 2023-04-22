@@ -15,8 +15,22 @@
         </div>
         <div class="form-content">
           <mat-form-field appearance="fill" class="exemple-form-field">
-            <mat-label>Số điện thoại hoặc email</mat-label>
-            <input matInput>
+            <mat-label>Số điện thoại</mat-label>
+            <input
+              matInput
+              placeholder="Nhập số điện thoại"
+              [formControl]="phoneNumber"
+              required
+              maxlength="10"
+            />
+            <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="exemple-form-field">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="gap2002@example.com" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorEmailMessage()}}</mat-error>
           </mat-form-field>
         </div>
         <div class="form-content">
@@ -25,10 +39,13 @@
             <input matInput>
           </mat-form-field>
         </div>
-        <div class="form-content">
+        <div >
           <mat-form-field appearance="fill" class="exemple-form-field">
             <mat-label>Mật khẩu</mat-label>
-            <input matInput>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button class="hide" style="margin-right: 7px; color:  #6B4932;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
           </mat-form-field>
         </div>
         <div class="form-content">
@@ -42,16 +59,16 @@
           <!-- #enddocregion toggle -->
           </mat-form-field>
         </div>
-        <div class="form-content exemple-form-field"  style="text-align: left;">
+        <div class="form-content exemple-form-field"  style="text-align: left; font-weight: 450;">
           <mat-hint style="font-size: 1.6rem;" >Giới tính:</mat-hint>
-          <mat-radio-group aria-label="Select an option">
+          <mat-radio-group aria-label="Select an option" >
             <mat-radio-button value="1">Nam</mat-radio-button>
             <mat-radio-button value="2">Nữ</mat-radio-button>
             <mat-radio-button value="3">Khác</mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="form-content">
-        <button onclick="dangky()">ĐĂNG KÝ</button>
+        <button onclick="dangky()" class="btn-dangky">ĐĂNG KÝ</button>
         </div>
       </div>
     </div>
