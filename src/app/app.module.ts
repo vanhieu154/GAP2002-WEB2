@@ -33,8 +33,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -71,11 +75,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FontAwesomeModule,
     HttpClientModule,
     IconModule,
+    MatIconModule,
+    BrowserModule,
+    MatInputModule,
+    MatFormFieldModule ,
+    MatSlideToggleModule,
+
     // NgbModule
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

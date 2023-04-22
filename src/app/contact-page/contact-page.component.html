@@ -30,7 +30,7 @@
         <div class="col ">
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Họ và tên: </label>
-            <textarea class="form-control" id="hoten" name="hoten" rows="1" style="width: 66%;"></textarea>
+            <input class="form-control" type="text" #Name id="hoten" name="hoten" rows="1" style="width: 66%;">
           </div>
         </div>
 
@@ -51,22 +51,6 @@
        </div>
       </div>
     </div>
-        <!-- <div class="col ">
-          <div class="row justify-content-start">
-            <div class="col-7">
-              <div class="mb-6">
-                <label for="exampleFormControlInput1" class="form-label">Email: </label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="" style="width: 50%;">
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Số điện thoại: </label>
-                <input type="tel" class="form-control" name="sdt" id="sdt" >
-              </div>
-            </div>
-          </div>
-        </div> -->
 
 
       <div class="col ">
@@ -75,7 +59,7 @@
           <textarea class="form-control" id="noidung" name="noidung" rows="3"></textarea>
         </div>
       </div>
-      <input class="form__guingay btn-primary" type="submit" value="Gửi ngay">
+      <input class="form__guingay btn-primary" (click)="onSubmit(Name.value)" type="submit" value="Gửi ngay">
     </div>
     </form>
 

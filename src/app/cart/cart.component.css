@@ -50,6 +50,10 @@ ul li{
 }
 .thanhtoan:hover{
   background-color: var(--darkbrown);
+  cursor: pointer;
+}
+.thanhtoan:hover a{
+
   color: var(--white);
 }
 .thanhtoan:active{
@@ -63,9 +67,6 @@ a{
 .thanhtoan a{
   text-decoration: none;
   color: #000000;
-}
-.thanhtoan a:hover{
-  color: #ffffff;
 }
 .buy-btn{
   display: flex;
