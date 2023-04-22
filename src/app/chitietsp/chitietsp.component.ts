@@ -41,19 +41,7 @@ export class ChitietspComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-        // let amountElement = document.getElementById('amount')!;
-    // let amount=amountElement.value;
-    // let render=(amount) =>{
-    //     amountElement.value=amount;
-    // }
-    // handleMinus(){
-    //   if(amount>this.product.Soluong-1){
-    //     amount=this.product.Soluong;
-    //   }else{
-    //   amount++;
-    //   }
-    //   render(amount);
-    // }
+
   }
   Detail(p:any){
     this.router.navigate(['chitietsp',p._id])
@@ -75,7 +63,7 @@ export class ChitietspComponent implements OnInit{
   }
 
   addProduct(){
-    let addSP: any[] = sessionStorage.getItem("Cart") ? JSON.parse(sessionStorage.getItem("Cart")!) : [];
+    let addSP: any[] = localStorage.getItem("Cart") ? JSON.parse(localStorage.getItem("Cart")!) : [];
     addSP[addSP.length] = this.product;
     addSP[addSP.length - 1].quantity = this.a;
     if(this.product.Discount>0){
@@ -98,6 +86,6 @@ export class ChitietspComponent implements OnInit{
       }
     }
     console.log(addSP[addSP.length-1]._id);
-    sessionStorage.setItem("Cart", JSON.stringify(addSP));
+    localStorage.setItem("Cart", JSON.stringify(addSP));
   }
 }
