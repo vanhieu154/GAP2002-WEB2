@@ -4,6 +4,7 @@ import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angu
 import { AuthService } from '../auth.service';
 import { NavService } from '../nav.service';
 import { ProductService } from '../product.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { ProductService } from '../product.service';
   styleUrls: ['./header.component.css'],
   // encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent  {
+export class HeaderComponent implements OnInit  {
   @ViewChild('header') header!: ElementRef;
   @Output() searchEvent = new EventEmitter<string>();
   prevScrollpos = 0;
@@ -26,11 +27,31 @@ export class HeaderComponent  {
   password = '';
   message = '';
   user:any;
-  errMessage:string=''
-  constructor(private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService) {
+  errMessage:string='';
+  public cartItemCount = 0;
+  hidden = false;
+  constructor(private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true
     }
+  }
+  ngOnInit(): void {
+    this.products = JSON.parse(localStorage.getItem("Cart")!);
+    this.cartItemCount = this.cartService.products.length;
+    this.cartService.getCartUpdatedListener().subscribe(() => {
+      this.cartItemCount = this.cartService.products.length;
+      if(this.cartItemCount==0){
+        this.hidden=true
+      }else{
+        this.hidden=false
+      }
+    });
+    if(this.cartItemCount==0){
+      this.hidden=true
+    }else{
+      this.hidden=false
+    }
+
   }
   showBox(showCartBox: boolean, showLoginBox: boolean,showSearchBox:boolean): void {
     if(this.showCartBox != showCartBox || this.showLoginBox != showLoginBox || this.showSearchBox!=showSearchBox){
@@ -111,7 +132,6 @@ export class HeaderComponent  {
     }
     localStorage.setItem("Cart", JSON.stringify(this.products));
   }
-
   onLogin(): void {
     this.authService.login(this.username, this.password).subscribe({
       next: (data) => {
@@ -127,17 +147,8 @@ export class HeaderComponent  {
     this.user='';
     sessionStorage.removeItem('checkLogin');
   }
-
   deleteP(i:number){
-    this.products.splice(i,1);
-    // if(this.products.length==0){
-    //   localStorage.setItem("Cart", JSON.stringify(this.products));
-    //   localStorage.removeItem("Cart");
-    // }else{
-    //   localStorage.setItem("Cart", JSON.stringify(this.products));
-    // }
-    localStorage.setItem("Cart", JSON.stringify(this.products));
-
+    this.cartService.deleteProduct(i);
   }
   toProductPage(i:number){
     this.navService.productSearch(i);
