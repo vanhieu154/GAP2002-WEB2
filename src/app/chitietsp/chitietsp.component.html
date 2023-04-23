@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="product__btn-add-container" >
-        <button class="product__btn-add" id="product__btn-add" (click)="addProduct()">Thêm vào giỏ hàng</button>
+        <button class="product__btn-add" id="product__btn-add" (click)="addProduct();openDialog()">Thêm vào giỏ hàng</button>
         <span class="product__liked"><i class="fa-solid fa-heart"></i></span>
       </div>
       <mat-accordion >
@@ -93,6 +93,7 @@
             </mat-expansion-panel-header>
             <div class="product__description">
               <p style="margin: 3px;" class="product__description__line" *ngFor="let d of product.Mota">{{d}}</p>
+              <!-- <p style="margin: 3px;" class="product__description__line" innerHTML="{{product.Mota}}"></p> -->
             </div>
           </mat-expansion-panel>
         <!-- </mat-accordion> -->

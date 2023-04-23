@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -13,7 +13,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: '[app-delivery-info]',
   templateUrl: './delivery-info.component.html',
-  styleUrls: ['./delivery-info.component.css']
+  styleUrls: ['./delivery-info.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DeliveryInfoComponent {
 public fullname:string=''
@@ -25,7 +26,17 @@ public district:string=''
 public districts: string[] =['Chọn Quận/ Huyện'];
 selectedProvince =null;
 selectedDistrict =null;
+public selectedOption:string=''
 public selectedPrice: any = null;
+public selectedPay='Thanh toán khi nhận hàng (COD)';
+tamtinh: number = 0;
+
+phoneNumberCheckResult: boolean | null = null;
+
+displayPage: any;
+
+
+
 // vd
 public order ={
   "image": "assets/Img/sanpham/gap01/gap01_1.webp",
@@ -363,10 +374,23 @@ public VietNamdata =[
    ]
   },
 ]
-  displayPage: any;
+
+
+
 constructor(){}
 public ngOnInit(): void{
   console.log('VietNamdata =', this.VietNamdata)
+
+  if (this.selectedProvince === 'Thành phố Hồ Chí Minh') {
+      this.selectedOption = 'Giao hàng trong tỉnh'
+      return;
+    }
+    else {
+      this.selectedOption = 'Giao hàng ngoài tỉnh'
+      return;
+    }
+    return;
+
 }
 public changeProvince(event: any){
   this.selectedProvince = event.target.value;
@@ -381,24 +405,45 @@ public changeDistrict(event: any){
   this.selectedDistrict = event.target.value;
 }
 
+//val
 emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-
 matcher = new MyErrorStateMatcher();
 
-activeContent = 'content1'; // Nội dung mặc định được hiển thị
-
-  showContent(content: string): void {
-    // Hàm này được gọi khi người dùng nhấn vào các nút kích hoạt
-    this.activeContent = content;
+isPhoneNumberValid(phoneNumber: string): boolean {
+  if (phoneNumber.length !== 10) {
+    return false;
   }
 
-  //   public selectedPrice=null;
-  // public changePrice(event: any){
-  //   this.selectedPrice = event.target.value;
-  // }
+
+  const phoneNumberRegex = /^(03|05|08|09)\d{8}$/;
+  if (!phoneNumberRegex.test(phoneNumber)) {
+    return false;
+  }
+  return true;
+}
+updatePhoneNumber(): void {
+  if (this.isPhoneNumberValid(this.phone)) {
+    this.phoneNumberCheckResult = true;
+  } else {
+    this.phoneNumberCheckResult = false;
+  }
+}
 
 
-  public selectedPay=null;
+activeContent = 'content1';
+
+  showContent(content: string): void {
+    if (this.fullname !== ''&& this.email !== '' && this.phoneNumberCheckResult ==true && this.address !== ''&& this.selectedProvince !== null
+       ) {
+          this.activeContent = content;
+      } else {
+        alert("Bạn cần nhập đủ và đúng thông tin")
+      }
+  }
+
+
+
+
   public changePay(event: any){
     this.selectedPay = event.target.value;
   }
@@ -416,16 +461,6 @@ activeContent = 'content1'; // Nội dung mặc định được hiển thị
     }
   }
 
-  // showText(event: any) {
-  //   const messageElem = document.getElementById("message");
-  //   if (messageElem) {
-  //     if (event.target.value === "Giao hàng trong tỉnh") {
-  //       messageElem.innerHTML = "Giao hàng trong tỉnh";
-  //     } else if (event.target.value === "Giao hàng ngoài tỉnh") {
-  //       messageElem.innerHTML = "Giao hàng ngoài tỉnh";
-  //     }
-  //   }
-  // }
 
   public showText() {
     const messageElem = document.getElementById("message");
@@ -435,4 +470,22 @@ activeContent = 'content1'; // Nội dung mặc định được hiển thị
       // document.getElementById("price").innerHTML = price;
     }
   }
+
+
+  get phivc(): number {
+    if (this.selectedOption === 'Giao hàng trong tỉnh') {
+      return 20000;
+    }
+    else if (this.selectedOption === 'Giao hàng ngoài tỉnh') {
+      return 40000;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  get tong(): number {
+    return this.phivc + this.tamtinh;
+  }
+
 }

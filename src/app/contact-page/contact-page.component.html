@@ -5,7 +5,7 @@
   </ol>
 </nav>
 
-<div class="row" style="padding-bottom: 20px;">
+<div class="row w-100" style="padding-bottom: 20px;">
   <div class="col-4 map">
      <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.8762386547432!2d106.6848415141168!3d10.820782061333924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e56ebd22a3%3A0x1ba0c27127718047!2zMTQyLCAzNGEgTMOqIEzhu6NpLCBQaMaw4budbmcgNCwgR8OyIFbhuqVwLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1669308774407!5m2!1svi!2s" width="400" height="750" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
@@ -29,38 +29,63 @@
         <div class="bar--bottom"></div> <br>
         <div class="col ">
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Họ và tên: </label>
-            <input class="form-control" type="text" #Name id="hoten" name="hoten" rows="1" style="width: 66%;">
+            <mat-form-field class="example-form-field ">
+              <mat-label style="color: grey;">Họ và tên</mat-label>
+              <input matInput type="text"  #Name id="hoten" name="hoten" style="color: black;" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+            </mat-form-field>
+            <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-top: -20px;">
+              Họ và Tên là <strong>bắt buộc</strong>
+            </mat-error>
           </div>
         </div>
 
 
-        <div class="col">
-          <div class=" justify-content-start">
-        <div class="col-8">
-           <div class="mb-2">
-                <label for="exampleFormControlInput1" class="form-label">Email: </label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="" style="width: 100%;" >
-              </div>
-        </div>
-        <div class="col-3">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Số điện thoại: </label>
-            <input type="tel" class="form-control" name="sdt" id="sdt" style="width: 95%;" >
+
+          <div>
+
+            <div w-100>
+            <mat-form-field class="example-form-field">
+              <mat-label style="color: grey;">Email</mat-label>
+              <input type="email"  id="email" name="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                     placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')" >
+                Vui lòng nhập địa chỉ email hợp lệ
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-left: -20px;">
+                Email là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
           </div>
-       </div>
+
+            <mat-form-field class="example-full-width" style="padding-top: 30px;">
+              <mat-label style="color: grey;">Số điện thoại</mat-label>
+              <input (ngModelChange)="updatePhoneNumber()" matInput type="text" id="phone" name="phone" [(ngModel)]="phone" (ngModelChange)="updatePhoneNumber()" style="color: black;" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+            </mat-form-field>
+            <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-top: -20px;">
+              Số điện thoại là <strong>bắt buộc</strong>
+            </mat-error>
+            <div *ngIf="phoneNumberCheckResult !== null" style="text-align: left; color: grey; margin-left: -10px; margin-top: -20px;">
+              <p [ngClass]="phoneNumberCheckResult ? 'valid' : 'invalid'">
+                {{ phoneNumberCheckResult ? 'Số điện thoại hợp lệ!' : 'Số điện thoại không hợp lệ!' }}
+              </p>
+            </div>
+
+
       </div>
     </div>
 
 
       <div class="col ">
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Nội dung:</label>
-          <textarea class="form-control" id="noidung" name="noidung" rows="3"></textarea>
-        </div>
+      <mat-form-field class="example-form-field " style="padding-top: 20px;">
+        <mat-label style="color: grey;">Nội dung</mat-label>
+        <textarea matInput type="text"  id="noidung" name="noidung" style="color: black;" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"></textarea>
+      </mat-form-field>
+      <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-top: -20px;">
+        Bạn cần nhập nội dung để chúng tôi có thể giải đáp hoặc gọi lại kịp thời!
+      </mat-error>
       </div>
       <input class="form__guingay btn-primary" (click)="onSubmit(Name.value)" type="submit" value="Gửi ngay">
-    </div>
+
     </form>
 
   </div>

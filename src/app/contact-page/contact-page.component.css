@@ -1,6 +1,6 @@
 * {
   font-size: 1.6rem;;
-  font-family: Quicksand;
+  /* font-family: Quicksand; */
 }
 
 :root {
@@ -15,12 +15,37 @@
 .form-control{
   font-size: 1.6rem;
 }
+.example-form-field {
+  /* width: 200px; */
+  /* min-width: 150px; */
+  /* max-width: 500px; */
+  width: 100%;
+}
+.mat-mdc-form-field-error {
+  display: block;
+  margin-bottom: 25px;
+
+}
+.mat-body-2 p, .mat-typography p {
+  margin: 0px 15px;
+}
+.mat-mdc-form-field-error {
+  color: var(--mdc-theme-error, #f44336);
+  text-align: left;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--white);
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--white);
+  border: lightgray 1px solid;
+}
 .breadcrumb{
   background-color: var(--lightpink);
   padding: 5px ;
   font-size: 1.6rem;
   padding-left: 70px;
-  margin-top: 101px;
+  margin-top: 102px;
 }
 .breadcrumb>li a{
   font-size: 1.2rem;
@@ -40,6 +65,7 @@ a{
   font-weight: bolder;
   color: var(--darkbrown);
   position: relative;
+  padding-top: 20px;
 }
 
 .map{
@@ -58,7 +84,7 @@ a{
 }
 .bar--bottom{
   position: absolute;
-  width: 350px;
+  width: 24%;
   height: 0px;
   margin-top: 2px;
   border: 1px solid #000000;

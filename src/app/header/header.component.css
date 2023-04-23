@@ -494,6 +494,9 @@ input.example-right-align {
 .header__cart-container{
   margin-top: 25px;
   /* color: var(--background-color); */
+  max-height: 275px;
+  overflow: auto;
+  overflow-x: hidden;
 }
 .header__cart-container p{
   margin: 15px 0 40px ;

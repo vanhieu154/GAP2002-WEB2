@@ -28,6 +28,17 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
+  addUser(user: User): Observable<any> {
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.post<any>(`${this.apiUrl}/users`, user, { headers })
+      .pipe(
+        map(res => {
+          return res;
+        }),
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
   handleError(error:HttpErrorResponse){
     return throwError(()=>new Error(error.message))
   }
