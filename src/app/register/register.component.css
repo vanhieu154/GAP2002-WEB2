@@ -126,6 +126,13 @@ input.example-right-align::-webkit-inner-spin-button {
 .mdc-text-field .mdc-text-field__input {
   caret-color: var(--mdc-theme-primary, var(--black));
 }
+.mat-calendar-body-selected {
+  background-color: var(--darkbrown);
+  color: #fff;
+}
+.mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: var(--darkbrown);
+}
 @media (max-width: 1023px) and (min-width: 740px) {
   .blog{
       margin-top: 128px;
