@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct, Product } from '../product';
 import { ProductService } from '../product.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chitietsp',
@@ -17,7 +18,7 @@ export class ChitietspComponent implements OnInit{
   items: any[] = [];
   a:number=1;
   panelOpenState = false;
-  constructor(private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router)
+  constructor(public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router)
   {
     activateRoute.paramMap.subscribe(
       (param)=>{
@@ -87,5 +88,26 @@ export class ChitietspComponent implements OnInit{
     }
     console.log(addSP[addSP.length-1]._id);
     localStorage.setItem("Cart", JSON.stringify(addSP));
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog)
+    // , {
+    //   data: {name: this.name, animal: this.animal},
+    // });
+  }
+}
+@Component({
+  selector: 'thongbaothemsp',
+  templateUrl: 'thongbaothemsp.html',
+  encapsulation: ViewEncapsulation.None
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    // @Inject(MAT_DIALOG_DATA) public data: ChitietspComponent,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

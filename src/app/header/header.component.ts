@@ -130,7 +130,14 @@ export class HeaderComponent  {
 
   deleteP(i:number){
     this.products.splice(i,1);
+    // if(this.products.length==0){
+    //   localStorage.setItem("Cart", JSON.stringify(this.products));
+    //   localStorage.removeItem("Cart");
+    // }else{
+    //   localStorage.setItem("Cart", JSON.stringify(this.products));
+    // }
     localStorage.setItem("Cart", JSON.stringify(this.products));
+
   }
   toProductPage(i:number){
     this.navService.productSearch(i);

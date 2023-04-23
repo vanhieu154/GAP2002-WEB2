@@ -40,9 +40,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
-
-
-
+import { MatBadgeModule } from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +90,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

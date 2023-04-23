@@ -42,6 +42,7 @@ export class TrangspComponent implements OnInit {
 				});
 
 				this.navService.currentSearch.subscribe(type => {
+          this.tempProducts=this.products
 					let ma = '';
 					const arr = data;
 					let product = [];
