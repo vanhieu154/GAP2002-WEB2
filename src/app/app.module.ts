@@ -76,6 +76,7 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     IconModule,
     MatIconModule,
+
     BrowserModule,
     MatInputModule,
     MatFormFieldModule ,
@@ -86,7 +87,8 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
