@@ -1,69 +1,83 @@
-<div class="login-card-container">
-  <div class="login-card">
-      <div class="login-card-header">
-          <h1>ĐĂNG KÝ</h1>
-          <div>Hãy đăng ký để mua hàng bạn nhé!</div>
+<div class="register" align="center">
+  <div class="form" >
+    <div class="head">
+      <div class="dk">ĐĂNG KÝ</div>
+      <div>Hãy đăng ký để mua hàng bạn nhé!</div>
+      <hr>
+    </div>
+    <div class="body">
+      <div class="form-container">
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="exemple-form-field">
+            <mat-label>Họ và tên</mat-label>
+            <input matInput placeholder="Nhập họ và tên" [formControl]="name" required>
+            <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="exemple-form-field">
+            <mat-label>Số điện thoại</mat-label>
+            <input
+              matInput
+              placeholder="Nhập số điện thoại"
+              [formControl]="phoneNumber"
+              required
+              maxlength="10"
+            />
+            <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="exemple-form-field">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="gap2002@example.com" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorEmailMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="exemple-form-field">
+            <mat-label>Tên đăng nhập</mat-label>
+            <input matInput placeholder="Nhập tên đăng nhập" [formControl]="acc" required>
+            <mat-error *ngIf="acc.invalid">{{getErrorAccMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="exemple-form-field">
+            <mat-label>Mật khẩu</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu" [formControl]="password" required>
+            <mat-error *ngIf="password.invalid">{{getErrorPWMessage()}}</mat-error>
+            <button class="hide" style="margin-right: 7px; color:  #6B4932;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="exemple-form-field">
+            <mat-label>Ngày sinh</mat-label>
+          <!-- #docregion toggle -->
+            <input matInput [matDatepicker]="picker" [formControl]="dob" required>
+            <mat-error *ngIf="dob.invalid">{{getErrorDoBMessage()}}</mat-error>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          <!-- #enddocregion toggle -->
+          </mat-form-field>
+        </div>
+        <div class="form-content exemple-form-field"  style="text-align: left; font-weight: 450;">
+          <mat-hint style="font-size: 1.6rem;" >Giới tính:</mat-hint>
+          <mat-radio-group aria-label="Select an option" >
+            <mat-radio-button value="1" checked>Nam</mat-radio-button>
+            <mat-radio-button value="2">Nữ</mat-radio-button>
+            <mat-radio-button value="3">Khác</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="form-content">
+        <button onclick="dangky()" class="btn-dangky">ĐĂNG KÝ</button>
+        </div>
       </div>
-      <!-- <form class="login-card-form" action="./otp.html" method="get"> -->
-          <div class="login-card-form">
-          <div class="form-item">
-              <span class="form-item-icon"><i class="fa-regular fa-user"></i></span>
-              <input type="text" placeholder="Tên đăng nhập" id="txt_name_dk" autofocus required >
-          </div>
-          <div class="form-item">
-              <span class="form-item-icon "><i class="fa-solid fa-lock"></i></span>
-              <input type="password" id="passDK" placeholder="Mật khẩu"  required>
-          </div>
-          <div class="form-item">
-              <span class="form-item-icon "><i class="fa-solid fa-lock"></i></span>
-              <input type="password" id="passDK2" placeholder="Nhập lại mật khẩu" required>
-          </div>
-          <div class="form-item">
-              <span class="form-item-icon "><i class="fa-solid fa-phone"></i></span>
-              <input type="number" id="txt_phone" placeholder="Số điện thoại" required>
-          </div>
-          <div class="form-item" id="gender">
-              <div class="radio">
-              <input type="radio" name="gender" id="nam" value="nam" checked>
-              <label for="">Nam</label>
-              </div>
-              <div class="radio">
-                  <input type="radio" name="gender" id="nu" value="nu">
-                  <label for="">Nữ</label>
-              </div>
-              <div class="radio">
-                  <input type="radio" name="gender" id="khac" value="khac">
-                  <label for="">Khác</label>
-              </div>
-          </div>
-          <button onclick="dangky()">Đăng ký</button>
-      </div>
-          <!-- <button type="submit">Đăng ký</button> -->
-      <!-- </form> -->
-      <div class="login-card-social">
-          <!-- separator -->
-          <div class="separator">Hoặc</div>
-          <div class="login-card-social-btns">
-              <a class="fb1" href="https://vi-vn.facebook.com/">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook"
-                      width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
-                  </svg>
-              </a>
-              <p class="fb"> Facebook </p>
-              <a class="gg1" href="https://accounts.google.com/login?hl=vi">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-google" width="24"
-                      height="24" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M17.788 5.108a9 9 0 1 0 3.212 6.892h-8"></path>
-                  </svg>
-              </a>
-              <p class="gg">Google</p>
-          </div>
-      </div>
-      <div class="back-to-main"><a routerLink="/" id="back-to-main" >Quay lại trang chủ</a></div>
+    </div>
+    <div class="foot">
+
+    </div>
   </div>
 </div>

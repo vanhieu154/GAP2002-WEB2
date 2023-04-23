@@ -134,10 +134,10 @@
                                   </button>
                                 </div>
                                 <div class="header__login__footer">
-                                  Khách hàng mới? <a class="create-account" href="./dangky.html">Tạo tài khoản</a>
+                                  Khách hàng mới? <a class="create-account" routerLink="/Register">Tạo tài khoản</a>
                                 </div>
                                 <div class="header__login__footer">
-                                  Quên mật khẩu? <a href="./quenmatkhau.html" class="restore-pass">Khôi phục mật khẩu</a>
+                                  Quên mật khẩu? <a routerLink="/forgetPass" class="restore-pass">Khôi phục mật khẩu</a>
                                 </div>
                                 <p *ngIf="message">{{ message }}</p>
                               </form>
@@ -147,7 +147,8 @@
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
                       <button class="box-icon" (click)="showBox(true,false,false);showCart()" >
-                          <span style="font-size: 2.5rem" class="fa-solid fa-cart-shopping"></span>
+                          <span matBadge="{{products.length}}" matBadgeColor="warn" style="font-size: 2.5rem"   class="fa-solid fa-cart-shopping" ></span>
+
                       </button>
                   </div>
                   <div class="header__cart" id="header__cart"   [class.activate]="showCartBox">

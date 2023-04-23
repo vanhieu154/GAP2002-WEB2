@@ -72,7 +72,7 @@ export class HeaderComponent  {
       this.prevScrollpos = currentScrollPos;
   }
   showCart(){
-    this.products = JSON.parse(sessionStorage.getItem("Cart")!);
+    this.products = JSON.parse(localStorage.getItem("Cart")!);
     if(this.products.length==0){
       this.cartProduct=false
     }else{
@@ -95,7 +95,7 @@ export class HeaderComponent  {
     for (let i = 0; i < this.products.length; i++) {
       this.pay=this.pay+this.products[i].total
     }
-    sessionStorage.setItem("Cart", JSON.stringify(this.products));
+    localStorage.setItem("Cart", JSON.stringify(this.products));
   }
 
   PlusP(i:number){
@@ -109,7 +109,7 @@ export class HeaderComponent  {
     for (let i = 0; i < this.products.length; i++) {
       this.pay=this.pay+this.products[i].total
     }
-    sessionStorage.setItem("Cart", JSON.stringify(this.products));
+    localStorage.setItem("Cart", JSON.stringify(this.products));
   }
 
   onLogin(): void {
@@ -130,7 +130,14 @@ export class HeaderComponent  {
 
   deleteP(i:number){
     this.products.splice(i,1);
-    sessionStorage.setItem("Cart", JSON.stringify(this.products));
+    // if(this.products.length==0){
+    //   localStorage.setItem("Cart", JSON.stringify(this.products));
+    //   localStorage.removeItem("Cart");
+    // }else{
+    //   localStorage.setItem("Cart", JSON.stringify(this.products));
+    // }
+    localStorage.setItem("Cart", JSON.stringify(this.products));
+
   }
   toProductPage(i:number){
     this.navService.productSearch(i);
