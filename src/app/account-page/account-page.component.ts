@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MyErrorStateMatcher } from '../delivery-info/delivery-info.component';
+
 
 @Component({
   selector: 'app-account-page',
@@ -46,4 +49,14 @@ export class AccountPageComponent {
   hideModal(){
     this.showmodal=false
   }
+  //email
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  matcher = new MyErrorStateMatcher();
+  labelPosition: 'before' | 'after' = 'after';
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 }

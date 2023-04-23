@@ -95,73 +95,66 @@
                     <div class="myaccount-body-right-ho-so-cua-toi" [class.activate]="myProfileP">
                         <h2 style="font-size:32px ;text-align: center;">Hồ sơ của tôi</h2>
                         <br>
-                        <form action="/action_page.php" autocomplete="on" method="post">
+                        <form action="/action_page.php" autocomplete="on" method="post" class="example-form">
                             <div class="row hs">
-                                <div class="col-2 form__label">
-                                    <label for="tendangnhap">Tên đăng nhập:</label>
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Tên đăng nhập (disabled)</mat-label>
+                                  <input matInput disabled value="ThanhThuy">
+                                </mat-form-field>
+                            </div>
+                            <div class="row hs">
+                                <div class="col">
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>First name</mat-label>
+                                    <input matInput>
+                                  </mat-form-field>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="tendangnhap" placeholder="Nhập tên đăng nhập" name="tendangnhap">
-                                    <p id="tendangnhap"></p>
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput>
+                                  </mat-form-field>
                                 </div>
                             </div>
                             <div class="row hs">
-                                <div class="col-2 form__label">
-                                    <label for="hovaten">Họ và tên:</label>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" id="hovaten" placeholder="Nhập họ và tên" name="hovaten">
-                                </div>
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Email</mat-label>
+                                  <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                                         placeholder="Ex. pat@example.com">
+                                  <mat-hint>Errors appear instantly!</mat-hint>
+                                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                    Please enter a valid email address
+                                  </mat-error>
+                                  <mat-error *ngIf="emailFormControl.hasError('required')">
+                                    Email is <strong>required</strong>
+                                  </mat-error>
+                                </mat-form-field>
                             </div>
                             <div class="row hs">
-                                <div class="col-2 form__label">
-                                    <label for="email">Email:</label>
-                                </div>
-                                <div class="col">
-                                    <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email">
-                                </div>
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Telephone</mat-label>
+                                <span matPrefix>+84 &nbsp;</span>
+                                <input type="tel" matInput placeholder="555-555-1234">
+                                <mat-icon matSuffix>mode_edit</mat-icon>
+                              </mat-form-field>
                             </div>
                             <div class="row hs">
-                                <div class="col-2 form__label">
-                                    <label for="phone">Số điện thoại:</label>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" name="phone">
-                                    <p id="phone"></p>
-                                </div>
+                              <section class="example-section">
+                                <label class="example-margin">Giới tính:</label>
+                                <mat-radio-group [(ngModel)]="labelPosition">
+                                  <mat-radio-button class="example-margin" value="after"><span style="color: black;">Nữ</span></mat-radio-button>
+                                  <mat-radio-button class="example-margin" value="before"><span style="color: black;">Nam</span></mat-radio-button>
+                                </mat-radio-group>
+                              </section>
                             </div>
                             <div class="row hs">
-                                <div class="col-2 form__label">
-                                    <label for="gioitinh">Giới tính:</label>
-                                </div>
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col" style="text-align: left;">
-                                            <input type="radio" id="gioitinh" name="gioitinh" value="nam">Nam</div>
-                                        <div class="col" style="text-align: left;">
-                                            <input type="radio" id="gioitinh" name="gioitinh" value="nu">Nữ</div>
-                                        <div class="col" style="text-align: left;">
-                                            <input type="radio" id="gioitinh" name="gioitinh" value="khac">Khác</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row hs">
-                                <div class="col-2 form__label">
-                                    <label for="dob">Ngày sinh:</label>
-                                </div>
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="number" class="form-control" id="dob" placeholder="Ngày" name="dob" max="31" min="1">
-                                        </div>
-                                        <div class="col">
-                                            <input type="number" class="form-control" id="dob" placeholder="Tháng" name="dob" max="12" min="1">
-                                        </div>
-                                        <div class="col">
-                                            <input type="number" class="form-control" id="dob" placeholder="Năm" name="dob">
-                                        </div>
-                                    </div>
-                                </div>
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Your birtday</mat-label>
+                                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker">
+                                <mat-hint>mm/dd/yyyy</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
                             </div>
                             <div class="row">
                                 <div class="col text-center">
