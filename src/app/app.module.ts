@@ -43,6 +43,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +87,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    MatStepperModule,
     // NgbModule
     FormsModule,
     ReactiveFormsModule,

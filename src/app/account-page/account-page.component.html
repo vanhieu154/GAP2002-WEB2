@@ -272,50 +272,64 @@
                 </div>
                 <!-- Đổi mật khẩu -->
                 <div style="display: none" class="container body__container-doi-mat-khau" [class.activate]="changePass">
-                    <!--  -->
-                    <form action="/action_page.php" method="get">
-                        <div class="row cachdeu">
-                            <h1>Đổi mật khẩu</h1><br>
-                            <span style="color: red;">*Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác </span>
-                        </div>
-                        <br>
-                        <div class="row cachdeu">
-                            <div class="col-3">
-                                <label for="matkhauhientai">Mật khẩu hiện tại:</label>
-                            </div>
-                            <div class="col">
-                                <input type="password" class="form-control" id="matkhauhientai" placeholder="" name="matkhauhientai">
-                            </div>
-                            <div class="col">
-                                <p style="color: blue;">Quên mật khẩu</p>
-                            </div>
-                        </div>
-                        <div class="row cachdeu">
-                            <div class="col-3">
-                                <label for="matkhaumoi">Mật khẩu mới:</label>
-                            </div>
-                            <div class="col">
-                                <input type="password" class="form-control" id="matkhaumoi" placeholder="" name="matkhaumoi">
-                            </div>
-                            <div class="col"></div>
-                        </div>
-                        <div class="row cachdeu">
-                            <div class="col-3">
-                                <label for="xacnhanmatkhau">Xác nhận mật khẩu:</label>
-                            </div>
-                            <div class="col">
-                                <input type="password" class="form-control" id="xacnhanmatkhau" placeholder="" name="xacnhanmatkhau">
-                            </div>
-                            <div class="col"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary submit">Submit</button>
-                            </div>
+                  <h1 style="text-align: center;">Đổi mật khẩu</h1>
+                  <div class="example-input-wrapper" style="display:none">
+                    <label for="duration">Animation duration:</label>
+                    <input id="duration" value="2000" type="number" min="0" step="100" #duration>
+                  </div>
 
+                  <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration.value">
+                    <mat-step [stepControl]="firstFormGroup">
+                      <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Fill out your current password</ng-template>
+                        <mat-form-field>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="firstCtrl" required>
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+
+                        </mat-form-field>
+                        <div>
+                          <button mat-button matStepperNext>Next</button>
                         </div>
-                    </form>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup">
+                      <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Fill out your new Password</ng-template>
+                        <mat-form-field>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="secondCtrl" required>
+                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        <div>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="thirdFormGroup">
+                      <form [formGroup]="thirdFormGroup">
+                        <ng-template matStepLabel>Fill out again your new Password</ng-template>
+                        <mat-form-field>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="thirdCtrl" required>
+                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        <div>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      You are now done
+                    </mat-step>
+                  </mat-vertical-stepper>
+
                 </div>
             </div>
             <!--Order  -->

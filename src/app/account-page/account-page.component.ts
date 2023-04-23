@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from '../delivery-info/delivery-info.component';
+import { Observable } from 'rxjs';
 
 
 @Component({
   selector: 'app-account-page',
   templateUrl: './account-page.component.html',
-  styleUrls: ['./account-page.component.css']
+  styleUrls: ['./account-page.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AccountPageComponent {
   myProfile=true;
@@ -59,4 +61,11 @@ export class AccountPageComponent {
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   };
+  constructor(private _formBuilder: FormBuilder) {}
+  firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['']});
+  secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
+  thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
+  hide = true;
+  // nhận xét
+ 
 }
