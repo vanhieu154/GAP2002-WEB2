@@ -1,4 +1,3 @@
-import { Order } from "./order";
 
 export class User {
   constructor(
@@ -11,7 +10,7 @@ export class User {
     public dateOfBirth:Date,
     public Img:string="",
     public cDate:Date,
-    public order:Order[] =[],
+    public order:string[] =[],
     public discount:string[] =[],
     public cartID:string ="",
   ){}

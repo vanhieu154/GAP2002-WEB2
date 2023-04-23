@@ -147,7 +147,7 @@
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
                       <button class="box-icon" (click)="showBox(true,false,false);showCart()" >
-                          <span matBadge="{{products.length}}" matBadgeColor="warn" style="font-size: 2.5rem"   class="fa-solid fa-cart-shopping" ></span>
+                          <span matBadge="{{cartItemCount}}" [matBadgeHidden]="hidden" matBadgeColor="warn" style="font-size: 2.5rem"   class="fa-solid fa-cart-shopping" ></span>
 
                       </button>
                   </div>

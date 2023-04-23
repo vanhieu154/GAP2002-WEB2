@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct, Product } from '../product';
 import { ProductService } from '../product.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-chitietsp',
@@ -18,7 +19,7 @@ export class ChitietspComponent implements OnInit{
   items: any[] = [];
   a:number=1;
   panelOpenState = false;
-  constructor(public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router)
+  constructor(private cartService: CartService,public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router)
   {
     activateRoute.paramMap.subscribe(
       (param)=>{
@@ -64,36 +65,10 @@ export class ChitietspComponent implements OnInit{
   }
 
   addProduct(){
-    let addSP: any[] = localStorage.getItem("Cart") ? JSON.parse(localStorage.getItem("Cart")!) : [];
-    addSP[addSP.length] = this.product;
-    addSP[addSP.length - 1].quantity = this.a;
-    if(this.product.Discount>0){
-      addSP[addSP.length - 1].price =this.product.Price-this.product.Price*this.product.Discount /100
-    }else{
-      addSP[addSP.length - 1].price =this.product.Price
-    }
-    addSP[addSP.length - 1].total = addSP[addSP.length - 1].price * this.a;
-    for (let i = 0; i < addSP.length - 1; i++) {
-      for (let j = i + 1; j < addSP.length; j++) {
-        if (addSP[i].MaSP == addSP[j].MaSP) {
-          addSP[i].quantity += addSP[j].quantity;
-          addSP[i].total += addSP[j].total;
-          addSP.splice(j, 1);
-          if(addSP[i].quantity>this.product.Soluong){
-            addSP[i].quantity=this.product.Soluong
-            addSP[i].total=addSP[i].price*addSP[i].quantity
-          }
-        }
-      }
-    }
-    console.log(addSP[addSP.length-1]._id);
-    localStorage.setItem("Cart", JSON.stringify(addSP));
+    this.cartService.addProduct(this.product, this.a);
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog)
-    // , {
-    //   data: {name: this.name, animal: this.animal},
-    // });
   }
 }
 @Component({
@@ -103,8 +78,7 @@ export class ChitietspComponent implements OnInit{
 })
 export class DialogOverviewExampleDialog {
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    // @Inject(MAT_DIALOG_DATA) public data: ChitietspComponent,
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>
   ) {}
 
   onNoClick(): void {
