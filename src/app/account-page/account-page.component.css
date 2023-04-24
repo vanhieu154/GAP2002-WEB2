@@ -12,6 +12,7 @@ body{
 }
 .my-body__container{
   min-height: 500px;
+  overflow-x: hidden;
 }
 .breadcrumb-item a{
   font-size: 1.2rem;
@@ -147,6 +148,48 @@ a{
 .hs{
 margin-bottom: 10px;
 
+}
+.example-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px
+}
+.mat-mdc-form-field-error {
+  color: var(--darkbrown);
+}
+
+.mdc-text-field--disabled.mdc-text-field--filled {
+  background-color: var(--lightpink);
+  border-radius: 10px;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--lightpink);
+  color: #6B4932;
+  border-radius: 10px;
+}
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input{
+  color: #472f1f;
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label{
+  color: #472f1f;
+}
+.mat-mdc-radio-button .mdc-form-field {
+  color: var(--mdc-theme-text-primary-on-background, rgb(0, 0, 0));
 }
 /* Địa chỉ của tôi */
 /* Animation */
@@ -304,15 +347,18 @@ margin-bottom: 10px;
 
 
 /* Đổi mật khẩu */
-.cachdeu{
-  margin-bottom: 10px;
-
+.example-input-wrapper {
+  margin-bottom: 16px;
 }
-.submit{
-  width: 48%;
+
+label {
+  margin-right: 4px;
+}
+.mat-step-header{
   background-color: var(--lightpink);
-  border: 1px solid var(--lightpink);
-  text-align: center;
+}
+.mat-step-header :hover{
+  background-color: #85556b;
 }
 /* Order */
 /* right form Đơn hàng*/

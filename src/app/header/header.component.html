@@ -147,7 +147,7 @@
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
                       <button class="box-icon" (click)="showBox(true,false,false);showCart()" >
-                          <span matBadge="{{products.length}}" matBadgeColor="warn" style="font-size: 2.5rem"   class="fa-solid fa-cart-shopping" ></span>
+                          <span matBadge="{{cartItemCount}}" [matBadgeHidden]="hidden" matBadgeColor="warn" style="font-size: 2.5rem"   class="fa-solid fa-cart-shopping" ></span>
 
                       </button>
                   </div>
@@ -208,7 +208,7 @@
                       </div>
                       <div class="header__cart_container-btn">
                        <button class="btn-header" routerLink="/Cart"><a >Xem giỏ hàng</a></button>
-                       <button class="btn-header" routerLink="/Payment"><a >Thanh toán</a></button>
+                       <button class="btn-header" routerLink="/DeliveryInfor"><a >Thanh toán</a></button>
                       </div>
                    </div>
               </div>
