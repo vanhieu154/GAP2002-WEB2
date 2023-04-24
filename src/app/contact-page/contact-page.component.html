@@ -31,9 +31,9 @@
           <div class="mb-3">
             <mat-form-field class="example-form-field ">
               <mat-label style="color: grey;">Họ và tên</mat-label>
-              <input matInput type="text"  #Name id="hoten" name="hoten" style="color: black;" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+              <input matInput type="text"  #Name id="fullname" name="fullname" style="color: black;" matInput [formControl]="FormControl" [errorStateMatcher]="matcher">
             </mat-form-field>
-            <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-top: -20px;">
+            <mat-error *ngIf="FormControl.hasError('required')" style="margin-top: -20px;">
               Họ và Tên là <strong>bắt buộc</strong>
             </mat-error>
           </div>
@@ -44,24 +44,20 @@
           <div>
 
             <div w-100>
-            <mat-form-field class="example-form-field">
-              <mat-label style="color: grey;">Email</mat-label>
-              <input type="email"  id="email" name="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                     placeholder="Ex. pat@example.com">
-              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')" >
-                Vui lòng nhập địa chỉ email hợp lệ
+              <mat-form-field class="example-form-field ">
+                <mat-label style="color: grey;">Email</mat-label>
+                <input matInput type="text"  #Email id="email" name="email" style="color: black;" matInput [errorStateMatcher]="matcher">
+              </mat-form-field>
+              <mat-error *ngIf="FormControl.hasError('email')">
+                Hãy chắn chắc bạn nhập đúng email của mình
               </mat-error>
-              <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-left: -20px;">
-                Email là <strong>bắt buộc</strong>
-              </mat-error>
-            </mat-form-field>
           </div>
 
             <mat-form-field class="example-full-width" style="padding-top: 30px;">
               <mat-label style="color: grey;">Số điện thoại</mat-label>
-              <input (ngModelChange)="updatePhoneNumber()" matInput type="text" id="phone" name="phone" [(ngModel)]="phone" (ngModelChange)="updatePhoneNumber()" style="color: black;" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+              <input (ngModelChange)="updatePhoneNumber()" matInput type="text" id="phone" name="phone" [(ngModel)]="phone" (ngModelChange)="updatePhoneNumber()" style="color: black;" matInput [formControl]="FormControl" [errorStateMatcher]="matcher">
             </mat-form-field>
-            <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-top: -20px;">
+            <mat-error *ngIf="FormControl.hasError('required')" style="margin-top: -20px;">
               Số điện thoại là <strong>bắt buộc</strong>
             </mat-error>
             <div *ngIf="phoneNumberCheckResult !== null" style="text-align: left; color: grey; margin-left: -10px; margin-top: -20px;">
@@ -78,11 +74,11 @@
       <div class="col ">
       <mat-form-field class="example-form-field " style="padding-top: 20px;">
         <mat-label style="color: grey;">Nội dung</mat-label>
-        <textarea matInput type="text"  id="noidung" name="noidung" style="color: black;" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"></textarea>
+        <textarea matInput type="text" id="contentcontact" name="contentcontact" style="color: black;" matInput [errorStateMatcher]="matcher"></textarea>
       </mat-form-field>
-      <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-top: -20px;">
+      <!-- <mat-error *ngIf="FormControl.hasError('required')" style="margin-top: -20px;">
         Bạn cần nhập nội dung để chúng tôi có thể giải đáp hoặc gọi lại kịp thời!
-      </mat-error>
+      </mat-error> -->
       </div>
       <input class="form__guingay btn-primary" (click)="onSubmit(Name.value)" type="submit" value="Gửi ngay">
 

@@ -1,8 +1,20 @@
 *{
   margin: 0;
   padding: 0;
-  /* font-family: Quicksand; */
   font-size: 1.6rem;
+}
+.body{
+  margin-top: 92px;
+}
+:root{
+  --darkpink: #b8a898;
+  --lightpink: #d2beb4;
+  --darkbrown: #6B4932;
+  --black: black;
+  --white: #ffffff;
+  --grey: #ADA9A9;
+  --lightgrey: #EEECEC;
+  --red: #FF0000;
 }
 .container {
   display: flex;
@@ -18,23 +30,32 @@
   margin-bottom: 10px;
   padding-bottom: 50px;
   height: max-content;
-  /* font-family: Quicksand; */
 
 }
-
-
-/* responsive */
-@media (max-width: 768px){
-  .box{
-    margin-top: 20px;
-  }
+.header__cart-item__price-current{
+  color: red;
+  font-size: 1.6rem;
 }
+.header__cart-item__price-old{
+  font-size: 1.2rem;
+  color: #bfbebeef ;
+  text-decoration: line-through;
+}
+.header__cart-item__font{
+  font-size: 1.6rem;
+  text-align: left;
+}
+
 .example-form-field {
   /* width: 200px; */
   /* min-width: 150px; */
   /* max-width: 500px; */
   width: 100%;
 }
+
+
+
+/* form */
 .mat-mdc-form-field-error {
   color: var(--mdc-theme-error, #f44336);
   text-align: left;
@@ -60,24 +81,24 @@
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
   border: lightgrey solid 1px;
-
-  /* display: flex; */
+}
+textarea.form-control,input.form-control,select.form-select {
+  font-size: 1.6rem;
 }
 
+
+/* half-right-content */
 .col--right__image {
   background-color: #EEECEC;
   text-align: left;
   padding: 30px 15px;
   border-top-left-radius: 10px;
 }
-
-
 .col--right__describe {
   padding: 30px 15px;
   background-color: #EEECEC;
   text-align: left;
 }
-
 .col--right__price {
   background-color: #EEECEC;
   text-align: right;
@@ -89,21 +110,11 @@ img {
   max-width: 100%;
   height: auto;
 }
-.bar{
-  border-bottom: 2px solid grey;
-  width: 100%;
 
-}
-
-textarea.form-control,input.form-control,select.form-select {
-  font-size: 1.6rem;
-}
 .text-right{
   text-align: right;
 }
-.body{
-  margin-top: 92px;
-}
+
 .col--left{
   padding-left: 50px;
   padding-top: 50px;
@@ -122,35 +133,29 @@ textarea.form-control,input.form-control,select.form-select {
   padding-bottom: 35px;
   background-color: var(--lightgrey);
 }
-
-:root{
-  --darkpink: #b8a898;
-  --lightpink: #d2beb4;
-  --darkbrown: #6B4932;
-  --black: black;
-  --white: #ffffff;
-  --grey: #ADA9A9;
-  --lightgrey: #EEECEC;
-  --red: #FF0000;
-}
+/* half-left-content */
 .gap2002{
   margin-top: 20px;
   font-size: 3rem;
   text-align: left;
   color: var(--darkbrown);
   font-weight: bolder;
-  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
 }
 .left--title{
   margin: 20px 0 10px 0;
   font-size: 2rem;
   font-weight: 600;
   text-align: left;
-  /* font-family: Quicksand; */
 }
 a{
   color: var(--black);
   text-decoration: none;
+}
+.email--note{
+  color: grey; margin-bottom: 20px; text-align: left; margin-left: -5px;
+}
+.phone-note{
+  text-align: left; color: grey; margin-left: 5px; margin-top: -15px; padding-bottom: 10px;
 }
 .button--gui__position{
   text-align: right;
@@ -184,27 +189,9 @@ border-radius: 10px;
 padding-left: 50px;
 padding-right: 20px;
 }
-.ship-infor{
-  display: none;
-}
-.icon__qr{
-  /* display: none; */
-  color: var(--black);
-  /* display: flex; */
-  flex-direction: column;
-  align-items: center;
-  padding: 30px;
-}
-.icon__check{
-  color: var(--darkbrown);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 30px;
-}
+
 .thongtin{
   text-align: left;
-
 }
 .thongtin__textleft{
   text-align: left;
@@ -217,13 +204,10 @@ padding-right: 20px;
   align-items: center;
   padding-top: 30px;
 }
-.sudungmagiamgia{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
+.title--thanks{
+  text-align: center; padding-top: 20px;
+  font-size: larger;
 }
-
 .button--muahang{
   background-color: initial;
   font-weight: bold;
@@ -242,10 +226,8 @@ padding-right: 20px;
   opacity: 0.7;
   background-color: var(--darkpink);
 }
-.font--sp{
-  font-size: 1.6rem;
-}
-.color--gia{
+
+.color--price{
   color: var(--red);
 }
 
@@ -255,29 +237,8 @@ padding-right: 20px;
 img{
   position: relative;
 }
-.icon--soluong{
-position: absolute;
-margin-left: -15px;
-margin-top: -10px;
-/* padding-left: -30px; */
-}
-.number--soluong{
-  position: absolute;
-  margin-left: -4px;
-  margin-top: -5px;
-  font-size: 12px;
-  color: var(--white);
-  /* padding-left: -30px; */
-}
-.button--hoantatdon{
-  text-align: right;
-}
-.success-order{
-  display: none;
-}
-
-.delivery-info2{
-  display: none;
+.button--showcontent{
+  text-align: center; margin-top: 30px; cursor: pointer;
 }
 .form-check-input:focus{
   box-shadow: 0 0 0 0.25rem rgb(210 190 180)
@@ -286,35 +247,13 @@ margin-top: -10px;
   background-color: rgb(210 190 180);
   border-color: rgb(210 190 180);
 }
-.modal-img{
-  display: flex;
-  justify-content: center;
-}
-.modal-content{
-  max-width: 485px;
-}
-.modal-footer{
-  display: flex;
-  justify-content: center;
-}
-.modal-footer .btn{
-  width: 60%;
-  font-size: 1.6rem;
-  background-color: rgb(210 190 180);
-  border: none;
-  font-weight: 500;
-  border-radius: 30px;
-  padding: 10px 0;
-}
-.modal-footer .btn:hover{
-  background-color: #fff;
-  color: #333;
-}
-.modal-body input{
-  border-radius: 30px;
 
+/* responsive */
+@media (max-width: 768px){
+  .box{
+    margin-top: 20px;
+  }
 }
-
 
 
 
