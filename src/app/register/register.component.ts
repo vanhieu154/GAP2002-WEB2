@@ -47,7 +47,7 @@ export class RegisterComponent {
 
   phoneNumber = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^0\d{9}$/),
+    Validators.pattern(/^(03|05|08|09)\d{8}$/),
   ]);
   getErrorPhoneMessage() {
     if (this.phoneNumber.hasError('required')) {
@@ -55,14 +55,5 @@ export class RegisterComponent {
     }
 
     return this.phoneNumber.hasError('pattern') ? '*Số điện thoại không hợp lệ' : '';
-  }
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-  getErrorEmailMessage() {
-    if (this.email.hasError('required')) {
-      return '*Vui lòng nhập email';
-    }
-
-    return this.email.hasError('email') ? '*Email không hợp lệ' : '';
   }
 }
