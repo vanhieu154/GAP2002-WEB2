@@ -33,7 +33,7 @@ export class RegisterComponent {
       return '*Vui lòng nhập mật khẩu';
     }
 
-    return this.password.hasError('acc') ? 'Mật khẩu không hợp lệ' : '';
+    return this.password.hasError('password') ? 'Mật khẩu không hợp lệ' : '';
   }
 
   dob = new FormControl('', [Validators.required]);
@@ -42,7 +42,7 @@ export class RegisterComponent {
       return '*Vui lòng nhập ngày sinh';
     }
 
-    return this.dob.hasError('acc') ? 'Ngày sinh không hợp lệ' : '';
+    return this.dob.hasError('dob') ? 'Ngày sinh không hợp lệ' : '';
   }
 
   phoneNumber = new FormControl('', [

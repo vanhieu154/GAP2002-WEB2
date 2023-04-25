@@ -46,7 +46,7 @@
               <mat-label>Mật khẩu</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu" [formControl]="password" required>
               <mat-error *ngIf="password.invalid">{{getErrorPWMessage()}}</mat-error>
-              <button class="hide" style="margin-right: 7px; color:  #6B4932;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <button class="hide" style=" color:  #6B4932;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>

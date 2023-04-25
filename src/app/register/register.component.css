@@ -147,5 +147,7 @@ input.example-right-align::-webkit-inner-spin-button {
   .blog{
       margin-top: 128px;
   }
-
+  .form{
+    width: 90%;
+  }
 }
