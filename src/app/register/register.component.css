@@ -26,7 +26,7 @@
   margin-top: 92px;
 }
 .form{
-  width: 30%;
+  width: 40%;
   /* background-color: #6B4932; */
   margin: 30px;
   padding: 30px;
@@ -137,11 +137,17 @@ input.example-right-align::-webkit-inner-spin-button {
   .blog{
       margin-top: 128px;
   }
+  .form{
+    width: 90%;
+  }
 }
 
 /*mobile*/
 @media (max-width: 740px) {
   .blog{
       margin-top: 128px;
+  }
+  .form{
+    width: 90%;
   }
 }

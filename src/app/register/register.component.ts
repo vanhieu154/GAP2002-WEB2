@@ -33,7 +33,7 @@ export class RegisterComponent {
       return '*Vui lòng nhập mật khẩu';
     }
 
-    return this.password.hasError('acc') ? 'Mật khẩu không hợp lệ' : '';
+    return this.password.hasError('password') ? 'Mật khẩu không hợp lệ' : '';
   }
 
   dob = new FormControl('', [Validators.required]);
@@ -42,12 +42,12 @@ export class RegisterComponent {
       return '*Vui lòng nhập ngày sinh';
     }
 
-    return this.dob.hasError('acc') ? 'Ngày sinh không hợp lệ' : '';
+    return this.dob.hasError('dob') ? 'Ngày sinh không hợp lệ' : '';
   }
 
   phoneNumber = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^0\d{9}$/),
+    Validators.pattern(/^(03|05|08|09)\d{8}$/),
   ]);
   getErrorPhoneMessage() {
     if (this.phoneNumber.hasError('required')) {
@@ -55,14 +55,5 @@ export class RegisterComponent {
     }
 
     return this.phoneNumber.hasError('pattern') ? '*Số điện thoại không hợp lệ' : '';
-  }
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-  getErrorEmailMessage() {
-    if (this.email.hasError('required')) {
-      return '*Vui lòng nhập email';
-    }
-
-    return this.email.hasError('email') ? '*Email không hợp lệ' : '';
   }
 }
