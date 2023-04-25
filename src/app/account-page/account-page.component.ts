@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs';
 import { MyErrorStateMatcher } from './MyErrorStateMatcher';
 
+import {  FormGroupDirective, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
 
 
 /** @title Input with a custom ErrorStateMatcher */
@@ -71,5 +74,6 @@ export class AccountPageComponent {
   hide = true;
   // nhận xét
 
+  // email
 
 }
