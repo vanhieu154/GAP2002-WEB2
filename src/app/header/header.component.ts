@@ -37,9 +37,9 @@ export class HeaderComponent implements OnInit  {
   }
   ngOnInit(): void {
     this.products = JSON.parse(localStorage.getItem("Cart")!);
-    this.cartItemCount = this.cartService.products.length;
+    this.cartItemCount = this.cartService.cartProducts.length;
     this.cartService.getCartUpdatedListener().subscribe(() => {
-      this.cartItemCount = this.cartService.products.length;
+      this.cartItemCount = this.cartService.cartProducts.length;
       if(this.cartItemCount==0){
         this.hidden=true
       }else{
@@ -137,6 +137,7 @@ export class HeaderComponent implements OnInit  {
       next: (data) => {
         this.user = data;
         console.log(this.user);
+        sessionStorage.setItem("Account", JSON.stringify(this.user))
       },
       error: (err) => {
         this.errMessage = err;
@@ -146,6 +147,8 @@ export class HeaderComponent implements OnInit  {
   onLogout():void{
     this.user='';
     sessionStorage.removeItem('checkLogin');
+    this.showBox(false,false,false);
+    this.authService.isLoggedIn=false
   }
   deleteP(i:number){
     this.cartService.deleteProduct(i);

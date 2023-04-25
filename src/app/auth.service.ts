@@ -20,9 +20,14 @@ export class AuthService {
       .pipe(
         map(res => {
           // Nếu đăng nhập thành công, gán giá trị true cho biến isLoggedIn
-          this.isLoggedIn = true;
-          sessionStorage.setItem('checkLogin', '1');
-          return res; // trả về res.send
+          if(res.message==null){
+            this.isLoggedIn = true;
+            sessionStorage.setItem('checkLogin', '1');
+            return res; // trả về res.send
+          }else{
+            return res;
+          }
+
         }),
         retry(3),
         catchError(this.handleError)

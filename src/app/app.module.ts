@@ -34,16 +34,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatStepperModule } from '@angular/material/stepper';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,12 +91,13 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatDatepickerModule,
     MatNativeDateModule,
     MatStepperModule,
+    MatExpansionModule,
+
     // NgbModule
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatExpansionModule,
     MatIconModule,
     MatBadgeModule,
     MatDialogModule,

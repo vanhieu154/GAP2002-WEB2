@@ -20,16 +20,22 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ContactPageComponent {
   phoneNumberCheckResult: boolean | null = null;
   public phone:string='';
+  public fullname:string='';
+  public email:string='';
+  public contentcontact:string='';
 
-  onSubmit(value:string){
-    alert("Cảm ơn " + value + ", thông tin của bạn đã được gửi !" )
-  }
+  onSubmit(value:string)
+    {
+     if(this.fullname == ''   &&  this.phoneNumberCheckResult ===false)
+     {alert("Bạn chưa nhập đủ hoặc chưa đúng thông tin")}
+     else
+     {alert("Cảm ơn " + value + ", thông tin của bạn đã được gửi !" )}
+    }
 
   isPhoneNumberValid(phoneNumber: string): boolean {
     if (phoneNumber.length !== 10) {
       return false;
     }
-
 
     const phoneNumberRegex = /^(03|05|08|09)\d{8}$/;
     if (!phoneNumberRegex.test(phoneNumber)) {
@@ -46,6 +52,7 @@ export class ContactPageComponent {
   }
 
 
-emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+FormControl = new FormControl('', [Validators.required, Validators.email]);
 matcher = new MyErrorStateMatcher();
+
 }

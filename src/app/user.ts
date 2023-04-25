@@ -1,3 +1,4 @@
+import { Cart } from "./cart";
 
 export class User {
   constructor(
@@ -12,7 +13,8 @@ export class User {
     public cDate:Date,
     public order:string[] =[],
     public discount:string[] =[],
-    public cartID:string ="",
+    public cart:Cart []=[],
   ){}
 }
+
 

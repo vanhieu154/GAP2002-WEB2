@@ -4,6 +4,7 @@ import { IProduct, Product } from '../product';
 import { ProductService } from '../product.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CartService } from '../cart.service';
+import { CartItem } from '../cart';
 
 @Component({
   selector: 'app-chitietsp',
@@ -64,9 +65,26 @@ export class ChitietspComponent implements OnInit{
     }
   }
 
-  addProduct(){
-    this.cartService.addProduct(this.product, this.a);
+  // addProduct(){
+  //   this.cartService.addProduct(this.product._id, this.a);
+  // }
+
+  addProduct() {
+    // const cartItem: CartItem = new CartItem(this.product._id, this.a); // Tạo một CartItem mới với sản phẩm và số lượng là 1
+    // this.cartService.addToCart(this.product._id, this.a); // Gọi method addToCart của service để thêm sản phẩm vào giỏ hàng
+    this.cartService.addToCart(this.product._id, this.a).subscribe({
+      next: (cart) => {
+        console.log('Cart updated:', cart);
+      },
+      error: (error) => {
+        console.log('Error updating cart:', error);
+      },
+      complete: () => {
+        console.log('Add to cart completed');
+      }
+    });
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog)
   }
