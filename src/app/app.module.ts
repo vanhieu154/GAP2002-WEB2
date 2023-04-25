@@ -41,7 +41,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatBadgeModule } from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -96,6 +98,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    MatIconModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

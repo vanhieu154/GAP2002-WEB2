@@ -1,23 +1,9 @@
-<<<<<<< Updated upstream
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MyErrorStateMatcher } from '../delivery-info/delivery-info.component';
 import { Observable } from 'rxjs';
-
-=======
-import { Component } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
->>>>>>> Stashed changes
+import { MyErrorStateMatcher } from './MyErrorStateMatcher';
 
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
@@ -68,7 +54,6 @@ export class AccountPageComponent {
   hideModal(){
     this.showmodal=false
   }
-<<<<<<< Updated upstream
   //email
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
@@ -85,11 +70,6 @@ export class AccountPageComponent {
   thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
   hide = true;
   // nhận xét
- 
-=======
-  // email
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  matcher = new MyErrorStateMatcher();
->>>>>>> Stashed changes
+
 }

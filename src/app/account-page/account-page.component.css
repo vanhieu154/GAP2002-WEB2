@@ -124,6 +124,24 @@ a{
   /* margin-top: 10px; */
 }
 /* Hồ sơ của tôi */
+.mat-mdc-form-field{
+  width: 100%;
+
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: #d2beb4;
+  border-radius: 10px;
+}
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input{
+  color: black;
+}
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-floating-label{
+  color: black;
+}
+.mdc-text-field--disabled.mdc-text-field--filled{
+  background-color: #d2beb4;
+  border-radius: 10px;
+}
 .myaccount-body-right-ho-so-cua-toi{
   display: none;
 }
