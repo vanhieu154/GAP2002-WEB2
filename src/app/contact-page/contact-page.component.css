@@ -33,12 +33,28 @@
   color: var(--mdc-theme-error, #f44336);
   text-align: left;
 }
+mat-error{
+  font-size: 1.2rem;
+}
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: var(--white);
 }
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: var(--white);
   border: lightgray 1px solid;
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: var(--black);
+}
+.mat-calendar-body-selected {
+  background-color: var(--darkbrown);
+  color: #fff;
+}
+.mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: var(--darkbrown);
+}
+.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: var(--mdc-theme-primary, var(--darkbrown));
 }
 .breadcrumb{
   background-color: var(--lightpink);
@@ -75,20 +91,20 @@ a{
 a{
   color: black;
 }
-.bar--top{
+/* .bar--top{
   position: absolute;
   width: 90px;
   height: 0px;
   margin-top: 2px;
   border: 1px solid #000000;
-}
-.bar--bottom{
+} */
+/* .bar--bottom{
   position: absolute;
   width: 24%;
   height: 0px;
   margin-top: 2px;
   border: 1px solid #000000;
-}
+} */
 .form__guingay{
   background-color: initial;
   font-weight: bold;

@@ -32,23 +32,24 @@ export class ContactPageComponent {
      {alert("Cảm ơn " + value + ", thông tin của bạn đã được gửi !" )}
     }
 
-  isPhoneNumberValid(phoneNumber: string): boolean {
-    if (phoneNumber.length !== 10) {
-      return false;
+    name = new FormControl('', [Validators.required]);
+    getErrorNameMessage() {
+      if (this.name.hasError('required')) {
+        return '*Vui lòng nhập họ và tên';
+      }
+
+      return this.name.hasError('name') ? 'Họ và tên không hợp lệ' : '';
+    }
+    phoneNumber = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^(03|05|08|09)\d{8}$/),
+  ]);
+  getErrorPhoneMessage() {
+    if (this.phoneNumber.hasError('required')) {
+      return '*Vui lòng nhập số điện thoại';
     }
 
-    const phoneNumberRegex = /^(03|05|08|09)\d{8}$/;
-    if (!phoneNumberRegex.test(phoneNumber)) {
-      return false;
-    }
-    return true;
-  }
-  updatePhoneNumber(): void {
-    if (this.isPhoneNumberValid(this.phone)) {
-      this.phoneNumberCheckResult = true;
-    } else {
-      this.phoneNumberCheckResult = false;
-    }
+    return this.phoneNumber.hasError('pattern') ? '*Số điện thoại không hợp lệ' : '';
   }
 
 
