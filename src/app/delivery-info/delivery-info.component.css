@@ -60,7 +60,12 @@
   color: var(--mdc-theme-error, #f44336);
   text-align: left;
 }
-
+mat-error{
+  font-size: 1.2rem;
+}
+.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: var(--mdc-theme-primary, var(--darkbrown));
+}
 .mat-mdc-form-field-error {
   display: block;
   margin-bottom: 25px;

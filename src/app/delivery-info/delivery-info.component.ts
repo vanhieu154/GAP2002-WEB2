@@ -449,25 +449,35 @@ public changeDistrict(event: any){
 //validate
 FormControl = new FormControl('', [Validators.required]);
 matcher = new MyErrorStateMatcher();
+name = new FormControl('', [Validators.required]);
+    getErrorNameMessage() {
+      if (this.name.hasError('required')) {
+        return '*Vui lòng nhập họ và tên';
+      }
 
+      return this.name.hasError('name') ? 'Họ và tên không hợp lệ' : '';
+    }
 
-isPhoneNumberValid(phoneNumber: string): boolean {
-  if (phoneNumber.length !== 10) {
-    return false;
-  }
-  const phoneNumberRegex = /^(03|05|08|09)\d{8}$/;
-  if (!phoneNumberRegex.test(phoneNumber)) {
-    return false;
-  }
-  return true;
-}
-updatePhoneNumber(): void {
-  if (this.isPhoneNumberValid(this.phone)) {
-    this.phoneNumberCheckResult = true;
-  } else {
-    this.phoneNumberCheckResult = false;
-  }
-}
+    phoneNumber = new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^(03|05|08|09)\d{8}$/),
+    ]);
+    getErrorPhoneMessage() {
+      if (this.phoneNumber.hasError('required')) {
+        return '*Vui lòng nhập số điện thoại';
+      }
+
+      return this.phoneNumber.hasError('pattern') ? '*Số điện thoại không hợp lệ' : '';
+    }
+
+    ad = new FormControl('', [Validators.required]);
+    getErrorAdMessage() {
+      if (this.ad.hasError('required')) {
+        return '*Vui lòng nhập địa chỉ cụ thể để chúng tôi giao hàng';
+      }
+
+      return this.ad.hasError('ad') ? 'địa chỉ không hợp lệ' : '';
+    }
 
 public showText() {
   const messageElem = document.getElementById("message");
