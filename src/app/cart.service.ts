@@ -59,9 +59,6 @@ export class CartService {
         }
       }
     }
-    //lấy cart để hiện thị
-
-
     sessionStorage.setItem('Account', JSON.stringify(account))
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8');

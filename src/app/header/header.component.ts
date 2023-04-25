@@ -209,7 +209,21 @@ export class HeaderComponent implements OnInit  {
         sessionStorage.setItem("Account", JSON.stringify(this.user));
         if(this.user.username!=null && this.user.password!=null){
           this.showBox(false,false,false)
-          this.cartService.addToCartDB([],0);
+          let tempCart=JSON.parse(localStorage.getItem('Cart') || '{}');
+          if(tempCart!=null){
+            this.cartService.addToCartDB(tempCart,tempCart.quantity)
+            .subscribe({
+              next: (cart) => {
+                console.log('Cart updated:', cart);
+              },
+              error: (error) => {
+                console.log('Error updating cart:', error);
+              },
+              complete: () => {
+                console.log('Add to cart completed');
+              }
+            });
+          }
           console.log(this.allProducts);
           this.cartService.createCartproduct(this.allProducts);
           this.cartItemCount = this.cartService.cartAddProduct.length;
