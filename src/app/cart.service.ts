@@ -5,111 +5,177 @@ import { Cart, CartItem } from './cart';
 import { ProductService } from './product.service';
 import data from '@iconify/icons-mdi/target';
 import { IProduct } from './product';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private apiUrl = 'http://localhost:4000';
-  private cartUpdated = new Subject<void>();
+  public cartUpdated = new Subject<void>();
   public cartProducts: any[] = [];
-  public products:any
-  errMessage: any;
+  public cartAddProduct:any[]=[];
+  errMessage: string='dd';
+  public products:any[]=[];
+  constructor(private http: HttpClient,private productService:ProductService,private authService:AuthService ) {
 
-  constructor(private http: HttpClient, private _service: ProductService ) {
-    this.loadCart();
-    this._service.getProducts().subscribe({
-      next:(data: IProduct[])=>{this.products=data},
-      error: (err) => {this.errMessage = err}
-    })
-    console.log(this.products);
 
   }
 
-  addToCart(productId: string, qty: number): Observable<Cart> {
-
+  public addToCartDB(product:any, quantity: number):Observable<Cart> {
+    const cartTemp=JSON.parse(localStorage.getItem('Cart') || '{}');
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
-
-    console.log(account.cart.cartItems[0]);
-
-    let cartItemss=account.cart.cartItems
-    const _id = account._id;
     if (!account.cart) {
       account.cart = new Cart();
     }
-
-    cartItemss.push(new CartItem(productId, qty));
-    account.cart.total += qty;
-    console.log();
-
-
-    for (let i = 0; i < cartItemss.length; i++) {
-      for (let j = i+1; j < cartItemss.length; j++) {
-        if(cartItemss[i].productID===cartItemss[j].productID){
-          cartItemss[i].qty+=cartItemss[j].qty
-          cartItemss.splice(j, 1);
-          // for(let p of this.products){
-          //   if(cartItems[i].productID==p._id){
-          //     if(cartItems[i].qty>p.quantity){
-          //       cartItems[i].qty=p.quantity
-          //     }
-          //   }
-          // }
+    const _id = account._id;
+    let cartItemss=account.cart.cartItems
+    if(cartTemp!= null){
+      for (let i = 0; i < cartTemp.length; i++) {
+        cartItemss.push(new CartItem(cartTemp[i]._id, cartTemp[i].quantity));
+        for (let i = 0; i < cartItemss.length; i++) {
+          for (let j = i+1; j < cartItemss.length; j++) {
+            if(cartItemss[i].productID==cartItemss[j].productID){
+              cartItemss[i].quantity+=cartItemss[j].quantity
+              cartItemss.splice(j, 1);
+              if(cartItemss[i].quantity>product.Soluong){
+                cartItemss[i].quantity=product.Soluong
+              }
+            }
+          }
         }
       }
-
+      localStorage.removeItem('Cart')
     }
+    cartItemss.push(new CartItem(product._id, quantity));
+    for (let i = 0; i < cartItemss.length; i++) {
+      for (let j = i+1; j < cartItemss.length; j++) {
+        if(cartItemss[i].productID==cartItemss[j].productID){
+          cartItemss[i].quantity+=cartItemss[j].quantity
+          cartItemss.splice(j, 1);
+          if(cartItemss[i].quantity>product.Soluong){
+            cartItemss[i].quantity=product.Soluong
+          }
+        }
+      }
+    }
+    //lấy cart để hiện thị
+
+
+    sessionStorage.setItem('Account', JSON.stringify(account))
+
     const headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8');
     const requestOptions: Object = {
       headers: headers
     };
-    console.log(account.cart);
-    sessionStorage.setItem('Account', JSON.stringify(account));
     return this.http.put<Cart>("http://localhost:4000/cart/"+_id,account.cart, requestOptions).pipe(
       retry(3),
       catchError(this.handleError)
     );
   }
-  // public addToCart(product: any,quantity:number) {
-  //   let addSP: any[] = localStorage.getItem("Cart") ? JSON.parse(localStorage.getItem("Cart")!) : [];
-  //   addSP[addSP.length] = product;
-  //   addSP[addSP.length - 1].quantity = quantity;
-  //   if(product.Discount>0){
-  //     addSP[addSP.length - 1].price =product.Price-product.Price*product.Discount /100
-  //   }else{
-  //     addSP[addSP.length - 1].price =product.Price
-  //   }
-  //   addSP[addSP.length - 1].total = addSP[addSP.length - 1].price * quantity;
-  //   for (let i = 0; i < addSP.length - 1; i++) {
-  //     for (let j = i + 1; j < addSP.length; j++) {
-  //       if (addSP[i].MaSP == addSP[j].MaSP) {
-  //         addSP[i].quantity += addSP[j].quantity;
-  //         addSP[i].total += addSP[j].total;
-  //         addSP.splice(j, 1);
-  //         if(addSP[i].quantity>product.Soluong){
-  //           addSP[i].quantity=product.Soluong
-  //           addSP[i].total=addSP[i].price*addSP[i].quantity
-  //         }
-  //       }
-  //     }
-  //   }
-  //   localStorage.setItem("Cart", JSON.stringify(addSP));
-  //   this.loadCart();
-  //   this.cartUpdated.next(); // phát ra sự kiện giỏ hàng được cập nhật
-  // }
-  public deleteProduct(i:number){
-    this.cartProducts.splice(i,1);
-    localStorage.setItem("Cart", JSON.stringify(this.cartProducts));
+  public createCartproduct(allProducts:IProduct[]){
+    const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
+    let cartItemss=account.cart.cartItems
+    for (let i = 0; i < allProducts.length; i++) {
+      for (let j = 0; j < cartItemss.length; j++) {
+        if (allProducts[i]._id===cartItemss[j].productID) {
+          this.cartAddProduct[this.cartAddProduct.length] = allProducts[i];
+          this.cartAddProduct[this.cartAddProduct.length - 1].quantity = cartItemss[j].quantity;
+
+          if(allProducts[i].Discount>0){
+            this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price-allProducts[i].Price*allProducts[i].Discount /100
+          }else{
+            this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price
+          }
+          this.cartAddProduct[this.cartAddProduct.length - 1].total = this.cartAddProduct[this.cartAddProduct.length - 1].price * cartItemss[j].quantity;
+          for (let i = 0; i < this.cartAddProduct.length - 1; i++) {
+            for (let j = i + 1; j < this.cartAddProduct.length; j++) {
+              if (this.cartAddProduct[i].MaSP == this.cartAddProduct[j].MaSP) {
+                this.cartAddProduct[i].quantity += this.cartAddProduct[j].quantity;
+                this.cartAddProduct[i].total += this.cartAddProduct[j].total;
+                this.cartAddProduct.splice(j, 1);
+                if(this.cartAddProduct[i].quantity>allProducts[i].Soluong){
+                  this.cartAddProduct[i].quantity=allProducts[i].Soluong
+                  this.cartAddProduct[i].total=this.cartAddProduct[i].price*this.cartAddProduct[i].quantity
+                }
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    sessionStorage.setItem("Cart", JSON.stringify(this.cartAddProduct));
+    this.loadCartDB()
+    this.cartUpdated.next();
+  }
+  public addToCart(product: any,quantity:number) {
+    this.cartAddProduct[this.cartAddProduct.length] = product;
+    this.cartAddProduct[this.cartAddProduct.length - 1].quantity = quantity;
+
+    if(product.Discount>0){
+      this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Price-product.Price*product.Discount /100
+    }else{
+      this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Price
+    }
+    this.cartAddProduct[this.cartAddProduct.length - 1].total = this.cartAddProduct[this.cartAddProduct.length - 1].price * quantity;
+    for (let i = 0; i < this.cartAddProduct.length - 1; i++) {
+      for (let j = i + 1; j < this.cartAddProduct.length; j++) {
+        if (this.cartAddProduct[i].MaSP == this.cartAddProduct[j].MaSP) {
+          this.cartAddProduct[i].quantity += this.cartAddProduct[j].quantity;
+          this.cartAddProduct[i].total += this.cartAddProduct[j].total;
+          this.cartAddProduct.splice(j, 1);
+          if(this.cartAddProduct[i].quantity>product.Soluong){
+            this.cartAddProduct[i].quantity=product.Soluong
+            this.cartAddProduct[i].total=this.cartAddProduct[i].price*this.cartAddProduct[i].quantity
+          }
+        }
+      }
+    }
+    localStorage.setItem("Cart", JSON.stringify(this.cartAddProduct));
+
     this.loadCart();
     this.cartUpdated.next();
+  }
+  public deleteProduct(i:number){
+      this.cartProducts.splice(i,1);
+      localStorage.setItem("Cart", JSON.stringify(this.cartProducts));
+      this.loadCart();
+      this.cartUpdated.next();
+  }
+  public deleteProductDB(i:number):Observable<Cart>{
+    const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
+    let CartP= JSON.parse(sessionStorage.getItem('Cart')||'{}')
+    let cartItemss=account.cart.cartItems
+    const _id = account._id;
+    cartItemss.splice(i,1)
+    CartP.splice(i,1)
+    console.log(cartItemss);
+    console.log(CartP);
+    sessionStorage.setItem("Cart", JSON.stringify(CartP));
+    sessionStorage.setItem('Account', JSON.stringify(account))
+    this.loadCartDB();
+    this.cartUpdated.next();
+    const headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8');
+    const requestOptions: Object = {
+      headers: headers
+    };
+    return this.http.put<Cart>("http://localhost:4000/cart/"+_id,account.cart, requestOptions).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
   }
 
   public getCartUpdatedListener() {
     return this.cartUpdated.asObservable();
   }
 
-  private loadCart() {
-    this.cartProducts = JSON.parse(localStorage.getItem("Cart")!) || [];
+  public loadCart() {
+    this.cartAddProduct = localStorage.getItem("Cart") ? JSON.parse(localStorage.getItem("Cart")!) : [];
+  }
+  public loadCartDB() {
+    this.cartAddProduct = sessionStorage.getItem("Cart") ? JSON.parse(sessionStorage.getItem("Cart")!) : [];
   }
   handleError(error:HttpErrorResponse){
     return throwError(()=>new Error(error.message))

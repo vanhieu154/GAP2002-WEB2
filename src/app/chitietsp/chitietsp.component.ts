@@ -5,6 +5,7 @@ import { ProductService } from '../product.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CartService } from '../cart.service';
 import { CartItem } from '../cart';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-chitietsp',
@@ -20,8 +21,10 @@ export class ChitietspComponent implements OnInit{
   items: any[] = [];
   a:number=1;
   panelOpenState = false;
-  constructor(private cartService: CartService,public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router)
-  {
+  public allProducts: IProduct[] = [];
+  constructor(private authService:AuthService ,private cartService: CartService,public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router) {
+    this.allProducts = [];
+
     activateRoute.paramMap.subscribe(
       (param)=>{
         this.id=param.get('id')
@@ -38,10 +41,34 @@ export class ChitietspComponent implements OnInit{
     this._service.getProducts().subscribe({
       next:(data: IProduct[])=>{
         this.products=data.filter(p => p.Hang == this.product.Hang).slice(0,6)
-
+        this.allProducts = data;
       },
       error:(err)=>{this.errMessage=err}
     })
+  }
+  addProduct() {
+    if(this.authService.isLoggedIn==false){
+      this.cartService.addToCart(this.product, this.a);
+    }
+    else{
+
+      this.cartService.addToCartDB(this.product, this.a)
+      .subscribe({
+        next: (cart) => {
+          console.log('Cart updated:', cart);
+        },
+        error: (error) => {
+          console.log('Error updating cart:', error);
+        },
+        complete: () => {
+          console.log('Add to cart completed');
+        }
+      });
+
+      this.cartService.createCartproduct(this.allProducts)
+
+    }
+
   }
   ngOnInit(): void {
 
@@ -69,21 +96,7 @@ export class ChitietspComponent implements OnInit{
   //   this.cartService.addProduct(this.product._id, this.a);
   // }
 
-  addProduct() {
-    // const cartItem: CartItem = new CartItem(this.product._id, this.a); // Tạo một CartItem mới với sản phẩm và số lượng là 1
-    // this.cartService.addToCart(this.product._id, this.a); // Gọi method addToCart của service để thêm sản phẩm vào giỏ hàng
-    this.cartService.addToCart(this.product._id, this.a).subscribe({
-      next: (cart) => {
-        console.log('Cart updated:', cart);
-      },
-      error: (error) => {
-        console.log('Error updating cart:', error);
-      },
-      complete: () => {
-        console.log('Add to cart completed');
-      }
-    });
-  }
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog)

@@ -10,9 +10,10 @@ export class AuthService {
   private apiUrl = 'http://localhost:4000';
 
   // Khởi tạo biến Islogging với giá trị ban đầu là false
-  isLoggedIn = false;
+  public isLoggedIn = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient ) {
+  }
 
   login(username: string, password: string): Observable<any> {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
