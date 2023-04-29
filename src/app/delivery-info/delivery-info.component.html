@@ -27,13 +27,11 @@
           <form novalidate>
             <div class="col" >
               <div class=" mb-3">
-                <mat-form-field class="example-form-field ">
-                  <mat-label>Họ và tên</mat-label>
-                  <input matInput type="text" [(ngModel)]="fullname" id="fullname" name="fullname" style="color: black;" matInput [formControl]="FormControl" [errorStateMatcher]="matcher">
+                  <mat-form-field class="example-form-field">
+                  <mat-label style="color: grey;">Họ và tên</mat-label>
+                  <input matInput placeholder="Họ và tên" [formControl]="name" required>
+                  <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
                 </mat-form-field>
-                <mat-error *ngIf="FormControl.hasError('required')" style="margin-top: -20px;">
-                  Họ và Tên là <strong>bắt buộc</strong>
-                </mat-error>
                 </div>
             </div>
             <div class="col" >
@@ -58,28 +56,25 @@
                 <!-- </mat-form-field> -->
 
 
-                <mat-form-field class="example-form-field" style="padding-top: 20px;">
-                  <mat-label>Số điện thoại</mat-label>
-                  <input (ngModelChange)="updatePhoneNumber()" matInput type="text" id="phone" name="phone" [(ngModel)]="phone" (ngModelChange)="updatePhoneNumber()" style="color: black;" matInput [formControl]="FormControl" [errorStateMatcher]="matcher">
+                <mat-form-field appearance="fill" class="example-form-field">
+                  <mat-label style="color: grey;">Số điện thoại</mat-label>
+                  <input
+                    matInput
+                    placeholder="Nhập số điện thoại"
+                    [formControl]="phoneNumber"
+                    required
+
+                  />
+                  <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
                 </mat-form-field>
-                <mat-error *ngIf="FormControl.hasError('required')" style="margin: -20px 0px 20px 0px; ">
-                  Số điện thoại là <strong>bắt buộc</strong>
-                </mat-error>
-                <div *ngIf="phoneNumberCheckResult !== null" class="phone--note">
-                  <p [ngClass]="phoneNumberCheckResult ? 'valid' : 'invalid'">
-                    {{ phoneNumberCheckResult ? 'Số điện thoại hợp lệ!' : 'Số điện thoại không hợp lệ!' }}
-                  </p>
-                </div>
                 </div>
             </div>
             <div class="col">
-              <mat-form-field class="example-form-field ">
-                <mat-label>Địa chỉ cụ thể</mat-label>
-                <input matInput type="text" [(ngModel)]="address" id="address" name="address" style="color: black;" matInput [formControl]="FormControl" [errorStateMatcher]="matcher">
+              <mat-form-field class="example-form-field">
+                <mat-label style="color: grey;">Địa chỉ cụ thể</mat-label>
+                <input matInput placeholder="Nhập địa chỉ cụ thể" [formControl]="ad" required>
+                <mat-error *ngIf="ad.invalid">{{getErrorAdMessage()}}</mat-error>
               </mat-form-field>
-              <mat-error *ngIf="FormControl.hasError('required')" style="margin-top: -20px;">
-                Nhập địa chỉ cụ thể để chúng tôi giao hàng
-              </mat-error>
             </div>
 
 
