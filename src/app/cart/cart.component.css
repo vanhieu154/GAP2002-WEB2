@@ -51,6 +51,7 @@ ul li{
 .thanhtoan:hover{
   background-color: var(--darkbrown);
   cursor: pointer;
+  color: var(--white);
 }
 .thanhtoan:hover a{
 

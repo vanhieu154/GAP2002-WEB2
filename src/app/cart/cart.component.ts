@@ -1,5 +1,4 @@
 
-import { CartService } from './cart.service';
 import { Brand, Icart } from './icart';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ProductService } from '../product.service';
@@ -32,19 +31,11 @@ export class CartComponent {
   errMessage:string=''
   items: Icart[] = [];
 
-
-
-    constructor(private cartService: CartService) {
-        this.items = this.cartService.getItems();
-    }
-
-
-
-
     brand: Brand = {
       name: 'SHIEN',
       completed: false,
       products: [
+        { name: 'Áo nữ Xù nhỏ cắt loại bướm giải trí', dongia: 80000, soluong: 1, sotien: 80000, kichthuoc: "freesize", hinh: "assets/Img/sp1.png", completed: false },
         { name: 'Áo nữ Xù nhỏ cắt loại bướm giải trí', dongia: 80000, soluong: 1, sotien: 80000, kichthuoc: "freesize", hinh: "assets/Img/sp1.png", completed: false },
       ],
       dongia: 0,
