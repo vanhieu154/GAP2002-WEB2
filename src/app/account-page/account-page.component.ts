@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MyErrorStateMatcher } from './MyErrorStateMatcher';
@@ -16,7 +16,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
   encapsulation: ViewEncapsulation.None
 })
 
-export class AccountPageComponent {
+export class AccountPageComponent implements OnInit {
   myProfile=true;
   myAddress=false;
   changePass=false;
@@ -72,8 +72,12 @@ export class AccountPageComponent {
   secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
   thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
   hide = true;
-  // nhận xét
+//selected date
+selectedDate: Date | undefined;
+defaultDate: Date | undefined;
 
-  // email
-
+ngOnInit() {
+  this.defaultDate = new Date('2002-07-10'); // set default date to 7/10/2002
+  this.selectedDate = this.defaultDate;
+}
 }
