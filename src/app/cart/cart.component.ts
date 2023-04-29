@@ -1,7 +1,7 @@
 import {  Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
-import {  ElementRef, Output, EventEmitter } from '@angular/core';
 import { CartService } from '../cart.service';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -10,31 +10,31 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  @ViewChild('header') header!: ElementRef;
-  @Output() searchEvent = new EventEmitter<string>();
-  prevScrollpos = 0;
-  hide = true;
-  showLoginBox = false;
-  showCartBox=false;
-  showSearchBox=false;
-  products:any;
   pay:number=0;
-  message = '';
-  user:any;
-  errMessage:string=''
   cartProduct:any[]=[]
   brands:any[]=[]
   tempProduct:any[]=[]
-  // items: Icart[] = [];
+  productLocation:number=0;
+  cartItemCount: number=0;
+  constructor(private cartService:CartService,private router:Router,private authService:AuthService){
 
-  constructor(private cartService:CartService){
-    if(sessionStorage.getItem('checkLogin') === '1'){
-      this.cartProduct = JSON.parse(sessionStorage.getItem('Cart') || '{}')
-      this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
+    if (sessionStorage.getItem('checkLogin') === '1') {
+      authService.isLoggedIn=true;
+
+      cartService.loadCartDB();
     }else{
-      this.cartProduct = JSON.parse(localStorage.getItem('Cart') || '{}')
-      this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
+      cartService.loadCart()
+
     }
+    cartService.getCartUpdatedListener().subscribe(() => {
+      this.cartItemCount = cartService.cartAddProduct.length;
+      this.cartProduct = cartService.cartAddProduct;
+      this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
+
+    });
+    this.cartItemCount = cartService.cartAddProduct.length;
+    this.cartProduct = cartService.cartAddProduct;
+    this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
     this.cartProduct=this.cartProduct.map(item => ({ ...item, completed: false }));
   }
 
@@ -44,6 +44,8 @@ export class CartComponent {
 
   updateAllComplete() {
     this.allComplete = this.cartProduct != null && this.cartProduct.every(b => b.completed);
+    this.updateTotalPrice()
+
   }
 
 
@@ -60,6 +62,8 @@ export class CartComponent {
       return;
     }
     this.cartProduct.forEach(b => (b.completed = completed));
+    this.updateTotalPrice()
+
   }
   setBrandAll(completed: boolean,brand:string) {
     this.tempProduct=this.cartProduct.filter(p=>p.Hang==brand)
@@ -69,6 +73,7 @@ export class CartComponent {
       return;
     }
     this.tempProduct.forEach(p => (p.completed = completed));
+    this.updateTotalPrice()
   }
 
   isBrandComplete(brand: string): boolean {
@@ -82,6 +87,139 @@ export class CartComponent {
 
     return completedItems.length > 0 && completedItems.length < brandItems.length;
   }
+	Detail(p: any) {
+		this.router.navigate(['chitietsp', p._id])
+	}
+  getProductLocation(p:any){
+    for (let i = 0; i < this.cartProduct.length; i++) {
+      if(this.cartProduct[i]._id===p._id){
+        this.productLocation=i
+      }
+
+    }
+  }
+  deleteP(c:any){
+    this.getProductLocation(c)
+    if(sessionStorage.getItem('checkLogin') === '1'){
+      this.cartService.deleteProductDB(this.productLocation)
+      .subscribe({
+        next: (cart) => {
+          console.log('Cart updated:', cart);
+        },
+        error: (error) => {
+          console.log('Error updating cart:', error);
+        },
+        complete: () => {
+          console.log('Add to cart completed');
+        }
+      });
+    }else{
+      this.cartService.deleteProduct(this.productLocation);
+
+    }
+    this.updateTotalPrice()
+  }
+  MinusP(c:any){
+    this.getProductLocation(c)
+    const i=this.productLocation
+    if(this.authService.isLoggedIn==false){
+      if(this.cartProduct[i].quantity<2) {
+        this.cartProduct[i].quantity =1;
+      }else{
+      this.cartProduct[i].quantity--;
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+      localStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+    }else{
+      if(this.cartProduct[i].quantity<2) {
+        this.cartProduct[i].quantity =1;
+      }else{
+      this.cartProduct[i].quantity--;
+      this.cartService.addToCartDB(this.cartProduct[i], -1)
+      .subscribe({
+        next: (cart) => {
+          console.log('Cart updated:', cart);
+        },
+        error: (error) => {
+          console.log('Error updating cart:', error);
+        },
+        complete: () => {
+          console.log('Add to cart completed');
+        }
+      });
+      sessionStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+    }
+    this.updateTotalPrice()
+
+  }
+  PlusP(c:any){
+    this.getProductLocation(c)
+    const i=this.productLocation
+    if(this.authService.isLoggedIn==false){
+      if(this.cartProduct[i].quantity>this.cartProduct[i].Soluong-1){
+        this.cartProduct[i].quantity=this.cartProduct[i].Soluong;
+      }else{
+      this.cartProduct[i].quantity++;
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+      localStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+    }else{
+      if(this.cartProduct[i].quantity>this.cartProduct[i].Soluong-1){
+        this.cartProduct[i].quantity=this.cartProduct[i].Soluong;
+      }else{
+      this.cartProduct[i].quantity++;
+      this.cartService.addToCartDB(this.cartProduct[i], 1)
+      .subscribe({
+        next: (cart) => {
+          console.log('Cart updated:', cart);
+        },
+        error: (error) => {
+          console.log('Error updating cart:', error);
+        },
+        complete: () => {
+          console.log('Add to cart completed');
+        }
+      });
+      sessionStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+
+    }
+    this.updateTotalPrice()
+
+  }
+  updateTotalPrice(): void {
+    this.pay = 0;
+    this.cartProduct.forEach(c => {
+      if (c.completed) {
+        this.pay += c.total;
+      }
+    });
+  }
+
+  createOrder(){
+    this.tempProduct=this.cartProduct.filter(c=>c.completed==true)
+    localStorage.setItem('Order',JSON.stringify(this.cartProduct))
+  }
+
 
 
 }

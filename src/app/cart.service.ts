@@ -30,23 +30,23 @@ export class CartService {
     }
     const _id = account._id;
     let cartItemss=account.cart.cartItems
-    // if(cartTemp!= null){
-    //   for (let i = 0; i < cartTemp.length; i++) {
-    //     cartItemss.push(new CartItem(cartTemp[i]._id, cartTemp[i].quantity));
-    //     for (let i = 0; i < cartItemss.length; i++) {
-    //       for (let j = i+1; j < cartItemss.length; j++) {
-    //         if(cartItemss[i].productID==cartItemss[j].productID){
-    //           cartItemss[i].quantity+=cartItemss[j].quantity
-    //           cartItemss.splice(j, 1);
-    //           if(cartItemss[i].quantity>product.Soluong){
-    //             cartItemss[i].quantity=product.Soluong
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    //   localStorage.removeItem('Cart')
-    // }
+    if(cartTemp!= null){
+      for (let i = 0; i < cartTemp.length; i++) {
+        cartItemss.push(new CartItem(cartTemp[i]._id, cartTemp[i].quantity));
+        for (let i = 0; i < cartItemss.length; i++) {
+          for (let j = i+1; j < cartItemss.length; j++) {
+            if(cartItemss[i].productID==cartItemss[j].productID){
+              cartItemss[i].quantity+=cartItemss[j].quantity
+              cartItemss.splice(j, 1);
+              if(cartItemss[i].quantity>product.Soluong){
+                cartItemss[i].quantity=product.Soluong
+              }
+            }
+          }
+        }
+      }
+      localStorage.removeItem('Cart')
+    }
     cartItemss.push(new CartItem(product._id, quantity));
     for (let i = 0; i < cartItemss.length; i++) {
       for (let j = i+1; j < cartItemss.length; j++) {
@@ -137,10 +137,11 @@ export class CartService {
     this.cartUpdated.next();
   }
   public deleteProduct(i:number){
-      this.cartProducts.splice(i,1);
-      localStorage.setItem("Cart", JSON.stringify(this.cartProducts));
-      this.loadCart();
-      this.cartUpdated.next();
+    this.cartAddProduct = JSON.parse(localStorage.getItem('Cart') || '{}');
+    this.cartAddProduct.splice(i,1);
+    localStorage.setItem("Cart", JSON.stringify(this.cartAddProduct));
+    this.loadCart();
+    this.cartUpdated.next();
   }
   public deleteProductDB(i:number):Observable<Cart>{
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');

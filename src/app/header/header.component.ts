@@ -223,7 +223,7 @@ export class HeaderComponent implements OnInit  {
                 console.log('Add to cart completed');
               }
             });
-            localStorage.removeItem('Cart')
+            // localStorage.removeItem('Cart')
           }
           // console.log(this.allProducts);
           this.cartService.createCartproduct(this.allProducts);
@@ -247,9 +247,7 @@ export class HeaderComponent implements OnInit  {
     this.cartService.cartUpdated.next();
   }
   deleteP(i:number){
-    if(this.authService.isLoggedIn==false){
-      this.cartService.deleteProduct(i);
-    }else{
+    if(sessionStorage.getItem('checkLogin') === '1'){
       this.cartService.deleteProductDB(i)
       .subscribe({
         next: (cart) => {
@@ -262,6 +260,9 @@ export class HeaderComponent implements OnInit  {
           console.log('Add to cart completed');
         }
       });
+    }else{
+      this.cartService.deleteProduct(i);
+
     }
   }
   toProductPage(i:number){

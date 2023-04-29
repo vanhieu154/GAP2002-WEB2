@@ -1,22 +1,16 @@
 <!-- Giỏ hàng trống -->
-<!-- <div  class="body" >
-  <div class="row text-center" *ngIf="items.length==0">
-    <div class="row text-center" >
-    <img src="./assets/Img/cart-empty.png" alt="" class="cart-empty" style="width: 10%;">
-    <p class="text-empty">Giỏ hàng của bạn trống</p>
-    <button class="muangay" routerLink="/"> MUA NGAY</button>
-  </div>
-</div> -->
+<ng-container ></ng-container>
+
 
 
 <!-- Có sản phẩm trong giỏ hàng  -->
-<!-- <div class="body" style=" background-color: #efefef;" *ngIf="items.length > 0"> -->
-<div class="body" style=" background-color: #efefef;" >
+<div class="body" style=" background-color: #efefef;" *ngIf="cartProduct.length > 0">
+<!-- <div class="body" style=" background-color: #efefef;" > -->
   <div>
     <div class="row text-center">
       <div class="col ">
       <h1 class= "text-left cart__header">Giỏ hàng của bạn </h1>
-      <p> Có <span class="sosanpham" id="sosanpham">0 sản phẩm</span>  trong giỏ hàng</p>
+      <p> Có <span class="sosanpham" id="sosanpham">{{cartItemCount}} sản phẩm</span>  trong giỏ hàng</p>
       <div class="bar"></div>
     </div>
     </div>
@@ -28,10 +22,6 @@
     <div class="col-6" id="cart__item__container">
       <div class="row box" style="height: 60px;">
           <div class="col-8" style="margin: 10px 0 0 30px; width: 50px;">
-            <!-- <mat-checkbox [(ngModel)]="allComplete"
-             (ngModelChange)="toggleAllProductsSelection()"
-             >
-            </mat-checkbox> -->
             <mat-checkbox
             [checked]="allComplete"
             [indeterminate]="someComplete()"
@@ -48,7 +38,7 @@
 
 
       <!-- hiển thị sản phẩm đc thêm -->
-      <ng-container *ngFor="let b of brands; let i=index">
+      <ng-container *ngFor="let b of brands">
         <div class=" row box cart__item">
           <div class="section">
             <div class="example-list-section">
@@ -58,13 +48,6 @@
                 [indeterminate]="isBrandIndeterminate(b)"
                 (change)="setBrandAll($event.checked,b)"
               >
-              <!-- <mat-checkbox
-              class="margin"
-              [checked]="isBrandComplete(b)"
-              [indeterminate]="isBrandIndeterminate(b)"
-
-              (change)="setAll($event.checked,b)"
-            > -->
                 <b>{{b}}</b>
               </mat-checkbox>
             </div>
@@ -72,29 +55,37 @@
               <div class="brand">
                 <ng-container *ngFor="let c of cartProduct">
                   <div *ngIf="c.Hang == b" class="row center">
-                    <!-- <div *ngFor="let product of brand.products" class="row center"> -->
+
                     <div class="col-8" style="margin: 10px 0 0 30px; width: 50px;"><mat-checkbox
                       [(ngModel)]="c.completed"
                       (ngModelChange)="updateAllComplete()"
                     >
                     </mat-checkbox></div>
                     <div class="col-6 cart__item--top row" style="width: 42%; text-align: left;">
-                      <div class="col"> <!-- dẫn tới trang chi tiết của sản phẩm đó -->
-                        <a routerLink=""><img  src="./assets/Img/sanpham/{{c.Hinhanh[i]}}" alt=""></a>
+                      <div class="col">
+                        <a (click)="Detail(c)"><img  src="./assets/Img/sanpham/{{c.Hinhanh[0]}}" alt=""></a>
                       </div>
                       <div class="col-8">
                         <div class="item-name">
-                          <a style="color: rgb(0, 0, 0);" routerLink="">{{c.TenSP}}</a> <!-- dẫn tới trang chi tiết của sản phẩm đó -->
+                          <a style="color: rgb(0, 0, 0);" (click)="Detail(c)">{{c.TenSP}}</a>
                         </div>
                         <div class="item-size">
                           Kích thước: {{c.Size}}
                         </div>
                       </div>
                     </div>
-                    <div class="col cart__item--top">{{c.price}}<u style="font-size: 1.2rem;">đ</u></div>
-                    <div class="col cart__item--top">{{c.quantity}}</div>
-                    <div class="col cart__item--top"><b>{{c.total}}</b> <u style="font-size: 1.2rem;">đ</u></div>
-                    <a class="col cart__item--top">Xóa</a>
+                    <div class="col cart__item--top">{{c.price.toLocaleString('vi-VN')}}<u style="font-size: 1.2rem;">đ</u></div>
+                    <div class="col cart__item--top">
+                      <span class='header__cart-item-minus' (click)="MinusP(c)">
+                        <i class='fa-solid fa-minus'></i>
+                      </span>
+                      <input type='number' min='1' name='header__cart-item-amount' class='header__cart-item-amount' value="{{c.quantity}}">
+                      <span class='header__cart-item-plus' (click)="PlusP(c)">
+                        <i class='fa-solid fa-plus'></i>
+                      </span>
+                    </div>
+                    <div class="col cart__item--top"><b>{{c.total.toLocaleString('vi-VN')}}</b> <u style="font-size: 1.2rem;">đ</u></div>
+                    <a class="col cart__item--top" (click)="deleteP(c)">Xóa</a>
                   </div>
                 </ng-container>
 
@@ -114,15 +105,14 @@
         <hr>
          <div style="margin: 20px 0"  class="container row">
             <div class="col-4"> Tổng tiền: </div>
-            <h4 class="col-8 sotien" id="sotien">0<u>đ</u></h4>
+            <h4 class="col-8 sotien" id="sotien">{{pay.toLocaleString('vi-VN')}}<u>đ</u></h4>
          </div>
         <hr>
         <div class="col" style="margin: 20px 0">
           <p>Phí vận chuyển sẽ được tính ở trang thanh toán.</p>
           <p>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</p></div> <br>
-        <button class=" col-10 button thanhtoan text-center" style="align-items: center;" routerLink="/DeliveryInfor"> THANH TOÁN </button> <br>
+        <button class=" col-10 button thanhtoan text-center" style="align-items: center;" routerLink="/DeliveryInfor" (click)="createOrder()"> THANH TOÁN </button> <br>
         <div class="col buy-btn" >
-           <!-- <iconify-icon class="text-right " icon="ion:return-up-back-sharp" width="25" height="25" ></iconify-icon> -->
            <a routerLink="/trangsp"  class=""> Tiếp tục mua hàng </a>
         </div>
       </div>
@@ -131,3 +121,11 @@
   </div>
 </div>
 
+<div  class="body" *ngIf="cartProduct.length==0"  >
+  <div class="row text-center" >
+    <div class="row text-center" >
+    <img src="./assets/Img/cart-empty.png" alt="" class="cart-empty" style="width: 10%;">
+    <p class="text-empty">Giỏ hàng của bạn trống</p>
+    <button class="muangay" routerLink="/" > MUA NGAY</button>
+  </div>
+</div>
