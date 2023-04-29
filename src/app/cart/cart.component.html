@@ -1,16 +1,16 @@
 <p>cart works!</p>
 <!-- Giỏ hàng trống -->
-<!-- <div  class="body" >
+<div  class="body" >
   <div class="row text-center" *ngIf="items.length==0">
     <img src="./assets/Img/cart-empty.png" alt="" class="cart-empty" style="width: 10%;">
     <p class="text-empty">Giỏ hàng của bạn trống</p>
     <button class="muangay" routerLink="/"> MUA NGAY</button>
   </div>
-</div> -->
+</div>
 
 
 <!-- Có sản phẩm trong giỏ hàng  -->
-<div class="body" style=" background-color: #efefef;" *ngIf="items.length == 0">
+<div class="body" style=" background-color: #efefef;" *ngIf="items.length > 0">
   <div>
     <div class="row text-center">
       <div class="col ">
