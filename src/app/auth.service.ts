@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    const headers = new HttpHeaders().set("Content-Type", "application/json;charset=utf-8");
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password }, { headers })
       .pipe(
         map(res => {
@@ -35,11 +35,15 @@ export class AuthService {
       );
   }
   addUser(user: User): Observable<any> {
-    const headers = new HttpHeaders().set("Content-Type", "application/json");
-    return this.http.post<any>(`${this.apiUrl}/users`, user, { headers })
+    const headers=new HttpHeaders().set("Content-Type","application/json;charset=utf-8")
+    const requestOptions:Object={
+      headers:headers,
+      responseType:"text"
+    }
+    return this.http.post<any>(`${this.apiUrl}/users`, JSON.stringify(user),requestOptions)
       .pipe(
         map(res => {
-          return res;
+          JSON.parse(res) as User
         }),
         retry(3),
         catchError(this.handleError)

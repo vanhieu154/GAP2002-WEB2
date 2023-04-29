@@ -211,7 +211,7 @@ export class HeaderComponent implements OnInit  {
           this.showBox(false,false,false)
           let tempCart=JSON.parse(localStorage.getItem('Cart') || '{}');
           if(tempCart!=null){
-            this.cartService.addToCartDB(tempCart,tempCart.quantity)
+            this.cartService.addToCartDB(tempCart,0)
             .subscribe({
               next: (cart) => {
                 console.log('Cart updated:', cart);
