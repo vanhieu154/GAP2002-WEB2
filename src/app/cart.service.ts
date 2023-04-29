@@ -30,23 +30,23 @@ export class CartService {
     }
     const _id = account._id;
     let cartItemss=account.cart.cartItems
-    if(cartTemp!= null){
-      for (let i = 0; i < cartTemp.length; i++) {
-        cartItemss.push(new CartItem(cartTemp[i]._id, cartTemp[i].quantity));
-        for (let i = 0; i < cartItemss.length; i++) {
-          for (let j = i+1; j < cartItemss.length; j++) {
-            if(cartItemss[i].productID==cartItemss[j].productID){
-              cartItemss[i].quantity+=cartItemss[j].quantity
-              cartItemss.splice(j, 1);
-              if(cartItemss[i].quantity>product.Soluong){
-                cartItemss[i].quantity=product.Soluong
-              }
-            }
-          }
-        }
-      }
-      localStorage.removeItem('Cart')
-    }
+    // if(cartTemp!= null){
+    //   for (let i = 0; i < cartTemp.length; i++) {
+    //     cartItemss.push(new CartItem(cartTemp[i]._id, cartTemp[i].quantity));
+    //     for (let i = 0; i < cartItemss.length; i++) {
+    //       for (let j = i+1; j < cartItemss.length; j++) {
+    //         if(cartItemss[i].productID==cartItemss[j].productID){
+    //           cartItemss[i].quantity+=cartItemss[j].quantity
+    //           cartItemss.splice(j, 1);
+    //           if(cartItemss[i].quantity>product.Soluong){
+    //             cartItemss[i].quantity=product.Soluong
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    //   localStorage.removeItem('Cart')
+    // }
     cartItemss.push(new CartItem(product._id, quantity));
     for (let i = 0; i < cartItemss.length; i++) {
       for (let j = i+1; j < cartItemss.length; j++) {
@@ -72,6 +72,7 @@ export class CartService {
   }
   public createCartproduct(allProducts:IProduct[]){
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
+    this.cartAddProduct=[]
     let cartItemss=account.cart.cartItems
     for (let i = 0; i < allProducts.length; i++) {
       for (let j = 0; j < cartItemss.length; j++) {
@@ -85,19 +86,19 @@ export class CartService {
             this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price
           }
           this.cartAddProduct[this.cartAddProduct.length - 1].total = this.cartAddProduct[this.cartAddProduct.length - 1].price * cartItemss[j].quantity;
-          for (let i = 0; i < this.cartAddProduct.length - 1; i++) {
-            for (let j = i + 1; j < this.cartAddProduct.length; j++) {
-              if (this.cartAddProduct[i].MaSP == this.cartAddProduct[j].MaSP) {
-                this.cartAddProduct[i].quantity += this.cartAddProduct[j].quantity;
-                this.cartAddProduct[i].total += this.cartAddProduct[j].total;
-                this.cartAddProduct.splice(j, 1);
-                if(this.cartAddProduct[i].quantity>allProducts[i].Soluong){
-                  this.cartAddProduct[i].quantity=allProducts[i].Soluong
-                  this.cartAddProduct[i].total=this.cartAddProduct[i].price*this.cartAddProduct[i].quantity
-                }
-              }
-            }
-          }
+          // for (let i = 0; i < this.cartAddProduct.length - 1; i++) {
+          //   for (let j = i + 1; j < this.cartAddProduct.length; j++) {
+          //     if (this.cartAddProduct[i].MaSP == this.cartAddProduct[j].MaSP) {
+          //       this.cartAddProduct[i].quantity += this.cartAddProduct[j].quantity;
+          //       this.cartAddProduct[i].total += this.cartAddProduct[j].total;
+          //       this.cartAddProduct.splice(j, 1);
+          //       if(this.cartAddProduct[i].quantity>allProducts[i].Soluong){
+          //         this.cartAddProduct[i].quantity=allProducts[i].Soluong
+          //         this.cartAddProduct[i].total=this.cartAddProduct[i].price*this.cartAddProduct[i].quantity
+          //       }
+          //     }
+          //   }
+          // }
         }
 
       }

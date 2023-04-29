@@ -26,7 +26,6 @@
                   placeholder="Nhập số điện thoại"
                   [formControl]="phoneNumber"
                   required
-
                 />
                 <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
               </mat-form-field>

@@ -1,11 +1,7 @@
-
-import { Brand, Icart } from './icart';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { ProductService } from '../product.service';
-import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import {  Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
-import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {  ElementRef, Output, EventEmitter } from '@angular/core';
+import { CartService } from '../cart.service';
 
 
 @Component({
@@ -21,71 +17,71 @@ export class CartComponent {
   showLoginBox = false;
   showCartBox=false;
   showSearchBox=false;
-  cartProduct=false;
   products:any;
   pay:number=0;
-  username = '';
-  password = '';
   message = '';
   user:any;
   errMessage:string=''
-  items: Icart[] = [];
+  cartProduct:any[]=[]
+  brands:any[]=[]
+  tempProduct:any[]=[]
+  // items: Icart[] = [];
 
-    brand: Brand = {
-      name: 'SHIEN',
-      completed: false,
-      products: [
-        { name: 'Áo nữ Xù nhỏ cắt loại bướm giải trí', dongia: 80000, soluong: 1, sotien: 80000, kichthuoc: "freesize", hinh: "assets/Img/sp1.png", completed: false },
-        { name: 'Áo nữ Xù nhỏ cắt loại bướm giải trí', dongia: 80000, soluong: 1, sotien: 80000, kichthuoc: "freesize", hinh: "assets/Img/sp1.png", completed: false },
-      ],
-      dongia: 0,
-      soluong: 0,
-      sotien: 0,
-      hinh: '',
-      kichthuoc: ''
-    };
-
-
-    allComplete: boolean = false;
-
-
-    updateAllComplete() {
-      this.allComplete = this.brand.products != null && this.brand.products.every(b => b.completed);
+  constructor(private cartService:CartService){
+    if(sessionStorage.getItem('checkLogin') === '1'){
+      this.cartProduct = JSON.parse(sessionStorage.getItem('Cart') || '{}')
+      this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
+    }else{
+      this.cartProduct = JSON.parse(localStorage.getItem('Cart') || '{}')
+      this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
     }
+    this.cartProduct=this.cartProduct.map(item => ({ ...item, completed: false }));
+  }
 
 
-    someComplete(): boolean {
-      if (this.brand.products == null) {
-        return false;
-      }
-      return this.brand.products.filter(b => b.completed).length > 0 && !this.allComplete;
+  allComplete: boolean = false;
+
+
+  updateAllComplete() {
+    this.allComplete = this.cartProduct != null && this.cartProduct.every(b => b.completed);
+  }
+
+
+  someComplete(): boolean {
+    if (this.cartProduct == null) {
+      return false;
     }
+    return this.cartProduct.filter(p => p.completed).length > 0 && !this.allComplete;
+  }
 
-
-    setAll(completed: boolean) {
-      this.allComplete = completed;
-      if (this.brand.products == null) {
-        return;
-      }
-      this.brand.products.forEach(b => (b.completed = completed));
+  setAll(completed: boolean) {
+    this.allComplete = completed;
+    if (this.cartProduct == null) {
+      return;
     }
+    this.cartProduct.forEach(b => (b.completed = completed));
+  }
+  setBrandAll(completed: boolean,brand:string) {
+    this.tempProduct=this.cartProduct.filter(p=>p.Hang==brand)
 
-
-    showCart(){
-      this.products = JSON.parse(localStorage.getItem("Cart")!);
-      if(this.products.length==0){
-        this.cartProduct=false
-      }else{
-        this.cartProduct=true
-      }
-      this.pay=0
-      for (let i = 0; i < this.products.length; i++) {
-        this.pay=this.pay+this.products[i].total
-      }
-
-
+    this.allComplete = completed;
+    if (this.tempProduct == null) {
+      return;
     }
+    this.tempProduct.forEach(p => (p.completed = completed));
+  }
 
+  isBrandComplete(brand: string): boolean {
+    const brandItems = this.cartProduct.filter(c => c.Hang === brand);
+    return brandItems.length > 0 && brandItems.every(c => c.completed);
+  }
+
+  isBrandIndeterminate(brand: string): boolean {
+    const brandItems = this.cartProduct.filter(c => c.Hang === brand);
+    const completedItems = brandItems.filter(c => c.completed);
+
+    return completedItems.length > 0 && completedItems.length < brandItems.length;
+  }
 
 
 }

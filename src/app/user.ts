@@ -12,9 +12,10 @@ export class User {
     public gender:string="",
     public Img:string="",
     public cDate:Date,
+    public cart:Cart []=[],
     public order:string[] =[],
     public discount:string[] =[],
-    public cart:Cart []=[],
+    public Address:string []=[]
   ){}
 }
 

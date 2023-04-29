@@ -51,7 +51,6 @@ export class ChitietspComponent implements OnInit{
       this.cartService.addToCart(this.product, this.a);
     }
     else{
-
       this.cartService.addToCartDB(this.product, this.a)
       .subscribe({
         next: (cart) => {
@@ -64,7 +63,6 @@ export class ChitietspComponent implements OnInit{
           console.log('Add to cart completed');
         }
       });
-
       this.cartService.createCartproduct(this.allProducts)
 
     }

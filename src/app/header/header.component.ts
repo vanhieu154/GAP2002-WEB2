@@ -211,7 +211,7 @@ export class HeaderComponent implements OnInit  {
           this.showBox(false,false,false)
           let tempCart=JSON.parse(localStorage.getItem('Cart') || '{}');
           if(tempCart!=null){
-            this.cartService.addToCartDB(tempCart,0)
+            this.cartService.addToCartDB(tempCart,tempCart.quantity )
             .subscribe({
               next: (cart) => {
                 console.log('Cart updated:', cart);
@@ -223,8 +223,9 @@ export class HeaderComponent implements OnInit  {
                 console.log('Add to cart completed');
               }
             });
+            localStorage.removeItem('Cart')
           }
-          console.log(this.allProducts);
+          // console.log(this.allProducts);
           this.cartService.createCartproduct(this.allProducts);
           this.cartItemCount = this.cartService.cartAddProduct.length;
           this.cartProducts = this.cartService.cartAddProduct;
