@@ -1,3 +1,4 @@
+<button mat-button (click)="openDialog()">Launch dialog</button>
 <div *ngIf="showCart()" style="background-color: #EEECEC;"></div>
 <div class="container-fluid w-100 " >
   <div class="row">
@@ -29,7 +30,7 @@
               <div class=" mb-3">
                   <mat-form-field class="example-form-field">
                   <mat-label style="color: grey;">Họ và tên</mat-label>
-                  <input matInput placeholder="Họ và tên" [formControl]="name" required>
+                  <input matInput placeholder="Họ và tên"  [(ngModel)]="fullname" id="fullname" name="fullname" [formControl]="name" required>
                   <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
                 </mat-form-field>
                 </div>
@@ -59,6 +60,7 @@
                 <mat-form-field appearance="fill" class="example-form-field">
                   <mat-label style="color: grey;">Số điện thoại</mat-label>
                   <input
+                  id="phone" [(ngModel)]="phone" name="phone"
                     matInput
                     placeholder="Nhập số điện thoại"
                     [formControl]="phoneNumber"
@@ -72,7 +74,7 @@
             <div class="col">
               <mat-form-field class="example-form-field">
                 <mat-label style="color: grey;">Địa chỉ cụ thể</mat-label>
-                <input matInput placeholder="Nhập địa chỉ cụ thể" [formControl]="ad" required>
+                <input matInput placeholder="Nhập địa chỉ cụ thể" [formControl]="ad" required  [(ngModel)]="address" id="address" name="address">
                 <mat-error *ngIf="ad.invalid">{{getErrorAdMessage()}}</mat-error>
               </mat-form-field>
             </div>
@@ -259,8 +261,8 @@
 
 
 
-  <div class="col-md-6 box wrap pt-3 pb-3" height="2000px " style="margin-bottom: 20px; ">
-
+  <div class="col-md-6 box wrap pt-3 pb-3" height="2000px " style="margin-bottom: 20px; margin-top: 100px;">
+<!--
     <div class="container w-100"  style="word-wrap: break-word; margin-top: 20px; padding: 30px 40px 30px 40px;background-color: #EEECEC; border-radius: 20px;"   >
       <table >
         <tr *ngIf="cartProduct" style="background-color: #EEECEC;">
@@ -330,8 +332,63 @@
           <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
         </tr>
     </table>
-    </div>
+    </div> -->
+
+
+
+
+  <div class="table-container" style=" padding: 0px 10px 0px 10px;">
+    <table align="center" class="table-hover"  >
+      <thead>
+        <tr *ngIf="cartProduct" >
+          <th>Ảnh </th>
+          <th>Mô Tả</th>
+          <th style="word-wrap: break-word; max-width: 35px;">Số lượng</th>
+          <th style="word-wrap: break-word; max-width: 80px;">Giá </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let p of products;let i=index">
+
+          <td style="word-wrap: break-word; width: 150px;" >
+            <img style="min-width: 30px;" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
+          </td>
+          <td style="word-wrap: break-word; max-width: 50px;" >{{p.TenSP}}</td>
+          <td style="word-wrap: break-word; max-width: 10px;">{{p.quantity}}</td>
+          <td style="word-wrap: break-word; max-width: 80px;">
+            <ng-container *ngIf="p.Discount>0">
+              <div class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}<u>đ</u> <span class="header__cart-item__price-old">{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span> </div>
+              <div><b>Tổng:</b>  <br> {{p.quantity}} * {{((p.Price-p.Price*p.Discount/100)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+            </ng-container>
+            <ng-container *ngIf="p.Discount==0">
+              <div class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}} <u>đ</u></div>
+              <div><b>Tổng:</b> <br> {{p.quantity}} * {{((p.Price)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+            </ng-container>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="text-align: left;">Tạm tính</td>
+          <td colspan="3" style="text-align: right; padding-left: 30px;"><h3 style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{pay.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+        </tr>
+
+        <tr>
+          <td style="text-align: left; ">Phí vận chuyển</td>
+          <td colspan="3" style="color: red; text-align: right;"> <h3 style="color: red; text-align: right; padding-right: 20px;">{{totalShip.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+        </tr>
+        <tr >
+          <td style="text-align: left;  padding-bottom: 30px;" >Tổng cộng</td>
+          <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
 
   </div>
-  </div>
+
+
+
+
 </div>

@@ -1,3 +1,86 @@
+
+
+.table-container {
+  margin: 0 0;
+  overflow-x: auto;
+}
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+thead th {
+  background: #d2beb4;
+  color: #6B4932;
+  font-size: 3.5rem;
+}
+
+
+tbody td, thead th {
+  padding: 15px 3px 15px 3px;
+  text-align: center;
+  font-size: 2rem;
+}
+tbody td{
+  border: #d2beb4 solid 1px;
+
+}
+
+
+@media (max-width: 499px) {
+
+  .table-container {
+    margin: 0;
+    overflow-x: scroll;
+  }
+
+
+  table {
+    border-collapse: scroll;
+    width: 100%;
+    word-wrap: break-word;
+  }
+
+
+  thead {
+    display: none;
+  }
+
+
+  tbody td {
+    display: block;
+    text-align: right;
+    padding: 2px 2px 2px 0;
+  }
+
+
+  tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 4px;
+    text-align: left;
+  }
+
+
+  td:first-child {
+    padding-left: 16px;
+  }
+
+
+  td:last-child {
+    padding-right: 16px;
+  }
+
+
+}
+
+
+
+
 *{
   margin: 0;
   padding: 0;
@@ -47,9 +130,6 @@
 }
 
 .example-form-field {
-  /* width: 200px; */
-  /* min-width: 150px; */
-  /* max-width: 500px; */
   width: 100%;
 }
 
@@ -254,12 +334,20 @@ img{
 }
 
 /* responsive */
-@media (max-width: 768px){
-  .box{
-    margin-top: 20px;
+
+@media (max-width: 1023px) and (min-width: 740px) {
+  .body{
+      margin-top: 128px;
   }
+
 }
 
+/*mobile*/
+ @media (max-width: 740px) {
+  .body{
+      margin-top: 128px;
+  }
+}
 
 
 

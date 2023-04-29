@@ -2,7 +2,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -24,12 +25,21 @@ export class ContactPageComponent {
   public email:string='';
   public contentcontact:string='';
 
-  onSubmit(value:string)
-    {
-     if(this.fullname == ''   &&  this.phoneNumberCheckResult ===false)
-     {alert("Bạn chưa nhập đủ hoặc chưa đúng thông tin")}
-     else
-     {alert("Cảm ơn " + value + ", thông tin của bạn đã được gửi !" )}
+
+  constructor(private router:Router,public dialog: MatDialog) { }
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogElementsExampleDialog);
+    setTimeout(() => {
+      dialogRef.close();
+    }, 3000);
+  }
+
+  onSubmit(value:string):void {
+     if(this.name.valid  &&  this.phoneNumber.valid)
+     this.dialog.open(DialogElementsExampleDialogcopy);
+
+     else{ this.dialog.open(DialogElementsExampleDialog); }
+
     }
 
     name = new FormControl('', [Validators.required]);
@@ -57,3 +67,14 @@ FormControl = new FormControl('', [Validators.required, Validators.email]);
 matcher = new MyErrorStateMatcher();
 
 }
+@Component({
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: 'dialog-elements-example-dialog.html',
+})
+export class DialogElementsExampleDialog {}
+
+@Component({
+  selector: 'dialog-elements-example-dialog copy',
+  templateUrl: 'dialog-elements-example-dialog copy.html',
+})
+export class DialogElementsExampleDialogcopy {}

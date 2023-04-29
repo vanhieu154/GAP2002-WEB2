@@ -5,9 +5,7 @@ import { ProductService } from '../product.service';
 import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
-
-
-
+import { MatDialog } from '@angular/material/dialog';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -53,12 +51,16 @@ public selectedOption:string=''
 public selectedPrice: any = null;
 public selectedPay='Thanh toán khi nhận hàng (COD)';
 contemporaryTotalPay: number = 0;
-phoneNumberCheckResult: boolean | null = null;
+// phoneNumberCheckResult: boolean | null = null;
 
 displayPage: any;
 
-  constructor(private router:Router,private productService:ProductService) {
-
+  constructor(private router:Router,private productService:ProductService,public dialog: MatDialog) { }
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogElementsExampleDialog);
+    setTimeout(() => {
+      dialogRef.close();
+    }, 3000);
   }
 
   showCart(){
@@ -408,11 +410,13 @@ public VietNamdata =[
 
 activeContent = 'content1';
   showContent(content: string): void {
-    if (this.fullname !== '' && this.phoneNumberCheckResult ==true && this.address !== ''&& this.selectedProvince !== null && this.selectedDistrict !== null
-       ) {
+    if (this.fullname !== ''  &&  this.phoneNumber.valid && this.address !== '' && this.selectedProvince !== null && this.selectedDistrict !== null )
+        {
           this.activeContent = content;
-      } else {
-        alert("Bạn cần nhập đủ và đúng thông tin bắt buộc !")
+      }
+      else {
+        // alert("Bạn cần nhập đủ và đúng thông tin bắt buộc !")
+        this.dialog.open(DialogElementsExampleDialog);
       }
   }
 
@@ -524,3 +528,8 @@ public showText() {
 
 
 }
+@Component({
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: 'dialog-elements-example-dialog.html',
+})
+export class DialogElementsExampleDialog {}
