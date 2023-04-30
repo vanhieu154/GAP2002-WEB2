@@ -150,6 +150,7 @@ a{
   max-width: 800px; /* Tùy chỉnh kích thước giới hạn của phần tử chứa nội dung */
 }
 .luu2{
+  display: none;
   background-color: var(--lightpink);
   text-align: center;
   color: white;
@@ -158,6 +159,9 @@ a{
 }
 .luu2:hover {
   background-color: var(--darkpink);
+}
+.luu2 .activate{
+  display: block;
 }
 :root {
 --lightpink: #d2beb4;
@@ -530,6 +534,9 @@ label {
   }
 }
 /* Voucher */
+.voucher-container{
+  display: none;
+}
 .voucher {
   border: 1px solid #ddd;
   border-radius: 5px;

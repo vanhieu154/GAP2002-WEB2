@@ -1,12 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MyErrorStateMatcher } from './MyErrorStateMatcher';
 
 import {  FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { User } from '../user';
 
-
+import { DatePipe } from '@angular/common';
+import { LocationService } from '../location.service';
+import { Address } from '../address';
+import { AddressService } from '../address.service';
+import { AuthService } from '../auth.service';
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
@@ -17,6 +22,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 
 export class AccountPageComponent implements OnInit {
+  @ViewChild('nameInput') nameInput!: ElementRef;
   myProfile=true;
   myAddress=false;
   changePass=false;
@@ -33,11 +39,119 @@ export class AccountPageComponent implements OnInit {
 
   myNotification=false;
 
+  myDiscount=false
+
   showmodal=false;
-  showMy(myProfile:boolean,myOrder:boolean,myNotification:boolean){
+  account=new User();
+
+
+  registerForm: FormGroup;
+  name:FormControl;
+  email: FormControl;
+  dob: FormControl;
+  phoneNumber: FormControl;
+  gender: FormControl;
+
+  allowFix:boolean=false
+
+
+  myAddresss:any[] = [];
+
+  errMesage: any;
+
+  defaultAddress=new Address()
+  constructor(private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService) {
+    this.cities=[]
+
+    this.locationService.getCities().subscribe( {
+      next:(data)=>{this.cities=data},
+      error:(err)=>(this.errMesage=err)
+
+    });
+
+    this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
+    // this.acc = new FormControl(this.account.username, [Validators.required]);
+    // this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+    this.name = new FormControl(this.account.name, Validators.required);
+    this.email = new FormControl(this.account.email);
+    this.dob = new FormControl(this.account.dob, Validators.required);
+    this.phoneNumber = new FormControl(this.account.phoneNumber, [
+      Validators.required,
+      Validators.pattern(/^(03|05|08|09)\d{8}$/),
+    ]);
+    this.gender = new FormControl(this.account.gender, Validators.required);
+
+    this.registerForm = this._formBuilder.group({
+      name: this.name,
+      email: this.email,
+      dob: this.dob,
+      phoneNumber: this.phoneNumber,
+      gender:this.gender,
+    });
+    this.addressService.getAddress(this.account._id).subscribe({
+      next: (data) => {
+        this.myAddresss = data
+        this.defaultAddress= data.find((p: { IsDefault: boolean; })=>p.IsDefault==true)
+        console.log(this.defaultAddress._id);
+
+      },
+      error: (err) => { this.errMesage = err; }
+    });
+  }
+  formAddress!:FormGroup
+
+
+  fixProfile(){
+    this.allowFix=!this.allowFix
+    if (this.allowFix) {
+      setTimeout(() => {
+        this.nameInput.nativeElement.focus();
+      });
+    }
+  }
+
+  getUserFromForm(): User {
+    return new User(
+      this.account._id,
+      this.account.username,
+      this.account.password,
+      this.name.value,
+      this.email.value,
+      this.dob.value,
+      this.phoneNumber.value,
+      this.gender.value,
+      this.account.Img,
+      this.account.cDate,
+      this.account.cart,
+      this.account.order,
+      this.account.discount,
+      this.account.Address,
+    );
+  }
+  onSubmit() {
+    const user = this.getUserFromForm();
+    console.log(user);
+    this.allowFix=!this.allowFix
+    this.authService.updateUser(user).subscribe({
+      next:(data)=>{
+        this.account=data,
+        sessionStorage.setItem('Account', JSON.stringify(this.account))
+      },
+      error:(err)=>{this.errMesage=err}
+    })
+    console.log(this.account);
+
+
+  }
+
+
+
+
+  showMy(myProfile:boolean,myOrder:boolean,myNotification:boolean,myDiscount:boolean){
     this.myProfile =myProfile;
     this.myOrder=myOrder;
     this.myNotification=myNotification;
+    this.myDiscount=myDiscount
   }
   showMyAccount(myProfileP:boolean,myAddress:boolean,changePass:boolean){
     this.myAddress=myAddress;
@@ -67,17 +181,95 @@ export class AccountPageComponent implements OnInit {
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   };
-  constructor(private _formBuilder: FormBuilder) {}
+
   firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['']});
   secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
   thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
   hide = true;
-//selected date
-selectedDate: Date | undefined;
-defaultDate: Date | undefined;
+  //selected date
+  selectedDate: Date | undefined;
+  defaultDate: Date | undefined;
 
-ngOnInit() {
-  this.defaultDate = new Date('2002-07-10'); // set default date to 7/10/2002
-  this.selectedDate = this.defaultDate;
-}
+
+
+
+
+
+
+  ngOnInit() {
+    this.formAddress = new FormGroup({
+      hovaten: new FormControl(''),
+      phonenumber: new FormControl(''),
+      city: new FormControl(''),
+      district: new FormControl(''),
+      ward: new FormControl(''),
+      diachicuthe: new FormControl(''),
+      addressType: new FormControl(''),
+      IsDefault: new FormControl(true)
+    });
+    // this.myAddresss = JSON.parse(localStorage.getItem('Address') || '{}');
+  }
+
+
+  cities: any[] = [];
+  selectedCityName: string = '';
+  districts: any[] = [];
+  selectedDistrictName: string = '';
+  Wards: any[] = [];
+  selectedWardName: string = '';
+
+  onCityChange(): void {
+    console.log(this.selectedCityName);
+
+    this.districts = [];
+    this.selectedDistrictName = '';
+    this.Wards=[];
+    this.selectedWardName='';
+
+    const selectedCity = this.cities.find(city => city.Name === this.selectedCityName);
+
+    if (selectedCity) {
+      this.districts = selectedCity.Districts;
+    }
+
+  }
+  onDistrictChange():void{
+    this.Wards=[];
+    this.selectedWardName='';
+
+    const selectedDistrict = this.districts.find(district=>district.Name === this.selectedDistrictName);
+
+    if(selectedDistrict){
+      this.Wards=selectedDistrict.Wards;
+    }
+  }
+  addressSubmit(){
+    console.log(this.formAddress.value);
+    this.addressService.addAddressToUser(this.account._id,this.formAddress.value).subscribe({
+      next:(data)=>{this.myAddresss=data},
+      error:(err)=>{this.errMesage=err}
+    })
+    this.cdRef.detectChanges();
+  }
+  deleteA(_id:string){
+    this.addressService.deleteAddress(this.account._id,_id).subscribe({
+      next:(data)=>{this.myAddresss=data},
+      error:(err)=>{this.errMesage=err}
+    })
+    this.cdRef.detectChanges();
+  }
+
+  setDefault(addressId:string){
+    this.addressService.updateAddressDefault(this.account._id,addressId).subscribe({
+      next:(data)=>{
+        this.myAddresss=data;
+        this.defaultAddress= data.find((p: { IsDefault: boolean; })=>p.IsDefault==true)
+        this.cdRef.markForCheck();
+        },
+      error:(err)=>{
+        this.errMesage=err
+      }
+    })
+  }
+
 }

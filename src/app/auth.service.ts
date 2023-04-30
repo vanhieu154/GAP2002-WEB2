@@ -49,6 +49,18 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
+  updateUser(user:any): Observable<any> {
+    const headers=new HttpHeaders().set("Content-Type","application/json;charset=utf-8")
+    const requestOptions:Object={
+      headers:headers,
+      responseType:"text"
+    }
+    return this.http.put<any>(`${this.apiUrl}/users`,JSON.stringify(user),requestOptions).pipe(
+      map(res=>JSON.parse(res) as User),
+      retry(3),
+      catchError(this.handleError)
+    )
+  }
   handleError(error:HttpErrorResponse){
     return throwError(()=>new Error(error.message))
   }

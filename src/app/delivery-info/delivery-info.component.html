@@ -39,7 +39,7 @@
               <div class="row ">
                 <mat-form-field class="example-form-field ">
                   <mat-label style="color: grey;">Email</mat-label>
-                  <input matInput type="text"  [(ngModel)]="email" id="email" name="email" style="color: black;" matInput [errorStateMatcher]="matcher">
+                  <input matInput type="text"  [(ngModel)]="email" name="email" id="email" name="email" style="color: black;" matInput [errorStateMatcher]="matcher">
                 </mat-form-field>
                 <mat-hint *ngIf="FormControl.hasError('email')" class="email--note">
                   Hãy chắn chắc bạn nhập đúng email của mình
@@ -86,7 +86,7 @@
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label"> </label>
                       <div>
-                        <select class="form-select form-select-lg mb-3" [(ngModel)]="VietNamdata" id="province" (change)="changeProvince($event)" aria-label=".form-select-sm">
+                        <select class="form-select form-select-lg mb-3"name="VietNamdata" [(ngModel)]="VietNamdata" id="province" (change)="changeProvince($event)" aria-label=".form-select-sm">
                         <option *ngFor="let pro of VietNamdata" >{{pro.province}}</option>
                         </select>
                          </div>
@@ -97,7 +97,7 @@
                   <div class="col-6">
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label"></label>
-                      <select class="form-select form-select-lg mb-3" [(ngModel)]="district" id="province" (change)="changeDistrict($event)" id="district" aria-label=".form-select-sm">
+                      <select class="form-select form-select-lg mb-3" name="district" [(ngModel)]="district" id="province" (change)="changeDistrict($event)" id="district" aria-label=".form-select-sm">
                         <option *ngFor="let district of districts" value="{{district}}" aria-placeholder="Chọn Quân/ Huyện">{{district}}</option>
                         </select>
                     </div>

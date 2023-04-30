@@ -44,6 +44,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { CommonModule, DatePipe } from '@angular/common';
 
 
 
@@ -76,14 +77,13 @@ import {MatButtonModule} from '@angular/material/button';
 
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
     IconModule,
     MatIconModule,
-
-    BrowserModule,
     MatInputModule,
     MatFormFieldModule ,
     MatSlideToggleModule,
@@ -98,12 +98,11 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatIconModule,
     MatBadgeModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

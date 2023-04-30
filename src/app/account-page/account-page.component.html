@@ -17,26 +17,25 @@
                     </svg>
                 </div>
                 <div class="col icon-account-content">
-                    <p id="accName">Tên tài khoản</p>
-                    <a  (click)="showMy(true,false,false)">
+                    <p id="accName">{{account.username}}</p>
+                    <a  (click)="showMy(true,false,false,false);fixProfile()">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"style="color: #d2beb4;"><path fill="currentColor" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z"></path></svg> Sửa hồ sơ</a>
                 </div>
-
             </div>
             <div class="col myaccount-body-left-2">
                 <div class="tai-khoan-cua-toi">
                     <ul>
                         <li>
-                            <button type="button" class="btn btn__myaccount" (click)="showMy(true,false,false)">
+                            <button type="button" class="btn btn__myaccount" (click)="showMy(true,false,false,false)">
                                 Tài khoản của tôi
                             </button>
                         </li>
                         <ul class="btn-content">
-                            <li class="content-detail hoso" (click)="showMyAccount(true,false,false);showMy(true,false,false)">
+                            <li class="content-detail hoso" (click)="showMyAccount(true,false,false);showMy(true,false,false,false)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"></path></svg>Hồ sơ</li>
-                            <li class="content-detail diachi" (click)="showMyAccount(false,true,false);showMy(true,false,false)">
+                            <li class="content-detail diachi" (click)="showMyAccount(false,true,false);showMy(true,false,false,false)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"></path></svg>Địa chỉ</li>
-                            <li class="content-detail doi-mat-khau" (click)="showMyAccount(false,false,true);showMy(true,false,false)">
+                            <li class="content-detail doi-mat-khau" (click)="showMyAccount(false,false,true);showMy(true,false,false,false)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 22q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v6.1q0 3.8-2.263 6.913T12 22Zm0-2.1q2.425-.75 4.05-2.963T17.95 12H12V4.125l-6 2.25v5.175q0 .175.05.45H12v7.9Z"></path></svg>Đổi mật khẩu</li>
                         </ul>
                     </ul>
@@ -46,7 +45,7 @@
                 <div class="don-hang">
                     <ul>
                         <li>
-                            <button type="button" class="btn btn__donhang" (click)="showMy(false,true,false)">
+                            <button type="button" class="btn btn__donhang" (click)="showMy(false,true,false,false)">
                                 Đơn hàng
                             </button>
                         </li>
@@ -57,7 +56,7 @@
                 <div class="thong-bao">
                     <ul>
                         <li>
-                            <button type="button" class="btn btn__thongbao" (click)="showMy(false,false,true)">
+                            <button type="button" class="btn btn__thongbao" (click)="showMy(false,false,true,false)">
                                 Thông báo
                             </button>
                         </li>
@@ -68,8 +67,8 @@
                 <div class="kho-voucher">
                     <ul>
                         <li>
-                            <a routerLink="/PromotionPage">
-                                <button type="button" class="btn">
+                            <a >
+                                <button type="button" class="btn" (click)="showMy(false,false,false,true)">
                                     Kho voucher
                                 </button>
                             </a>
@@ -96,58 +95,61 @@
                     <div class="myaccount-body-right-ho-so-cua-toi" [class.activate]="myProfileP">
                         <h2 style="font-size:32px ;text-align: center;">Hồ sơ của tôi</h2>
                         <br>
-                        <form action="/action_page.php" autocomplete="on" method="post" class="example-form">
+                        <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
                             <div class="row hs">
                                 <mat-form-field class="example-full-width">
-                                  <mat-label>Tên đăng nhập (disabled)</mat-label>
-                                  <input matInput disabled value="ThanhThuy">
+                                  <mat-label>Tên đăng nhập</mat-label>
+                                  <input matInput disabled value="{{account.username}}" >
                                 </mat-form-field>
                             </div>
                             <div class="row hs">
                                 <div class="col">
-                                  <mat-form-field class="example-full-width">
-                                    <mat-label>First name</mat-label>
-                                    <input matInput disabled value="Nguyễn">
-                                  </mat-form-field>
-                                </div>
-                                <div class="col">
-                                  <mat-form-field class="example-full-width">
-                                    <mat-label>Last Name</mat-label>
-                                    <input matInput disabled value="Thùy">
+                                  <mat-form-field appearance="fill" class="exemple-form-field">
+                                    <mat-label>Họ và tên</mat-label>
+                                    <input matInput placeholder="Nhập họ và tên" [readonly]="!allowFix" [formControl]="name" required #nameInput>
+                                    <!-- <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error> -->
                                   </mat-form-field>
                                 </div>
                             </div>
                             <div class="row hs">
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Email</mat-label>
-                                  <input matInput disabled value="nttthuy102002@gmail.com">
+                                  <input matInput  placeholder="Nhập Email"  [readonly]="!allowFix"  [formControl]="email"  required>
                                 </mat-form-field>
-                          </div>
+                            </div>
                             <div class="row hs">
                               <mat-form-field class="example-full-width">
-                                <mat-label>Phone Number</mat-label>
-                                <input matInput disabled value="0904983615">
+                                <mat-label>Số điện thoại</mat-label>
+                                <input [formControl]="phoneNumber" matInput [readonly]="!allowFix" placeholder="Nhập số điện thoại">
                               </mat-form-field>
-                        </div>
+                            </div>
                             <div class="row hs">
                               <section class="example-section">
-                                <label class="example-margin">Giới tính:</label>
-                                <mat-radio-group [(ngModel)]="labelPosition">
-                                  <mat-radio-button class="example-margin" value="after" checked=""><span style="color: black;">Nữ</span></mat-radio-button>
-                                  <mat-radio-button class="example-margin" value="before"><span style="color: black;">Nam</span></mat-radio-button>
+                                <mat-hint style="font-size: 1.6rem;" >Giới tính:</mat-hint>
+                                <mat-radio-group aria-label="Select an option"  [formControl]="gender" >
+                                  <mat-radio-button value="Nam" ><span style="color: black;">Nam</span></mat-radio-button>
+                                  <mat-radio-button value="Nữ"><span style="color: black;">Nữ</span></mat-radio-button>
+                                  <mat-radio-button value="Khác"><span style="color: black;">Khác</span></mat-radio-button>
                                 </mat-radio-group>
                               </section>
                             </div>
                             <div class="row hs">
                               <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label>Your birthday</mat-label>
-                                <input matInput [(ngModel)]="selectedDate" [value]="defaultDate | date:'MM/dd/yyyy'" disabled>
+                                <mat-label>Ngày sinh</mat-label>
+                                <input matInput [matDatepicker]="picker" [formControl]="dob" required  [readonly]="!allowFix">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="!allowFix"></mat-datepicker-toggle>
+                                <mat-datepicker #picker [disabled]="!allowFix"></mat-datepicker>
                               </mat-form-field>
-
-
                             </div>
+                            <div class="row ">
+                              <div class="col text-center" >
+                                  <button  type="submit" [disabled]="registerForm.invalid"  class="btn luu2 " [class.activate]="allowFix">
+                                      Lưu
+                                  </button>
+                              </div>
+                          </div>
                         </form>
-
                     </div>
                 </div>
                 <!-- Địa chỉ của tôi -->
@@ -160,30 +162,26 @@
                           <button type="button" class="btn btn-Themdiachi" (click)="showModal()">Thêm địa chỉ</button>
                       </div>
                   </div>
-                  <hr>
-                  <div class="row dia-chi-1">
+
+                  <ng-container *ngFor="let a of myAddresss | keyvalue;let i=index">
+                    <hr>
+                    <div class="row dia-chi-2">
                       <div class="col">
-                          <p class="dia-chi-header"><span class="dia-chi-ten">Tên tài khoản</span> | Số điện thoại</p>
-                          <p class="dia-chi-text">Địa chỉ cụ thể</p>
-                          <p class="macdinh">Mặc định</p>
+                        <p class="dia-chi-header"><span class="dia-chi-ten">{{ a.value.hovaten }}</span> | {{ a.value.phonenumber }}</p>
+                        <p class="dia-chi-text">{{ a.value.diachicuthe }}, {{ a.value.ward }}, {{ a.value.district }}, {{ a.value.city }}</p>
+                        <ng-container >
+                          <p class="macdinh" *ngIf="a.value._id== defaultAddress._id">Mặc định</p>
+                        </ng-container>
                       </div>
                       <div class="col-4">
-                          <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
-                          <p class="setup">Thiết lập mặc định</p>
+                        <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
+                        <p class="xoa" style="cursor: pointer;" (click)="deleteA(a.value._id)">Xóa</p>
+                        <p class="setup" (click)="setDefault(a.value._id)">Thiết lập mặc định</p>
                       </div>
-                  </div>
-                  <hr>
-                  <div class="row dia-chi-2">
-                      <div class="col">
-                          <p class="dia-chi-header"><span class="dia-chi-ten">Tên tài khoản</span> | Số điện thoại</p>
-                          <p class="dia-chi-text">Địa chỉ cụ thể</p>
-                      </div>
-                      <div class="col-4">
-                          <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
-                          <p class="xoa" style="cursor: pointer;">Xóa</p>
-                          <p class="setup">Thiết lập mặc định</p>
-                      </div>
-                  </div>
+                    </div>
+                  </ng-container>
+
+
               </div>
 
                 <!-- Modal layout -->
@@ -193,59 +191,62 @@
                         <div class="modal__inner">
                             <!-- Form thêm địa chỉ mới -->
                             <div class="container Them-dia-chi">
-                                <form action="/action_page.php" method="get">
+                                <form [formGroup]="formAddress" (ngSubmit)="addressSubmit()" >
                                   <br>
                                     <h1 style="text-align: center;">Địa chỉ mới</h1>
                                     <div class="row dong-1">
                                         <div class="col">
-                                            <input type="text" class="form-control" id="hovaten" placeholder="Họ và tên" name="hovaten">
+                                            <input type="text" class="form-control" id="hovaten" placeholder="Họ và tên" formControlName="hovaten">
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại" name="phonenumber">
+                                            <input type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại"  formControlName="phonenumber">
                                         </div>
                                     </div>
                                     <div class="row dong-2">
                                         <div class="col">
-                                            <select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
-                                                <option value="" selected>Chọn tỉnh thành</option>
+                                            <select id="city" class="form-select form-select-sm mb-3" [(ngModel)]="selectedCityName" formControlName="city" (change)="onCityChange()">
+                                              <option value="">Chọn tỉnh/thành phố</option>
+                                              <option *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</option>
                                             </select>
                                         </div>
                                         <div class="col">
-                                            <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
-                                                <option value="" selected>Chọn quận huyện</option>
+                                            <select class="form-select form-select-sm mb-3" id="district" [(ngModel)]="selectedDistrictName" formControlName="district" (change)="onDistrictChange()">
+                                              <option value="">Chọn quận/huyện</option>
+                                              <option *ngFor="let district of districts" [value]="district.Name">{{ district.Name }}</option>
                                             </select>
                                         </div>
                                         <div class="col">
-                                            <select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
-                                                <option value="" selected>Chọn phường xã</option>
-                                            </select>
+                                          <select class="form-select form-select-sm mb-3" id="ward" [(ngModel)]="selectedWardName" formControlName="ward" >
+                                            <option value="">Chọn phường/ xã</option>
+                                            <option *ngFor="let w of Wards" [value]="w.Name">{{ w.Name }}</option>
+                                          </select>
                                         </div>
                                     </div>
                                     <div class="row dong-3">
                                         <div class="col">
-                                            <input type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" name="diachicuthe">
+                                            <input type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" formControlName="diachicuthe">
                                         </div>
                                     </div>
                                     <div class="row dong-4">
                                         <label for="" class="form-label">Loại địa chỉ:</label>
-                                        <div class="col-3">
-                                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="Nhà riêng" checked>Nhà riêng
+                                        <div class="col">
+                                            <input type="radio" class="form-check-input"  formControlName="addressType" value="Nhà riêng" checked>Nhà riêng
                                         </div>
                                         <div class="col">
-                                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="Căn phòng" checked>Văn phòng
+                                            <input type="radio" class="form-check-input"  formControlName="addressType" value="Căn phòng" >Văn phòng
                                         </div>
                                     </div>
-                                    <div class="row form-check form-switch dong-5">
+                                    <!-- <div class="row form-check form-switch dong-5">
                                         <div class="col">
-                                            <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+                                            <input class="form-check-input" type="checkbox" id="mySwitch" formControlName="IsDefault" value="yes">
                                             <label class="form-check-label" for="mySwitch">Đặt làm địa chỉ mặc định</label>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row dong-6">
                                       <div class="col"><button type="button" class="col complete btn" (click)="hideModal()">Trở lại</button></div>
 
                                         <div class="col">
-                                            <button type="button" class="btn complete"  (click)="hideModal()">Hoàn thành</button>
+                                            <button type="button" type="submit" class="btn complete"  (click)="hideModal()">Hoàn thành</button>
                                         </div>
                                     </div><br>
                                 </form>
@@ -267,10 +268,9 @@
                         <ng-template matStepLabel>Fill out your current password</ng-template>
                         <mat-form-field>
                           <input matInput [type]="hide ? 'password' : 'text'" formControlName="firstCtrl" required>
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-
+                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
                         </mat-form-field>
                         <div>
                           <button mat-button matStepperNext>Next</button>
@@ -633,7 +633,25 @@
                     <div class="col"></div>
                 </div>
             </div>
-        </div>
+            <!-- Kho voucher của user -->
+
+            <div class="row voucher-container"[class.activate]="myDiscount">
+              <div class="voucher col-4" >
+                <div class="row voucher-header">
+                  <img src="./assets/Img/Voucher/coupon.png" alt="voucher" width="100%" height="100%">
+                </div>
+                <div class="row voucher-body">
+                  <h4>Mã giảm giá: ABC123</h4>
+                  <p>Giảm giá 10% cho đơn hàng trên 500.000đ</p>
+                  <p>Hạn sử dụng: 31/12/2023</p>
+                </div>
+                <div class="row  text-center">
+                <button class=" voucher-button">Apply code</button>
+                </div>
+              </div>
+
+
+
     </div>
 
 
@@ -692,85 +710,13 @@
     </div>
 
 
-<!-- Chỉnh sửa hồ sơ của tôi -->
- <div class="body__container--hosocuatoi" [class.activate]="myProfile">
-  <div container text-center>
-      <div class="myaccount-body-right-ho-so-cua-toi" [class.activate]="myProfileP">
-          <h2 style="font-size:32px ;text-align: center;">Hồ sơ của tôi</h2>
-          <br>
-          <form action="/action_page.php" autocomplete="on" method="post" class="example-form">
-              <div class="row hs">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Tên đăng nhập</mat-label>
-                    <input matInput >
-                  </mat-form-field>
-              </div>
-              <div class="row hs">
-                  <div class="col">
-                    <mat-form-field class="example-full-width">
-                      <mat-label>First name</mat-label>
-                      <input matInput placeholder="Mời bạn nhập FirstName">
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Last Name</mat-label>
-                      <input matInput placeholder="Mời bạn nhập LastName">
-                    </mat-form-field>
-                  </div>
-              </div>
-              <div class="row hs">
-                <form class="example-form">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" >
-                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                      Please enter a valid email address
-                    </mat-error>
-                    <mat-error *ngIf="emailFormControl.hasError('required')">
-                      Email is <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </form>
-              </div>
-              <div class="row hs">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Telephone</mat-label>
-                  <span matPrefix>+84 &nbsp;</span>
-                  <input type="tel" matInput  placeholder="0904983615">
-                  <mat-icon matSuffix>mode_edit</mat-icon>
-                </mat-form-field>
-              </div>
-              <div class="row hs">
-                <section class="example-section">
-                  <label class="example-margin">Giới tính:</label>
-                  <mat-radio-group [(ngModel)]="labelPosition">
-                    <mat-radio-button class="example-margin" value="after" checked=""><span style="color: black;">Nữ</span></mat-radio-button>
-                    <mat-radio-button class="example-margin" value="before"><span style="color: black;">Nam</span></mat-radio-button>
-                  </mat-radio-group>
-                </section>
-              </div>
-              <div class="row hs">
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <mat-label>Your birtday</mat-label>
-                  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker">
-                  <mat-hint>mm/dd/yyyy</mat-hint>
-                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="row">
-                  <div class="col text-center">
-                      <button type="button" class="btn luu2">
-                          Lưu
-                      </button>
-                  </div>
-              </div>
-          </form>
 
-      </div>
-  </div>
-<!-- Kho voucher của user -->
+
+
+
+ <!-- <div class="body__container--hosocuatoi" [class.activate]="myProfile">
+
+
 <div class="voucher">
   <div class="row voucher-header">
     <img src="./assets/Img/Voucher/coupon.png" alt="voucher" width="100%" height="100%">
@@ -782,5 +728,5 @@
   </div>
   <div class="row  text-center"> <button class=" voucher-button">Apply code</button></div>
 
-</div>
+</div> -->
 
