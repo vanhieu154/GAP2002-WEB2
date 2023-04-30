@@ -1,611 +1,702 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-KJL0HmxMYbUCwuV21j+TDeO+pV7r0KT27ipC6e2MwY+tCkJB1z6JX9j+swzNO87H/SN/pLOe5S/jMEvruox8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <nav aria-label="breadcrumb ">
-  <ol class="breadcrumb w-100">
-    <li class="breadcrumb-item"><a routerLink="">Trang chủ</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Tài khoản</li>
-  </ol>
+    <ol class="breadcrumb w-100">
+        <li class="breadcrumb-item"><a routerLink="">Trang chủ</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Tài khoản</li>
+    </ol>
 </nav>
 <div class=" my-body__container">
-<div class="row myaccount-body">
-  <div class="col-4 myaccount-body-left text-center">
-    <div class="row myaccount-body-left-1 " >
-      <!-- <div class="col icon-account"><iconify-icon icon="carbon:user-avatar-filled-alt" style="color: #b8a898" witdh="80px" height="80px"></iconify-icon></div> -->
-      <div class="col icon-account-content">
-          <p id="accName">Tên tài khoản</p>
-          <p>
-            <!-- <iconify-icon icon="material-symbols:edit" witdh="20px" height="20px"></iconify-icon> -->
-            Sửa hồ sơ</p></div>
-    </div>
-    <div class="col myaccount-body-left-2">
-          <div class="tai-khoan-cua-toi">
-              <ul>
-                  <li><button type="button" class="btn btn__myaccount">
-                      Tài khoản của tôi
-                    </button>
-                  </li>
-                      <ul class="btn-content">
-                          <li class="content-detail hoso">
-                            <!-- <iconify-icon icon="mdi:account"></iconify-icon> -->
-                             Hồ sơ</li>
-                          <li class="content-detail diachi">
-                            <!-- <iconify-icon icon="mdi:address-marker"></iconify-icon> -->
-                            Địa chỉ</li>
-                          <li class="content-detail doi-mat-khau">
-                            <!-- <iconify-icon icon="material-symbols:security"></iconify-icon> -->
-                             Đổi mật khẩu</li>
-                      </ul>
-              </ul>
-          </div>
-      </div>
-      <div class="col myaccount-body-left-3">
-          <div class="don-hang">
-              <ul>
-                  <li><button type="button" class="btn btn__donhang">
-                      Đơn hàng
-                    </button>
-                  </li>
-              </ul>
-          </div>
-      </div>
-      <div class="col myaccount-body-left-4">
-          <div class="thong-bao">
-              <ul>
-                  <li><button type="button" class="btn btn__thongbao">
-                      Thông báo
-                    </button>
-                  </li>
-              </ul>
-          </div>
-      </div>
-      <div class="col myaccount-body-left-5">
-          <div class="kho-voucher">
-              <ul>
-                  <li><a routerLink="/PromotionPage"><button type="button" class="btn">
-                      Kho voucher
-                    </button></a>
-                  </li>
-              </ul>
-          </div>
-      </div>
-      <div class="col myaccount-body-left-6">
-          <div class="dang-xuat">
-              <ul>
-                  <li><button type="button" class="btn" onclick="dangxuat()">
-                      Đăng xuất
-                    </button>
-                  </li>
-              </ul>
-          </div>
-      </div>
-  </div>
-  <div class="col myaccount-body-right">
-      <!-- Hồ sơ của tôi -->
-<div class="body__container--hosocuatoi">
-<div container text-center >
-  <div  class="myaccount-body-right-ho-so-cua-toi">
-      <h2 style="font-size:32px ;">Hồ sơ của tôi</h2> <br><br>
-      <form action="/action_page.php" autocomplete="on" method="post">
-          <div class="row hs">
-              <div class="col-2 form__label">
-                  <label for="tendangnhap">Tên đăng nhập:</label>
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" id="tendangnhap" placeholder="Nhập tên đăng nhập" name="tendangnhap">
-                  <p id="tendangnhap"></p>
-              </div>
-          </div>
-          <div class="row hs">
-              <div class="col-2 form__label">
-                  <label for="hovaten">Họ và tên:</label>
-              </div>
-              <div class="col">
-                  <input type="text" class="form-control" id="hovaten" placeholder="Nhập họ và tên" name="hovaten">
-              </div>
-          </div>
-          <div class="row hs">
-              <div class="col-2 form__label">
-                  <label for="email">Email:</label>
-              </div>
-              <div class="col">
-                  <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email">
-              </div>
-          </div>
-          <div class="row hs">
-              <div class="col-2 form__label">
-                  <label for="phone">Số điện thoại:</label>
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" name="phone">
-                <p id="phone"></p>
-              </div>
-          </div>
-          <div class="row hs">
-              <div class="col-2 form__label">
-                  <label for="gioitinh">Giới tính:</label>
-              </div>
-              <div class="col">
+    <div class="row myaccount-body">
+        <div class="col-4 myaccount-body-left text-center">
+            <div class="row myaccount-body-left-1 ">
+                <div class="col icon-account">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 32 32" style="color: #d2beb4;">
+                        <path fill="currentColor" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"></path>
+                        <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"></path>
+                    </svg>
+                </div>
+                <div class="col icon-account-content">
+                    <p id="accName">Tên tài khoản</p>
+                    <p>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"style="color: #d2beb4;"><path fill="currentColor" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z"></path></svg> Sửa hồ sơ</p>
+                </div>
+            </div>
+            <div class="col myaccount-body-left-2">
+                <div class="tai-khoan-cua-toi">
+                    <ul>
+                        <li>
+                            <button type="button" class="btn btn__myaccount" (click)="showMy(true,false,false)">
+                                Tài khoản của tôi
+                            </button>
+                        </li>
+                        <ul class="btn-content">
+                            <li class="content-detail hoso" (click)="showMyAccount(true,false,false);showMy(true,false,false)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"></path></svg>Hồ sơ</li>
+                            <li class="content-detail diachi" (click)="showMyAccount(false,true,false);showMy(true,false,false)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"></path></svg>Địa chỉ</li>
+                            <li class="content-detail doi-mat-khau" (click)="showMyAccount(false,false,true);showMy(true,false,false)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="color: #d2beb4;"><path fill="currentColor" d="M12 22q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v6.1q0 3.8-2.263 6.913T12 22Zm0-2.1q2.425-.75 4.05-2.963T17.95 12H12V4.125l-6 2.25v5.175q0 .175.05.45H12v7.9Z"></path></svg>Đổi mật khẩu</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="col myaccount-body-left-3">
+                <div class="don-hang">
+                    <ul>
+                        <li>
+                            <button type="button" class="btn btn__donhang" (click)="showMy(false,true,false)">
+                                Đơn hàng
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col myaccount-body-left-4">
+                <div class="thong-bao">
+                    <ul>
+                        <li>
+                            <button type="button" class="btn btn__thongbao" (click)="showMy(false,false,true)">
+                                Thông báo
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col myaccount-body-left-5">
+                <div class="kho-voucher">
+                    <ul>
+                        <li>
+                            <a routerLink="/PromotionPage">
+                                <button type="button" class="btn">
+                                    Kho voucher
+                                </button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col myaccount-body-left-6">
+                <div class="dang-xuat">
+                    <ul>
+                        <li>
+                            <button type="button" class="btn" onclick="dangxuat()">
+                                Đăng xuất
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col myaccount-body-right">
+            <!-- Hồ sơ của tôi -->
+            <div class="body__container--hosocuatoi" [class.activate]="myProfile">
+                <div container text-center>
+                    <div class="myaccount-body-right-ho-so-cua-toi" [class.activate]="myProfileP">
+                        <h2 style="font-size:32px ;text-align: center;">Hồ sơ của tôi</h2>
+                        <br>
+                        <form action="/action_page.php" autocomplete="on" method="post">
+                            <div class="row hs">
+                                <div class="col-2 form__label">
+                                    <label for="tendangnhap">Tên đăng nhập:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="tendangnhap" placeholder="Nhập tên đăng nhập" name="tendangnhap">
+                                    <p id="tendangnhap"></p>
+                                </div>
+                            </div>
+                            <div class="row hs">
+                                <div class="col-2 form__label">
+                                    <label for="hovaten">Họ và tên:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="hovaten" placeholder="Nhập họ và tên" name="hovaten">
+                                </div>
+                            </div>
+                            <div class="row hs">
+                                <div class="col-2 form__label">
+                                    <label for="email">Email:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email">
+                                </div>
+                            </div>
+                            <div class="row hs">
+                                <div class="col-2 form__label">
+                                    <label for="phone">Số điện thoại:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" name="phone">
+                                    <p id="phone"></p>
+                                </div>
+                            </div>
+                            <div class="row hs">
+                                <div class="col-2 form__label">
+                                    <label for="gioitinh">Giới tính:</label>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col" style="text-align: left;">
+                                            <input type="radio" id="gioitinh" name="gioitinh" value="nam">Nam</div>
+                                        <div class="col" style="text-align: left;">
+                                            <input type="radio" id="gioitinh" name="gioitinh" value="nu">Nữ</div>
+                                        <div class="col" style="text-align: left;">
+                                            <input type="radio" id="gioitinh" name="gioitinh" value="khac">Khác</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row hs">
+                                <div class="col-2 form__label">
+                                    <label for="dob">Ngày sinh:</label>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="number" class="form-control" id="dob" placeholder="Ngày" name="dob" max="31" min="1">
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" class="form-control" id="dob" placeholder="Tháng" name="dob" max="12" min="1">
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" class="form-control" id="dob" placeholder="Năm" name="dob">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="button" class="btn luu2">
+                                        Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- Địa chỉ của tôi -->
+                <div class="container address" [class.activate]="myAddress">
                   <div class="row">
-                      <div class="col" style="text-align: left;"> <input type="radio" id="gioitinh" name="gioitinh" value="nam">Nam</div>
-                      <div class="col" style="text-align: left;"><input type="radio" id="gioitinh" name="gioitinh" value="nu">Nữ</div>
-                      <div class="col" style="text-align: left;"><input type="radio" id="gioitinh" name="gioitinh" value="khac">Khác</div>
+                      <div class="col-8 dia-chi-cua-toi">
+                          <h1 >Địa chỉ của tôi</h1>
+                      </div>
+                      <div class="col-4">
+                          <button type="button" class="btn btn-Themdiachi" (click)="showModal()">Thêm địa chỉ</button>
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="row dia-chi-1">
+                      <div class="col">
+                          <p class="dia-chi-header"><span class="dia-chi-ten">Tên tài khoản</span> | Số điện thoại</p>
+                          <p class="dia-chi-text">Địa chỉ cụ thể</p>
+                          <p class="macdinh">Mặc định</p>
+                      </div>
+                      <div class="col-4">
+                          <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
+                          <p class="setup">Thiết lập mặc định</p>
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="row dia-chi-2">
+                      <div class="col">
+                          <p class="dia-chi-header"><span class="dia-chi-ten">Tên tài khoản</span> | Số điện thoại</p>
+                          <p class="dia-chi-text">Địa chỉ cụ thể</p>
+                      </div>
+                      <div class="col-4">
+                          <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
+                          <p class="xoa" style="cursor: pointer;">Xóa</p>
+                          <p class="setup">Thiết lập mặc định</p>
+                      </div>
                   </div>
               </div>
-          </div>
-          <div class="row hs">
-              <div class="col-2 form__label">
-                  <label for="dob">Ngày sinh:</label>
-              </div>
-              <div class="col">
-                  <div class="row">
-                      <div class="col"><input type="number" class="form-control" id="dob" placeholder="Ngày" name="dob" max="31" min="1"></div>
-                      <div class="col"><input type="number" class="form-control" id="dob" placeholder="Tháng" name="dob" max="12" min="1"></div>
-                      <div class="col"><input type="number" class="form-control" id="dob" placeholder="Năm" name="dob"></div>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-            <div class="col text-center">
-                <button type="button" class="btn luu2">
-                    Lưu
-                  </button>
-            </div>
-          </div>
-      </form>
 
-  </div>
-</div>
-<!-- Địa chỉ của tôi -->
-<div class="container address " >
-  <!-- style="display: none" -->
-<div class="row">
-    <div class="col dia-chi-cua-toi"><h1>Địa chỉ của tôi</h1></div>
-    <div class="col-4 " onclick="showModal()">
-        <button type="button" class="btn btn-Themdiachi">
-          <!-- <iconify-icon [icon]="ic:baseline-plus" ></iconify-icon> -->
-          Thêm địa chỉ</button>
-    </div>
-    <hr>
-</div>
-<div class="row dia-chi-1">
-    <p style="font-weight:bold;font-size:24pt">Địa chỉ</p><br>
-    <div class="col">
-        <p><span style="font-weight:bold ;">Tên tài khoản</span> | Số điện thoại <br> Địa chỉ cụ thể </p>
-        <p class="macdinh">Mặc định</p>
-    </div>
-    <div class="col-4">
-        <br>
-        <p style="font-size: 1.6rem; color: blue; margin-left: 30%; cursor: pointer;">Cập nhật</p>
-        <p class="setup">Thiết lập mặc định</p>
-    </div>
-    <hr>
-</div>
-<div class="row dia-chi-2">
-    <div class="col">
-        <br>
-        <p><span style="font-weight:bold ;">Tên tài khoản</span> | Số điện thoại <br> Địa chỉ cụ thể </p>
+                <!-- Modal layout -->
+                <div class="modal" [class.activate]="showmodal">
+                    <div class="modal__overlay"></div>
+                    <div class="modal__body">
+                        <div class="modal__inner">
+                            <!-- Form thêm địa chỉ mới -->
+                            <div class="container Them-dia-chi">
+                                <form action="/action_page.php" method="get">
+                                  <br>
+                                    <h1 style="text-align: center;">Địa chỉ mới</h1>
+                                    <div class="row dong-1">
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="hovaten" placeholder="Họ và tên" name="hovaten">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại" name="phonenumber">
+                                        </div>
+                                    </div>
+                                    <div class="row dong-2">
+                                        <div class="col">
+                                            <select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
+                                                <option value="" selected>Chọn tỉnh thành</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
+                                                <option value="" selected>Chọn quận huyện</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
+                                                <option value="" selected>Chọn phường xã</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row dong-3">
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" name="diachicuthe">
+                                        </div>
+                                    </div>
+                                    <div class="row dong-4">
+                                        <label for="" class="form-label">Loại địa chỉ:</label>
+                                        <div class="col-3">
+                                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="Nhà riêng" checked>Nhà riêng
+                                        </div>
+                                        <div class="col">
+                                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="Căn phòng" checked>Văn phòng
+                                        </div>
+                                    </div>
+                                    <div class="row form-check form-switch dong-5">
+                                        <div class="col">
+                                            <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+                                            <label class="form-check-label" for="mySwitch">Đặt làm địa chỉ mặc định</label>
+                                        </div>
+                                    </div>
+                                    <div class="row dong-6">
+                                      <div class="col"><button type="button" class="col complete btn" (click)="hideModal()">Trở lại</button></div>
 
-    </div>
-    <div class="col-4">
-        <br>
-        <p style="font-size: 1.6rem; color: blue; cursor: pointer;margin-left: 10%;"><span>Cập nhật</span> <span style="margin-left: 30%;">Xóa</span></p>
-        <p class="setup">Thiết lập mặc định</p>
-    </div>
-    <hr>
-</div>
-</div>
-<!-- Modal layout -->
-<div class="modal">
-<div class="modal__overlay"></div>
-<div class="modal__body">
-<div class="modal__inner">
-    <!-- Form thêm địa chỉ mới -->
-    <div class="container Them-dia-chi">
-        <form action="/action_page.php" method="get">
-            <h3>Địa chỉ mới</h3>
-         <div class="row dong-1">
-            <div class="col"><input type="text" class="form-control" id="hovaten" placeholder="Họ và tên" name="hovaten"></div>
-            <div class="col"><input type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại" name="phonenumber"></div>
-        </div>
-        <div class="row dong-2">
-            <div class="col"><select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
-              <option value="" selected>Chọn tỉnh thành</option>
-              </select></div>
-            <div class="col"><select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
-              <option value="" selected>Chọn quận huyện</option>
-              </select></div>
-            <div class="col"><select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
-<option value="" selected>Chọn phường xã</option>
-</select></div>
-        </div>
-        <div class="row dong-3">
-            <div class="col">
-                <input type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" name="diachicuthe">
-            </div>
-        </div>
-        <div class="row dong-4">
-            <label for="" class="form-label">Loại địa chỉ:</label>
-            <div class="col-3">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="Nhà riêng" checked>Nhà riêng
-            </div>
-            <div class="col">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="Căn phòng" checked>Văn phòng
-            </div>
-        </div>
-        <div class="row form-check form-switch dong-5">
-            <div class="col">
-                <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
-                <label class="form-check-label" for="mySwitch">Đặt làm địa chỉ mặc định</label>
-            </div>
-          </div>
-        <div class="row dong-6">
-            <div class="col return" onclick="hideModal()"><span>Trở lại</span></div>
-            <div class="col"><button type="button" class="btn complete">Hoàn thành</button></div>
-        </div>
-        </form>
-    </div>
-</div>
-</div>
-</div>
-<script>
-const modal = document.querySelector(".modal")
-function showModal() {
-modal.classList.add("open")
-}
-function hideModal(){
-modal.classList.remove("open")
-}
-</script>
-<!-- Đổi mật khẩu -->
-<div class="container body__container-doi-mat-khau" >
-  <!-- style="display: none" -->
-    <form action="/action_page.php" method="get">
-        <div class="row cachdeu">
-            <span style="font-size: 32pt; font-weight:bold">Đổi mật khẩu</span>
-            <span style="color: red;">*Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác </span>
-        </div>
-        <br><br><br>
-        <div class="row cachdeu">
-            <div class="col-3">
-                <label for="matkhauhientai">Mật khẩu hiện tại:</label>
-            </div>
-            <div class="col">
-                <input type="password" class="form-control" id="matkhauhientai" placeholder="" name="matkhauhientai">
-            </div>
-            <div class="col">
-                <p style="color: blue;">Quên mật khẩu</p>
-            </div>
-        </div>
-        <div class="row cachdeu">
-            <div class="col-3">
-                <label for="matkhaumoi">Mật khẩu mới:</label>
-            </div>
-            <div class="col">
-                <input type="password" class="form-control" id="matkhaumoi" placeholder="" name="matkhaumoi">
-            </div>
-            <div class="col"></div>
-        </div>
-        <div class="row cachdeu">
-            <div class="col-3">
-                <label for="xacnhanmatkhau">Xác nhận mật khẩu:</label>
-            </div>
-            <div class="col">
-                <input type="password" class="form-control" id="xacnhanmatkhau" placeholder="" name="xacnhanmatkhau">
-            </div>
-            <div class="col"></div>
-        </div>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary submit">Submit</button>
-            </div>
+                                        <div class="col">
+                                            <button type="button" class="btn complete"  (click)="hideModal()">Hoàn thành</button>
+                                        </div>
+                                    </div><br>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Đổi mật khẩu -->
+                <div style="display: none" class="container body__container-doi-mat-khau" [class.activate]="changePass">
+                    <!--  -->
+                    <form action="/action_page.php" method="get">
+                        <div class="row cachdeu">
+                            <h1>Đổi mật khẩu</h1><br>
+                            <span style="color: red;">*Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác </span>
+                        </div>
+                        <br>
+                        <div class="row cachdeu">
+                            <div class="col-3">
+                                <label for="matkhauhientai">Mật khẩu hiện tại:</label>
+                            </div>
+                            <div class="col">
+                                <input type="password" class="form-control" id="matkhauhientai" placeholder="" name="matkhauhientai">
+                            </div>
+                            <div class="col">
+                                <p style="color: blue;">Quên mật khẩu</p>
+                            </div>
+                        </div>
+                        <div class="row cachdeu">
+                            <div class="col-3">
+                                <label for="matkhaumoi">Mật khẩu mới:</label>
+                            </div>
+                            <div class="col">
+                                <input type="password" class="form-control" id="matkhaumoi" placeholder="" name="matkhaumoi">
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row cachdeu">
+                            <div class="col-3">
+                                <label for="xacnhanmatkhau">Xác nhận mật khẩu:</label>
+                            </div>
+                            <div class="col">
+                                <input type="password" class="form-control" id="xacnhanmatkhau" placeholder="" name="xacnhanmatkhau">
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary submit">Submit</button>
+                            </div>
 
-        </div>
-    </form>
-</div>
-</div>
-
-<!--Order  -->
-<div class="body__container--Order" >
-  <!-- style="display: none;" -->
-<!-- top -->
-<div class="top--header">
-<div class="row myaccount-body-right-top">
-<div class="col myaccount-body-right-top-confirm"><a href="#" onclick="showWP()">Chờ xác nhận</a></div>
-<div class="col myaccount-body-right-top-cho-lay-hang"><a href="#">Chờ lấy hàng</a></div>
-<div class="col myaccount-body-right-top-dang-giao"><a href="#">Đang giao</a></div>
-<div class="col myaccount-body-right-top-da-giao"><a href="#">Đã giao</a></div>
-<div class="col myaccount-body-right-top-da-huy"><a href="#" onclick="showDaHuy()">Đã hủy</a></div>
-<div class="col-3 myaccount-body-right-top-tra-hang"><a href="#">Trả hàng/Hoàn tiền</a></div>
-
-<hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
-</div>
-<div class="row text-center chua-co-don-hang"><p>Chưa có đơn hàng nào</p></div>
-</div>
-<!-- Chờ xác nhận -->
-<div class="row myaccount-body-right-top-wait-confirm cho-xac-nhan">
-<div id="wait-confirm-container">
-
-</div>
-</div>
-<!-- Chờ lấy hàng -->
-<div class="row myaccount-body-right-top-wait-confirm cho-lay-hang">
-<div class="row">
-  <div class="col">
-    <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
-  </div>
-  <div class="col">
-    <p style="text-align: right;margin-right:20%;margin-top:10%">
-      <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
-      Lấy hàng thành công | <span style="font-weight: bold;">Chờ lấy hàng</span></p>
-  </div>
-</div>
-<hr class="hr_style">
-<div class="row">
-  <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt=""></div>
-  <div class="col information">
-    <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-    <p>Số lượng: 1</p>
-  </div>
-  <div class="col price">
-    <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-  </div>
-</div>
-<hr class="hrr__style">
-<div class="row total__bill">
-  <p>Tổng số tiền: <h2>120,000<sup>đ</sup></h2>
-</div>
-<div class="row">
-  <div class="col"></div>
-  <div class="col"></div>
-  <div class="col"><button type="button" class="btn btn-view ">Xem chi tiết đơn hàng</button></div>
-</div>
-</div>
-
-<!-- Đang giao -->
-<div class="row myaccount-body-right-top-wait-confirm dang-giao">
-<div class="row">
-  <div class="col">
-    <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
-  </div>
-  <div class="col">
-    <p style="text-align: right;margin-right:20%;margin-top:10%">
-      <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
-      Lấy hàng thành công | <span style="font-weight: bold;">Đang giao</span></p>
-  </div>
-</div>
-<hr class="hr_style">
-<div class="row">
-  <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt=""></div>
-  <div class="col information">
-    <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-    <p>Số lượng: 1</p>
-  </div>
-  <div class="col price">
-    <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-  </div>
-</div>
-<hr class="hrr__style">
-<div class="row total__bill">
-  <p>Tổng số tiền: <span>120,000<sup>đ</sup></span></p>
-</div>
-<div class="row">
-  <div class="col"></div>
-  <div class="col"></div>
-  <div class="col"><button type="button" class="btn btn-view">Đã nhận được hàng</button></div>
-</div>
-</div>
-<!-- Đã giao -->
-<div class="row myaccount-body-right-top-wait-confirm da-giao">
-<div class="row">
-  <div class="col">
-    <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
-  </div>
-  <div class="col">
-    <p style="text-align: right;margin-right:20%;margin-top:10%">
-      <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
-      Lấy hàng thành công | <span style="font-weight: bold;">Đã giao</span></p>
-  </div>
-</div>
-<hr class="hr_style">
-<div class="row">
-  <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt=""></div>
-  <div class="col information">
-    <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-    <p>Số lượng: 1</p>
-  </div>
-  <div class="col price">
-    <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-  </div>
-</div>
-<hr class="hrr__style">
-<div class="row total__bill">
-  <p>Tổng số tiền: <span>120,000<sup>đ</sup></span></p>
-</div>
-<div class="row">
-  <div class="col"></div>
-  <div class="col"><button type="button" class="btn btn-view btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Đánh giá</button></div>
-  <div class="col"><button type="button" class="btn btn-view">Mua lại</button></div>
-</div>
-</div>
-<!-- Đã hủy -->
-<div class="row myaccount-body-right-top-wait-confirm da-huy" id="da_huy">
-<div class="row">
-  <div class="col">
-    <p style="text-align: left;margin-left: 5%;">Tên Nhãn Hàng</p>
-  </div>
-  <div class="col">
-    <p style="text-align: right;margin-right:20%">Đã hủy</p>
-  </div>
-</div>
-<hr class="hr_style">
-<div class="row">
-  <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt=""></div>
-  <div class="col information">
-    <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-    <p>Số lượng: 1</p>
-  </div>
-  <div class="col price">
-    <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-  </div>
-</div>
-<hr class="hrr__style">
-<div class="row total__bill">
-  <p>Tổng số tiền: <span>120,000<sup>đ</sup></span></p>
-</div>
-<div class="row">
-  <div class="col"></div>
-  <div class="col"><button type="button" class="btn btn-view">Mua lại</button></div>
-  <div class="col"><button type="button" class="btn btn-view">Chi tiết hủy đơn</button></div>
-</div>
-</div>
-</div>
-<div class="body__container--thongbao" >
-  <!-- style="display: none;" -->
-<!-- Thông báo -->
-<div class="row top-1">
-<p>Đánh dấu đã đọc tất cả</p>
-<hr class="style_hr">
-</div>
-<div class="row dong1">
-<div class="col-2 dong1-image1"><img class="image1" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt=""></div>
-<div class="col-6 don-hang-dong1">
-<p><span style="font-weight: bold;"> Giao kiện hàng thành công</span> <br>
-Đơn hàng #000001 đã giao thành công đến bạn <br>
-16:02 11-12-2022</p>
-</div>
-<div class="col"><button type="button" class="btn btn-viewdetail">Xem chi tiết đơn hàng</button></div>
-</div>
-<!-- sp dòng 2 -->
-<div class="row dong2">
-<div class="col-2 dong2-image1"><img class="image1" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt=""></div>
-<div class="col-6 don-hang-dong2">
-<p><span style="font-weight: bold;"> Bạn có kiện hàng đang trên đường giao</span> <br>
-Đơn hàng #000001 vẫn đang trên đường vận chuyển và dự kiến được giao trong 1-2 ngày tới. Vui lòng bỏ qua thông báo này nếu bạn đã nhận được đơn hàng nhé! :( <br>
-16:02 11-12-2022</p>
-</div>
-<div class="col"><button type="button" class="btn btn-viewdetail">Xem chi tiết</button></div>
-</div>
-<!-- sp dòng 3 -->
-<div class="row dong3">
-<div class="col-2 dong1-image1"><img class="image1" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt=""></div>
-<div class="col-6 don-hang-dong1">
-<p><span style="font-weight: bold;"> Thanh toán thành công</span> <br>
-Đơn hàng #000001 đã thanh toán thành công đến bạn <br>
-16:02 11-12-2022</p>
-</div>
-<div class="col"><button type="button" class="btn btn-viewdetail">Xem chi tiết</button></div>
-</div>
-</div>
-<!-- Xem chi tiết đơn hàng -->
-<div class="row body__container--OrderDetail" >
-  <!-- style="display: none;" -->
-  <div class="row">
-    <div class="col return--orderdetail">
-      <p>
-        <!-- <iconify-icon icon="material-symbols:arrow-back-ios-rounded"></iconify-icon> -->
-         Trở lại</p>
-    </div>
-    <div class="col-5">
-      <p>Mã đơn hàng:#000001 | <span style="color:red ;">ĐƠN HÀNG ĐÃ GIAO</span></p>
-    </div>
-  </div>
-  <hr class="hr__style--orderdetail">
-  <div class="row">
-    <div class="col"><p>Địa chỉ nhận hàng</p></div>
-    <div class="col-2"><p>#0000001</p></div>
-  </div>
-  <div class="row">
-    <div class="col-4 diachinhanhang-bottom">Họ và tên <br>Số điện thoại <br>Địa chỉ cụ thể</div>
-    <div class="col">
-      <ul style=" list-style-type:url(./assets/Img/circle.png)">
-        <li style="color:#33A121;">Giao hàng thành công. Người nhận hàng: Võ Thị Nhung </li>
-        <li>Đang giao hàng</li>
-        <li>Đơn hàng đã được bàn giao đến đơn vị vận chuyển</li>
-        <li>Đơn hàng đã được đóng gói</li>
-        <li>Người gửi đang chuẩn bị đơn hàng</li>
-      </ul>
-    </div>
-  </div>
-  <p style="font-weight:bold">Tên Nhãn Hàng</p>
-  <div class="row">
-    <div class="col-2"><img class="img__order--detail" src="./assets/Img/sanpham/gap16/gap16_1.webp" alt=""></div>
-    <div class="col-6"><p>Váy nữ Dây kéo Xù màu trơn Giải trí <br>Số lượng:1</p></div>
-    <div class="col-4"><p><span style="color:red;font-size: larger;">120.00<sup>đ</sup></span><span style="text-decoration: line-through; color:darkgray">(155.00đ)</span></p></div>
-  </div>
-  <div class="row bottom__order--detail">
-    <div class="row style__bottom--top">
-      <div class="col-8 style__bottom">Tổng tiền hàng</div>
-      <div class="col red">120.000<sup>đ</sup></div>
-    </div>
-    <div class="row style__bottom--top1">
-      <div class="col-8 style__bottom">Phí vận chuyển</div>
-      <div class="col red">20.000<sup>đ</sup></div>
-    </div>
-    <div class="row style__bottom--top1">
-      <div class="col-8 style__bottom">Voucher từ shop</div>
-      <div class="col red">0<sup>đ</sup></div>
-    </div>
-    <div class="row style__bottom--top1">
-      <div class="col-8 style__bottom">Tổng số tiền</div>
-      <div class="col red" style="font-size: larger;">140.000<sup>đ</sup></div>
-    </div>
-    <div class="row style__bottom--top1">
-      <div class="col-8 style__bottom">Phương thức thanh toán</div>
-      <div class="col">Thanh toán khi nhận hàng (COD)</div>
-    </div>
-  </div>
-  <div class="row bottom-btn">
-    <div class="col"></div>
-    <div class="col"><button type="button" class="btn btn__order--detail">
-      Mua lại
-    </button></div>
-    <div class="col"></div>
-    </div>
-</div>
-  </div>
-</div>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered  ">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Đánh giá sản phẩm</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <h2 style="margin-bottom: 30px">Hãy là người đầu tiên nhận xét "Áo sơ mi nữ xù họa tiết nhỏ"</h2>
-        <form action="#" method="get">
-          <div class="mb-3">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-              <option selected><b>Đánh giá của bạn *</b></option>
-              <option value="1">Tuyệt vời</option>
-              <option value="2">Tốt</option>
-              <option value="3">Hài Lòng</option>
-              <option value="4">Không Hài Lòng</option>
-            </select>
-          </div>
-          <div class="mb-3 form-floating">
-            <textarea class="form-control" placeholder="Nhận xét của bạn *" id="nhanxet" style="height: 200px"></textarea>
-            <label for="nhanxet"><b>Nhận xét của bạn *</b></label>
-          </div>
-            <div class="mb-3 row">
-              <div class="col-6">
-                <label for="ten" class="form-label"><b>Tên *</b></label>
-                <input type="text" class="form-control" id="ten" aria-describedby="emailHelp">
-              </div>
-              <div class="col-6">
-                <label for="email" class="form-label"><b>Email   *</b></label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-              </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="save">
-            <label class="form-check-label" for="save">Lưu tên của tôi, email, và trang web trong trình duyệt này cho lần bình luận kế tiếp của tôi</label>
-          </div>
-      <!-- </div> -->
-      <div class="modal-footer">
-        <button type="button" class="btn" data-bs-dismiss="modal">Gửi đi</button>
-      </div>
-    </form>
+            <!--Order  -->
+            <div style="display: none;" class="body__container--Order" [class.activate]="myOrder">
+                <!--  -->
+                <!-- top -->
+                <div class="top--header">
+                    <div class="row myaccount-body-right-top">
+                        <div class="col myaccount-body-right-top-confirm"><a  (click)="showOrderStatus(true,false,false,false,false)" >Chờ xác nhận</a>
+                        </div>
+                        <div class="col myaccount-body-right-top-cho-lay-hang"><a  (click)="showOrderStatus(false,true,false,false,false)">Chờ lấy hàng</a>
+                        </div>
+                        <div class="col myaccount-body-right-top-dang-giao"><a  (click)="showOrderStatus(false,false,true,false,false)">Đang giao</a>
+                        </div>
+                        <div class="col myaccount-body-right-top-da-giao"><a  (click)="showOrderStatus(false,false,false,true,false)">Đã giao</a>
+                        </div>
+                        <div class="col myaccount-body-right-top-da-huy"><a  (click)="showOrderStatus(false,false,false,false,true)">Đã hủy</a>
+                        </div>
+                        <div class="col-3 myaccount-body-right-top-tra-hang"><a  (click)="showOrderStatus(true,false,false,false,false)">Trả hàng/Hoàn tiền</a>
+                        </div>
+
+                        <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
+                    </div>
+                    <div style="display: none;"  class="row text-center chua-co-don-hang" >
+                        <p>Chưa có đơn hàng nào</p>
+                    </div>
+                </div>
+                <!-- Chờ xác nhận -->
+                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm cho-xac-nhan" [class.activate]="waitConfirmOrder">
+                    <div id="wait-confirm-container">
+
+                    </div>
+                </div>
+                <!-- Chờ lấy hàng -->
+                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm cho-lay-hang" [class.activate]="waitPickUp">
+                    <div class="row">
+                        <div class="col">
+                            <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
+                        </div>
+                        <div class="col">
+                            <p style="text-align: right;margin-right:20%;margin-top:10%">
+                                <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+                                Lấy hàng thành công | <span style="font-weight: bold;">Chờ lấy hàng</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="hr_style">
+                    <div class="row">
+                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                        </div>
+                        <div class="col information">
+                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                            <p>Số lượng: 1</p>
+                        </div>
+                        <div class="col price">
+                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                        </div>
+                    </div>
+                    <hr class="hrr__style">
+                    <div class="row total__bill">
+                        <p>Tổng số tiền:
+                            <h2>120,000<sup>đ</sup></h2>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col">
+                            <button type="button" class="btn btn-view ">Xem chi tiết đơn hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Đang giao -->
+                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm dang-giao" [class.activate]="inDelivering">
+                    <div class="row">
+                        <div class="col">
+                            <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
+                        </div>
+                        <div class="col">
+                            <p style="text-align: right;margin-right:20%;margin-top:10%">
+                                <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+                                Lấy hàng thành công | <span style="font-weight: bold;">Đang giao</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="hr_style">
+                    <div class="row">
+                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                        </div>
+                        <div class="col information">
+                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                            <p>Số lượng: 1</p>
+                        </div>
+                        <div class="col price">
+                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                        </div>
+                    </div>
+                    <hr class="hrr__style">
+                    <div class="row total__bill">
+                        <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col">
+                            <button type="button" class="btn btn-view">Đã nhận được hàng</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Đã giao -->
+                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm da-giao" [class.activate]="delivered">
+                    <div class="row">
+                        <div class="col">
+                            <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
+                        </div>
+                        <div class="col">
+                            <p style="text-align: right;margin-right:20%;margin-top:10%">
+                                <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+                                Lấy hàng thành công | <span style="font-weight: bold;">Đã giao</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="hr_style">
+                    <div class="row">
+                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                        </div>
+                        <div class="col information">
+                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                            <p>Số lượng: 1</p>
+                        </div>
+                        <div class="col price">
+                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                        </div>
+                    </div>
+                    <hr class="hrr__style">
+                    <div class="row total__bill">
+                        <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <button type="button" class="btn btn-view btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Đánh giá</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-view">Mua lại</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Đã hủy -->
+                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm da-huy" id="da_huy"   [class.activate]="cancelled">
+                    <div class="row">
+                        <div class="col">
+                            <p style="text-align: left;margin-left: 5%;">Tên Nhãn Hàng</p>
+                        </div>
+                        <div class="col">
+                            <p style="text-align: right;margin-right:20%">Đã hủy</p>
+                        </div>
+                    </div>
+                    <hr class="hr_style">
+                    <div class="row">
+                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                        </div>
+                        <div class="col information">
+                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                            <p>Số lượng: 1</p>
+                        </div>
+                        <div class="col price">
+                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                        </div>
+                    </div>
+                    <hr class="hrr__style">
+                    <div class="row total__bill">
+                        <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <button type="button" class="btn btn-view">Mua lại</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-view">Chi tiết hủy đơn</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  class="body__container--thongbao" [class.activate]="myNotification">
+                <!--  -->
+                <!-- Thông báo -->
+                <div class="row top-1">
+                    <p>Đánh dấu đã đọc tất cả</p>
+                    <hr class="style_hr">
+                </div>
+                <div class="row dong1">
+                    <div class="col-2 dong1-image1"><img class="image1" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                    </div>
+                    <div class="col-6 don-hang-dong1">
+                        <p><span style="font-weight: bold;"> Giao kiện hàng thành công</span>
+                            <br> Đơn hàng #000001 đã giao thành công đến bạn
+                            <br> 16:02 11-12-2022</p>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-viewdetail">Xem chi tiết đơn hàng</button>
+                    </div>
+                </div>
+                <!-- sp dòng 2 -->
+                <div class="row dong2">
+                    <div class="col-2 dong2-image1"><img class="image1" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                    </div>
+                    <div class="col-6 don-hang-dong2">
+                        <p><span style="font-weight: bold;"> Bạn có kiện hàng đang trên đường giao</span>
+                            <br> Đơn hàng #000001 vẫn đang trên đường vận chuyển và dự kiến được giao trong 1-2 ngày tới. Vui lòng bỏ qua thông báo này nếu bạn đã nhận được đơn hàng nhé! :(
+                            <br> 16:02 11-12-2022</p>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-viewdetail">Xem chi tiết</button>
+                    </div>
+                </div>
+                <!-- sp dòng 3 -->
+                <div class="row dong3">
+                    <div class="col-2 dong1-image1"><img class="image1" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                    </div>
+                    <div class="col-6 don-hang-dong1">
+                        <p><span style="font-weight: bold;"> Thanh toán thành công</span>
+                            <br> Đơn hàng #000001 đã thanh toán thành công đến bạn
+                            <br> 16:02 11-12-2022</p>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-viewdetail">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Xem chi tiết đơn hàng -->
+            <div style="display: none;" class="row body__container--OrderDetail" [class.activate]="myOrderDetail">
+                <!--  -->
+                <div class="row">
+                    <div class="col return--orderdetail">
+                        <p>
+                            <!-- <iconify-icon icon="material-symbols:arrow-back-ios-rounded"></iconify-icon> -->
+                            Trở lại</p>
+                    </div>
+                    <div class="col-5">
+                        <p>Mã đơn hàng:#000001 | <span style="color:red ;">ĐƠN HÀNG ĐÃ GIAO</span>
+                        </p>
+                    </div>
+                </div>
+                <hr class="hr__style--orderdetail">
+                <div class="row">
+                    <div class="col">
+                        <p>Địa chỉ nhận hàng</p>
+                    </div>
+                    <div class="col-2">
+                        <p>#0000001</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 diachinhanhang-bottom">Họ và tên
+                        <br>Số điện thoại
+                        <br>Địa chỉ cụ thể</div>
+                    <div class="col">
+                        <ul style=" list-style-type:url(./assets/Img/circle.png)">
+                            <li style="color:#33A121;">Giao hàng thành công. Người nhận hàng: Võ Thị Nhung </li>
+                            <li>Đang giao hàng</li>
+                            <li>Đơn hàng đã được bàn giao đến đơn vị vận chuyển</li>
+                            <li>Đơn hàng đã được đóng gói</li>
+                            <li>Người gửi đang chuẩn bị đơn hàng</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="font-weight:bold">Tên Nhãn Hàng</p>
+                <div class="row">
+                    <div class="col-2"><img class="img__order--detail" src="./assets/Img/sanpham/gap16/gap16_1.webp" alt="">
+                    </div>
+                    <div class="col-6">
+                        <p>Váy nữ Dây kéo Xù màu trơn Giải trí
+                            <br>Số lượng:1</p>
+                    </div>
+                    <div class="col-4">
+                        <p><span style="color:red;font-size: larger;">120.00<sup>đ</sup></span><span style="text-decoration: line-through; color:darkgray">(155.00đ)</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row bottom__order--detail">
+                    <div class="row style__bottom--top">
+                        <div class="col-8 style__bottom">Tổng tiền hàng</div>
+                        <div class="col red">120.000<sup>đ</sup>
+                        </div>
+                    </div>
+                    <div class="row style__bottom--top1">
+                        <div class="col-8 style__bottom">Phí vận chuyển</div>
+                        <div class="col red">20.000<sup>đ</sup>
+                        </div>
+                    </div>
+                    <div class="row style__bottom--top1">
+                        <div class="col-8 style__bottom">Voucher từ shop</div>
+                        <div class="col red">0<sup>đ</sup>
+                        </div>
+                    </div>
+                    <div class="row style__bottom--top1">
+                        <div class="col-8 style__bottom">Tổng số tiền</div>
+                        <div class="col red" style="font-size: larger;">140.000<sup>đ</sup>
+                        </div>
+                    </div>
+                    <div class="row style__bottom--top1">
+                        <div class="col-8 style__bottom">Phương thức thanh toán</div>
+                        <div class="col">Thanh toán khi nhận hàng (COD)</div>
+                    </div>
+                </div>
+                <div class="row bottom-btn">
+                    <div class="col"></div>
+                    <div class="col">
+                        <button type="button" class="btn btn__order--detail">
+                            Mua lại
+                        </button>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-</div>
+
+
+
+
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Đánh giá sản phẩm</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2 style="margin-bottom: 30px">Hãy là người đầu tiên nhận xét "Áo sơ mi nữ xù họa tiết nhỏ"</h2>
+                    <form action="#" method="get">
+                        <div class="mb-3">
+                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option selected><b>Đánh giá của bạn *</b>
+                                </option>
+                                <option value="1">Tuyệt vời</option>
+                                <option value="2">Tốt</option>
+                                <option value="3">Hài Lòng</option>
+                                <option value="4">Không Hài Lòng</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <textarea class="form-control" placeholder="Nhận xét của bạn *" id="nhanxet" style="height: 200px"></textarea>
+                            <label for="nhanxet"><b>Nhận xét của bạn *</b>
+                            </label>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-6">
+                                <label for="ten" class="form-label"><b>Tên *</b>
+                                </label>
+                                <input type="text" class="form-control" id="ten" aria-describedby="emailHelp">
+                            </div>
+                            <div class="col-6">
+                                <label for="email" class="form-label"><b>Email   *</b>
+                                </label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="save">
+                            <label class="form-check-label" for="save">Lưu tên của tôi, email, và trang web trong trình duyệt này cho lần bình luận kế tiếp của tôi</label>
+                        </div>
+                        <!-- </div> -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-bs-dismiss="modal">Gửi đi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

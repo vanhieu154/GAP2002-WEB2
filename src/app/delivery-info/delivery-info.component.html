@@ -1,38 +1,294 @@
-<div class="container text-center">
+<div class="container-fluid w-100 "  >
+<div class="row">
+  <div class="col-md-6 box blue">
 
-  <h4> Thông tin giao hàng</h4>
-<form action="" method="get">
-<div class="col">
-<div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label"> </label>
-    <textarea class="form-control" id="hoten" name="hoten" rows="1" placeholder="Họ và tên"></textarea>
-  </div>
-</div>
-<div class="col">
-<div class="row justify-content-start">
-    <div class="col-8">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"> </label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+<div class="container  row w-100 body" height="2000px " ng-controller="myController">
+  <ng-container [ngSwitch]="activeContent">
+    <div *ngSwitchCase="'content1'">
+      <div class=" col-6 col--left delivery-info row text-center w-100">
+      <h5 class=""> GAP2002 </h5>
+      <h4> Thông tin giao hàng</h4>
+      <br>
+      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb ">
+          <li class="breadcrumb-item"> <b>Thông tin cơ bản</b> </li>
+          <li class="breadcrumb-item active" aria-current="page">  Thông tin giao hàng  </li>
+          <li class="breadcrumb-item active" aria-current="page">  Hoàn tất</li>
+        </ol>
+      </nav>
       </div>
-    </div>
-    <div class="col-4">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"></label>
-        <input type="tel" class="form-control" name="sdt" id="sdt" placeholder="Số điện thoại" >
-      </div>
-    </div>
-  </div>
-</div>
-<div class="col">
-<div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label"> </label>
-    <textarea class="form-control" id="hoten" name="hoten" rows="1" placeholder="Địa chỉ"></textarea>
-  </div>
-</div>
-<div class="col">
-<div class="row justify-content-start">
-    <div class="col-6">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"> </label>
 
+      <div class="row text-center content--left">
+        <form >
+          <div class="col" >
+            <div class=" mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label" > </label>
+                <textarea class="form-control form-select-lg"  [(ngModel)]="fullname"  id="fullname" name="fullname" rows="1" placeholder="Họ và tên" ></textarea>
+              </div>
+          </div>
+          <div class="col" >
+            <div class="row justify-content-start">
+                <div class="col-8">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"> </label>
+                    <input type="email" class="form-control form-select-lg"  [(ngModel)]="email" id="email" name="email" placeholder="Email">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"></label>
+                    <input type="tel" class="form-control form-select-lg"  [(ngModel)]="phone" name="phone" id="phone" placeholder="Số điện thoại" >
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="col">
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label"> </label>
+                <textarea class="form-control form-select-lg"  [(ngModel)]="address" id="address" name="address" rows="1" placeholder="Địa chỉ"></textarea>
+              </div>
+          </div>
+          <div class="col">
+            <div class="row justify-content-start">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"> </label>
+                    <div>
+                      <select class="form-select form-select-lg mb-3" [(ngModel)]="VietNamdata" id="province" (change)="changeProvince($event)" aria-label=".form-select-sm">
+                      <option *ngFor="let pro of VietNamdata" >{{pro.province}}</option>
+                      </select>
+                       </div>
+
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"></label>
+                    <select class="form-select form-select-lg mb-3" [(ngModel)]="district" id="province" (change)="changeDistrict($event)" id="district" aria-label=".form-select-sm">
+                      <option *ngFor="let district of districts" value="{{district}}">{{district}}</option>
+                      </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        <div class="button--gui__position">
+          <button class=" button--gui w-100" (click)="showContent('content2')" style="text-align: center; margin-top: 30px; cursor: pointer;">Tiếp tục đến Thông tin giao hàng</button>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+    <div *ngSwitchCase="'content2'" >
+      <div class=" col-6 col--left delivery-info row text-center w-100" style="margin-bottom: 15px;">
+        <h5 class=""> GAP2002 </h5>
+        <h4> Thông tin giao hàng</h4>
+        <br>
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb ">
+            <li class="breadcrumb-item active" aria-current="page" > Thông tin cơ bản </li>
+            <li class="breadcrumb-item " > <b> Thông tin giao hàng</b>  </li>
+            <li class="breadcrumb-item active" aria-current="page">  Hoàn tất </li>
+          </ol>
+        </nav>
+        </div>
+
+        <div class="content--left ">
+        <div class="box__border col--left">
+          <div class="form-check" >
+            <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice1" [(ngModel)]="selectedPrice"  value="Giao hàng trong tỉnh" >
+    <label class="form-check-label w-100" for="deliveryPrice2">
+    <div class="row">
+      <div class="col">Giao hàng trong tỉnh</div>
+      <div class="col" style="color: red;">20,000 đ</div>
+    </div>
+
+            </label>
+          </div> <hr>
+          <div class="form-check" >
+            <input class="form-check-input" type="radio" name="deliveryPrice"  id="deliveryPrice2" value="Giao hàng ngoài tỉnh" [(ngModel)]="selectedPrice"  (change)="showText()">
+    <label class="form-check-label w-100" for="deliveryPrice1">
+
+      <div class="row ">
+        <div class="col">Giao hàng ngoài tỉnh </div>
+        <div class="col" style="color: red;">40,000 đ</div>
+      </div>
+    </label>
+          </div>
+        </div>
+        <br>
+          <div class="box__border">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value="Thanh toán khi nhận hàng (COD)" [(ngModel)]="selectedPay" (change)="showPay($event)">
+            <label class="form-check-label" for="howtopay">
+            Thanh toán khi nhận hàng (COD)
+            </label>
+          </div> <hr>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value="Chuyển khoản qua ngân hàng" [(ngModel)]="selectedPay" (change)="showPay($event)"  data-bs-toggle="modal" data-bs-target="#showVisa">
+            <label class="form-check-label" for="howtopay">
+              Chuyển khoản qua ngân hàng
+            </label>
+          </div> <hr>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value=" Ví điện tử" [(ngModel)]="selectedPay" (change)="showPay($event)">
+            <label class="form-check-label" for="howtopay">
+              Ví điện tử
+            </label>
+          </div>
+        </div>
+
+        <button (click)="showContent('content1')" class=" button--gui w-100"  style="text-align: center; margin-top: 30px; cursor: pointer;">Quay về Thông tin cơ bản</button>
+        <button (click)="showContent('content3')" class=" button--gui w-100"  style="text-align: center; margin-top: 10px; cursor: pointer;">Hoàn tất đơn hàng</button>
+</div>
+
+    </div>
+
+
+    <div *ngSwitchCase="'content3'">
+
+      <div class=" col-6 col--left delivery-info row text-center w-100">
+        <h5 class=""> GAP2002 </h5>
+        <h4> Thông tin giao hàng</h4>
+        <br>
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb ">
+            <li class="breadcrumb-item active" aria-current="page"> Thông tin cơ bản </li>
+            <li class="breadcrumb-item active " aria-current="page"> Thông tin giao hàng </li>
+            <li class="breadcrumb-item " > <b> Hoàn tất</b> </li>
+          </ol>
+        </nav>
+      </div>
+          <div class="content--left">
+        <div class="container text-center " style="margin-bottom: 20px;">
+          <!-- icon o day -->
+          <br>
+          <h4 style="color: red;">   Đặt hàng thành công </h4>
+        </div>
+
+        <div style="text-align: center;"> <b>Mã đơn hàng:</b>  #000001 </div>
+
+        <div class="text-center box__border" style="margin-bottom: 20px;">
+          <h4> Thông tin đơn hàng</h4> <br>
+          <div class="row " >
+              <div class="col thongtin" style="word-wrap: break-word;" >
+                <b>Họ và tên: </b> {{fullname}} <br>
+                <b>Email:</b> {{email}}  <br>
+                <b>Số điện thoại:</b> {{phone}} <br>
+                <b>Tỉnh / Thành phố: </b>
+                 <div class="col thongtin"> {{ selectedProvince }} </div>
+                <b>Quận / Huyện: </b> {{selectedDistrict}}  <br>
+                <b>Địa chỉ chi tiết:</b> {{address}}  <br>
+              </div>
+              <div class="col thongtin__textleft">
+                <div> <b> Giao hàng: </b></div> <span id="message">{{selectedPrice}}</span> <br>
+                <div> <b> Phương thức thanh toán: </b></div> <span id="message">{{selectedPay}}</span> <br>
+              </div> <br>
+              <h4 style="text-align: center; padding-top: 20px;">  Cám ơn bạn đã mua hàng! </h4>
+          </div>
+        </div>
+
+        <button class="button--muahang w-100" [routerLink]="['']" > Tiếp tục mua hàng </button>
+        </div>
+
+    </div>
+
+  </ng-container>
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+<div class="col-md-6 box wrap pt-3 pb-3" height="2000px " style="margin-bottom: 20px;  padding: 50px;">
+  <div class="container" style="word-wrap: break-word; margin-top: 20px;">
+    <div class="box col-5 col--right__image">
+      <h3 style="border-bottom: black solid 1px; text-align: center;"><b>Ảnh sản phẩm</b></h3>
+      <div><img src="{{order.image}}"> </div>
+    </div>
+    <div class="box col-4 col--right__describe">
+      <h3 style="border-bottom: black solid 1px; text-align: center;"> <b>Mô tả</b> </h3>
+      <p>{{order.describe}} </p>
+    </div>
+    <div class="box col-3 col--right__price">
+      <h3 style="border-bottom: black solid 1px; text-align: center;"> <b>Giá</b> </h3>
+      <h3 style="color: red;">{{order.price}} đ </h3>
+    </div>
+
+    <div class="w-100" style="padding-bottom: 10px; background-color: lightgray; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" >
+
+      <div class="container-fliud w-100" style="padding: 10px;">
+        <div class="row">
+          <div class="col-md-9 box " >
+            <textarea class="form-control form-select-lg" id="magiamgia" name="magiamgia" rows="1" placeholder="Mã giảm giá" style="padding: 10px;"></textarea>
+          </div>
+          <div class="col-md-3 box " >
+            <input class="btn-primary button--gui" style="border-radius: 5px;" type="submit" value="Áp dụng" >
+          </div>
+        </div>
+      </div>
+
+      <div class="container" style="word-wrap: break-word; ">
+        <div class=" col-7 ">
+          <h3 style="text-align: left; padding: 10px 10px ;">Tạm tính:</h3>
+        </div>
+        <div class=" col-5 ">
+          <h3 style="color: red; text-align: right; padding: 10px 20px ;">{{order.price}} đ</h3>
+        </div>
+      </div>
+
+
+      <div class="container" style="word-wrap: break-word; ">
+        <div class=" col-7 ">
+          <h3 style="text-align: left; padding: 10px 10px ;">Phí vận chuyển:</h3>
+        </div>
+        <div class=" col-5 ">
+          <p style="color: red; text-align: right; padding: 10px 20px ;">{{selectedPrice === 'Giao hàng trong tỉnh' ? '20000' : '40000'}}đ</p>
+        </div>
+      </div>
+
+
+      <div class="container" style="word-wrap: break-word; border-bottom-left-radius: 50px; border-bottom-right-radius: 5px;">
+        <div class=" col-7 ">
+          <h3 style="text-align: left; padding: 10px 10px ;">Tổng cộng:</h3>
+        </div>
+        <div class=" col-5 ">
+          <p style="color: red; text-align: right; padding: 10px 20px ; ">{{selectedPrice === 'Giao hàng trong tỉnh' ? '20000' : '40000'}}đ</p>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+  </div>
+  <!-- border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" -->
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+</div>

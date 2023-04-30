@@ -1,357 +1,117 @@
-body{
-  background: linear-gradient(to right,#724e34e4, #dac5ba);
-  font-size: 1.6rem;
-}
-input{
-  font-size: 1.6rem;
-
-}
-.form-item{
-  display: flex;
-  align-items: center;
-}
-/* CSS header top */
-.breadcrumb{
-  /* background-color: var(--lightpink); */
-  padding: 5px ;
-  font-size: 12px;
-  padding-left: 70px;
-}
-.breadcrumb-item.active, .breadcrumb-item+.breadcrumb-item::before{
-  color: white;
+:root {
+  --darkpink: #b8a898;
+  --lightpink: #e0d4ce;
+  --darkbrown: #6B4932;
+  --black: black;
+  --white: #ffffff;
+  --green: rgb(82, 155, 115);
 }
 
-.breadcrumb>li{
-  font-size: 1.3rem;
+.head{
+  font-size: 1.6rem;
 }
-a{
-  color: var(--black);
-  text-decoration: none;
+.dk{
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--darkbrown);
+  padding-bottom: 15px;
 }
-.h2, h2 {
-  font-size: calc(1.325rem + .9vw);
-}
-.h3, h3 {
-  font-size: calc(1.3rem + .6vw);
-}
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-/* header */
-.header{
-  position: fixed;
-  z-index: 99;
-  width: 100%;
-  top: 0;
-  background-color: var(--white-color);
-  transition: top 0.8s;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
-}
-.logo-container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-/* body */
-.login-card-container{
-  /* font-size: 1.6rem; */
-  font-family: 'Quicksand';
-  /* min-height: 100vh; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
+.register{
+  padding: 20px 0 20px;
+  overflow: hidden;
   margin-top: 92px;
   background: linear-gradient(to right,#724e34e4, #dac5ba);
 
 }
-
-/* Login Card */
-.login-card {
-  width: 450px;
-  background: rgba(255, 255, 255, .5);
-  margin-top: 2rem;
-  padding: 4rem;
+.form{
+  width: 40%;
+  /* background-color: #6B4932; */
+  margin: 30px;
+  padding: 30px;
+  border: 1px solid #ccc;
   border-radius: 10px;
-  position: relative;
-  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
-.login-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, .15);
-  border-radius: 10px;
-  z-index: -1;
+.form-container{
+  margin: 30px 0 30px 0;
 }
-
-/* ---------- */
-
-/* Login Card Standard */
-.login-card-header,
-.login-card-footer {
-  text-align: center;
-}
-/* ---------- */
-
-/* Login Card Header */
-.login-card-header {
-  margin-bottom: 2rem;
-}
-
-.login-card-header h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: .5rem;
-}
-
-.login-card-header h1+div {
-  /* font-size: calc(1rem * .8); */
-  opacity: .8;
-}
-.login-card-header div {
-  /* font-size: calc(1rem * .8); */
-  font-size: 1.3rem;
-}
-/* ---------- */
-
-/* Login Card Form */
-.login-card-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.login-card-form .form-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  /* font-size: calc(1rem * .8); */
-  margin-bottom: .5rem;
-}
-
-.login-card-form .form-item #gender{
-  width: 50%;
-}
-
-.login-card-form .form-item .form-item-icon {
-  position: absolute;
-  /* top: .82rem; */
-  left: 1.4rem;
-  font-size: 1.3rem;
-  opacity: .4;
-}
-
-.login-card-form .form-item-other {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* font-size: calc(1rem * .8); */
-  margin-bottom: .5rem;
-  font-size: 1.6rem;
-}
-.form-item .radio{
-  display: flex;
-  text-align: left;
-  padding-inline:10px;
-  page-break-inside: 10px;
-  font-size: 1.6rem;
-
-}
-input[type='radio']{
-  margin-right: 5px;
-}
-
-/* ---------- */
-
-/* Login Card Footer */
-.login-card-footer {
-  margin-top: 1.5rem;
-  font-size: calc(1rem * .8);
-}
-/* ---------- */
-
-/* Login Card Form Elements */
-.login-card input[type="text"],
-.login-card input[type="password"],
-.login-card input[type="number"] {
-  border: none;
-  outline: none;
-  background: rgba(255, 255, 255, .3);
-  padding: 1rem 1.5rem;
-  padding-left: calc(1rem * 3.5);
-  border-radius: 5px;
+.form-content{
+  padding-top: 10px;
   width: 100%;
-  transition: background .5s;
 }
 
-.login-card input:focus {
-  background: white;
+.exemple-form-field{
+  width: 100%;
 }
 
-.login-card .button {
-  display: flex;
-
-  /* background: #6B4932;
-  border: none;
-  color: white;
-  padding: 1rem;
-  border-radius: 5px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: background .5s; */
+button{
+  background-color: initial;
+  font-weight: 500;
+  margin-left: auto;
+  border: 1px solid  var(--darkbrown);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  width: 200px;
+}
+button:hover{
+  background-color: var(--darkbrown);
+  color: var(--white);
+}
+button:active{
+  opacity: 0.7;
+  background-color: var(--darkpink);
 }
 
-button {
-  flex: 1;
-  background: #6B4932;
-  border: none;
-  color: white;
-  padding: 1rem;
-  border-radius: 5px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: background .5s;
-  font-size: 1.6rem;
-
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--lightpink);
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--darkbrown);
+}
+.mat-mdc-radio-button .mdc-form-field {
+  color: var(--mdc-theme-text-primary-on-background, rgb(0, 0, 0));
 }
 
-button:hover {
-  background-color: rgba(0, 0, 0, 0.85);
-  cursor: pointer;
-}
-/* ---------- */
-
-/* Login Card Social Buttons */
-.login-card-social {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  text-align: center;
-  margin-top: 3rem;
-}
-
-.login-card-social>div {
-  opacity: .8;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  /* font-size: calc(1rem * .8); */
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: #fff;
+  --mdc-radio-disabled-unselected-icon-color: #fff;
+  --mdc-radio-unselected-focus-icon-color: #eeeeee;
+  --mdc-radio-unselected-hover-icon-color: #eeeeee;
+  --mdc-radio-unselected-icon-color:var(--lightpink);
+  --mdc-radio-unselected-pressed-icon-color: var(--darkbrown);
+  --mdc-radio-selected-focus-icon-color: var(--darkbrown);
+  --mdc-radio-selected-hover-icon-color:var(--darkbrown);
+  --mdc-radio-selected-icon-color:var(--darkbrown);
+  --mdc-radio-selected-pressed-icon-color:var(--darkbrown);
+  --mat-mdc-radio-ripple-color: var(--black);
+  --mat-mdc-radio-checked-ripple-color:var(--darkbrown);
 }
 
-.login-card-social-btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+.mat-datepicker-content {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  background-color: var(--lightpink);
+  color: var(--darkbrown);
+}
+.mat-datepicker-toggle, .mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button {
+  color: var(--darkbrown);
 }
 
-.login-card-social-btns a {
-  padding-top: 5px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(255, 255, 255, .6);
-  border-radius: 100px;
-  transition: all .5s;
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: var(--black);
 }
 
-.fb1:hover {
-  background-color: rgb(74, 114, 214);;
-  transform: scale(1.1);
-  color: white;
-}
-
-.gg1:hover{
-  background-color: rgb(224, 68, 68);
-  transform: scale(1.1);
-  color: black;
-}
-
-.fb{
-  color: rgb(74, 114, 214);
-  font-weight: bold;
-  font-size: 1.4rem;
-  margin-top: 1rem;
-}
-
-.gg{
-  color: rgb(224, 68, 68);
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-top: 1rem;
-
-}
-
-/* ---------- */
-
-/* separator */
-.separator {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font-size: 1.6rem;
-}
-
-.separator::before,
-.separator::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid #000;
-}
-
-.separator:not(:empty)::before {
-  margin-right: .25em;
-}
-
-.separator:not(:empty)::after {
-  margin-left: .25em;
-}
-/* separator */
-
-.back-to-main {
-  margin: 20px;
-  text-align: center;
-  text-decoration: underline;
-}
-
-#back-to-main{
-  color: #000007;
-  font-size: 1.6rem;
-
-
-}
-
-.login-card a:hover {
-  text-decoration:transparent;
-}
-
-/* Responsive */
-
-@media (max-width: 400px) {
-  .login-card {
-      width: 350px;
-      height: 650px;
-      padding: 2rem;
+@media (max-width: 1023px) and (min-width: 740px) {
+  .blog{
+      margin-top: 128px;
   }
-  .gg,.fb {
-      font-size: 1.3rem;
-  }
-  .breadcrumb{
-      padding-left: 10px;
+}
+
+/*mobile*/
+@media (max-width: 740px) {
+  .blog{
+      margin-top: 128px;
   }
 }

@@ -14,10 +14,10 @@
                       <li class="">
                           <button class="header__list__sub-nav-link js-header__list__sub-nav-link" (click)="showSubnav()" >Sản Phẩm <i class="fa-solid fa-chevron-down"></i></button>
                           <ul id="showSubnav" class="sub-nav-menu js-sub-nav-menu">
-                              <!-- <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(0)">Quần</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(1)">Áo</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(2)">Phụ kiện</a></li>
-                              <li><a class="sub-nav-item" href="./trangsp.html" ((click))="toProductPage(3)">Đầm</a></li> -->
+                              <li><a class="sub-nav-item" (click)="toProductPage(0)">Quần</a></li>
+                              <li><a class="sub-nav-item" (click)="toProductPage(1)">Áo</a></li>
+                              <li><a class="sub-nav-item" (click)="toProductPage(2)">Phụ kiện</a></li>
+                              <li><a class="sub-nav-item" (click)="toProductPage(3)">Đầm</a></li>
                           </ul>
                       </li>
                       <li><a  routerLink="Blog">Blog</a></li>
@@ -39,10 +39,10 @@
                           <div class="">
                               <a routerLink="/trangsp">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a>
                               <ul class="header__subnavbar">
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(0)">Quần</a></li>
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(1)">Áo</a></li>
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(2)">Phụ kiện</a></li>
-                                  <li><a class="header__subnavbar-item" href="./trangsp.html" onclick="toProductPage(3)">Đầm</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(0)">Quần</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(1)">Áo</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(2)">Phụ kiện</a></li>
+                                  <li><a class="header__subnavbar-item"  (click)="toProductPage(3)">Đầm</a></li>
                               </ul>
                           </div>
                       </li>
@@ -54,53 +54,65 @@
           </nav>
           <div class="header__icon">
               <div class="header__icon-wrap">
-                  <div class="header__icon__search dropdown-center">
-                      <button class=" box-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span  class="  fa-solid fa-magnifying-glass"></span>
+                  <div class="header__icon__search ">
+                      <button class=" box-icon" type="button" (click)="showBox(false,false,true)">
+                          <span style="font-size: 2.5rem" class="  fa-solid fa-magnifying-glass"></span>
                       </button >
-                      <div class="dropdown-menu header__search ">
-                          <form action="./trangsp.html" method="get" class="" id="searchProduct">
+                      <div class=" header__search "  [class.activate]="showSearchBox">
+                          <!-- <form action="./trangsp.html" method="get" class="" id="searchProduct"> -->
                               <h2>TÌM KIẾM</h2>
                               <hr>
                               <div class="header__search__search-bar">
                                   <input type="text" class="search-bar__input" placeholder="Tìm kiếm sản phẩm" id="search-bar__input" name="search-bar__input">
-                                  <button class="search-bar__btn" id="search-bar__btn" type="submit" onclick="pSearch()">
+                                  <button class="search-bar__btn" id="search-bar__btn" type="submit" (click)="pSearch()">
                                       <i class="search-bar__icon  fa-solid fa-magnifying-glass"></i>
                                   </button>
                               </div>
-                          </form>
+                          <!-- </form> -->
                       </div>
                   </div>
                   <div class="header__icon__login ">
-                      <button class="box-icon" (click)="showLogin()">
-                          <span  class="fa-solid fa-circle-user"></span>
+                      <button class="box-icon" (click)="showBox(false,true,false)" id="login" >
+                          <span style="font-size: 2.5rem" class="fa-solid fa-circle-user"></span>
                       </button>
-                      <div id="header__login-container" class="header__login-container">
-                        <div *ngIf="isLoggedIn">
+                      <div  id="header__login-container" class="header__login-container"   [class.activate]="showLoginBox">
+                        <div *ngIf="authService.isLoggedIn" >
                          <div class="header__login2">
                            <ul>
-                            <li><a class="header__login-item" href="./myaccount.html"> Tài khoản của tôi</a></li>
-                            <li><a class="header__login-item" href="./myaccount.html"> Đơn hàng</a></li>
-                            <li><a class="header__login-item" href="./myaccount.html"> Thông báo</a></li>
-                            <li><a class="header__login-item" href="./myaccount.html"> Kho voucher</a></li>
-                            <li><a class="header__login-item" onclick="dangxuat()" href="#"> Đăng xuất</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Tài khoản của tôi</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Đơn hàng</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Thông báo</a></li>
+                            <li><a class="header__login-item" routerLink="/AccountPage"> Kho voucher</a></li>
+                            <li><a class="header__login-item" (click)="onLogout()" > Đăng xuất</a></li>
                            </ul>
                           </div>
                         </div>
 
-                        <div *ngIf="!isLoggedIn">
+                        <div *ngIf="!authService.isLoggedIn" >
                           <div class="header__login">
-                              <!-- <form > -->
+                              <form (submit)="onLogin()">
                                 <h2>ĐĂNG NHẬP TÀI KHOẢN</h2>
                                 <p>Nhập tài khoản và mật khẩu của bạn</p>
                                 <div class="header__login__nor">
-                                  <input type="text" placeholder="Tài khoản" id="user" malgength="128">
+                                  <input type="text" placeholder="Tài khoản" id="user" malgength="128" [(ngModel)]="username" name="username">
                                 </div>
+                                <!-- <div class="example-container">
+                                  <mat-form-field appearance="fill" >
+                                    <mat-label>Nhập mật khẩu</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" class="header__login__nor">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                  </mat-form-field>
+                                </div> -->
                                 <div class="header__login__nor">
-                                  <input type="password"  placeholder="Mật khẩu" id="password">
+                                  <input type="password" matInput [type]="hide ? 'password' : 'text'"  placeholder="Mật khẩu" id="password"  [(ngModel)]="password" name="password">
+                                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>
                                 </div>
                                 <!-- <div class="btn-wrap header__login__confirm"> -->
-                                <button class="btn-header"  onclick="login()">Đăng nhập</button>
+                                <button class="btn-header"  type="submit">Đăng nhập</button>
                                 <!-- </div> -->
                                 <div class="header__or">
                                   <div class="line"></div>
@@ -127,27 +139,75 @@
                                 <div class="header__login__footer">
                                   Quên mật khẩu? <a  routerLink="forgetPass" class="restore-pass">Khôi phục mật khẩu</a>
                                 </div>
-                              <!-- </form> -->
+                                <p *ngIf="message">{{ message }}</p>
+                              </form>
                             </div>
                         </div>
                       </div>
                   </div>
                   <div class="header__icon__cart" id="header__icon__cart" >
-                      <button class="box-icon" onclick="showCart()" >
-                          <span  class="fa-solid fa-cart-shopping"></span>
+                      <button class="box-icon" (click)="showBox(true,false,false);showCart()" >
+                          <span style="font-size: 2.5rem" class="fa-solid fa-cart-shopping"></span>
                       </button>
                   </div>
-                  <div class="header__cart" id="header__cart">
+                  <div class="header__cart" id="header__cart"   [class.activate]="showCartBox">
                       <h2>Giỏ hàng</h2>
                       <div class="header__cart-container" id="header__cart-container">
+                        <ng-container *ngIf="!cartProduct">
+                          <svg style='color: var(--background-color)' xmlns='http://www.w3.org/2000/svg' width='50' height='50' fill='currentColor' class='cart-icon bi bi-cart2' viewBox='0 0 16 16'>
+                            <path d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'/>
+                          </svg>
+                          <p>Hiện chưa có sản phẩm</p>
+                          <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
+                        </ng-container>
+                        <ng-container *ngIf="cartProduct">
+                          <ng-container *ngFor="let p of products;let i=index">
+                            <div class='row'>
+                            <div class='col-2'>
+                            <img class='w-100' src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
+                            </div>
+                            <div style='position: relative; text-align: left;' class='col-10'>
+                            <div class='header__cart-item__delete'>
+                              <i class='fa-solid fa-xmark' (click)="deleteP(i);showBox(true,false,false);showCart()"></i>
+                            </div>
+                            <div class='header__cart-item__infor'>
+                            <div class='header__cart-item__header'>{{p.TenSP}}</div>
+                            <div class='header__cart-item__price-container row'>
+                            <div class='col-7'>
+                            <div class='header__cart-item__price'>
+                              <ng-container *ngIf="p.Discount>0">
+                                <span class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}<u>đ</u></span>
+                                <span class='header__cart-item__price-old'>{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span>
+                              </ng-container>
+                              <ng-container *ngIf="p.Discount==0">
+                                <span class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}}<u>đ</u></span>
+                              </ng-container>
+                            </div>
+                            <div class='header__cart-item__quantity'>
+                            <span  class='header__cart-item-minus' (click)="MinusP(i)" ><i class='fa-solid fa-minus'></i></span>
+                            <input type='number' min='1' name='header__cart-item-amount' class='header__cart-item-amount' value="{{p.quantity}}">
+                            <span  class='header__cart-item-plus' (click)="PlusP(i)" ><i class='fa-solid fa-plus'></i></span>
+                            </div>
+                            </div>
+                            <div class='col-5' style='align-items: center;display:flex;justify-content: flex-end'>
+                            <span class='header__cart-item__price-finnal'>{{p.total.toLocaleString('vi-VN')}}<u>đ</u></span>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
+                          </ng-container>
+
+                        </ng-container>
                       </div>
                       <div class="header__cart-money">
                        <p>Tổng tiền</p>
-                       <p class="home-product-item__price-current" id="home-product-item__price-current"></p>
+                       <p class="home-product-item__price-current" id="home-product-item__price-current"><span>{{pay.toLocaleString('vi-VN')}}<u>đ</u></span></p>
                       </div>
                       <div class="header__cart_container-btn">
-                       <button class="btn-header" onclick="toGioHang()"><a >Xem giỏ hàng</a></button>
-                       <button class="btn-header" onclick="toThanhToan()"><a >Thanh toán</a></button>
+                       <button class="btn-header" routerLink="/Cart"><a >Xem giỏ hàng</a></button>
+                       <button class="btn-header" routerLink="/Payment"><a >Thanh toán</a></button>
                       </div>
                    </div>
               </div>
@@ -156,7 +216,7 @@
 
       <div class="header__search-bar">
           <input type="text" class="search-bar__input" id="search-bar__input1" placeholder="Tìm kiếm sản phẩm">
-          <button class="search-bar__btn" onclick="pSearch1()">
+          <button class="search-bar__btn" (click)="pSearch1()">
               <i class="search-bar__icon  fa-solid fa-magnifying-glass"></i>
           </button>
       </div>

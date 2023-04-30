@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import home from '@iconify/icons-mdi/target';
+
 
 @Component({
   selector: 'app-page404',

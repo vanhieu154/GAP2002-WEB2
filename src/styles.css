@@ -1,5 +1,5 @@
 /* Import font từ Google Fonts */
-@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700subset=vietnamese');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 /* You can add global styles to this file, and also import other style files */
 :root{
   --white-color: #fff;
@@ -21,7 +21,7 @@
 
 *{
   box-sizing: border-box;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif
   /* font-size: 1.6rem; */
   /* overflow-y: hidden; */
 }
@@ -31,7 +31,7 @@ html{
   /* HACK */
   font-size: 62.5%;
   line-height: 1.6rem;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
   box-sizing: border-box;
 }
 
@@ -100,6 +100,13 @@ box-shadow: 0 0 0 0.25rem rgb(210 190 180/55%);
   --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
   --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
 }
+.mat-mdc-checkbox .mdc-form-field {
+  color: #333;
+}
+
+
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 html, body { height: 100%; }

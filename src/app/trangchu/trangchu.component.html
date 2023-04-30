@@ -46,7 +46,7 @@
                         <div class="slider__btn-container w-100">
                             <div class="category">
                                 <h2>Quần</h2>
-                                <button class="btn-header" onclick="toProductPage(0)">Xem ngay</button>
+                                <button class="btn-header" (click)="toProductPage(0)">Xem ngay</button>
                             </div>
                         </div>
 
@@ -56,7 +56,7 @@
                         <div class="slider__btn-container w-100">
                             <div class="category">
                                 <h2>Áo</h2>
-                                <button class="btn-header" onclick="toProductPage(1)">Xem ngay</button>
+                                <button class="btn-header" (click)="toProductPage(1)">Xem ngay</button>
                             </div>
                         </div>
                       </div>
@@ -65,7 +65,7 @@
                         <div class="slider__btn-container w-100">
                             <div class="category">
                                 <h2>Phụ kiện</h2>
-                                <button class="btn-header" onclick="toProductPage(2)">Xem ngay</button>
+                                <button class="btn-header" (click)="toProductPage(2)">Xem ngay</button>
                             </div>
                         </div>
                       </div>
@@ -74,7 +74,7 @@
                         <div class="slider__btn-container w-100">
                             <div class="category">
                                 <h2>Váy</h2>
-                                <button class="btn-header" onclick="toProductPage(3)">Xem ngay</button>
+                                <button class="btn-header" (click)="toProductPage(3)">Xem ngay</button>
                             </div>
                         </div>
                       </div>
@@ -117,12 +117,12 @@
                       </div>
                       <div class="home-product-item__origin">
                         <div class="home-product-item__grand">{{p.Hang}}</div>
-                          <div class="home-product-item__origin-name">Nhật bản</div>
+                          <!-- <div class="home-product-item__origin-name">Nhật bản</div> -->
                       </div>
-                      <div class="home-product-item__favor">
+                      <!-- <div class="home-product-item__favor">
                         <i class="fa-solid fa-check"></i>
                         <span>Yêu thích</span>
-                      </div>
+                      </div> -->
                       <div *ngIf="p.Discount > 0">
                         <div class="home-product-item__sale-off">
                           <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
@@ -155,12 +155,12 @@
                       </div>
                       <div class="home-product-item__origin">
                         <div class="home-product-item__grand">{{p.Hang}}</div>
-                          <div class="home-product-item__origin-name">Nhật bản</div>
+                          <!-- <div class="home-product-item__origin-name">Nhật bản</div> -->
                       </div>
-                      <div class="home-product-item__favor">
+                      <!-- <div class="home-product-item__favor">
                         <i class="fa-solid fa-check"></i>
                         <span>Yêu thích</span>
-                      </div>
+                      </div> -->
                         <div class="home-product-item__sale-off">
                           <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
                           <div class="home-product-item__sale-off-label">GIẢM</div>
@@ -215,7 +215,7 @@
         </div>
         <!-- end register -->
         <!-- Footer -->
-        <div class="footer"></div>
+        <!-- <div class="footer"></div> -->
     </div>
 
 
