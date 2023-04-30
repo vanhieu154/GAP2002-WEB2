@@ -24,6 +24,8 @@
   padding: 20px 0 20px;
   overflow: hidden;
   margin-top: 92px;
+  background: linear-gradient(to right,#724e34e4, #dac5ba);
+
 }
 .form{
   width: 40%;

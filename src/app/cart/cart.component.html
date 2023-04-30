@@ -75,16 +75,14 @@
                       </div>
                     </div>
                     <div class="col cart__item--top">{{c.price.toLocaleString('vi-VN')}}<u style="font-size: 1.2rem;">đ</u></div>
-                    <div class="col cart__item--top">
-                      <span class='header__cart-item-minus' (click)="MinusP(c)">
-                        <i class='fa-solid fa-minus'></i>
-                      </span>
-                      <input type='number' min='1' name='header__cart-item-amount' class='header__cart-item-amount' value="{{c.quantity}}">
-                      <span class='header__cart-item-plus' (click)="PlusP(c)">
-                        <i class='fa-solid fa-plus'></i>
-                      </span>
+                    <div class="col cart__item--top ">
+                      <div class=" row button-added">
+                        <span class='header__cart-item-minus is-form minus col' (click)="MinusP(c)"><i class='fa-solid fa-minus' ></i></span>
+                        <input type='number' min='1' name='header__cart-item-amountheader__cart-item-amount' class='header__cart-item-amount col input-qty' value="{{c.quantity}}">
+                        <span class='header__cart-item-plus is-form col plus' (click)="PlusP(c)"><i class='fa-solid fa-plus'></i></span>
+                      </div>
                     </div>
-                    <div class="col cart__item--top"><b>{{c.total.toLocaleString('vi-VN')}}</b> <u style="font-size: 1.2rem;">đ</u></div>
+                    <div class="col cart__item--top"><b>{{c.total.toLocaleString('vi-VN')}}<u style="font-size: 1.2rem;">đ</u></b></div>
                     <a class="col cart__item--top" (click)="deleteP(c)">Xóa</a>
                   </div>
                 </ng-container>
@@ -94,8 +92,6 @@
           </div>
         </div>
       </ng-container>
-
-
     </div>
 
     <!-- Hiển thị thông tin tổng đơn hàng -->
@@ -129,3 +125,8 @@
     <button class="muangay" routerLink="/" > MUA NGAY</button>
   </div>
 </div>
+
+
+
+
+

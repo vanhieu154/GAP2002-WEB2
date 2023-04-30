@@ -1,7 +1,8 @@
 
-body {
+.form-container {
   background: linear-gradient(to right, #724f36e4, #D2BEB4);
   font-size: 1.6rem;
+  height: 50vh;
 }
 .h2, h2 {
   font-size: calc(1.325rem + .9vw);
