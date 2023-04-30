@@ -1,3 +1,4 @@
+<button mat-button (click)="openDialog()">Launch dialog</button>
 <nav aria-label="breadcrumb w-100" >
   <ol class="breadcrumb w-100"  >
     <li class="breadcrumb-item "><a routerLink="">Trang chủ</a></li>
@@ -5,7 +6,7 @@
   </ol>
 </nav>
 
-<div class="row" style="padding-bottom: 20px;">
+<div class="row w-100" style="padding-bottom: 20px;">
   <div class="col-4 map">
      <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.8762386547432!2d106.6848415141168!3d10.820782061333924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e56ebd22a3%3A0x1ba0c27127718047!2zMTQyLCAzNGEgTMOqIEzhu6NpLCBQaMaw4budbmcgNCwgR8OyIFbhuqVwLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1669308774407!5m2!1svi!2s" width="400" height="750" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
@@ -29,38 +30,56 @@
         <div class="bar--bottom"></div> <br>
         <div class="col ">
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Họ và tên: </label>
-            <input class="form-control" type="text" #Name id="hoten" name="hoten" rows="1" style="width: 66%;">
+            <mat-form-field class="example-form-field">
+              <mat-label style="color: grey;">Họ và tên</mat-label>
+              <input matInput placeholder="Họ và tên" [formControl]="name" required #Name >
+              <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
+            </mat-form-field>
           </div>
         </div>
 
 
-        <div class="col">
-          <div class=" justify-content-start">
-        <div class="col-8">
-           <div class="mb-2">
-                <label for="exampleFormControlInput1" class="form-label">Email: </label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="" style="width: 100%;" >
-              </div>
-        </div>
-        <div class="col-3">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Số điện thoại: </label>
-            <input type="tel" class="form-control" name="sdt" id="sdt" style="width: 95%;" >
+
+          <div>
+
+            <div w-100>
+              <mat-form-field class="example-form-field ">
+                <mat-label style="color: grey;">Email</mat-label>
+                <input matInput type="text"  #Email id="email" name="email" style="color: black;" matInput [errorStateMatcher]="matcher">
+              </mat-form-field>
+              <mat-error *ngIf="FormControl.hasError('email')">
+                Hãy chắn chắc bạn nhập đúng email của mình
+              </mat-error>
           </div>
-       </div>
+
+          <mat-form-field appearance="fill" class="example-form-field">
+            <mat-label style="color: grey;">Số điện thoại</mat-label>
+            <input
+              matInput
+              placeholder="Nhập số điện thoại"
+              [formControl]="phoneNumber"
+              required
+
+            />
+            <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
+          </mat-form-field>
+
+
       </div>
     </div>
 
 
       <div class="col ">
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Nội dung:</label>
-          <textarea class="form-control" id="noidung" name="noidung" rows="3"></textarea>
-        </div>
+      <mat-form-field class="example-form-field " style="padding-top: 20px;">
+        <mat-label style="color: grey;">Nội dung</mat-label>
+        <textarea matInput type="text" id="contentcontact" name="contentcontact" style="color: black;" matInput [errorStateMatcher]="matcher"></textarea>
+      </mat-form-field>
+      <!-- <mat-error *ngIf="FormControl.hasError('required')" style="margin-top: -20px;">
+        Bạn cần nhập nội dung để chúng tôi có thể giải đáp hoặc gọi lại kịp thời!
+      </mat-error> -->
       </div>
       <input class="form__guingay btn-primary" (click)="onSubmit(Name.value)" type="submit" value="Gửi ngay">
-    </div>
+
     </form>
 
   </div>

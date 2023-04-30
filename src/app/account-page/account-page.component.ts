@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { MyErrorStateMatcher } from './MyErrorStateMatcher';
 
+import {  FormGroupDirective, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+
+
+/** @title Input with a custom ErrorStateMatcher */
 @Component({
   selector: 'app-account-page',
   templateUrl: './account-page.component.html',
-  styleUrls: ['./account-page.component.css']
+  styleUrls: ['./account-page.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
-export class AccountPageComponent {
+
+export class AccountPageComponent implements OnInit {
   myProfile=true;
   myAddress=false;
   changePass=false;
@@ -46,4 +57,27 @@ export class AccountPageComponent {
   hideModal(){
     this.showmodal=false
   }
+  //email
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  matcher = new MyErrorStateMatcher();
+  labelPosition: 'before' | 'after' = 'after';
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
+  constructor(private _formBuilder: FormBuilder) {}
+  firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['']});
+  secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
+  thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
+  hide = true;
+//selected date
+selectedDate: Date | undefined;
+defaultDate: Date | undefined;
+
+ngOnInit() {
+  this.defaultDate = new Date('2002-07-10'); // set default date to 7/10/2002
+  this.selectedDate = this.defaultDate;
+}
 }

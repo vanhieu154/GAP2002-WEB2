@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { CartService } from './cart.service';
-import { Brand, Icart } from './icart';
+import {  Component, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-cart',
@@ -8,46 +10,216 @@ import { Brand, Icart } from './icart';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  items: Icart[] = [];
+  pay:number=0;
+  cartProduct:any[]=[]
+  brands:any[]=[]
+  tempProduct:any[]=[]
+  productLocation:number=0;
+  cartItemCount: number=0;
+  constructor(private cartService:CartService,private router:Router,private authService:AuthService){
 
-    constructor(private cartService: CartService) {
-        this.items = this.cartService.getItems();
+    if (sessionStorage.getItem('checkLogin') === '1') {
+      authService.isLoggedIn=true;
+
+      cartService.loadCartDB();
+    }else{
+      cartService.loadCart()
+
     }
+    cartService.getCartUpdatedListener().subscribe(() => {
+      this.cartItemCount = cartService.cartAddProduct.length;
+      this.cartProduct = cartService.cartAddProduct;
+      this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
+
+    });
+    this.cartItemCount = cartService.cartAddProduct.length;
+    this.cartProduct = cartService.cartAddProduct;
+    this.brands=[...new Set(this.cartProduct.map(item => item.Hang))]
+    this.cartProduct=this.cartProduct.map(item => ({ ...item, completed: false }));
+  }
 
 
-    brand: Brand = {
-      name: 'SHIEN',
-      completed: false,
-      products: [
-        { name: 'Áo nữ Xù nhỏ cắt loại bướm giải trí', dongia: 80000, soluong: 1, sotien: 80000, kichthuoc: "freesize", hinh: "assets/Img/sp1.png", completed: false },
-      ],
-      dongia: 0,
-      soluong: 0,
-      sotien: 0,
-      hinh: '',
-      kichthuoc: ''
-    };
+  allComplete: boolean = false;
 
-    allComplete: boolean = false;
 
-    updateAllComplete() {
-      this.allComplete = this.brand.products != null && this.brand.products.every(b => b.completed);
+  updateAllComplete() {
+    this.allComplete = this.cartProduct != null && this.cartProduct.every(b => b.completed);
+    this.updateTotalPrice()
+
+  }
+
+
+  someComplete(): boolean {
+    if (this.cartProduct == null) {
+      return false;
     }
+    return this.cartProduct.filter(p => p.completed).length > 0 && !this.allComplete;
+  }
 
-    someComplete(): boolean {
-      if (this.brand.products == null) {
-        return false;
+  setAll(completed: boolean) {
+    this.allComplete = completed;
+    if (this.cartProduct == null) {
+      return;
+    }
+    this.cartProduct.forEach(b => (b.completed = completed));
+    this.updateTotalPrice()
+
+  }
+  setBrandAll(completed: boolean,brand:string) {
+    this.tempProduct=this.cartProduct.filter(p=>p.Hang==brand)
+
+    this.allComplete = completed;
+    if (this.tempProduct == null) {
+      return;
+    }
+    this.tempProduct.forEach(p => (p.completed = completed));
+    this.updateTotalPrice()
+  }
+
+  isBrandComplete(brand: string): boolean {
+    const brandItems = this.cartProduct.filter(c => c.Hang === brand);
+    return brandItems.length > 0 && brandItems.every(c => c.completed);
+  }
+
+  isBrandIndeterminate(brand: string): boolean {
+    const brandItems = this.cartProduct.filter(c => c.Hang === brand);
+    const completedItems = brandItems.filter(c => c.completed);
+
+    return completedItems.length > 0 && completedItems.length < brandItems.length;
+  }
+	Detail(p: any) {
+		this.router.navigate(['chitietsp', p._id])
+	}
+  getProductLocation(p:any){
+    for (let i = 0; i < this.cartProduct.length; i++) {
+      if(this.cartProduct[i]._id===p._id){
+        this.productLocation=i
       }
-      return this.brand.products.filter(b => b.completed).length > 0 && !this.allComplete;
-    }
 
-    setAll(completed: boolean) {
-      this.allComplete = completed;
-      if (this.brand.products == null) {
-        return;
-      }
-      this.brand.products.forEach(b => (b.completed = completed));
     }
+  }
+  deleteP(c:any){
+    this.getProductLocation(c)
+    if(sessionStorage.getItem('checkLogin') === '1'){
+      this.cartService.deleteProductDB(this.productLocation)
+      .subscribe({
+        next: (cart) => {
+          console.log('Cart updated:', cart);
+        },
+        error: (error) => {
+          console.log('Error updating cart:', error);
+        },
+        complete: () => {
+          console.log('Add to cart completed');
+        }
+      });
+    }else{
+      this.cartService.deleteProduct(this.productLocation);
+
+    }
+    this.updateTotalPrice()
+  }
+  MinusP(c:any){
+    this.getProductLocation(c)
+    const i=this.productLocation
+    if(this.authService.isLoggedIn==false){
+      if(this.cartProduct[i].quantity<2) {
+        this.cartProduct[i].quantity =1;
+      }else{
+      this.cartProduct[i].quantity--;
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+      localStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+    }else{
+      if(this.cartProduct[i].quantity<2) {
+        this.cartProduct[i].quantity =1;
+      }else{
+      this.cartProduct[i].quantity--;
+      this.cartService.addToCartDB(this.cartProduct[i], -1)
+      .subscribe({
+        next: (cart) => {
+          console.log('Cart updated:', cart);
+        },
+        error: (error) => {
+          console.log('Error updating cart:', error);
+        },
+        complete: () => {
+          console.log('Add to cart completed');
+        }
+      });
+      sessionStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+    }
+    this.updateTotalPrice()
+
+  }
+  PlusP(c:any){
+    this.getProductLocation(c)
+    const i=this.productLocation
+    if(this.authService.isLoggedIn==false){
+      if(this.cartProduct[i].quantity>this.cartProduct[i].Soluong-1){
+        this.cartProduct[i].quantity=this.cartProduct[i].Soluong;
+      }else{
+      this.cartProduct[i].quantity++;
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+      localStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+    }else{
+      if(this.cartProduct[i].quantity>this.cartProduct[i].Soluong-1){
+        this.cartProduct[i].quantity=this.cartProduct[i].Soluong;
+      }else{
+      this.cartProduct[i].quantity++;
+      this.cartService.addToCartDB(this.cartProduct[i], 1)
+      .subscribe({
+        next: (cart) => {
+          console.log('Cart updated:', cart);
+        },
+        error: (error) => {
+          console.log('Error updating cart:', error);
+        },
+        complete: () => {
+          console.log('Add to cart completed');
+        }
+      });
+      sessionStorage.setItem("Cart", JSON.stringify(this.cartProduct));
+      }
+      this.cartProduct[i].total=this.cartProduct[i].quantity*this.cartProduct[i].price
+      this.pay=0
+      for (let i = 0; i < this.cartProduct.length; i++) {
+        this.pay=this.pay+this.cartProduct[i].total
+      }
+
+    }
+    this.updateTotalPrice()
+
+  }
+  updateTotalPrice(): void {
+    this.pay = 0;
+    this.cartProduct.forEach(c => {
+      if (c.completed) {
+        this.pay += c.total;
+      }
+    });
+  }
+
+  createOrder(){
+    this.tempProduct=this.cartProduct.filter(c=>c.completed==true)
+    localStorage.setItem('Order',JSON.stringify(this.cartProduct))
+  }
+
 
 
 }

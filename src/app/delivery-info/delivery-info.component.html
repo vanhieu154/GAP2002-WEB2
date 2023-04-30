@@ -1,294 +1,394 @@
-<div class="container-fluid w-100 "  >
-<div class="row">
-  <div class="col-md-6 box blue">
+<button mat-button (click)="openDialog()">Launch dialog</button>
+<div *ngIf="showCart()" style="background-color: #EEECEC;"></div>
+<div class="container-fluid w-100 " >
+  <div class="row">
+    <div class="col-md-6 box blue">
 
-<div class="container  row w-100 body" height="2000px " ng-controller="myController">
-  <ng-container [ngSwitch]="activeContent">
-    <div *ngSwitchCase="'content1'">
-      <div class=" col-6 col--left delivery-info row text-center w-100">
-      <h5 class=""> GAP2002 </h5>
-      <h4> Thông tin giao hàng</h4>
-      <br>
-      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-        <ol class="breadcrumb ">
-          <li class="breadcrumb-item"> <b>Thông tin cơ bản</b> </li>
-          <li class="breadcrumb-item active" aria-current="page">  Thông tin giao hàng  </li>
-          <li class="breadcrumb-item active" aria-current="page">  Hoàn tất</li>
-        </ol>
-      </nav>
-      </div>
 
-      <div class="row text-center content--left">
-        <form >
-          <div class="col" >
-            <div class=" mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label" > </label>
-                <textarea class="form-control form-select-lg"  [(ngModel)]="fullname"  id="fullname" name="fullname" rows="1" placeholder="Họ và tên" ></textarea>
-              </div>
-          </div>
-          <div class="col" >
-            <div class="row justify-content-start">
-                <div class="col-8">
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"> </label>
-                    <input type="email" class="form-control form-select-lg"  [(ngModel)]="email" id="email" name="email" placeholder="Email">
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"></label>
-                    <input type="tel" class="form-control form-select-lg"  [(ngModel)]="phone" name="phone" id="phone" placeholder="Số điện thoại" >
-                  </div>
-                </div>
-              </div>
-          </div>
-          <div class="col">
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label"> </label>
-                <textarea class="form-control form-select-lg"  [(ngModel)]="address" id="address" name="address" rows="1" placeholder="Địa chỉ"></textarea>
-              </div>
-          </div>
-          <div class="col">
-            <div class="row justify-content-start">
-                <div class="col-6">
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"> </label>
-                    <div>
-                      <select class="form-select form-select-lg mb-3" [(ngModel)]="VietNamdata" id="province" (change)="changeProvince($event)" aria-label=".form-select-sm">
-                      <option *ngFor="let pro of VietNamdata" >{{pro.province}}</option>
-                      </select>
-                       </div>
+  <div class="container  row w-100 body" height="2000px " ng-controller="myController">
+    <ng-container [ngSwitch]="activeContent">
 
-                  </div>
+
+      <div *ngSwitchCase="'content1'">
+        <div class=" col-6 col--left delivery-info row text-center w-100">
+        <div class="gap2002"> GAP2002 </div>
+        <div class="left--title"> Thông tin giao hàng</div >
+        <br>
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"> <b>Thông tin cơ bản</b> </li>
+            <li class="breadcrumb-item active" aria-current="page">  Thông tin giao hàng  </li>
+            <li class="breadcrumb-item active" aria-current="page">  Hoàn tất</li>
+          </ol>
+        </nav>
+        </div>
+
+
+        <div class="row text-center content--left">
+          <form novalidate>
+            <div class="col" >
+              <div class=" mb-3">
+                  <mat-form-field class="example-form-field">
+                  <mat-label style="color: grey;">Họ và tên</mat-label>
+                  <input matInput placeholder="Họ và tên"  [(ngModel)]="fullname" id="fullname" name="fullname" [formControl]="name" required>
+                  <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
+                </mat-form-field>
                 </div>
-                <div class="col-6">
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"></label>
-                    <select class="form-select form-select-lg mb-3" [(ngModel)]="district" id="province" (change)="changeDistrict($event)" id="district" aria-label=".form-select-sm">
-                      <option *ngFor="let district of districts" value="{{district}}">{{district}}</option>
-                      </select>
-                  </div>
-                </div>
-              </div>
             </div>
-        </form>
-        <div class="button--gui__position">
-          <button class=" button--gui w-100" (click)="showContent('content2')" style="text-align: center; margin-top: 30px; cursor: pointer;">Tiếp tục đến Thông tin giao hàng</button>
-        </div>
-      </div>
+            <div class="col" >
+              <div class="row ">
+                <mat-form-field class="example-form-field ">
+                  <mat-label style="color: grey;">Email</mat-label>
+                  <input matInput type="text"  [(ngModel)]="email" id="email" name="email" style="color: black;" matInput [errorStateMatcher]="matcher">
+                </mat-form-field>
+                <mat-hint *ngIf="FormControl.hasError('email')" class="email--note">
+                  Hãy chắn chắc bạn nhập đúng email của mình
+                </mat-hint>
+                <!-- <mat-form-field class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input type="email"  [(ngModel)]="email" id="email" name="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                         placeholder="Ex. pat@example.com">
+                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Vui lòng nhập địa chỉ email hợp lệ
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-left: -20px; color: grey;">
+                    Email là <strong>bắt buộc</strong>
+                  </mat-error> -->
+                <!-- </mat-form-field> -->
 
 
-    </div>
+                <mat-form-field appearance="fill" class="example-form-field">
+                  <mat-label style="color: grey;">Số điện thoại</mat-label>
+                  <input
+                  id="phone" [(ngModel)]="phone" name="phone"
+                    matInput
+                    placeholder="Nhập số điện thoại"
+                    [formControl]="phoneNumber"
+                    required
+
+                  />
+                  <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
+                </mat-form-field>
+                </div>
+            </div>
+            <div class="col">
+              <mat-form-field class="example-form-field">
+                <mat-label style="color: grey;">Địa chỉ cụ thể</mat-label>
+                <input matInput placeholder="Nhập địa chỉ cụ thể" [formControl]="ad" required  [(ngModel)]="address" id="address" name="address">
+                <mat-error *ngIf="ad.invalid">{{getErrorAdMessage()}}</mat-error>
+              </mat-form-field>
+            </div>
 
 
-
-    <div *ngSwitchCase="'content2'" >
-      <div class=" col-6 col--left delivery-info row text-center w-100" style="margin-bottom: 15px;">
-        <h5 class=""> GAP2002 </h5>
-        <h4> Thông tin giao hàng</h4>
-        <br>
-        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-          <ol class="breadcrumb ">
-            <li class="breadcrumb-item active" aria-current="page" > Thông tin cơ bản </li>
-            <li class="breadcrumb-item " > <b> Thông tin giao hàng</b>  </li>
-            <li class="breadcrumb-item active" aria-current="page">  Hoàn tất </li>
-          </ol>
-        </nav>
-        </div>
-
-        <div class="content--left ">
-        <div class="box__border col--left">
-          <div class="form-check" >
-            <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice1" [(ngModel)]="selectedPrice"  value="Giao hàng trong tỉnh" >
-    <label class="form-check-label w-100" for="deliveryPrice2">
-    <div class="row">
-      <div class="col">Giao hàng trong tỉnh</div>
-      <div class="col" style="color: red;">20,000 đ</div>
-    </div>
-
-            </label>
-          </div> <hr>
-          <div class="form-check" >
-            <input class="form-check-input" type="radio" name="deliveryPrice"  id="deliveryPrice2" value="Giao hàng ngoài tỉnh" [(ngModel)]="selectedPrice"  (change)="showText()">
-    <label class="form-check-label w-100" for="deliveryPrice1">
-
-      <div class="row ">
-        <div class="col">Giao hàng ngoài tỉnh </div>
-        <div class="col" style="color: red;">40,000 đ</div>
-      </div>
-    </label>
-          </div>
-        </div>
-        <br>
-          <div class="box__border">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value="Thanh toán khi nhận hàng (COD)" [(ngModel)]="selectedPay" (change)="showPay($event)">
-            <label class="form-check-label" for="howtopay">
-            Thanh toán khi nhận hàng (COD)
-            </label>
-          </div> <hr>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value="Chuyển khoản qua ngân hàng" [(ngModel)]="selectedPay" (change)="showPay($event)"  data-bs-toggle="modal" data-bs-target="#showVisa">
-            <label class="form-check-label" for="howtopay">
-              Chuyển khoản qua ngân hàng
-            </label>
-          </div> <hr>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value=" Ví điện tử" [(ngModel)]="selectedPay" (change)="showPay($event)">
-            <label class="form-check-label" for="howtopay">
-              Ví điện tử
-            </label>
-          </div>
-        </div>
-
-        <button (click)="showContent('content1')" class=" button--gui w-100"  style="text-align: center; margin-top: 30px; cursor: pointer;">Quay về Thông tin cơ bản</button>
-        <button (click)="showContent('content3')" class=" button--gui w-100"  style="text-align: center; margin-top: 10px; cursor: pointer;">Hoàn tất đơn hàng</button>
-</div>
-
-    </div>
+            <div class="col">
+              <div class="row justify-content-start">
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label"> </label>
+                      <div>
+                        <select class="form-select form-select-lg mb-3" [(ngModel)]="VietNamdata" id="province" (change)="changeProvince($event)" aria-label=".form-select-sm">
+                        <option *ngFor="let pro of VietNamdata" >{{pro.province}}</option>
+                        </select>
+                         </div>
 
 
-    <div *ngSwitchCase="'content3'">
-
-      <div class=" col-6 col--left delivery-info row text-center w-100">
-        <h5 class=""> GAP2002 </h5>
-        <h4> Thông tin giao hàng</h4>
-        <br>
-        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-          <ol class="breadcrumb ">
-            <li class="breadcrumb-item active" aria-current="page"> Thông tin cơ bản </li>
-            <li class="breadcrumb-item active " aria-current="page"> Thông tin giao hàng </li>
-            <li class="breadcrumb-item " > <b> Hoàn tất</b> </li>
-          </ol>
-        </nav>
-      </div>
-          <div class="content--left">
-        <div class="container text-center " style="margin-bottom: 20px;">
-          <!-- icon o day -->
-          <br>
-          <h4 style="color: red;">   Đặt hàng thành công </h4>
-        </div>
-
-        <div style="text-align: center;"> <b>Mã đơn hàng:</b>  #000001 </div>
-
-        <div class="text-center box__border" style="margin-bottom: 20px;">
-          <h4> Thông tin đơn hàng</h4> <br>
-          <div class="row " >
-              <div class="col thongtin" style="word-wrap: break-word;" >
-                <b>Họ và tên: </b> {{fullname}} <br>
-                <b>Email:</b> {{email}}  <br>
-                <b>Số điện thoại:</b> {{phone}} <br>
-                <b>Tỉnh / Thành phố: </b>
-                 <div class="col thongtin"> {{ selectedProvince }} </div>
-                <b>Quận / Huyện: </b> {{selectedDistrict}}  <br>
-                <b>Địa chỉ chi tiết:</b> {{address}}  <br>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label"></label>
+                      <select class="form-select form-select-lg mb-3" [(ngModel)]="district" id="province" (change)="changeDistrict($event)" id="district" aria-label=".form-select-sm">
+                        <option *ngFor="let district of districts" value="{{district}}" aria-placeholder="Chọn Quân/ Huyện">{{district}}</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col thongtin__textleft">
-                <div> <b> Giao hàng: </b></div> <span id="message">{{selectedPrice}}</span> <br>
-                <div> <b> Phương thức thanh toán: </b></div> <span id="message">{{selectedPay}}</span> <br>
-              </div> <br>
-              <h4 style="text-align: center; padding-top: 20px;">  Cám ơn bạn đã mua hàng! </h4>
+          </form>
+          <div class="button--gui__position">
+            <button class="button--showcontent button--gui w-100" (click)="showContent('content2')" >Tiếp tục đến Thông tin giao hàng</button>
           </div>
         </div>
 
-        <button class="button--muahang w-100" [routerLink]="['']" > Tiếp tục mua hàng </button>
+
+
+
+      </div>
+
+
+
+
+
+
+      <div *ngSwitchCase="'content2'" >
+        <div class=" col-6 col--left delivery-info row text-center w-100" style="margin-bottom: 15px;">
+          <div class="gap2002"> GAP2002 </div>
+          <div class="left--title"> Thông tin giao hàng</div>
+          <br>
+          <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb ">
+              <li class="breadcrumb-item active" aria-current="page" > Thông tin cơ bản </li>
+              <li class="breadcrumb-item " > <b> Thông tin giao hàng</b>  </li>
+              <li class="breadcrumb-item active" aria-current="page">  Hoàn tất </li>
+            </ol>
+          </nav>
+          </div>
+
+
+          <div class="content--left ">
+          <div class="box__border col--left">
+            <div class="form-check" >
+              <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice1"  value="Giao hàng trong tỉnh" [(ngModel)]="selectedPrice" [(ngModel)]="selectedOption" [checked]="selectedProvince === 'Thành phố Hồ Chí Minh'" [disabled]="selectedProvince !== 'Thành phố Hồ Chí Minh'" >
+      <label class="form-check-label w-100" for="deliveryPrice2">
+      <div class="row">
+        <div class="col">Giao hàng trong tỉnh</div>
+        <div class="col color--price" >20,000 đ</div>
+      </div>
+
+
+              </label>
+            </div> <hr>
+            <div class="form-check" >
+              <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice2" value="Giao hàng ngoài tỉnh" [(ngModel)]="selectedPrice" [(ngModel)]="selectedOption" [disabled]="selectedProvince === 'Thành phố Hồ Chí Minh'" [checked]="selectedProvince !== 'Thành phố Hồ Chí Minh'" >
+      <label class="form-check-label w-100" for="deliveryPrice1">
+
+
+        <div class="row ">
+          <div class="col">Giao hàng ngoài tỉnh </div>
+          <div class="col color--price" >40,000 đ</div>
         </div>
+      </label>
+            </div>
+          </div>
+          <br>
+            <div class="box__border">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" checked name="howtopay" id="howToDelivery" value="Thanh toán khi nhận hàng (COD)" [(ngModel)]="selectedPay" (change)="showPay($event)">
+              <label class="form-check-label" for="howtopay">
+              Thanh toán khi nhận hàng (COD)
+              </label>
 
-    </div>
 
-  </ng-container>
+            </div> <hr>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value="Chuyển khoản qua ngân hàng" [(ngModel)]="selectedPay" (change)="showPay($event)" >
+              <label class="form-check-label" for="howtopay">
+                Chuyển khoản qua ngân hàng
+              </label>
+            </div>
+            <div>   <img *ngIf="selectedPay === 'Chuyển khoản qua ngân hàng' " src="assets\Img\thanhtoan-stk.jpg" ></div>
+            <hr>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="howtopay" id="howToDelivery" value="Ví điện tử" [(ngModel)]="selectedPay" (change)="showPay($event)">
+              <label class="form-check-label" for="howtopay">
+                Ví điện tử
+              </label>
+            </div>
+            <div>  <img *ngIf="selectedPay === 'Ví điện tử' " src="\assets\Img\thanh toán-vdt.jpg" ></div>
+          </div>
+
+
+          <button (click)="showContent('content1')" class="button--showcontent button--gui w-100"  >Quay về Thông tin cơ bản</button>
+          <button (click)="showContent('content3')" class="button--showcontent button--gui w-100"  >Hoàn tất đơn hàng</button>
+  </div>
+
+
+      </div>
 
 
 
+
+      <div *ngSwitchCase="'content3'">
+
+
+        <div class=" col-6 col--left delivery-info row text-center w-100">
+          <div class="gap2002"> GAP2002 </div>
+          <div class="left--title"> Thông tin giao hàng</div>
+          <br>
+          <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb ">
+              <li class="breadcrumb-item active" aria-current="page"> Thông tin cơ bản </li>
+              <li class="breadcrumb-item active " aria-current="page"> Thông tin giao hàng </li>
+              <li class="breadcrumb-item " > <b> Hoàn tất</b> </li>
+            </ol>
+          </nav>
+        </div>
+            <div class="content--left">
+          <div class="container text-center " style="margin-bottom: 20px;">
+            <!-- icon o day -->
+            <br>
+            <div class="tittle--thanks">  Đặt hàng thành công </div>
+          </div>
+
+
+          <div style="text-align: center;"> <b>Mã đơn hàng:</b>  #000001 </div> <br>
+
+
+          <div class="text-center box__border" style="margin-bottom: 20px;">
+           <div><b> Thông tin đơn hàng</b> </div> <br>
+            <div class="row ">
+                <div class="col thongtin" style="word-wrap: break-word;" >
+                  <b>Họ và tên: </b> {{fullname}} <br>
+                  <b>Email:</b> {{email}}  <br>
+                  <b>Số điện thoại:</b> {{phone}} <br>
+                  <b>Tỉnh / Thành phố: </b>
+                   <div class="col thongtin"> {{ selectedProvince }} </div>
+                  <b>Quận / Huyện: </b> {{selectedDistrict}}  <br>
+                  <b>Địa chỉ chi tiết:</b> {{address}}  <br>
+                </div>
+                <div class="col thongtin__textleft">
+                  <div> <b> Giao hàng: </b></div> <span id="message">{{selectedOption}}</span> <br>
+                  <div> <b> Phương thức thanh toán: </b></div> <span id="message">{{selectedPay}}</span> <br>
+                </div> <br>
+                <div class="title--thanks">  Cám ơn bạn đã mua hàng! </div>
+            </div>
+          </div>
+
+
+          <button class="button--muahang w-100" [routerLink]="['']" > Tiếp tục mua hàng </button>
+          </div>
+
+
+      </div>
+
+
+    </ng-container>
+  </div>
+ </div>
+
+
+
+
+
+
+  <div class="col-md-6 box wrap pt-3 pb-3" height="2000px " style="margin-bottom: 20px; margin-top: 100px;">
+<!--
+    <div class="container w-100"  style="word-wrap: break-word; margin-top: 20px; padding: 30px 40px 30px 40px;background-color: #EEECEC; border-radius: 20px;"   >
+      <table >
+        <tr *ngIf="cartProduct" style="background-color: #EEECEC;">
+      <th class="box col-md-4 ">
+        <div style=" text-align: center; "><b>Ảnh sản phẩm</b></div>
+      </th>
+      <th class="box col-md-2 ">
+        <div style=" text-align: center;"> <b>Mô tả</b> </div>
+      </th>
+      <th class="box col-md-1 ">
+        <div style=" text-align: center;"> <b>SL</b> </div>
+      </th>
+      <th class="box col-md-4">
+        <div style=" text-align: center; "> <b>Giá</b> </div>
+      </th>
+    </tr>
+    <tr> <td colspan="4"><hr></td> </tr>
+
+
+
+
+
+      <tr *ngFor="let p of products;let i=index" style="background-color: #EEECEC;">
+        <td class="box col-md-4" style="padding: 5px 30px 10px 30px;">
+          <img class='w-100' style="min-width: 90px; min-height: 120px;" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
+        </td>
+        <td class="box col-md-2 header__cart-item__font" style="padding: 5px 10px 5px 10px; text-align: left;">{{p.TenSP}} </td>
+        <td class="box col-md-1" style="word-wrap: break-word;">  <div type='number' min='1' name='header__cart-item-amount' class='header__cart-item-amount'>{{p.quantity}}</div></td>
+        <td class='box col-md-4 header__cart-item__price' style=" text-align: right; padding-right: 10px;">
+          <ng-container *ngIf="p.Discount>0">
+            <div class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}<u>đ</u> <span class="header__cart-item__price-old">{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span> </div>
+            <div><b>Tổng:</b>  <br> {{p.quantity}} * {{((p.Price-p.Price*p.Discount/100)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+          </ng-container>
+          <ng-container *ngIf="p.Discount==0">
+            <div class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}} <u>đ</u></div>
+            <div><b>Tổng:</b> <br> {{p.quantity}} * {{((p.Price)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+          </ng-container>
+        </td>
+      </tr>
+
+
+      <tr style="background-color: #EEECEC;" > <td colspan="4" style="padding-top: 30px;"> <hr></td> </tr>
+        <tr style="background-color: #EEECEC;">
+          <td colspan="2">
+                    <input width="80%" style="margin-left: 30px; padding: 10px 0px 10px 30px; background-color: #EEECEC; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"  class="form-control form-select-lg" id="magiamgia" name="magiamgia" rows="1" placeholder="Mã giảm giá" style="padding: 10px;">
+          </td>
+
+          <td></td>
+
+          <td><input class="btn-primary button--gui w-100" style="border-radius: 5px; text-align: center; padding: 11px 5px 11px 5px;" type="submit" value="Áp dụng" ></td>
+        </tr>
+
+        <tr style="background-color: #EEECEC;"> <td colspan="4" > <hr></td> </tr>
+
+        <tr style="background-color: #EEECEC;">
+          <td style="text-align: left;">Tạm tính</td>
+          <td colspan="3" style="text-align: right; padding-left: 30px;"><h3 style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{pay.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+        </tr>
+
+        <tr style="background-color: #EEECEC;">
+          <td style="text-align: left; ">Phí vận chuyển</td>
+          <td colspan="3" style="color: red; text-align: right;"> <h3 style="color: red; text-align: right; padding-right: 20px;">{{totalShip.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+        </tr>
+        <tr style="background-color: #EEECEC;" > <td colspan="4" > <hr></td> </tr>
+        <tr style="background-color: #EEECEC; ">
+          <td style="text-align: left;  padding-bottom: 30px;" >Tổng cộng</td>
+          <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
+        </tr>
+    </table>
+    </div> -->
+
+
+
+
+  <div class="table-container" style=" padding: 0px 10px 0px 10px;">
+    <table align="center" class="table-hover"  >
+      <thead>
+        <tr *ngIf="cartProduct" >
+          <th>Ảnh </th>
+          <th>Mô Tả</th>
+          <th style="word-wrap: break-word; max-width: 35px;">Số lượng</th>
+          <th style="word-wrap: break-word; max-width: 80px;">Giá </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let p of products;let i=index">
+
+          <td style="word-wrap: break-word; width: 150px;" >
+            <img style="min-width: 30px;" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
+          </td>
+          <td style="word-wrap: break-word; max-width: 50px;" >{{p.TenSP}}</td>
+          <td style="word-wrap: break-word; max-width: 10px;">{{p.quantity}}</td>
+          <td style="word-wrap: break-word; max-width: 80px;">
+            <ng-container *ngIf="p.Discount>0">
+              <div class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}<u>đ</u> <span class="header__cart-item__price-old">{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span> </div>
+              <div><b>Tổng:</b>  <br> {{p.quantity}} * {{((p.Price-p.Price*p.Discount/100)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+            </ng-container>
+            <ng-container *ngIf="p.Discount==0">
+              <div class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}} <u>đ</u></div>
+              <div><b>Tổng:</b> <br> {{p.quantity}} * {{((p.Price)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+            </ng-container>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="text-align: left;">Tạm tính</td>
+          <td colspan="3" style="text-align: right; padding-left: 30px;"><h3 style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{pay.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+        </tr>
+
+        <tr>
+          <td style="text-align: left; ">Phí vận chuyển</td>
+          <td colspan="3" style="color: red; text-align: right;"> <h3 style="color: red; text-align: right; padding-right: 20px;">{{totalShip.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+        </tr>
+        <tr >
+          <td style="text-align: left;  padding-bottom: 30px;" >Tổng cộng</td>
+          <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>
-
-
-
-
-
-</div>
-
-
-
-<div class="col-md-6 box wrap pt-3 pb-3" height="2000px " style="margin-bottom: 20px;  padding: 50px;">
-  <div class="container" style="word-wrap: break-word; margin-top: 20px;">
-    <div class="box col-5 col--right__image">
-      <h3 style="border-bottom: black solid 1px; text-align: center;"><b>Ảnh sản phẩm</b></h3>
-      <div><img src="{{order.image}}"> </div>
-    </div>
-    <div class="box col-4 col--right__describe">
-      <h3 style="border-bottom: black solid 1px; text-align: center;"> <b>Mô tả</b> </h3>
-      <p>{{order.describe}} </p>
-    </div>
-    <div class="box col-3 col--right__price">
-      <h3 style="border-bottom: black solid 1px; text-align: center;"> <b>Giá</b> </h3>
-      <h3 style="color: red;">{{order.price}} đ </h3>
-    </div>
-
-    <div class="w-100" style="padding-bottom: 10px; background-color: lightgray; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" >
-
-      <div class="container-fliud w-100" style="padding: 10px;">
-        <div class="row">
-          <div class="col-md-9 box " >
-            <textarea class="form-control form-select-lg" id="magiamgia" name="magiamgia" rows="1" placeholder="Mã giảm giá" style="padding: 10px;"></textarea>
-          </div>
-          <div class="col-md-3 box " >
-            <input class="btn-primary button--gui" style="border-radius: 5px;" type="submit" value="Áp dụng" >
-          </div>
-        </div>
-      </div>
-
-      <div class="container" style="word-wrap: break-word; ">
-        <div class=" col-7 ">
-          <h3 style="text-align: left; padding: 10px 10px ;">Tạm tính:</h3>
-        </div>
-        <div class=" col-5 ">
-          <h3 style="color: red; text-align: right; padding: 10px 20px ;">{{order.price}} đ</h3>
-        </div>
-      </div>
-
-
-      <div class="container" style="word-wrap: break-word; ">
-        <div class=" col-7 ">
-          <h3 style="text-align: left; padding: 10px 10px ;">Phí vận chuyển:</h3>
-        </div>
-        <div class=" col-5 ">
-          <p style="color: red; text-align: right; padding: 10px 20px ;">{{selectedPrice === 'Giao hàng trong tỉnh' ? '20000' : '40000'}}đ</p>
-        </div>
-      </div>
-
-
-      <div class="container" style="word-wrap: break-word; border-bottom-left-radius: 50px; border-bottom-right-radius: 5px;">
-        <div class=" col-7 ">
-          <h3 style="text-align: left; padding: 10px 10px ;">Tổng cộng:</h3>
-        </div>
-        <div class=" col-5 ">
-          <p style="color: red; text-align: right; padding: 10px 20px ; ">{{selectedPrice === 'Giao hàng trong tỉnh' ? '20000' : '40000'}}đ</p>
-        </div>
-      </div>
-
-    </div>
-
-
-
-
 
   </div>
-  <!-- border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" -->
 
 
 
 
-</div>
-
-
-
-
-
-
-
-
-
-</div>
 </div>

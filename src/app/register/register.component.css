@@ -16,6 +16,10 @@
   color: var(--darkbrown);
   padding-bottom: 15px;
 }
+.hide{
+  border: none;
+  background-color: var(--lightpink);
+}
 .register{
   padding: 20px 0 20px;
   overflow: hidden;
@@ -32,9 +36,7 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.form-container{
-  margin: 30px 0 30px 0;
-}
+
 .form-content{
   padding-top: 10px;
   width: 100%;
@@ -44,7 +46,7 @@
   width: 100%;
 }
 
-button{
+.btn-dangky{
   background-color: initial;
   font-weight: 500;
   margin-left: auto;
@@ -56,15 +58,18 @@ button{
   border-radius: 3px;
   width: 200px;
 }
-button:hover{
+.btn-dangky:hover{
   background-color: var(--darkbrown);
   color: var(--white);
 }
-button:active{
+.btn-dangky:active{
   opacity: 0.7;
   background-color: var(--darkpink);
 }
-
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: var(--lightpink);
 }
@@ -74,7 +79,9 @@ button:active{
 .mat-mdc-radio-button .mdc-form-field {
   color: var(--mdc-theme-text-primary-on-background, rgb(0, 0, 0));
 }
-
+.mat-datepicker-content {
+  color: var(--darkbrown);
+}
 .mat-mdc-radio-button.mat-accent {
   --mdc-radio-disabled-selected-icon-color: #fff;
   --mdc-radio-disabled-unselected-icon-color: #fff;
@@ -90,6 +97,16 @@ button:active{
   --mat-mdc-radio-checked-ripple-color:var(--darkbrown);
 }
 
+.mat-calendar-arrow {
+  fill: var(--darkbrown);
+}
+.mat-calendar-body-cell-content, .mat-date-range-input-separator {
+  color: var(--darkbrown);
+  border-color: rgba(0,0,0,0);
+}
+.mat-calendar-table-header, .mat-calendar-body-label {
+  color:var(--darkbrown);
+}
 .mat-datepicker-content {
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   background-color: var(--lightpink);
@@ -102,10 +119,28 @@ button:active{
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
   color: var(--black);
 }
-
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+  border-bottom-color: var(--darkbrown);
+}
+.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: var(--mdc-theme-primary, var(--darkbrown));
+}
+.mdc-text-field .mdc-text-field__input {
+  caret-color: var(--mdc-theme-primary, var(--black));
+}
+.mat-calendar-body-selected {
+  background-color: var(--darkbrown);
+  color: #fff;
+}
+.mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: var(--darkbrown);
+}
 @media (max-width: 1023px) and (min-width: 740px) {
   .blog{
       margin-top: 128px;
+  }
+  .form{
+    width: 90%;
   }
 }
 
@@ -113,5 +148,8 @@ button:active{
 @media (max-width: 740px) {
   .blog{
       margin-top: 128px;
+  }
+  .form{
+    width: 90%;
   }
 }
