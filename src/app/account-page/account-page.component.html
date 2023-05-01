@@ -100,6 +100,7 @@
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Tên đăng nhập</mat-label>
                                   <input matInput disabled value="{{account.username}}" >
+
                                 </mat-form-field>
                             </div>
                             <div class="row hs">
@@ -107,7 +108,7 @@
                                   <mat-form-field appearance="fill" class="exemple-form-field">
                                     <mat-label>Họ và tên</mat-label>
                                     <input matInput placeholder="Nhập họ và tên" [readonly]="!allowFix" [formControl]="name" required #nameInput>
-                                    <!-- <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error> -->
+                                    <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
                                   </mat-form-field>
                                 </div>
                             </div>
@@ -115,12 +116,14 @@
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Email</mat-label>
                                   <input matInput  placeholder="Nhập Email"  [readonly]="!allowFix"  [formControl]="email"  required>
+                                  <mat-error *ngIf="email.invalid">{{getErrorEmailMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>
                             <div class="row hs">
                               <mat-form-field class="example-full-width">
                                 <mat-label>Số điện thoại</mat-label>
                                 <input [formControl]="phoneNumber" matInput [readonly]="!allowFix" placeholder="Nhập số điện thoại">
+                                <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
                               </mat-form-field>
                             </div>
                             <div class="row hs">
@@ -137,7 +140,7 @@
                               <mat-form-field class="example-full-width" appearance="fill">
                                 <mat-label>Ngày sinh</mat-label>
                                 <input matInput [matDatepicker]="picker" [formControl]="dob" required  [readonly]="!allowFix">
-                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-error *ngIf="dob.invalid">{{getErrorDoBMessage()}}</mat-error>
                                 <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="!allowFix"></mat-datepicker-toggle>
                                 <mat-datepicker #picker [disabled]="!allowFix"></mat-datepicker>
                               </mat-form-field>
@@ -196,10 +199,12 @@
                                     <h1 style="text-align: center;">Địa chỉ mới</h1>
                                     <div class="row dong-1">
                                         <div class="col">
-                                            <input type="text" class="form-control" id="hovaten" placeholder="Họ và tên" formControlName="hovaten">
+                                            <input matInput type="text" class="form-control" id="hovaten" placeholder="Họ và tên" formControlName="hovaten" [formControl]="name" required>
+                                            <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại"  formControlName="phonenumber">
+                                            <input matInput type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại"  formControlName="phonenumber" [formControl]="phoneNumber" required>
+                                            <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
                                         </div>
                                     </div>
                                     <div class="row dong-2">
@@ -224,7 +229,7 @@
                                     </div>
                                     <div class="row dong-3">
                                         <div class="col">
-                                            <input type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" formControlName="diachicuthe">
+                                            <input matInput type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" formControlName="diachicuthe"  required>
                                         </div>
                                     </div>
                                     <div class="row dong-4">
@@ -259,7 +264,7 @@
                   <h1 style="text-align: center;">Đổi mật khẩu</h1>
                   <div class="example-input-wrapper" style="display:none">
                     <label for="duration">Animation duration:</label>
-                    <input id="duration" value="2000" type="number" min="0" step="100" #duration>
+                    <input id="duration" value="2000" type="number" min="0" step="70" #duration >
                   </div>
 
                   <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration.value">
@@ -267,7 +272,7 @@
                       <form [formGroup]="firstFormGroup">
                         <ng-template matStepLabel>Fill out your current password</ng-template>
                         <mat-form-field>
-                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="firstCtrl" required>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="firstCtrl" required placeholder="Nhập lại mật khẩu của bạn">
                           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
@@ -281,7 +286,8 @@
                       <form [formGroup]="secondFormGroup">
                         <ng-template matStepLabel>Fill out your new Password</ng-template>
                         <mat-form-field>
-                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="secondCtrl" required>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="secondCtrl"[formControl]="password" required placeholder="Nhập mật khẩu mới của bạn">
+                          <mat-error *ngIf="password.invalid">{{getErrorPWMessage()}}</mat-error>
                           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
@@ -296,10 +302,24 @@
                       <form [formGroup]="thirdFormGroup">
                         <ng-template matStepLabel>Fill out again your new Password</ng-template>
                         <mat-form-field>
-                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="thirdCtrl" required>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="thirdCtrl" [formControl]="password" required placeholder="Nhập lại mật khẩu mới của bạn" >
+                          <mat-error *ngIf="password.invalid">{{getErrorPWMessage()}}</mat-error>
                           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
+                        </mat-form-field>
+                        <div>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="fourFormGroup">
+                      <form [formGroup]="fourFormGroup">
+                        <ng-template matStepLabel>Fill out your OTP</ng-template>
+                        <mat-form-field>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="fourCtrl" [formControl]="otp" required placeholder="Nhập mã OTP của bạn">
+                          <mat-error *ngIf="otp.invalid">{{getErrorOTPMessage()}}</mat-error>
                         </mat-form-field>
                         <div>
                           <button mat-button matStepperPrevious>Back</button>

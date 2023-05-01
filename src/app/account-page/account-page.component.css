@@ -8,7 +8,6 @@ body{
 }
 *{
   font-size: 1.6rem;
-  font-family: quicksand;
 }
 .my-body__container{
   min-height: 500px;
@@ -224,6 +223,7 @@ margin-bottom: 10px;
   color: #6B4932;
   border-radius: 10px;
   padding: 5px;
+  background-color: var(--lightpink);
 }
 .macdinh:hover {
   background-color: #c0a28e;
@@ -241,6 +241,7 @@ margin-bottom: 10px;
   color: #6B4932;
   border-radius: 10px;
   padding: 5px;
+  background-color: var(--lightpink);
 }
 .dia-chi-2{
   margin-top: 30px;
@@ -335,11 +336,12 @@ label {
   margin-right: 4px;
 }
 .mat-step-header{
-  background-color: var(--lightpink);
+  background-color:#98697e;
 }
-.mat-step-header :hover{
-  background-color: #85556b;
+.mat-stepper-vertical{
+  background-color: #98697e;
 }
+
 /* Order */
 /* right form Đơn hàng*/
 .myaccount-body-right-top{
@@ -512,7 +514,9 @@ label {
   background-color: rgb(210 190 180);
   border-color: rgb(210 190 180);
 }
-
+.mat-mdc-form-field-error{
+  font-size: 1.1 rem;
+}
 
 
 
@@ -582,4 +586,7 @@ label {
   background-color: #fff;
   color: #d2beb4;
   border: 1px solid #d2beb4;
+}
+.mat-vertical-content{
+  color: white;
 }

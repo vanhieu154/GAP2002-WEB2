@@ -51,7 +51,8 @@ export class AccountPageComponent implements OnInit {
   dob: FormControl;
   phoneNumber: FormControl;
   gender: FormControl;
-
+  password: FormControl;
+  otp:FormControl;
   allowFix:boolean=false
 
 
@@ -80,13 +81,14 @@ export class AccountPageComponent implements OnInit {
       Validators.pattern(/^(03|05|08|09)\d{8}$/),
     ]);
     this.gender = new FormControl(this.account.gender, Validators.required);
-
+    this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+    this.otp = new FormControl('', [Validators.required, Validators.pattern(/^\d{4}$/)]);
     this.registerForm = this._formBuilder.group({
       name: this.name,
       email: this.email,
       dob: this.dob,
       phoneNumber: this.phoneNumber,
-      gender:this.gender,
+      gender:this.gender
     });
     this.addressService.getAddress(this.account._id).subscribe({
       next: (data) => {
@@ -185,6 +187,7 @@ export class AccountPageComponent implements OnInit {
   firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['']});
   secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
   thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
+  fourFormGroup: FormGroup = this._formBuilder.group({fourCtrl: ['']});
   hide = true;
   //selected date
   selectedDate: Date | undefined;
@@ -208,6 +211,49 @@ export class AccountPageComponent implements OnInit {
       IsDefault: new FormControl(true)
     });
     // this.myAddresss = JSON.parse(localStorage.getItem('Address') || '{}');
+  }
+  getErrorNameMessage() {
+    if (this.name.hasError('required')) {
+      return '*Vui lòng nhập họ và tên';
+    }
+
+    return this.name.hasError('name') ? 'Họ và tên không hợp lệ' : '';
+  }
+  getErrorPhoneMessage() {
+    if (this.phoneNumber.hasError('required')) {
+      return '*Vui lòng nhập số điện thoại';
+    }
+
+    return this.phoneNumber.hasError('pattern') ? '*Số điện thoại không hợp lệ' : '';
+  }
+  getErrorEmailMessage() {
+    if (this.email.hasError('required')) {
+      return 'Bạn phải nhập email';
+    }
+    return this.email.hasError('email') ? 'Email không hợp lệ' : '';
+  }
+
+  getErrorDoBMessage() {
+    if (this.dob.hasError('required')) {
+      return '*Vui lòng nhập ngày sinh';
+    }
+
+    return this.dob.hasError('dob') ? 'Ngày sinh không hợp lệ' : '';
+  }
+  getErrorPWMessage() {
+    if (this.password.hasError('required')) {
+      return '*Vui lòng nhập mật khẩu';
+    }
+
+    return this.password.hasError('password') ? 'Mật khẩu không hợp lệ' : '';
+  }
+  getErrorOTPMessage(){
+    if (this.otp.hasError('required')) {
+      return '*Vui lòng nhập OTP';
+    }
+
+    return this.otp.hasError('otp') ? 'Mật khẩu không hợp lệ' : '';
+
   }
 
 
