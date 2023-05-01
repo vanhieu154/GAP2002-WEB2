@@ -336,7 +336,10 @@ label {
   margin-right: 4px;
 }
 .mat-step-header{
-  background-color:black;
+  background-color:#98697e;
+}
+.mat-stepper-vertical{
+  background-color: #98697e;
 }
 
 /* Order */
