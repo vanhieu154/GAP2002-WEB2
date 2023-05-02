@@ -66,9 +66,9 @@ tbody td{
   }
 
 
-  td:first-child {
+  /* td:first-child {
     padding-left: 16px;
-  }
+  } */
 
 
   td:last-child {
@@ -176,8 +176,9 @@ textarea.form-control,input.form-control,select.form-select {
 .col--right__image {
   background-color: #EEECEC;
   text-align: left;
-  padding: 30px 15px;
+  /* padding: 30px 15px; */
   border-top-left-radius: 10px;
+
 }
 .col--right__describe {
   padding: 30px 15px;
@@ -200,14 +201,14 @@ img {
   text-align: right;
 }
 
-.col--left{
+/* .col--left{
   padding-left: 50px;
   padding-top: 50px;
   padding-right: 40px;
-}
+} */
 .content--left{
-  margin-left: 10px;
-  padding-left: 45px;
+  /* margin-left: 10px;
+  padding-left: 45px; */
   padding-top: 10px;
   padding-right: 50px;
 }
@@ -249,9 +250,9 @@ a{
   background-color: initial;
   text-align: center;
   /* font-weight: bold; */
-  margin-left: auto;
+  /* margin-left: auto; */
   border: 1px solid  var(--darkbrown);
-  padding-left: 25px;
+  /* padding-left: 25px; */
   padding-right: 25px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -271,7 +272,7 @@ border-color: var(--grey);
 padding-top: 10px;
 padding-bottom: 10px;
 border-radius: 10px;
-padding-left: 50px;
+/* padding-left: 50px; */
 padding-right: 20px;
 }
 
@@ -280,7 +281,7 @@ padding-right: 20px;
 }
 .thongtin__textleft{
   text-align: left;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   font-size: 2.5rem;
 }
 .lienhe{
@@ -296,9 +297,9 @@ padding-right: 20px;
 .button--muahang{
   background-color: initial;
   font-weight: bold;
-  margin-left: auto;
+  /* margin-left: auto; */
   border: 1px solid  var(--darkbrown);
-  padding-left: 40px;
+  /* padding-left: 40px; */
   padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -317,7 +318,7 @@ padding-right: 20px;
 }
 
 .lienhe span{
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 img{
   position: relative;

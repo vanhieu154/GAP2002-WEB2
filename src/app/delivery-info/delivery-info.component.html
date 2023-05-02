@@ -10,7 +10,7 @@
 
 
       <div *ngSwitchCase="'content1'">
-        <div class=" col-6 col--left delivery-info row text-center w-100">
+    <div class=" col-6 delivery-info row text-center w-100">           <!-- **Bỏ thuộc tính trái-->
         <div class="gap2002"> GAP2002 </div>
         <div class="left--title"> Thông tin giao hàng</div >
         <br>
@@ -44,17 +44,6 @@
                 <mat-hint *ngIf="FormControl.hasError('email')" class="email--note">
                   Hãy chắn chắc bạn nhập đúng email của mình
                 </mat-hint>
-                <!-- <mat-form-field class="example-full-width">
-                  <mat-label>Email</mat-label>
-                  <input type="email"  [(ngModel)]="email" id="email" name="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                         placeholder="Ex. pat@example.com">
-                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                    Vui lòng nhập địa chỉ email hợp lệ
-                  </mat-error>
-                  <mat-error *ngIf="emailFormControl.hasError('required')" style="margin-left: -20px; color: grey;">
-                    Email là <strong>bắt buộc</strong>
-                  </mat-error> -->
-                <!-- </mat-form-field> -->
 
 
                 <mat-form-field appearance="fill" class="example-form-field">
@@ -118,10 +107,10 @@
 
 
 
-
+<!-- -------------------------------------------------TRANG THÔNG IN GIAO HÀNG ----------PAGE-2-------------  -->
 
       <div *ngSwitchCase="'content2'" >
-        <div class=" col-6 col--left delivery-info row text-center w-100" style="margin-bottom: 15px;">
+        <div class=" col-6  delivery-info row text-center w-100" style="margin-bottom: 15px;">      <!-- **Bỏ thuộc tính trái-->
           <div class="gap2002"> GAP2002 </div>
           <div class="left--title"> Thông tin giao hàng</div>
           <br>
@@ -136,7 +125,7 @@
 
 
           <div class="content--left ">
-          <div class="box__border col--left">
+          <div class="box__border ">             <!-- **Bỏ thuộc tính trái-->
             <div class="form-check" >
               <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice1"  value="Giao hàng trong tỉnh" [(ngModel)]="selectedPrice" [(ngModel)]="selectedOption" [checked]="selectedProvince === 'Thành phố Hồ Chí Minh'" [disabled]="selectedProvince !== 'Thành phố Hồ Chí Minh'" >
       <label class="form-check-label w-100" for="deliveryPrice2">
@@ -198,10 +187,12 @@
 
 
 
+
+
+<!-- ---------------------------------TRANG HOÀN TẤT-------PAGE 3---------------  -->
+
       <div *ngSwitchCase="'content3'">
-
-
-        <div class=" col-6 col--left delivery-info row text-center w-100">
+        <div class=" col-6  delivery-info row text-center w-100">     <!-- **Bỏ thuộc tính trái-->
           <div class="gap2002"> GAP2002 </div>
           <div class="left--title"> Thông tin giao hàng</div>
           <br>
@@ -213,7 +204,7 @@
             </ol>
           </nav>
         </div>
-            <div class="content--left">
+            <div class="content--left">                       <!-- **Bỏ thuộc tính trái-->
           <div class="container text-center " style="margin-bottom: 20px;">
             <!-- icon o day -->
             <br>
@@ -224,7 +215,7 @@
           <div style="text-align: center;"> <b>Mã đơn hàng:</b>  #000001 </div> <br>
 
 
-          <div class="text-center box__border" style="margin-bottom: 20px;">
+          <div class="text-center box__border" style="margin-bottom: 20px;">        <!-- **Bỏ thuộc tính trái-->
            <div><b> Thông tin đơn hàng</b> </div> <br>
             <div class="row ">
                 <div class="col thongtin" style="word-wrap: break-word;" >
@@ -232,11 +223,11 @@
                   <b>Email:</b> {{email}}  <br>
                   <b>Số điện thoại:</b> {{phone}} <br>
                   <b>Tỉnh / Thành phố: </b>
-                   <div class="col thongtin"> {{ selectedProvince }} </div>
+                   <div class="col thongtin"> {{ selectedProvince }} </div>     <!-- **Bỏ thuộc tính trái-->
                   <b>Quận / Huyện: </b> {{selectedDistrict}}  <br>
                   <b>Địa chỉ chi tiết:</b> {{address}}  <br>
                 </div>
-                <div class="col thongtin__textleft">
+                <div class="col thongtin__textleft">                  <!-- **Bỏ thuộc tính trái-->
                   <div> <b> Giao hàng: </b></div> <span id="message">{{selectedOption}}</span> <br>
                   <div> <b> Phương thức thanh toán: </b></div> <span id="message">{{selectedPay}}</span> <br>
                 </div> <br>
@@ -244,14 +235,9 @@
             </div>
           </div>
 
-
           <button class="button--muahang w-100" [routerLink]="['']" > Tiếp tục mua hàng </button>
           </div>
-
-
       </div>
-
-
     </ng-container>
   </div>
  </div>
@@ -260,83 +246,8 @@
 
 
 
-
+<!-- ----------------------------------BẢNG TÍNH TIỀN BÊN PHẢI-----------------------  -->
   <div class="col-md-6 box wrap pt-3 pb-3" height="2000px " style="margin-bottom: 20px; margin-top: 100px;">
-<!--
-    <div class="container w-100"  style="word-wrap: break-word; margin-top: 20px; padding: 30px 40px 30px 40px;background-color: #EEECEC; border-radius: 20px;"   >
-      <table >
-        <tr *ngIf="cartProduct" style="background-color: #EEECEC;">
-      <th class="box col-md-4 ">
-        <div style=" text-align: center; "><b>Ảnh sản phẩm</b></div>
-      </th>
-      <th class="box col-md-2 ">
-        <div style=" text-align: center;"> <b>Mô tả</b> </div>
-      </th>
-      <th class="box col-md-1 ">
-        <div style=" text-align: center;"> <b>SL</b> </div>
-      </th>
-      <th class="box col-md-4">
-        <div style=" text-align: center; "> <b>Giá</b> </div>
-      </th>
-    </tr>
-    <tr> <td colspan="4"><hr></td> </tr>
-
-
-
-
-
-      <tr *ngFor="let p of products;let i=index" style="background-color: #EEECEC;">
-        <td class="box col-md-4" style="padding: 5px 30px 10px 30px;">
-          <img class='w-100' style="min-width: 90px; min-height: 120px;" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
-        </td>
-        <td class="box col-md-2 header__cart-item__font" style="padding: 5px 10px 5px 10px; text-align: left;">{{p.TenSP}} </td>
-        <td class="box col-md-1" style="word-wrap: break-word;">  <div type='number' min='1' name='header__cart-item-amount' class='header__cart-item-amount'>{{p.quantity}}</div></td>
-        <td class='box col-md-4 header__cart-item__price' style=" text-align: right; padding-right: 10px;">
-          <ng-container *ngIf="p.Discount>0">
-            <div class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}<u>đ</u> <span class="header__cart-item__price-old">{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span> </div>
-            <div><b>Tổng:</b>  <br> {{p.quantity}} * {{((p.Price-p.Price*p.Discount/100)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
-          </ng-container>
-          <ng-container *ngIf="p.Discount==0">
-            <div class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}} <u>đ</u></div>
-            <div><b>Tổng:</b> <br> {{p.quantity}} * {{((p.Price)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
-          </ng-container>
-        </td>
-      </tr>
-
-
-      <tr style="background-color: #EEECEC;" > <td colspan="4" style="padding-top: 30px;"> <hr></td> </tr>
-        <tr style="background-color: #EEECEC;">
-          <td colspan="2">
-                    <input width="80%" style="margin-left: 30px; padding: 10px 0px 10px 30px; background-color: #EEECEC; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"  class="form-control form-select-lg" id="magiamgia" name="magiamgia" rows="1" placeholder="Mã giảm giá" style="padding: 10px;">
-          </td>
-
-          <td></td>
-
-          <td><input class="btn-primary button--gui w-100" style="border-radius: 5px; text-align: center; padding: 11px 5px 11px 5px;" type="submit" value="Áp dụng" ></td>
-        </tr>
-
-        <tr style="background-color: #EEECEC;"> <td colspan="4" > <hr></td> </tr>
-
-        <tr style="background-color: #EEECEC;">
-          <td style="text-align: left;">Tạm tính</td>
-          <td colspan="3" style="text-align: right; padding-left: 30px;"><h3 style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{pay.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
-        </tr>
-
-        <tr style="background-color: #EEECEC;">
-          <td style="text-align: left; ">Phí vận chuyển</td>
-          <td colspan="3" style="color: red; text-align: right;"> <h3 style="color: red; text-align: right; padding-right: 20px;">{{totalShip.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
-        </tr>
-        <tr style="background-color: #EEECEC;" > <td colspan="4" > <hr></td> </tr>
-        <tr style="background-color: #EEECEC; ">
-          <td style="text-align: left;  padding-bottom: 30px;" >Tổng cộng</td>
-          <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
-        </tr>
-    </table>
-    </div> -->
-
-
-
-
   <div class="table-container" style=" padding: 0px 10px 0px 10px;">
     <table align="center" class="table-hover"  >
       <thead>
@@ -369,16 +280,16 @@
 
         <tr>
           <td style="text-align: left;">Tạm tính</td>
-          <td colspan="3" style="text-align: right; padding-left: 30px;"><h3 style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{pay.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+          <td colspan="3" style="text-align: right"><h3 style="color: red; text-align: right; padding-right: 20px;">{{pay.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
         </tr>
 
         <tr>
           <td style="text-align: left; ">Phí vận chuyển</td>
-          <td colspan="3" style="color: red; text-align: right;"> <h3 style="color: red; text-align: right; padding-right: 20px;">{{totalShip.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
+<!-- **Bỏ thuộc tính trái-->         <td colspan="3" style="color: red; text-align: right;"> <h3 style="color: red; text-align: right; padding-right: 20px;">{{totalShip.toLocaleString('vi-VN')}}<u>đ</u></h3></td>
         </tr>
         <tr >
           <td style="text-align: left;  padding-bottom: 30px;" >Tổng cộng</td>
-          <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding: 10px 20px 0px 0px;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
+ <!-- **Bỏ thuộc tính trái-->          <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding-right: 20px ;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
         </tr>
       </tbody>
     </table>
