@@ -28,6 +28,9 @@ export class CartService {
     if (!account.cart) {
       account.cart = new Cart();
     }
+    if (!account.cart.cartItems) {
+      account.cart.cartItems = []; // Khởi tạo 'cartItems' là một mảng trống nếu không tồn tại
+    }
     const _id = account._id;
     let cartItemss=account.cart.cartItems
     if(cartTemp!= null){

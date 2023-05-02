@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-KJL0HmxMYbUCwuV21j+TDeO+pV7r0KT27ipC6e2MwY+tCkJB1z6JX9j+swzNO87H/SN/pLOe5S/jMEvruox8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-KJL0HmxMYbUCwuV21j+TDeO+pV7r0KT27ipC6e2MwY+tCkJB1z6JX9j+swzNO87H/SN/pLOe5S/jMEvruox8w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 <nav aria-label="breadcrumb ">
     <ol class="breadcrumb w-100">
         <li class="breadcrumb-item"><a routerLink="">Trang chủ</a>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col icon-account-content">
                     <p id="accName">{{account.username}}</p>
-                    <a  (click)="showMy(true,false,false,false);fixProfile()">
+                    <a  (click)="showMy(true,false,false,false);fixProfile();showMyAccount(true,false,false)">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"style="color: #d2beb4;"><path fill="currentColor" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z"></path></svg> Sửa hồ sơ</a>
                 </div>
             </div>
@@ -177,7 +177,7 @@
                         </ng-container>
                       </div>
                       <div class="col-4">
-                        <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p>
+                        <!-- <p class="cap-nhat" style="cursor: pointer;">Cập nhật</p> -->
                         <p class="xoa" style="cursor: pointer;" (click)="deleteA(a.value._id)">Xóa</p>
                         <p class="setup" (click)="setDefault(a.value._id)">Thiết lập mặc định</p>
                       </div>
@@ -199,37 +199,45 @@
                                     <h1 style="text-align: center;">Địa chỉ mới</h1>
                                     <div class="row dong-1">
                                         <div class="col">
-                                            <input matInput type="text" class="form-control" id="hovaten" placeholder="Họ và tên" formControlName="hovaten" [formControl]="name" required>
-                                            <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
+                                            <input matInput type="text" class="form-control" id="hovaten" placeholder="Họ và tên" formControlName="hovaten"  required>
+                                            <mat-error *ngIf="formAddress.controls['hovaten'].invalid && isFormInvalid">{{getErrorNameMessage()}}</mat-error>
                                         </div>
                                         <div class="col">
-                                            <input matInput type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại"  formControlName="phonenumber" [formControl]="phoneNumber" required>
-                                            <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
+                                            <input matInput type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại"  formControlName="phonenumber"  required>
+                                            <mat-error *ngIf="formAddress.controls['phonenumber'].invalid && isFormInvalid">{{getErrorPhoneMessage()}}</mat-error>
                                         </div>
                                     </div>
                                     <div class="row dong-2">
                                         <div class="col">
-                                            <select id="city" class="form-select form-select-sm mb-3" [(ngModel)]="selectedCityName" formControlName="city" (change)="onCityChange()">
+                                            <select id="city" class="form-select form-select-sm mb-3" formControlName="city" (change)="onCityChange()" required>
                                               <option value="">Chọn tỉnh/thành phố</option>
                                               <option *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</option>
                                             </select>
+                                            <mat-error *ngIf="formAddress.controls['city'].invalid && isFormInvalid">*Vui lòng chọn Tỉnh/Thành</mat-error>
+
                                         </div>
                                         <div class="col">
-                                            <select class="form-select form-select-sm mb-3" id="district" [(ngModel)]="selectedDistrictName" formControlName="district" (change)="onDistrictChange()">
+                                            <select class="form-select form-select-sm mb-3" id="district" formControlName="district" (change)="onDistrictChange()" required>
                                               <option value="">Chọn quận/huyện</option>
                                               <option *ngFor="let district of districts" [value]="district.Name">{{ district.Name }}</option>
                                             </select>
+                                            <mat-error *ngIf="formAddress.controls['district'].invalid && isFormInvalid">*Vui lòng chọn Quận/Huyện</mat-error>
+
                                         </div>
                                         <div class="col">
-                                          <select class="form-select form-select-sm mb-3" id="ward" [(ngModel)]="selectedWardName" formControlName="ward" >
+                                          <select class="form-select form-select-sm mb-3" id="ward" formControlName="ward" (change)="onDistrictChange()" required>
                                             <option value="">Chọn phường/ xã</option>
                                             <option *ngFor="let w of Wards" [value]="w.Name">{{ w.Name }}</option>
                                           </select>
+                                          <mat-error *ngIf="formAddress.controls['ward'].invalid && isFormInvalid">*Vui lòng chọn Phường/Xã</mat-error>
+
                                         </div>
                                     </div>
                                     <div class="row dong-3">
                                         <div class="col">
                                             <input matInput type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" formControlName="diachicuthe"  required>
+                                            <mat-error *ngIf="formAddress.controls['diachicuthe'].invalid && isFormInvalid">*Vui lòng nhập địa chỉ cụ thể</mat-error>
+
                                         </div>
                                     </div>
                                     <div class="row dong-4">
@@ -240,6 +248,8 @@
                                         <div class="col">
                                             <input type="radio" class="form-check-input"  formControlName="addressType" value="Căn phòng" >Văn phòng
                                         </div>
+                                        <mat-error *ngIf="formAddress.controls['diachicuthe'].invalid && isFormInvalid">*Vui lòng chọn loại địa chỉ</mat-error>
+
                                     </div>
                                     <!-- <div class="row form-check form-switch dong-5">
                                         <div class="col">
@@ -248,10 +258,10 @@
                                         </div>
                                     </div> -->
                                     <div class="row dong-6">
-                                      <div class="col"><button type="button" class="col complete btn" (click)="hideModal()">Trở lại</button></div>
+                                      <div class="col"><button type="button"  class="col complete btn" (click)="hideModal()">Trở lại</button></div>
 
                                         <div class="col">
-                                            <button type="button" type="submit" class="btn complete"  (click)="hideModal()">Hoàn thành</button>
+                                            <button type="button" type="submit"  class="btn complete"  >Hoàn thành</button>
                                         </div>
                                     </div><br>
                                 </form>
@@ -270,66 +280,67 @@
                   <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration.value">
                     <mat-step [stepControl]="firstFormGroup">
                       <form [formGroup]="firstFormGroup">
-                        <ng-template matStepLabel>Fill out your current password</ng-template>
+                        <ng-template matStepLabel>Nhập mật khẩu cũ</ng-template>
                         <mat-form-field>
-                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="firstCtrl" required placeholder="Nhập lại mật khẩu của bạn">
-                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          <input noDiacritics matInput [type]="hide2 ? 'password' : 'text'" formControlName="firstCtrl" required placeholder="Nhập lại mật khẩu của bạn">
+                          <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                            <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
                         </mat-form-field>
+                        <mat-error *ngIf="logOldPasswword || firstFormGroup.controls['firstCtrl'].invalid">*Mật khẩu không chính xác, vui lòng nhập lại mật khẩu</mat-error>
                         <div>
-                          <button mat-button matStepperNext>Next</button>
+                          <button mat-button  (click)="checkOldPass()">Next</button>
                         </div>
                       </form>
                     </mat-step>
                     <mat-step [stepControl]="secondFormGroup">
                       <form [formGroup]="secondFormGroup">
-                        <ng-template matStepLabel>Fill out your new Password</ng-template>
+                        <ng-template matStepLabel>Nhập mật khẩu mới</ng-template>
                         <mat-form-field>
-                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="secondCtrl"[formControl]="password" required placeholder="Nhập mật khẩu mới của bạn">
-                          <mat-error *ngIf="password.invalid">{{getErrorPWMessage()}}</mat-error>
-                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          <input noDiacritics matInput [type]="hide1 ? 'password' : 'text'" formControlName="secondCtrl" required placeholder="Nhập mật khẩu mới của bạn">
+                          <mat-error >{{checkNewPassRes}}</mat-error>
+                          <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                            <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
                         </mat-form-field>
                         <div>
-                          <button mat-button matStepperPrevious>Back</button>
-                          <button mat-button matStepperNext>Next</button>
+                          <!-- <button mat-button matStepperPrevious>Back</button> -->
+                          <button mat-button  (click)="checkNewPass()">Next</button>
                         </div>
                       </form>
                     </mat-step>
                     <mat-step [stepControl]="thirdFormGroup">
                       <form [formGroup]="thirdFormGroup">
-                        <ng-template matStepLabel>Fill out again your new Password</ng-template>
+                        <ng-template matStepLabel>Nhập lại mật khẩu mới</ng-template>
                         <mat-form-field>
-                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="thirdCtrl" [formControl]="password" required placeholder="Nhập lại mật khẩu mới của bạn" >
-                          <mat-error *ngIf="password.invalid">{{getErrorPWMessage()}}</mat-error>
+                          <input noDiacritics matInput [type]="hide ? 'password' : 'text'" formControlName="thirdCtrl"  required placeholder="Nhập lại mật khẩu mới của bạn" >
+                          <mat-error *ngIf="thirdFormGroup.invalid">{{checkReNewPassRes}}</mat-error>
                           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
                         </mat-form-field>
                         <div>
                           <button mat-button matStepperPrevious>Back</button>
-                          <button mat-button matStepperNext>Next</button>
+                          <button mat-button (click)="checkReNewPass()">Next</button>
                         </div>
                       </form>
                     </mat-step>
                     <mat-step [stepControl]="fourFormGroup">
                       <form [formGroup]="fourFormGroup">
-                        <ng-template matStepLabel>Fill out your OTP</ng-template>
+                        <ng-template matStepLabel>Nhập mã OTP được gửi qua số điện thoại của bạn</ng-template>
                         <mat-form-field>
-                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="fourCtrl" [formControl]="otp" required placeholder="Nhập mã OTP của bạn">
-                          <mat-error *ngIf="otp.invalid">{{getErrorOTPMessage()}}</mat-error>
+                          <input noDiacritics matInput formControlName="fourCtrl" required placeholder="Nhập mã OTP của bạn">
+                          <mat-error *ngIf="fourFormGroup.invalid">{{checkOTPRes}}</mat-error>
                         </mat-form-field>
                         <div>
                           <button mat-button matStepperPrevious>Back</button>
-                          <button mat-button matStepperNext>Next</button>
+                          <button mat-button (click)="checkOTP()">Next</button>
                         </div>
                       </form>
                     </mat-step>
                     <mat-step>
-                      <ng-template matStepLabel>Done</ng-template>
-                      You are now done
+                      <ng-template matStepLabel>Hoàn thành</ng-template>
+                      Bạn đã đổi mật khẩu thành công
                     </mat-step>
                   </mat-vertical-stepper>
 

@@ -13,6 +13,7 @@ export class AuthService {
   public isLoggedIn = false;
 
   constructor(private http: HttpClient ) {
+
   }
 
   login(username: string, password: string): Observable<any> {
@@ -60,6 +61,27 @@ export class AuthService {
       retry(3),
       catchError(this.handleError)
     )
+  }
+  confirmPass(userID:string,password:string){
+    const headers = new HttpHeaders().set("Content-Type", "application/json;charset=utf-8");
+    return this.http.post<any>(`${this.apiUrl}/confirmPass`, { userID, password }, { headers })
+      .pipe(
+        map(res => {
+          return res;
+        }),
+        retry(3),
+        catchError(this.handleError)
+      );
+
+  }
+  changePass(userID:string,password:string){
+    const headers = new HttpHeaders().set("Content-Type", "application/json;charset=utf-8");
+    return this.http.put<any>(`${this.apiUrl}/changePass`, { userID, password }, { headers })
+      .pipe(
+        map(res=>JSON.parse(res) as User),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
   handleError(error:HttpErrorResponse){
     return throwError(()=>new Error(error.message))

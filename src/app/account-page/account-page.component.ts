@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MyErrorStateMatcher } from './MyErrorStateMatcher';
 
@@ -12,6 +12,7 @@ import { LocationService } from '../location.service';
 import { Address } from '../address';
 import { AddressService } from '../address.service';
 import { AuthService } from '../auth.service';
+import { MatStepper } from '@angular/material/stepper';
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
@@ -61,7 +62,7 @@ export class AccountPageComponent implements OnInit {
   errMesage: any;
 
   defaultAddress=new Address()
-  constructor(private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService) {
+  constructor(private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService) {
     this.cities=[]
 
     this.locationService.getCities().subscribe( {
@@ -172,6 +173,7 @@ export class AccountPageComponent implements OnInit {
   }
   hideModal(){
     this.showmodal=false
+    this.isFormInvalid=false
   }
   //email
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -184,43 +186,37 @@ export class AccountPageComponent implements OnInit {
     return day !== 0 && day !== 6;
   };
 
-  firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['']});
-  secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
-  thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
-  fourFormGroup: FormGroup = this._formBuilder.group({fourCtrl: ['']});
-  hide = true;
-  //selected date
-  selectedDate: Date | undefined;
-  defaultDate: Date | undefined;
-
-
-
-
 
 
 
   ngOnInit() {
-    this.formAddress = new FormGroup({
-      hovaten: new FormControl(''),
-      phonenumber: new FormControl(''),
-      city: new FormControl(''),
-      district: new FormControl(''),
-      ward: new FormControl(''),
-      diachicuthe: new FormControl(''),
-      addressType: new FormControl(''),
-      IsDefault: new FormControl(true)
+    this.formAddress = this._formBuilder.group({
+      hovaten: ['', Validators.required],
+      phonenumber: ['', Validators.required],
+      city: ['', Validators.required],
+      district: ['', Validators.required],
+      ward: ['', Validators.required],
+      diachicuthe: ['', Validators.required],
+      addressType: ['', Validators.required],
+      IsDefault: [true]
     });
     // this.myAddresss = JSON.parse(localStorage.getItem('Address') || '{}');
+    this.secondFormGroup.valueChanges.subscribe((value)=>{
+      this.secondFormGroup.setErrors({'secondCtrl':true})
+    })
+
+
   }
+
   getErrorNameMessage() {
-    if (this.name.hasError('required')) {
+    if (this.name.hasError('required')||this.formAddress.controls['hovaten'].hasError('required')) {
       return '*Vui lòng nhập họ và tên';
     }
 
     return this.name.hasError('name') ? 'Họ và tên không hợp lệ' : '';
   }
   getErrorPhoneMessage() {
-    if (this.phoneNumber.hasError('required')) {
+    if (this.phoneNumber.hasError('required')||this.formAddress.controls['phonenumber'].hasError('required')) {
       return '*Vui lòng nhập số điện thoại';
     }
 
@@ -240,62 +236,45 @@ export class AccountPageComponent implements OnInit {
 
     return this.dob.hasError('dob') ? 'Ngày sinh không hợp lệ' : '';
   }
-  getErrorPWMessage() {
-    if (this.password.hasError('required')) {
-      return '*Vui lòng nhập mật khẩu';
-    }
 
-    return this.password.hasError('password') ? 'Mật khẩu không hợp lệ' : '';
-  }
-  getErrorOTPMessage(){
-    if (this.otp.hasError('required')) {
-      return '*Vui lòng nhập OTP';
-    }
 
-    return this.otp.hasError('otp') ? 'Mật khẩu không hợp lệ' : '';
-
-  }
 
 
   cities: any[] = [];
-  selectedCityName: string = '';
   districts: any[] = [];
-  selectedDistrictName: string = '';
   Wards: any[] = [];
-  selectedWardName: string = '';
-
   onCityChange(): void {
-    console.log(this.selectedCityName);
-
     this.districts = [];
-    this.selectedDistrictName = '';
     this.Wards=[];
-    this.selectedWardName='';
-
-    const selectedCity = this.cities.find(city => city.Name === this.selectedCityName);
+    const selectedCity = this.cities.find(city => city.Name == this.formAddress.controls['city'].value);
 
     if (selectedCity) {
       this.districts = selectedCity.Districts;
     }
 
+
   }
   onDistrictChange():void{
     this.Wards=[];
-    this.selectedWardName='';
-
-    const selectedDistrict = this.districts.find(district=>district.Name === this.selectedDistrictName);
-
+    const selectedDistrict = this.districts.find(district=>district.Name == this.formAddress.controls['district'].value);
     if(selectedDistrict){
       this.Wards=selectedDistrict.Wards;
     }
   }
+  isFormInvalid = false;
   addressSubmit(){
-    console.log(this.formAddress.value);
-    this.addressService.addAddressToUser(this.account._id,this.formAddress.value).subscribe({
-      next:(data)=>{this.myAddresss=data},
-      error:(err)=>{this.errMesage=err}
-    })
-    this.cdRef.detectChanges();
+    if (this.formAddress.valid) {
+      console.log(this.formAddress.value);
+      this.addressService.addAddressToUser(this.account._id,this.formAddress.value).subscribe({
+        next:(data)=>{this.myAddresss=data},
+        error:(err)=>{this.errMesage=err}
+      })
+      this.cdRef.detectChanges();
+      this.hideModal()
+    } else {
+      this.isFormInvalid = true;
+    }
+
   }
   deleteA(_id:string){
     this.addressService.deleteAddress(this.account._id,_id).subscribe({
@@ -318,4 +297,115 @@ export class AccountPageComponent implements OnInit {
     })
   }
 
+  @HostListener('keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    const charCode = event.key.charCodeAt(0);
+    // Kiểm tra nếu ký tự có dấu
+    if (charCode >= 192 && charCode <= 687 || charCode === 32) {
+      event.preventDefault(); // Hủy bỏ sự kiện nhập của ký tự có dấu
+    }
+  }
+
+  logOldPasswword :boolean=false
+  firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['', (Validators.required, Validators.minLength(6))]});
+  thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['', (Validators.required, Validators.minLength(6))]});
+  fourFormGroup: FormGroup = this._formBuilder.group({fourCtrl: ['', (Validators.required, Validators.minLength(9))]});
+  hide = true;
+  hide1 = true;
+  hide2 = true;
+  @ViewChild("stepper", { static: false }) stepper!: MatStepper;
+  checkOldPass(){
+    if(this.firstFormGroup.invalid){
+      this.logOldPasswword=true
+    }else{
+      console.log(this.firstFormGroup.controls['firstCtrl'].value);
+
+      this.authService.confirmPass(this.account._id,this.firstFormGroup.controls['firstCtrl'].value).subscribe({
+        next:(data)=>{
+          if(data==true){
+            this.stepper.next();
+          }else{
+            this.logOldPasswword=true
+          }
+        },
+        error:(err)=>{this.errMesage=err}
+      })
+    }
+  }
+  checkNewPassRes:string=''
+  checkNewPassStatus:boolean=true
+  checkNewPassValidator(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+    return new Promise((resolve, reject) => {
+      if (control.value == '') {
+        resolve({ emptyPassword: true }); // Giá trị rỗng
+      } else if (control.value == this.firstFormGroup.controls['firstCtrl'].value) {
+        resolve({ invalidPassword: true }); // Giá trị không hợp lệ
+      } else {
+        resolve(null); // Giá trị hợp lệ
+      }
+    });
+  }
+  // secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['', (Validators.required, Validators.minLength(6))]});
+  secondFormGroup: FormGroup = this._formBuilder.group({
+    secondCtrl: ['', [Validators.required, this.checkNewPassValidator.bind(this),Validators.minLength(6)]],
+  });
+  checkNewPass(){
+    if(this.secondFormGroup.valid){
+      this.stepper.next();
+    }else{
+      if(this.secondFormGroup.controls['secondCtrl'].value==''){
+        this.checkNewPassRes='*Vui lòng nhập mật khẩu mới'
+      }else{
+        if(this.secondFormGroup.controls['secondCtrl'].value==this.firstFormGroup.controls['firstCtrl'].value){
+
+          this.checkNewPassRes='Mật khẩu mới không được trùng lắp với mật khẩu gần nhất'
+        }else{
+        this.checkNewPassRes='*Mật khẩu không hợp lệ, yêu cầu tối thiểu 6 ký tự'
+        }
+      }
+    }
+  }
+  checkReNewPassRes:string=''
+  checkReNewPass(){
+    this.checkReNewPassRes=""
+    if(this.secondFormGroup.controls['secondCtrl'].value==this.thirdFormGroup.controls['thirdCtrl'].value){
+      this.stepper.next();
+    }else{
+      this.checkReNewPassRes="Mật khẩu không trùng khớp"
+    }
+  }
+  checkOTPRes:string=''
+  checkOTP(){
+    if(this.fourFormGroup.controls['fourCtrl'].value==123456789){
+      this.authService.changePass(this.account._id,this.secondFormGroup.controls['secondCtrl'].value).subscribe({
+        next:(data)=>{
+          this.account=data
+          sessionStorage.setItem('Account',JSON.stringify(data))
+        },
+        error:(err)=>{this.errMesage=err}
+      })
+      this.stepper.next();
+    }else{
+      if(this.fourFormGroup.controls['fourCtrl'].value==''){
+        this.checkOTPRes='*Vui lòng nhập mã OTP'
+      }else{
+        this.checkOTPRes='*Mã OTP sai yêu cầu nhập lại'
+      }
+    }
+  }
+  getErrorPWMessage() {
+    if (this.secondFormGroup.hasError('required')) {
+      return '*Vui lòng nhập mật khẩu';
+    }else{
+      return this.secondFormGroup.hasError('password') ?  'Mật khẩu không hợp lệ':'' ;
+    }
+  }
+
+
+
+
+
+
+
 }
+

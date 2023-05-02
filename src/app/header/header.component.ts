@@ -207,7 +207,7 @@ export class HeaderComponent implements OnInit  {
       next: (data) => {
         this.user = data;
         sessionStorage.setItem("Account", JSON.stringify(this.user));
-        if(this.user.username!=null && this.user.password!=null){
+        if(this.user.message==null){
           this.showBox(false,false,false)
           let tempCart=JSON.parse(localStorage.getItem('Cart') || '{}');
           if(tempCart!=null){
@@ -226,10 +226,15 @@ export class HeaderComponent implements OnInit  {
             // localStorage.removeItem('Cart')
           }
           // console.log(this.allProducts);
-          this.cartService.createCartproduct(this.allProducts);
           this.cartItemCount = this.cartService.cartAddProduct.length;
           this.cartProducts = this.cartService.cartAddProduct;
+          this.cartService.createCartproduct(this.cartProducts);
+
+        }else{
+          console.log("Đăng nhập thất bại");
+
         }
+
       },
       error: (err) => {
         this.errMessage = err;
