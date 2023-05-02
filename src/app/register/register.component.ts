@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,7 @@ export class RegisterComponent {
   gender: FormControl;
 
   users: User[] = [];
-  constructor(private formBuilder: FormBuilder,private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder,private authService: AuthService,private router:Router) {
     this.acc = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
     this.name = new FormControl('', Validators.required);
@@ -112,8 +113,12 @@ export class RegisterComponent {
     );
   }
   onSubmit() {
+    this.router.navigate(['otp_register'])
+
+
+
     const user = this.getUserFromForm();
-      console.log(user);
+    console.log(user);
     this.authService.addUser(user).subscribe({
       next:(data)=>{console.log(data);
       },

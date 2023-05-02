@@ -68,7 +68,7 @@ import { CommonModule, DatePipe } from '@angular/common';
     PromotionPageComponent,
     ContactPageComponent,
     AccountPageComponent,
-    OtpForgetPassComponent,
+
     ForgetPassComponent,
     PaymentComponent,
     SetUpPasswordComponent,

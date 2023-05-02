@@ -17,12 +17,12 @@ import { PromotionPageComponent } from './promotion-page/promotion-page.componen
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { OtpRegisterComponent } from './otp-register/otp-register.component';
-import { OtpForgetPassComponent } from './otp-forget-pass/otp-forget-pass.component';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { PaymentComponent } from './payment/payment.component';
 import { SetUpPasswordComponent } from './set-up-password/set-up-password.component';
 import { DeliveryInfoComponent } from './delivery-info/delivery-info.component';
 import { ChangeSuccessComponent } from './change-success/change-success.component';
+import { OtpForgetPassComponent } from './otp-forget-pass/otp-forget-pass.component';
 
 const routes: Routes = [
   {
@@ -94,7 +94,6 @@ const routes: Routes = [
   {
     path:"payment",component:PaymentComponent
   },
-
 ];
 
 
