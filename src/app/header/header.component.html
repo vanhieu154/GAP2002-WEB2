@@ -205,7 +205,8 @@
               </ng-container>
               <ng-container *ngIf="IsCartProduct">
                 <ng-container *ngFor="let p of cartProducts;let i=index">
-                  <div class='row'>
+                  <mat-checkbox>
+                    <div class='row'>
                     <div class='col-2'>
                       <img class='w-100' src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
                     </div>
@@ -252,6 +253,7 @@
                     </div>
                   </div>
                   <hr style='border: 2px solid;border-radius: 45px;background-color: #c6c6c6;color: #c6c6c6; opacity: 1;'>
+                  </mat-checkbox>
                 </ng-container>
               </ng-container>
             </div>
@@ -267,7 +269,7 @@
               <button class="btn-header" routerLink="/Cart">
                 <a>Xem giỏ hàng</a>
               </button>
-              <button class="btn-header" routerLink="/DeliveryInfor">
+              <button class="btn-header" (click)="createOrder()">
                 <a>Thanh toán</a>
               </button>
             </div>

@@ -58,9 +58,6 @@ export class ChitietspComponent implements OnInit{
         },
         error: (error) => {
           console.log('Error updating cart:', error);
-        },
-        complete: () => {
-          console.log('Add to cart completed');
         }
       });
       this.cartService.createCartproduct(this.allProducts)
@@ -89,10 +86,6 @@ export class ChitietspComponent implements OnInit{
     this.a++;
     }
   }
-
-  // addProduct(){
-  //   this.cartService.addProduct(this.product._id, this.a);
-  // }
 
 
 

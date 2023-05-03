@@ -1,5 +1,4 @@
-<button mat-button (click)="openDialog()">Launch dialog</button>
-<div *ngIf="showCart()" style="background-color: #EEECEC;"></div>
+<!-- <div style="background-color: #EEECEC;"></div> -->
 <div class="container-fluid w-100 " >
   <div class="row">
     <div class="col-md-6 box blue">
@@ -25,78 +24,49 @@
 
 
         <div class="row text-center content--left">
-          <form novalidate>
-            <div class="col" >
-              <div class=" mb-3">
-                  <mat-form-field class="example-form-field">
-                  <mat-label style="color: grey;">Họ và tên</mat-label>
-                  <input matInput placeholder="Họ và tên"  [(ngModel)]="fullname" id="fullname" name="fullname" [formControl]="name" required>
-                  <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
-                </mat-form-field>
-                </div>
-            </div>
-            <div class="col" >
-              <div class="row ">
-                <mat-form-field class="example-form-field ">
-                  <mat-label style="color: grey;">Email</mat-label>
-                  <input matInput type="text"  [(ngModel)]="email" name="email" id="email" name="email" style="color: black;" matInput [errorStateMatcher]="matcher">
-                </mat-form-field>
-                <mat-hint *ngIf="FormControl.hasError('email')" class="email--note">
-                  Hãy chắn chắc bạn nhập đúng email của mình
-                </mat-hint>
-
-
-                <mat-form-field appearance="fill" class="example-form-field">
-                  <mat-label style="color: grey;">Số điện thoại</mat-label>
-                  <input
-                  id="phone" [(ngModel)]="phone" name="phone"
-                    matInput
-                    placeholder="Nhập số điện thoại"
-                    [formControl]="phoneNumber"
-                    required
-
-                  />
-                  <mat-error *ngIf="phoneNumber.invalid">{{getErrorPhoneMessage()}}</mat-error>
-                </mat-form-field>
-                </div>
-            </div>
-            <div class="col">
-              <mat-form-field class="example-form-field">
-                <mat-label style="color: grey;">Địa chỉ cụ thể</mat-label>
-                <input matInput placeholder="Nhập địa chỉ cụ thể" [formControl]="ad" required  [(ngModel)]="address" id="address" name="address">
-                <mat-error *ngIf="ad.invalid">{{getErrorAdMessage()}}</mat-error>
-              </mat-form-field>
-            </div>
-
-
-            <div class="col">
-              <div class="row justify-content-start">
-                  <div class="col-6">
-                    <div class="mb-3">
-                      <label for="exampleFormControlInput1" class="form-label"> </label>
-                      <div>
-                        <select class="form-select form-select-lg mb-3"name="VietNamdata" [(ngModel)]="VietNamdata" id="province" (change)="changeProvince($event)" aria-label=".form-select-sm">
-                        <option *ngFor="let pro of VietNamdata" >{{pro.province}}</option>
-                        </select>
-                         </div>
-
-
+          <form >
+            <!-- <mat-radio-group formControlName="selectedAddress"> -->
+              <ng-container *ngFor="let a of myAddresss | keyvalue; let i=index">
+                <ng-container *ngIf="a.value._id== defaultAddress._id">
+                  <hr>
+                  <div class="row dia-chi-2">
+                    <div class="col" style="text-align: left;">
+                      <mat-radio-button [checked]="selectedAddress == a.value" (change)="selectAddress(a.value)" >
+                        <div style="color: #333;">
+                          <p class="dia-chi-header"><span class="dia-chi-ten">{{ a.value.hovaten }}</span> | {{ a.value.phonenumber }}</p>
+                          <p class="dia-chi-text">{{ a.value.diachicuthe }}, {{ a.value.ward }}, {{ a.value.district }}, {{ a.value.city }}</p>
+                          <ng-container>
+                            <p class="macdinh" >Mặc định</p>
+                          </ng-container>
+                        </div>
+                      </mat-radio-button>
                     </div>
                   </div>
-                  <div class="col-6">
-                    <div class="mb-3">
-                      <label for="exampleFormControlInput1" class="form-label"></label>
-                      <select class="form-select form-select-lg mb-3" name="district" [(ngModel)]="district" id="province" (change)="changeDistrict($event)" id="district" aria-label=".form-select-sm">
-                        <option *ngFor="let district of districts" value="{{district}}" aria-placeholder="Chọn Quân/ Huyện">{{district}}</option>
-                        </select>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngFor="let a of myAddresss | keyvalue; let i=index">
+                <ng-container *ngIf="a.value._id != defaultAddress._id">
+                  <hr>
+                  <div class="row dia-chi-2">
+                    <div class="col" style="text-align: left;">
+                      <mat-radio-button [checked]="selectedAddress == a.value" (change)="selectAddress(a.value)">
+                        <div style="color: #333;">
+                          <p class="dia-chi-header"><span class="dia-chi-ten">{{ a.value.hovaten }}</span> | {{ a.value.phonenumber }}</p>
+                          <p class="dia-chi-text">{{ a.value.diachicuthe }}, {{ a.value.ward }}, {{ a.value.district }}, {{ a.value.city }}</p>
+                        </div>
+                      </mat-radio-button>
                     </div>
                   </div>
-                </div>
-              </div>
-          </form>
+                </ng-container>
+              </ng-container>
+            <!-- </mat-radio-group> -->
+
           <div class="button--gui__position">
+            <!-- <button class="button--showcontent button--gui w-100" (click)="submitForm()" type="submit" >Tiếp tục đến Thông tin giao hàng</button> -->
             <button class="button--showcontent button--gui w-100" (click)="showContent('content2')" >Tiếp tục đến Thông tin giao hàng</button>
           </div>
+        </form>
+
         </div>
 
 
@@ -127,7 +97,7 @@
           <div class="content--left ">
           <div class="box__border ">             <!-- **Bỏ thuộc tính trái-->
             <div class="form-check" >
-              <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice1"  value="Giao hàng trong tỉnh" [(ngModel)]="selectedPrice" [(ngModel)]="selectedOption" [checked]="selectedProvince === 'Thành phố Hồ Chí Minh'" [disabled]="selectedProvince !== 'Thành phố Hồ Chí Minh'" >
+              <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice1"  value="Giao hàng trong tỉnh" [(ngModel)]="selectedPrice" [(ngModel)]="selectedOption" [checked]="selectedProvince === 'Thành phố Hồ Chí Minh'" disabled >
       <label class="form-check-label w-100" for="deliveryPrice2">
       <div class="row">
         <div class="col">Giao hàng trong tỉnh</div>
@@ -138,7 +108,7 @@
               </label>
             </div> <hr>
             <div class="form-check" >
-              <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice2" value="Giao hàng ngoài tỉnh" [(ngModel)]="selectedPrice" [(ngModel)]="selectedOption" [disabled]="selectedProvince === 'Thành phố Hồ Chí Minh'" [checked]="selectedProvince !== 'Thành phố Hồ Chí Minh'" >
+              <input class="form-check-input" (change)="showText()" type="radio" name="deliveryPrice"  id="deliveryPrice2" value="Giao hàng ngoài tỉnh" [(ngModel)]="selectedPrice" [(ngModel)]="selectedOption" disabled [checked]="selectedProvince !== 'Thành phố Hồ Chí Minh'" >
       <label class="form-check-label w-100" for="deliveryPrice1">
 
 
@@ -178,7 +148,7 @@
 
 
           <button (click)="showContent('content1')" class="button--showcontent button--gui w-100"  >Quay về Thông tin cơ bản</button>
-          <button (click)="showContent('content3')" class="button--showcontent button--gui w-100"  >Hoàn tất đơn hàng</button>
+          <button (click)="showContent('content3');completeOrder()" class="button--showcontent button--gui w-100"  >Hoàn tất đơn hàng</button>
   </div>
 
 
@@ -212,20 +182,20 @@
           </div>
 
 
-          <div style="text-align: center;"> <b>Mã đơn hàng:</b>  #000001 </div> <br>
+          <div style="text-align: center;"> <b>Mã đơn hàng:</b>  {{order._id}} </div> <br>
 
 
           <div class="text-center box__border" style="margin-bottom: 20px;">        <!-- **Bỏ thuộc tính trái-->
            <div><b> Thông tin đơn hàng</b> </div> <br>
             <div class="row ">
                 <div class="col thongtin" style="word-wrap: break-word;" >
-                  <b>Họ và tên: </b> {{fullname}} <br>
-                  <b>Email:</b> {{email}}  <br>
-                  <b>Số điện thoại:</b> {{phone}} <br>
+                  <b>Họ và tên: </b> {{selectedAddress.hovaten}} <br>
+                  <b>Email:</b> {{account.email}}  <br>
+                  <b>Số điện thoại:</b> {{selectedAddress.phonenumber}} <br>
                   <b>Tỉnh / Thành phố: </b>
-                   <div class="col thongtin"> {{ selectedProvince }} </div>     <!-- **Bỏ thuộc tính trái-->
-                  <b>Quận / Huyện: </b> {{selectedDistrict}}  <br>
-                  <b>Địa chỉ chi tiết:</b> {{address}}  <br>
+                   <div class="col thongtin"> {{ selectedAddress.city }} </div>     <!-- **Bỏ thuộc tính trái-->
+                  <b>Quận / Huyện: </b> {{selectedAddress.district}}  <br>
+                  <b>Địa chỉ chi tiết:</b> {{selectedAddress.diachicuthe}}  <br>
                 </div>
                 <div class="col thongtin__textleft">                  <!-- **Bỏ thuộc tính trái-->
                   <div> <b> Giao hàng: </b></div> <span id="message">{{selectedOption}}</span> <br>
@@ -251,7 +221,7 @@
   <div class="table-container" style=" padding: 0px 10px 0px 10px;">
     <table align="center" class="table-hover"  >
       <thead>
-        <tr *ngIf="cartProduct" >
+        <tr >
           <th>Ảnh </th>
           <th>Mô Tả</th>
           <th style="word-wrap: break-word; max-width: 35px;">Số lượng</th>
@@ -259,7 +229,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr  *ngFor="let p of products;let i=index">
+        <tr  *ngFor="let p of tempOrder;let i=index">
 
           <td style="word-wrap: break-word; width: 150px;" >
             <img style="min-width: 30px;" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>

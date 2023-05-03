@@ -41,7 +41,7 @@
       <ng-container *ngFor="let b of brands">
         <div class=" row box cart__item">
           <div class="section">
-            <div class="example-list-section">
+            <div class="example-list-section" style="text-align: left;">
               <mat-checkbox
                 class="margin"
                 [checked]="isBrandComplete(b)"
@@ -51,7 +51,7 @@
                 <b>{{b}}</b>
               </mat-checkbox>
             </div>
-            <div class="example-list-section">
+            <div class="example-list-section ">
               <div class="brand">
                 <ng-container *ngFor="let c of cartProduct">
                   <div *ngIf="c.Hang == b" class="row center">
@@ -107,7 +107,7 @@
         <div class="col" style="margin: 20px 0">
           <p>Phí vận chuyển sẽ được tính ở trang thanh toán.</p>
           <p>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</p></div> <br>
-        <button class=" col-10 button thanhtoan text-center" style="align-items: center;" routerLink="/DeliveryInfor" (click)="createOrder()"> THANH TOÁN </button> <br>
+        <button class=" col-10 button thanhtoan text-center" style="align-items: center;"(click)="createOrder()"> THANH TOÁN </button> <br>
         <div class="col buy-btn" >
            <a routerLink="/trangsp"  class=""> Tiếp tục mua hàng </a>
         </div>

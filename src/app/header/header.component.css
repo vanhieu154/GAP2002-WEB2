@@ -564,7 +564,7 @@ input.example-right-align {
 
 }
 .header__cart-item__header{
-  width: 300px;
+  width: 265px;
 }
 .header__cart-item__quantity span, .header__cart-item__quantity input{
   padding:0 10px;

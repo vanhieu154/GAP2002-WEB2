@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit  {
   hidden = false;
   cartProducts: any[]=[];
   allProducts:any[]=[];
+  tempProduct:any[]=[]
   constructor(private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
 
     if (sessionStorage.getItem('checkLogin') === '1') {
@@ -223,6 +224,7 @@ export class HeaderComponent implements OnInit  {
                 console.log('Add to cart completed');
               }
             });
+            this.cartService.createCartproduct(this.allProducts)
             // localStorage.removeItem('Cart')
           }
           // console.log(this.allProducts);
@@ -290,7 +292,19 @@ export class HeaderComponent implements OnInit  {
       element.classList.toggle("activate");
     }
   }
+  createOrder(){
+    this.tempProduct=this.cartProducts.filter(c=>c.completed==true)
+    if(this.tempProduct!=null){
+      localStorage.setItem('Order',JSON.stringify(this.tempProduct))
+      this.router.navigate(['/DeliveryInfor'])
+    }else{
 
+
+      console.log('chưa có sản phẩm trong giỏ hàng');
+
+
+    }
+  }
 
   showHeaderList(): void {
     const element = document.getElementById("header__list-container");

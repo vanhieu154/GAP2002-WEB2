@@ -95,7 +95,7 @@ export class AccountPageComponent implements OnInit {
       next: (data) => {
         this.myAddresss = data
         this.defaultAddress= data.find((p: { IsDefault: boolean; })=>p.IsDefault==true)
-        console.log(this.defaultAddress._id);
+
 
       },
       error: (err) => { this.errMesage = err; }
@@ -297,14 +297,7 @@ export class AccountPageComponent implements OnInit {
     })
   }
 
-  @HostListener('keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent) {
-    const charCode = event.key.charCodeAt(0);
-    // Kiểm tra nếu ký tự có dấu
-    if (charCode >= 192 && charCode <= 687 || charCode === 32) {
-      event.preventDefault(); // Hủy bỏ sự kiện nhập của ký tự có dấu
-    }
-  }
+
 
   logOldPasswword :boolean=false
   firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['', (Validators.required, Validators.minLength(6))]});

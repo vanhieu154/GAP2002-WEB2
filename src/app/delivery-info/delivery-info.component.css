@@ -4,8 +4,22 @@
   margin: 0 0;
   overflow-x: auto;
 }
-
-
+.dia-chi-2{
+  margin-top: 30px;
+}
+.dia-chi-cua-toi{
+  font-size:18px ;
+  font-weight: bold;
+}
+.macdinh{
+  border:1px solid var(--darkbrown);
+  width: 20%;
+  text-align: center;
+  color: #6B4932;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: var(--lightpink);
+}
 table {
   border-collapse: collapse;
   width: 100%;

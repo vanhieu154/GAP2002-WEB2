@@ -32,7 +32,7 @@ export class CartService {
       account.cart.cartItems = []; // Khởi tạo 'cartItems' là một mảng trống nếu không tồn tại
     }
     const _id = account._id;
-    let cartItemss=account.cart.cartItems
+    let cartItemss=account.cart
     if(cartTemp!= null){
       for (let i = 0; i < cartTemp.length; i++) {
         cartItemss.push(new CartItem(cartTemp[i]._id, cartTemp[i].quantity));
@@ -51,6 +51,8 @@ export class CartService {
       localStorage.removeItem('Cart')
     }
     cartItemss.push(new CartItem(product._id, quantity));
+    console.log(cartItemss);
+
     for (let i = 0; i < cartItemss.length; i++) {
       for (let j = i+1; j < cartItemss.length; j++) {
         if(cartItemss[i].productID==cartItemss[j].productID){
@@ -62,11 +64,14 @@ export class CartService {
         }
       }
     }
+    console.log(account.cart);
+    account.cart.cartItems=cartItemss
     sessionStorage.setItem('Account', JSON.stringify(account))
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8');
     const requestOptions: Object = {
-      headers: headers
+      headers: headers,
+      responseType:"text"
     };
     return this.http.put<Cart>("http://localhost:4000/cart/"+_id,account.cart, requestOptions).pipe(
       retry(3),
@@ -76,37 +81,25 @@ export class CartService {
   public createCartproduct(allProducts:IProduct[]){
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     this.cartAddProduct=[]
-    let cartItemss=account.cart.cartItems
-    for (let i = 0; i < allProducts.length; i++) {
-      for (let j = 0; j < cartItemss.length; j++) {
-        if (allProducts[i]._id===cartItemss[j].productID) {
-          this.cartAddProduct[this.cartAddProduct.length] = allProducts[i];
-          this.cartAddProduct[this.cartAddProduct.length - 1].quantity = cartItemss[j].quantity;
-
-          if(allProducts[i].Discount>0){
-            this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price-allProducts[i].Price*allProducts[i].Discount /100
-          }else{
-            this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price
+    let cartItemss=account.cart
+    if(cartItemss!=null)
+    {
+      for (let i = 0; i < allProducts.length; i++) {
+        for (let j = 0; j < cartItemss.length; j++) {
+          if (allProducts[i]._id===cartItemss[j].productID) {
+            this.cartAddProduct[this.cartAddProduct.length] = allProducts[i];
+            this.cartAddProduct[this.cartAddProduct.length - 1].quantity = cartItemss[j].quantity;
+            if(allProducts[i].Discount>0){
+              this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price-allProducts[i].Price*allProducts[i].Discount /100
+            }else{
+              this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price
+            }
+            this.cartAddProduct[this.cartAddProduct.length - 1].total = this.cartAddProduct[this.cartAddProduct.length - 1].price * cartItemss[j].quantity;
           }
-          this.cartAddProduct[this.cartAddProduct.length - 1].total = this.cartAddProduct[this.cartAddProduct.length - 1].price * cartItemss[j].quantity;
-          // for (let i = 0; i < this.cartAddProduct.length - 1; i++) {
-          //   for (let j = i + 1; j < this.cartAddProduct.length; j++) {
-          //     if (this.cartAddProduct[i].MaSP == this.cartAddProduct[j].MaSP) {
-          //       this.cartAddProduct[i].quantity += this.cartAddProduct[j].quantity;
-          //       this.cartAddProduct[i].total += this.cartAddProduct[j].total;
-          //       this.cartAddProduct.splice(j, 1);
-          //       if(this.cartAddProduct[i].quantity>allProducts[i].Soluong){
-          //         this.cartAddProduct[i].quantity=allProducts[i].Soluong
-          //         this.cartAddProduct[i].total=this.cartAddProduct[i].price*this.cartAddProduct[i].quantity
-          //       }
-          //     }
-          //   }
-          // }
         }
-
       }
-
     }
+    this.cartAddProduct[this.cartAddProduct.length - 1].completed=false
     sessionStorage.setItem("Cart", JSON.stringify(this.cartAddProduct));
     this.loadCartDB()
     this.cartUpdated.next();
@@ -114,7 +107,6 @@ export class CartService {
   public addToCart(product: any,quantity:number) {
     this.cartAddProduct[this.cartAddProduct.length] = product;
     this.cartAddProduct[this.cartAddProduct.length - 1].quantity = quantity;
-
     if(product.Discount>0){
       this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Price-product.Price*product.Discount /100
     }else{
@@ -134,8 +126,8 @@ export class CartService {
         }
       }
     }
+    this.cartAddProduct[this.cartAddProduct.length - 1].completed=false
     localStorage.setItem("Cart", JSON.stringify(this.cartAddProduct));
-
     this.loadCart();
     this.cartUpdated.next();
   }
@@ -149,7 +141,7 @@ export class CartService {
   public deleteProductDB(i:number):Observable<Cart>{
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     let CartP= JSON.parse(sessionStorage.getItem('Cart')||'{}')
-    let cartItemss=account.cart.cartItems
+    let cartItemss=account.cart
     const _id = account._id;
     cartItemss.splice(i,1)
     CartP.splice(i,1)

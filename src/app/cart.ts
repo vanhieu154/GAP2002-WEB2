@@ -1,7 +1,6 @@
 export class Cart {
   constructor(
-    public cartItems: CartItem[] = [],
-    public cDate: Date = new Date()
+    public cartItems: CartItem[] = []
   ) {}
 }
 export class CartItem {

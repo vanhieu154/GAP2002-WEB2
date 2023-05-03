@@ -217,7 +217,17 @@ export class CartComponent {
 
   createOrder(){
     this.tempProduct=this.cartProduct.filter(c=>c.completed==true)
-    localStorage.setItem('Order',JSON.stringify(this.cartProduct))
+    if(this.tempProduct!=null){
+      localStorage.setItem('Order',JSON.stringify(this.tempProduct))
+      this.router.navigate(['/DeliveryInfor'])
+    }else{
+
+
+      console.log('chưa có sản phẩm trong giỏ hàng');
+
+
+    }
+
   }
 
 
