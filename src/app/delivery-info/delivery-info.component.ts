@@ -12,6 +12,7 @@ import { Address } from '../address';
 import { CartService } from '../cart.service';
 import { Order, OrderItem } from '../order'  ;
 import { OrderService } from '../order.service';
+import { CartItem } from '../cart';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -59,13 +60,19 @@ account=new User();
 defaultAddress=new Address()
 cartProducts: any[]=[];
 public cartItemCount = 0;
+tempCartProduct: any[]=[]
+tempCart:any[]=[]
+allProduct:any[]=[]
   constructor(private formBuilder: FormBuilder,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService) {
     this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
     this.tempOrder= JSON.parse(localStorage.getItem('Order') || '{}');
-    console.log(this.tempOrder);
     for (let i = 0; i < this.tempOrder.length; i++) {
       this.pay+=this.tempOrder[i].total
     }
+    this.productService.getProducts().subscribe({
+      next:(data)=>{this.allProduct=data},
+      error:(err)=>{this.errMessage=err}
+    })
     this.addressService.getAddress(this.account._id).subscribe({
       next: (data) => {
         this.myAddresss = data
@@ -79,15 +86,28 @@ public cartItemCount = 0;
     }else{
       cartService.loadCart()
     }
+    this.cartItemCount = cartService.cartAddProduct.length;
+    this.cartProducts = cartService.cartAddProduct;
     cartService.getCartUpdatedListener().subscribe(() => {
       this.cartItemCount = cartService.cartAddProduct.length;
       this.cartProducts = cartService.cartAddProduct;
+
     });
+    console.log(this.cartProducts);
+
     for (let i = 0; i < this.tempOrder.length; i++) {
       this.order.orderItems.push(new OrderItem(this.tempOrder[i]._id,this.tempOrder[i].quantity,this.tempOrder[i].Discount))
     }
     this.order.userId=this.account._id,
     this.order.cDate=new Date()
+    const idsToRemove = this.tempOrder.map(order => order._id);
+    this.tempCartProduct = this.cartProducts.filter(product => !idsToRemove.includes(product._id));
+    // const accountcc=this.account
+    // accountcc.cart=this.tempCartProduct
+    // console.log(this.tempCartProduct);
+
+    // console.log( accountcc);
+
   }
 
   selectAddress(address: Address) {
@@ -169,6 +189,24 @@ public showText() {
       },
       error:(err)=>{this.errMessage=err}
     })
+    const idsToRemove = this.tempOrder.map(order => order._id);
+    this.tempCartProduct = this.cartProducts.filter(product => !idsToRemove.includes(product._id));
+
+    for (let i = 0; i < this.tempCartProduct.length; i++) {
+      this.tempCart.push(new CartItem(this.tempCartProduct[i]._id, this.tempCartProduct[i].quantity));
+    }
+    this.account.cart=this.tempCart
+    this.cartService.updateCart(this.account._id,this.tempCart).subscribe({
+      next:(data)=>{
+        this.account=data,
+        console.log(data);
+
+      },
+      error:(err)=>{this.errMessage=err}
+    })
+    sessionStorage.setItem("Account",JSON.stringify(this.account))
+    this.cartService.createCartproduct(this.allProduct)
+
   }
 
 

@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit  {
   hidden = false;
   cartProducts: any[]=[];
   allProducts:any[]=[];
-  tempProduct:any[]=[]
+  tempProduct:any=null
   constructor(private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
 
     if (sessionStorage.getItem('checkLogin') === '1') {
@@ -293,8 +293,11 @@ export class HeaderComponent implements OnInit  {
     }
   }
   createOrder(){
+    // this.tempProduct=null
     this.tempProduct=this.cartProducts.filter(c=>c.completed==true)
-    if(this.tempProduct!=null){
+    if(this.tempProduct.length>0){
+      console.log( this.tempProduct);
+
       localStorage.setItem('Order',JSON.stringify(this.tempProduct))
       this.router.navigate(['/DeliveryInfor'])
     }else{
@@ -305,7 +308,10 @@ export class HeaderComponent implements OnInit  {
 
     }
   }
-
+  isBrandComplete(brand: string): boolean {
+    const brandItems = this.cartProducts.filter(c => c.Hang === brand);
+    return brandItems.length > 0 && brandItems.every(c => c.completed);
+  }
   showHeaderList(): void {
     const element = document.getElementById("header__list-container");
     if (element) {

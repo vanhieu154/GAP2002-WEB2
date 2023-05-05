@@ -217,7 +217,7 @@ export class CartComponent {
 
   createOrder(){
     this.tempProduct=this.cartProduct.filter(c=>c.completed==true)
-    if(this.tempProduct!=null){
+    if(this.tempProduct.length>0){
       localStorage.setItem('Order',JSON.stringify(this.tempProduct))
       this.router.navigate(['/DeliveryInfor'])
     }else{

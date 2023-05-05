@@ -6,6 +6,7 @@ import { ProductService } from './product.service';
 import data from '@iconify/icons-mdi/target';
 import { IProduct } from './product';
 import { AuthService } from './auth.service';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class CartService {
 
   }
 
-  public addToCartDB(product:any, quantity: number):Observable<Cart> {
+  public addToCartDB(product:any, quantity: number): Observable<Cart>{
     const cartTemp=JSON.parse(localStorage.getItem('Cart') || '{}');
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     if (!account.cart) {
@@ -67,7 +68,6 @@ export class CartService {
     console.log(account.cart);
     account.cart.cartItems=cartItemss
     sessionStorage.setItem('Account', JSON.stringify(account))
-
     const headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8');
     const requestOptions: Object = {
       headers: headers,
@@ -78,11 +78,23 @@ export class CartService {
       catchError(this.handleError)
     );
   }
+  updateCart(_id:any,cart:any): Observable<User>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8');
+    const requestOptions: Object = {
+      headers: headers,
+      responseType:"text"
+    };
+    return this.http.put<User>("http://localhost:4000/cart/"+_id,cart, requestOptions).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
+
   public createCartproduct(allProducts:IProduct[]){
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     this.cartAddProduct=[]
     let cartItemss=account.cart
-    if(cartItemss!=null)
+    if(cartItemss.length>0)
     {
       for (let i = 0; i < allProducts.length; i++) {
         for (let j = 0; j < cartItemss.length; j++) {
