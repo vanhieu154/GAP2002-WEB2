@@ -45,8 +45,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { CommonModule, DatePipe } from '@angular/common';
-
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -68,7 +68,6 @@ import { CommonModule, DatePipe } from '@angular/common';
     PromotionPageComponent,
     ContactPageComponent,
     AccountPageComponent,
-
     ForgetPassComponent,
     PaymentComponent,
     SetUpPasswordComponent,
@@ -92,7 +91,7 @@ import { CommonModule, DatePipe } from '@angular/common';
     MatNativeDateModule,
     MatStepperModule,
     MatExpansionModule,
-
+    MatTabsModule,
     // NgbModule
     FormsModule,
     ReactiveFormsModule,
@@ -101,6 +100,8 @@ import { CommonModule, DatePipe } from '@angular/common';
     MatBadgeModule,
     MatDialogModule,
     MatButtonModule,
+    MatSidenavModule,
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

@@ -13,6 +13,7 @@ import { Address } from '../address';
 import { AddressService } from '../address.service';
 import { AuthService } from '../auth.service';
 import { MatStepper } from '@angular/material/stepper';
+import { OrderService } from '../order.service';
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
@@ -32,11 +33,7 @@ export class AccountPageComponent implements OnInit {
   myOrder=false;
   myOrderDetail=false;
 
-  waitConfirmOrder=true;
-  waitPickUp=false
-  inDelivering=false
-  delivered=false
-  cancelled=false
+
 
   myNotification=false;
 
@@ -62,9 +59,27 @@ export class AccountPageComponent implements OnInit {
   errMesage: any;
 
   defaultAddress=new Address()
-  constructor(private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService) {
-    this.cities=[]
 
+  waitConfirmOrder:any[]=[];
+  waitPickUp:any[]=[]
+  inDelivering:any[]=[]
+  delivered:any[]=[]
+  cancelled:any[]=[]
+
+  constructor(private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService, private orderService:OrderService) {
+    this.cities=[]
+    console.log(this.waitPickUp.length);
+
+    // this.orderService.getOrders().subscribe({
+    //   next:(data)=>{
+    //     this.waitConfirmOrder = data.filter((order: { status: number; }) => order.status === 0 );
+    //     this.waitPickUp = data.filter((order: { status: number; }) => order.status === 1 );
+    //     this.inDelivering = data.filter((order: { status: number; }) => order.status === 2 );
+    //     this.delivered = data.filter((order: { status: number; }) => order.status === 3 );
+    //     this.cancelled = data.filter((order: { status: number; }) => order.status === 4 );
+    //   },
+    //   error:(err)=>{this.errMesage=err}
+    // })
     this.locationService.getCities().subscribe( {
       next:(data)=>{this.cities=data},
       error:(err)=>(this.errMesage=err)
@@ -160,13 +175,6 @@ export class AccountPageComponent implements OnInit {
     this.myAddress=myAddress;
     this.changePass=changePass;
     this.myProfileP=myProfileP;
-  }
-  showOrderStatus( waitConfirmOrder:boolean,waitPickUp:boolean,inDelivering:boolean,delivered:boolean,cancelled:boolean){
-    this.waitConfirmOrder=waitConfirmOrder;
-    this.waitPickUp=waitPickUp;
-    this.inDelivering=inDelivering;
-    this.delivered=delivered;
-    this.cancelled=cancelled;
   }
   showModal(){
     this.showmodal=true
@@ -393,6 +401,7 @@ export class AccountPageComponent implements OnInit {
       return this.secondFormGroup.hasError('password') ?  'Mật khẩu không hợp lệ':'' ;
     }
   }
+
 
 
 

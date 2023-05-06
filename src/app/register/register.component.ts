@@ -113,10 +113,7 @@ export class RegisterComponent {
     );
   }
   onSubmit() {
-    this.router.navigate(['otp_register'])
-
-
-
+    this.router.navigate(['otp_register',this.phoneNumber.value])
     const user = this.getUserFromForm();
     console.log(user);
     this.authService.addUser(user).subscribe({

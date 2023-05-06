@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-otp-register',
@@ -6,19 +7,54 @@ import { Component } from '@angular/core';
   styleUrls: ['./otp-register.component.css']
 })
 export class OtpRegisterComponent {
-  phoneNumber!: string;
+  phoneNumber: any;
 
-  constructor() { }
+  constructor(private router:Router,private activateRoute:ActivatedRoute) {
+    activateRoute.paramMap.subscribe(
+      (param)=>{
+        this.phoneNumber=param.get('phoneNumber')
+      }
+    )
+   }
 
   ngOnInit() {
-    var temp= localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : [];
+    // var temp= localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : [];
 
     // const temp = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')):[];
-    this.phoneNumber = temp[temp.length-1].phone;
-    this.Verify();
+    // this.phoneNumber =  temp[temp.length-1].phone;
+    function OTPInput(): void {
+      const inputs = document.querySelectorAll<HTMLInputElement>('#otp > *[id]');
+
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('keydown', function (event: KeyboardEvent): void {
+          if (event.key === "Backspace") {
+            inputs[i].value = '';
+            if (i !== 0)
+              (inputs[i - 1] as HTMLInputElement).focus();
+          } else {
+            if (i === inputs.length - 1 && inputs[i].value !== '') {
+              return;
+            } else if (event.keyCode > 47 && event.keyCode < 58) { //0-9 only
+              inputs[i].value = event.key;
+              if (i !== inputs.length - 1)
+                (inputs[i + 1] as HTMLInputElement).focus();
+              event.preventDefault();
+            } else if (event.keyCode > 64 && event.keyCode < 91) {
+              inputs[i].value = String.fromCharCode(event.keyCode);
+              if (i !== inputs.length - 1)
+                (inputs[i + 1] as HTMLInputElement).focus();
+              event.preventDefault();
+            }
+          }
+        });
+      }
+    }
+
+    OTPInput();
+
   }
 
-  Verify(): void
+  Verify()
   {
     const otp1 = (<HTMLInputElement>document.getElementById('first')).value;
     const otp2 = (<HTMLInputElement>document.getElementById('second')).value;
@@ -28,8 +64,7 @@ export class OtpRegisterComponent {
     const otp6 = (<HTMLInputElement>document.getElementById('sixth')).value;
 
     if(otp1 === '1' && otp2 === '2' && otp3 === '3' && otp4 === '4' && otp5 === '5' && otp6 === '6') {
-
-      window.location.href="./register-successfully.html"
+      this.router.navigate(['RegisterSuccessfull'])
     } else {
       alert("Nhập mã otp sai vui lòng nhập lại")
     return;
@@ -37,36 +72,7 @@ export class OtpRegisterComponent {
   }
 
 }
-// function OTPInput() {
-//   const inputs = document.querySelectorAll<HTMLInputElement>('#otp > *[id]');
 
-//   for (let i = 0; i < inputs.length; i++) {
-//     inputs[i].addEventListener('keydown', function (event: KeyboardEvent) {
-//         if (event.key === "Backspace") {
-//           inputs[i].value = '';
-//           if (i !== 0)
-//             (inputs[i - 1] as HTMLInputElement).focus();
-//         } else {
-//           if (i === inputs.length - 1 && inputs[i].value !== '') {
-//             return true;
-//           } else if (event.keyCode > 47 && event.keyCode < 58) { //0-9 only
-//             inputs[i].value = event.key;
-//             if (i !== inputs.length - 1)
-//               (inputs[i + 1] as HTMLInputElement).focus();
-//             event.preventDefault();
-//           } else if (event.keyCode > 64 && event.keyCode < 91) {
-//             inputs[i].value = String.fromCharCode(event.keyCode);
-//             if (i !== inputs.length - 1)
-//               (inputs[i + 1] as HTMLInputElement).focus();
-//             event.preventDefault();
-//           }
-//         }
-//       });
-//   }
-//   return;
-// }
-
-// OTPInput();
 
 
 

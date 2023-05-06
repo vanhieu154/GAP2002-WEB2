@@ -195,12 +195,11 @@ public showText() {
     for (let i = 0; i < this.tempCartProduct.length; i++) {
       this.tempCart.push(new CartItem(this.tempCartProduct[i]._id, this.tempCartProduct[i].quantity));
     }
-    this.account.cart=this.tempCart
+    // this.account.cart=this.tempCart
     this.cartService.updateCart(this.account._id,this.tempCart).subscribe({
       next:(data)=>{
         this.account=data,
         console.log(data);
-
       },
       error:(err)=>{this.errMessage=err}
     })

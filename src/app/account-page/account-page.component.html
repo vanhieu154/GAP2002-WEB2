@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="col myaccount-body-right">
+        <div class="col-8 myaccount-body-right">
             <!-- Hồ sơ của tôi -->
             <div class="body__container--hosocuatoi" [class.activate]="myProfile">
                 <div container text-center>
@@ -348,11 +348,249 @@
             </div>
             <!--Order  -->
             <div style="display: none;" class="body__container--Order" [class.activate]="myOrder">
-                <!--  -->
+              <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+                <mat-tab  label="Chờ xác nhận">
+                  <!-- Chờ xác nhận -->
+                  <ng-container *ngIf=" waitConfirmOrder.length>0">
+                    <div class="row myaccount-body-right-top-wait-confirm cho-xac-nhan" >
+                      <div id="wait-confirm-container">
+                        <!-- html+='<div class="row">';
+                        html+='<div class="col">';
+                          <ng-container *ngFor="let p of waitConfirmOrder">
+                            html+='<p style="text-align: left;margin-left: 5%;">'+p[a].Hang+'</p>';
+                            html+='</div>';
+                            html+='<div class="col">';
+                            html+='<p style="text-align: right;margin-right:20%">Chờ xác nhận</p>';
+                            html+='</div>';
+                            html+='</div>';
+                            html+='<hr class="hr_style">';
+                            html+='<div class="row" style="align-items: center">';
+                            html+='<div class="col-2"> <img class="img-order" src="./access/Img/sanpham/'+p[a].Hinhanh[0]+'" alt=""></div>';
+                            html+='<div class="col information" style="padding-left: 20px;">';
+                            html+='<p>'+p[a].TenSP+'</p>';
+                            html+='<p>Số lượng: '+p[a].quantity+'</p>';
+                            html+='</div>';
+                            html+='<div class="col price">';
+                            <ng-container *ngIf=""></ng-container>
+                              html+='</div>';
+                              html+='</div>';
+                              html+='<hr class="hrr__style">'; -->
+                          <!-- </ng-container> -->
+                      </div>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf=" waitConfirmOrder.length==00">
+                    <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
+                    <div  class=" text-center chua-co-don-hang" >
+                      <p>Chưa có đơn hàng nào </p>
+                    </div>
+                  </ng-container>
+                </mat-tab>
+                <mat-tab  label="Chờ lấy hàng">
+                  <!-- Chờ lấy hàng -->
+                  <ng-container *ngIf="waitPickUp.length>0">
+                    <div class="row myaccount-body-right-top-wait-confirm cho-lay-hang" >
+                      <div class="row">
+                          <div class="col">
+                              <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
+                          </div>
+                          <div class="col">
+                              <p style="text-align: right;margin-right:20%;margin-top:10%">
+                                  <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+                                  Lấy hàng thành công | <span style="font-weight: bold;">Chờ lấy hàng</span>
+                              </p>
+                          </div>
+                      </div>
+                      <hr class="hr_style">
+                      <div class="row">
+                          <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                          </div>
+                          <div class="col information">
+                              <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                              <p>Số lượng: 1</p>
+                          </div>
+                          <div class="col price">
+                              <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                          </div>
+                      </div>
+                      <hr class="hrr__style">
+                      <div class="row total__bill">
+                          <p>Tổng số tiền:
+                              <h2>120,000<sup>đ</sup></h2>
+                      </div>
+                      <div class="row">
+                          <div class="col"></div>
+                          <div class="col"></div>
+                          <div class="col">
+                              <button type="button" class="btn btn-view ">Xem chi tiết đơn hàng</button>
+                          </div>
+                      </div>
+                  </div>
+                  </ng-container>
+                  <ng-container *ngIf="waitPickUp.length==0">
+                    <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
+                    <div  class=" text-center chua-co-don-hang" >
+                      <p>Chưa có đơn hàng nào đang chờ lấy hàng</p>
+                    </div>
+                  </ng-container>
+                </mat-tab>
+                <mat-tab  label="Đang giao">
+                <!-- Đang giao -->
+                  <ng-container *ngIf="inDelivering.length>0">
+                    <div class="row myaccount-body-right-top-wait-confirm dang-giao" >
+                      <div class="row">
+                          <div class="col">
+                              <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
+                          </div>
+                          <div class="col">
+                              <p style="text-align: right;margin-right:20%;margin-top:10%">
+                                  <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+                                  Lấy hàng thành công | <span style="font-weight: bold;">Đang giao</span>
+                              </p>
+                          </div>
+                      </div>
+                      <hr class="hr_style">
+                      <div class="row">
+                          <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                          </div>
+                          <div class="col information">
+                              <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                              <p>Số lượng: 1</p>
+                          </div>
+                          <div class="col price">
+                              <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                          </div>
+                      </div>
+                      <hr class="hrr__style">
+                      <div class="row total__bill">
+                          <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
+                          </p>
+                      </div>
+                      <div class="row">
+                          <div class="col"></div>
+                          <div class="col"></div>
+                          <div class="col">
+                              <button type="button" class="btn btn-view">Đã nhận được hàng</button>
+                          </div>
+                      </div>
+                  </div>
+                  </ng-container>
+                  <ng-container *ngIf="inDelivering.length==0">
+                    <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
+                    <div  class=" text-center chua-co-don-hang" >
+                      <p>Chưa có đơn hàng nào đang giao</p>
+                    </div>
+                  </ng-container>
+
+                </mat-tab>
+                <mat-tab  label="Đã giao">
+                    <!-- Đã giao -->
+                    <ng-container *ngIf=" delivered.length>0">
+                      <div class="row myaccount-body-right-top-wait-confirm da-giao" >
+                        <div class="row">
+                            <div class="col">
+                                <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
+                            </div>
+                            <div class="col">
+                                <p style="text-align: right;margin-right:20%;margin-top:10%">
+                                    <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
+                                    Lấy hàng thành công | <span style="font-weight: bold;">Đã giao</span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="hr_style">
+                        <div class="row">
+                            <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                            </div>
+                            <div class="col information">
+                                <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                                <p>Số lượng: 1</p>
+                            </div>
+                            <div class="col price">
+                                <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                            </div>
+                        </div>
+                        <hr class="hrr__style">
+                        <div class="row total__bill">
+                            <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col">
+                                <button type="button" class="btn btn-view btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Đánh giá</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-view">Mua lại</button>
+                            </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf=" delivered.length==0">
+                      <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
+                      <div  class=" text-center chua-co-don-hang" >
+                        <p>Chưa có đơn hàng nào đã giao</p>
+                      </div>
+                    </ng-container>
+                </mat-tab>
+                <mat-tab  label="Đã hủy">
+                  <!-- Đã hủy -->
+                  <ng-container *ngIf="cancelled.length>0">
+                    <div class="row myaccount-body-right-top-wait-confirm da-huy" id="da_huy"   >
+                      <div class="row">
+                          <div class="col">
+                              <p style="text-align: left;margin-left: 5%;">Tên Nhãn Hàng</p>
+                          </div>
+                          <div class="col">
+                              <p style="text-align: right;margin-right:20%">Đã hủy</p>
+                          </div>
+                      </div>
+                      <hr class="hr_style">
+                      <div class="row">
+                          <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
+                          </div>
+                          <div class="col information">
+                              <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
+                              <p>Số lượng: 1</p>
+                          </div>
+                          <div class="col price">
+                              <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
+                          </div>
+                      </div>
+                      <hr class="hrr__style">
+                      <div class="row total__bill">
+                          <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
+                          </p>
+                      </div>
+                      <div class="row">
+                          <div class="col"></div>
+                          <div class="col">
+                              <button type="button" class="btn btn-view">Mua lại</button>
+                          </div>
+                          <div class="col">
+                              <button type="button" class="btn btn-view">Chi tiết hủy đơn</button>
+                          </div>
+                      </div>
+                  </div>
+                  </ng-container>
+                  <ng-container *ngIf="cancelled.length==0">
+                    <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
+                      <div  class=" text-center chua-co-don-hang" >
+                        <p>Bạn chưa hủy đơn hàng nào</p>
+                      </div>
+                  </ng-container>
+
+                </mat-tab>
+                <mat-tab  label="Trả hàng/Hoàn tiền">
+
+                </mat-tab>
+              </mat-tab-group>
+              <!--  -->
                 <!-- top -->
                 <div class="top--header">
                     <div class="row myaccount-body-right-top">
-                        <div class="col myaccount-body-right-top-confirm"><a  (click)="showOrderStatus(true,false,false,false,false)" >Chờ xác nhận</a>
+
+                        <!-- <div class="col myaccount-body-right-top-confirm"><a  (click)="showOrderStatus(true,false,false,false,false)" >Chờ xác nhận</a>
                         </div>
                         <div class="col myaccount-body-right-top-cho-lay-hang"><a  (click)="showOrderStatus(false,true,false,false,false)">Chờ lấy hàng</a>
                         </div>
@@ -363,174 +601,19 @@
                         <div class="col myaccount-body-right-top-da-huy"><a  (click)="showOrderStatus(false,false,false,false,true)">Đã hủy</a>
                         </div>
                         <div class="col-3 myaccount-body-right-top-tra-hang"><a  (click)="showOrderStatus(true,false,false,false,false)">Trả hàng/Hoàn tiền</a>
-                        </div>
-
-                        <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
-                    </div>
-                    <div style="display: none;"  class="row text-center chua-co-don-hang" >
-                        <p>Chưa có đơn hàng nào</p>
-                    </div>
-                </div>
-                <!-- Chờ xác nhận -->
-                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm cho-xac-nhan" [class.activate]="waitConfirmOrder">
-                    <div id="wait-confirm-container">
+                        </div> -->
 
                     </div>
-                </div>
-                <!-- Chờ lấy hàng -->
-                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm cho-lay-hang" [class.activate]="waitPickUp">
-                    <div class="row">
-                        <div class="col">
-                            <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
-                        </div>
-                        <div class="col">
-                            <p style="text-align: right;margin-right:20%;margin-top:10%">
-                                <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
-                                Lấy hàng thành công | <span style="font-weight: bold;">Chờ lấy hàng</span>
-                            </p>
-                        </div>
-                    </div>
-                    <hr class="hr_style">
-                    <div class="row">
-                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
-                        </div>
-                        <div class="col information">
-                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <div class="col price">
-                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-                        </div>
-                    </div>
-                    <hr class="hrr__style">
-                    <div class="row total__bill">
-                        <p>Tổng số tiền:
-                            <h2>120,000<sup>đ</sup></h2>
-                    </div>
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col">
-                            <button type="button" class="btn btn-view ">Xem chi tiết đơn hàng</button>
-                        </div>
-                    </div>
+
+
                 </div>
 
-                <!-- Đang giao -->
-                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm dang-giao" [class.activate]="inDelivering">
-                    <div class="row">
-                        <div class="col">
-                            <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
-                        </div>
-                        <div class="col">
-                            <p style="text-align: right;margin-right:20%;margin-top:10%">
-                                <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
-                                Lấy hàng thành công | <span style="font-weight: bold;">Đang giao</span>
-                            </p>
-                        </div>
-                    </div>
-                    <hr class="hr_style">
-                    <div class="row">
-                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
-                        </div>
-                        <div class="col information">
-                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <div class="col price">
-                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-                        </div>
-                    </div>
-                    <hr class="hrr__style">
-                    <div class="row total__bill">
-                        <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col">
-                            <button type="button" class="btn btn-view">Đã nhận được hàng</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Đã giao -->
-                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm da-giao" [class.activate]="delivered">
-                    <div class="row">
-                        <div class="col">
-                            <p style="text-align: start; margin-left: 5%;margin-top:10%;">Tên Nhãn Hàng</p>
-                        </div>
-                        <div class="col">
-                            <p style="text-align: right;margin-right:20%;margin-top:10%">
-                                <!-- <iconify-icon icon="tabler:truck-delivery" width="30" height="30"></iconify-icon> -->
-                                Lấy hàng thành công | <span style="font-weight: bold;">Đã giao</span>
-                            </p>
-                        </div>
-                    </div>
-                    <hr class="hr_style">
-                    <div class="row">
-                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
-                        </div>
-                        <div class="col information">
-                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <div class="col price">
-                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-                        </div>
-                    </div>
-                    <hr class="hrr__style">
-                    <div class="row total__bill">
-                        <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col">
-                            <button type="button" class="btn btn-view btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Đánh giá</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-view">Mua lại</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Đã hủy -->
-                <div style="display: none;" class="row myaccount-body-right-top-wait-confirm da-huy" id="da_huy"   [class.activate]="cancelled">
-                    <div class="row">
-                        <div class="col">
-                            <p style="text-align: left;margin-left: 5%;">Tên Nhãn Hàng</p>
-                        </div>
-                        <div class="col">
-                            <p style="text-align: right;margin-right:20%">Đã hủy</p>
-                        </div>
-                    </div>
-                    <hr class="hr_style">
-                    <div class="row">
-                        <div class="col-2"> <img class="img-order" src="./assets/Img/sanpham/gap01/gap01_1.webp" alt="">
-                        </div>
-                        <div class="col information">
-                            <p>Áo sơ mi nữ xù họa tiết nhỏ</p>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <div class="col price">
-                            <span style="color: red;font-size:20px">120.000<sup>đ</sup></span><del><span style="color: darkgray;">(150.000)<sup>đ</sup></span></del>
-                        </div>
-                    </div>
-                    <hr class="hrr__style">
-                    <div class="row total__bill">
-                        <p>Tổng số tiền: <span>120,000<sup>đ</sup></span>
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col">
-                            <button type="button" class="btn btn-view">Mua lại</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-view">Chi tiết hủy đơn</button>
-                        </div>
-                    </div>
-                </div>
+
+
+
+
+
+
             </div>
             <div  class="body__container--thongbao" [class.activate]="myNotification">
                 <!--  -->

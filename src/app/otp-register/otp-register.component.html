@@ -3,7 +3,7 @@
   <div class="input-otp-header">
       Vui lòng nhập mã OTP để xác minh </div>
       <div class="text">Mã xác minh của bạn sẽ được gửi bằng tin nhắn đến <br>
-      <span id="phoneNumber">000000000</span></div>
+      <span id="phoneNumber">{{phoneNumber}}</span></div>
 <!-- <form action="./dangkythanhcong.html" method="get"  data-autosubmit="false" autocomplete="off"> -->
   <div class="mb-6 text-center">
       <div id="otp" class="flex justify-center">
@@ -16,11 +16,11 @@
       </div>
   </div>
   <div >Bạn vẫn chưa nhận được?
-      <a href="#">Gửi lại</a>
+      <a >Gửi lại</a>
   </div>
   <div class="button">
   <!-- <button type="submit">Xác nhận</button> -->
-      <button onclick="Verify()">Xác nhận</button>
+      <button (click)="Verify()">Xác nhận</button>
   </div>
 <!-- </form> -->
 </div>

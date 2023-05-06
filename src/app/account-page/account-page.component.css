@@ -459,10 +459,16 @@ label {
   text-align: right;
 
 }
+.mat-mdc-tab-header-pagination-chevron {
+  border-color:#333
+}
 .dong2 .btn-viewdetail{
   margin-right: 22%;
 }
 /* Order detail */
+.mat-mdc-tab .mdc-tab__text-label {
+  color: #333;
+}
 .body__container--OrderDetail{
   margin: 20px;
   padding: 20px;

@@ -24,7 +24,7 @@ export class CartService {
   }
 
   public addToCartDB(product:any, quantity: number): Observable<Cart>{
-    const cartTemp=JSON.parse(localStorage.getItem('Cart') || '{}');
+    // const cartTemp=JSON.parse(localStorage.getItem('Cart') || '{}');
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     if (!account.cart) {
       account.cart = new Cart();
@@ -33,24 +33,8 @@ export class CartService {
       account.cart.cartItems = []; // Khởi tạo 'cartItems' là một mảng trống nếu không tồn tại
     }
     const _id = account._id;
-    let cartItemss=account.cart
-    if(cartTemp!= null){
-      for (let i = 0; i < cartTemp.length; i++) {
-        cartItemss.push(new CartItem(cartTemp[i]._id, cartTemp[i].quantity));
-        for (let i = 0; i < cartItemss.length; i++) {
-          for (let j = i+1; j < cartItemss.length; j++) {
-            if(cartItemss[i].productID==cartItemss[j].productID){
-              cartItemss[i].quantity+=cartItemss[j].quantity
-              cartItemss.splice(j, 1);
-              if(cartItemss[i].quantity>product.Soluong){
-                cartItemss[i].quantity=product.Soluong
-              }
-            }
-          }
-        }
-      }
-      localStorage.removeItem('Cart')
-    }
+    let cartItemss=account.cart.cartItems
+    console.log();
     cartItemss.push(new CartItem(product._id, quantity));
     console.log(cartItemss);
 
@@ -93,7 +77,9 @@ export class CartService {
   public createCartproduct(allProducts:IProduct[]){
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     this.cartAddProduct=[]
-    let cartItemss=account.cart
+    let cartItemss=account.cart.cartItems
+    console.log(cartItemss);
+
     if(cartItemss.length>0)
     {
       for (let i = 0; i < allProducts.length; i++) {
@@ -101,6 +87,7 @@ export class CartService {
           if (allProducts[i]._id===cartItemss[j].productID) {
             this.cartAddProduct[this.cartAddProduct.length] = allProducts[i];
             this.cartAddProduct[this.cartAddProduct.length - 1].quantity = cartItemss[j].quantity;
+            this.cartAddProduct[this.cartAddProduct.length - 1].completed=false
             if(allProducts[i].Discount>0){
               this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price-allProducts[i].Price*allProducts[i].Discount /100
             }else{
@@ -111,7 +98,7 @@ export class CartService {
         }
       }
     }
-    this.cartAddProduct[this.cartAddProduct.length - 1].completed=false
+    console.log(this.cartAddProduct);
     sessionStorage.setItem("Cart", JSON.stringify(this.cartAddProduct));
     this.loadCartDB()
     this.cartUpdated.next();
@@ -153,7 +140,7 @@ export class CartService {
   public deleteProductDB(i:number):Observable<Cart>{
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     let CartP= JSON.parse(sessionStorage.getItem('Cart')||'{}')
-    let cartItemss=account.cart
+    let cartItemss=account.cart.cartItems
     const _id = account._id;
     cartItemss.splice(i,1)
     CartP.splice(i,1)

@@ -71,7 +71,7 @@ const routes: Routes = [
     path:"AccountPage",component:AccountPageComponent
   },
   {
-    path:"otp_register",component:OtpRegisterComponent
+    path:"otp_register/:phoneNumber",component:OtpRegisterComponent
   },
   {
     path:"otp_forgetPass",component:OtpForgetPassComponent

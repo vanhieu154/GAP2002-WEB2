@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit  {
   allProducts:any[]=[];
   tempProduct:any=null
   constructor(private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
-
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true;
       cartService.loadCartDB();
@@ -211,27 +210,26 @@ export class HeaderComponent implements OnInit  {
         if(this.user.message==null){
           this.showBox(false,false,false)
           let tempCart=JSON.parse(localStorage.getItem('Cart') || '{}');
-          if(tempCart!=null){
-            this.cartService.addToCartDB(tempCart,tempCart.quantity )
-            .subscribe({
-              next: (cart) => {
-                console.log('Cart updated:', cart);
-              },
-              error: (error) => {
-                console.log('Error updating cart:', error);
-              },
-              complete: () => {
-                console.log('Add to cart completed');
-              }
-            });
-            this.cartService.createCartproduct(this.allProducts)
-            // localStorage.removeItem('Cart')
+          if (tempCart.length>0) {
+            for (let i = 0; i < tempCart.length; i++) {
+              this.cartService.addToCartDB(tempCart[i],tempCart[i].quantity )
+              .subscribe({
+                next: (cart) => {
+                  console.log('Cart updated:', cart);
+                },
+                error: (error) => {
+                  console.log('Error updating cart:', error);
+                },
+                complete: () => {
+                  console.log('Add to cart completed');
+                }
+              });
+            }
           }
-          // console.log(this.allProducts);
+          localStorage.removeItem('Cart')
           this.cartItemCount = this.cartService.cartAddProduct.length;
           this.cartProducts = this.cartService.cartAddProduct;
-          this.cartService.createCartproduct(this.cartProducts);
-
+          this.cartService.createCartproduct(this.allProducts);
         }else{
           console.log("Đăng nhập thất bại");
 
