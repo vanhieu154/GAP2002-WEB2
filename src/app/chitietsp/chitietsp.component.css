@@ -460,6 +460,25 @@ a, ul,li{
   margin: 10px;
 }
 
+/* Đánh giá */
+.box{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.reviews{
+  padding: 10px;
+}
+.info{
+  padding: 5px 0 10px 0;
+}
+.review-body{
+  text-align: left;
+  padding-bottom: 10px;
+}
+.review-rating{
+  text-align: left;
+}
 
 /*---------------- RESPONSIVE ------------------------*/
 @media (max-width: 1023px){

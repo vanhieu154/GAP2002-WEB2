@@ -123,20 +123,25 @@
 </div>
 </div>
 
-<div class="relative-product-container" >
-    <h2>Đánh giá sản phẩm</h2>
-    <ng-container *ngFor="let p of productEvaluate">
-    <ul>
-      <li>
-        <div class="review-header">
-          <span class="review-rating">Đánh giá khách hàng: {{p.rating}}</span>
+<div class="relative-product-container box container">
+    <h2 style="margin-top: 10px;">Đánh giá sản phẩm</h2>
+  <ng-container *ngFor="let p of productEvaluate">
+    <div class="row reviews">
+      <div class="col">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 32 32" style="color: #d2beb4;">
+          <path fill="currentColor" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"></path>
+          <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"></path>
+        </svg>
+      </div>
+      <div class="col-11">
+        <div class="row info review-rating">
+          <div class="row">Tên khách hàng: {{p.cusName}}</div>
+          <div class="row">Khách hàng đánh giá: {{p.rating}}</div>
         </div>
-        <div class="review-body">
-          <p>Tên khách hàng:{{p.cusName}}</p>
-          <p>Bình luận khách hàng:{{p.comment}}</p>
-        </div>
-      </li>
-    </ul>
+        <div class="row review-body">Bình luận: {{p.comment}}</div>
+      </div>
+      <hr>
+    </div>
   </ng-container>
 </div>
 

@@ -30,7 +30,7 @@ export class RegisterComponent {
     this.dob = new FormControl('', Validators.required);
     this.phoneNumber = new FormControl('', [
       Validators.required,
-      Validators.pattern(/^(03|05|08|09)\d{8}$/),
+      Validators.pattern(/^(03|05|07|08|09)\d{8}$/),
     ]);
     this.gender = new FormControl('', Validators.required);
 
