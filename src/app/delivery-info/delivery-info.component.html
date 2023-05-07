@@ -25,7 +25,6 @@
 
         <div class="row text-center content--left">
           <form >
-            <!-- <mat-radio-group formControlName="selectedAddress"> -->
               <ng-container *ngFor="let a of myAddresss | keyvalue; let i=index">
                 <ng-container *ngIf="a.value._id== defaultAddress._id">
                   <hr>
@@ -59,12 +58,13 @@
                   </div>
                 </ng-container>
               </ng-container>
-            <!-- </mat-radio-group> -->
-
-          <div class="button--gui__position">
-            <!-- <button class="button--showcontent button--gui w-100" (click)="submitForm()" type="submit" >Tiếp tục đến Thông tin giao hàng</button> -->
-            <button class="button--showcontent button--gui w-100" (click)="showContent('content2')" >Tiếp tục đến Thông tin giao hàng</button>
-          </div>
+              <hr>
+              <div class="col text-center">
+                <button type="button" class="btn btn-Themdiachi" (click)="showModal()">Thêm địa chỉ</button>
+              </div>
+              <div class="button--gui__position">
+                <button class="button--showcontent button--gui w-100" (click)="showContent('content2')" >Tiếp tục đến Thông tin giao hàng</button>
+               </div>
         </form>
 
         </div>
@@ -73,7 +73,77 @@
 
 
       </div>
-
+      <div class="modal" [class.activate]="showmodal">
+        <div class="modal__overlay"></div>
+        <div class="modal__body">
+          <div class="modal__inner">
+            <div class="container Them-dia-chi">
+              <form [formGroup]="formAddress" (ngSubmit)="addressSubmit()">
+                <br>
+                <h1 style="text-align: center;">Địa chỉ mới</h1>
+                <div class="row dong-1">
+                  <div class="col">
+                    <input matInput type="text" class="form-control" id="hovaten" placeholder="Họ và tên" formControlName="hovaten" required>
+                    <mat-error *ngIf="formAddress.controls['hovaten'].invalid && isFormInvalid">{{getErrorNameMessage()}}</mat-error>
+                  </div>
+                  <div class="col">
+                    <input matInput type="text" class="form-control" id="phonenumber" placeholder="Số điện thoại" formControlName="phonenumber" required>
+                    <mat-error *ngIf="formAddress.controls['phonenumber'].invalid && isFormInvalid">{{getErrorPhoneMessage()}}</mat-error>
+                  </div>
+                </div>
+                <div class="row dong-2">
+                  <div class="col">
+                    <select id="city" class="form-select form-select-sm mb-3" formControlName="city" (change)="onCityChange()" required>
+                      <option value="">Chọn tỉnh/thành phố</option>
+                      <option *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</option>
+                    </select>
+                    <mat-error *ngIf="formAddress.controls['city'].invalid && isFormInvalid">*Vui lòng chọn Tỉnh/Thành</mat-error>
+                  </div>
+                  <div class="col">
+                    <select class="form-select form-select-sm mb-3" id="district" formControlName="district" (change)="onDistrictChange()" required>
+                      <option value="">Chọn quận/huyện</option>
+                      <option *ngFor="let district of districts" [value]="district.Name">{{ district.Name }}</option>
+                    </select>
+                    <mat-error *ngIf="formAddress.controls['district'].invalid && isFormInvalid">*Vui lòng chọn Quận/Huyện</mat-error>
+                  </div>
+                  <div class="col">
+                    <select class="form-select form-select-sm mb-3" id="ward" formControlName="ward" (change)="onDistrictChange()" required>
+                      <option value="">Chọn phường/ xã</option>
+                      <option *ngFor="let w of Wards" [value]="w.Name">{{ w.Name }}</option>
+                    </select>
+                    <mat-error *ngIf="formAddress.controls['ward'].invalid && isFormInvalid">*Vui lòng chọn Phường/Xã</mat-error>
+                  </div>
+                </div>
+                <div class="row dong-3">
+                  <div class="col">
+                    <input matInput type="text" class="form-control" id="diachicuthe" placeholder="Địa chỉ cụ thể" formControlName="diachicuthe" required>
+                    <mat-error *ngIf="formAddress.controls['diachicuthe'].invalid && isFormInvalid">*Vui lòng nhập địa chỉ cụ thể</mat-error>
+                  </div>
+                </div>
+                <div class="row dong-4">
+                  <label for="" class="form-label">Loại địa chỉ:</label>
+                  <div class="col">
+                    <input type="radio" class="form-check-input" formControlName="addressType" value="Nhà riêng" checked>Nhà riêng
+                  </div>
+                  <div class="col">
+                    <input type="radio" class="form-check-input" formControlName="addressType" value="Căn phòng">Văn phòng
+                  </div>
+                  <mat-error *ngIf="formAddress.controls['diachicuthe'].invalid && isFormInvalid">*Vui lòng chọn loại địa chỉ</mat-error>
+                </div>
+                <div class="row dong-6">
+                  <div class="col">
+                    <button type="button" class="col complete btn" (click)="hideModal()">Trở lại</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" type="submit" class="btn complete">Hoàn thành</button>
+                  </div>
+                </div>
+                <br>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
@@ -273,3 +343,5 @@
 
 
 </div>
+
+

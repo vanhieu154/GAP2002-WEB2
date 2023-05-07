@@ -105,12 +105,6 @@ export class AccountPageComponent implements OnInit {
           this.deliveredlength=this.delivered.length+this.inDeliveringlength
         this.getOrderDetailsForStatus(this.order,this.cancelled,this.cancelledDetails,this.cancelledAddress,4)
 
-        console.log(this.waitConfirmOrderDetails);
-
-        console.log(this.waitConfirmOrderlength);
-        console.log(this.cancelledDetails);
-
-
         // this.cancelledlength=this.cancelled.length+this.deliveredlength
       },
       error:(err)=>{this.errMesage=err}
@@ -123,10 +117,10 @@ export class AccountPageComponent implements OnInit {
     this.name = new FormControl(this.account.name, Validators.required);
     this.email = new FormControl(this.account.email);
     this.dob = new FormControl(this.account.dob, Validators.required);
-    this.phoneNumber = new FormControl(this.account.phoneNumber, [
-      Validators.required,
-      Validators.pattern(/^(03|05|08|09)\d{8}$/),
-    ]);
+      this.phoneNumber = new FormControl(this.account.phoneNumber, [
+        Validators.required,
+        Validators.pattern(/^(03|05|08|09)\d{8}$/),
+      ]);
     this.gender = new FormControl(this.account.gender, Validators.required);
     this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
     this.otp = new FormControl('', [Validators.required, Validators.pattern(/^\d{4}$/)]);
@@ -261,9 +255,6 @@ export class AccountPageComponent implements OnInit {
       IsDefault: [true]
     });
     // this.myAddresss = JSON.parse(localStorage.getItem('Address') || '{}');
-    this.secondFormGroup.valueChanges.subscribe((_value)=>{
-      this.secondFormGroup.setErrors({'secondCtrl':true})
-    })
 
 
   }
@@ -459,6 +450,7 @@ export class AccountPageComponent implements OnInit {
     order.status=4
     this.orderService.updateOrder(order).subscribe({
       next:(data)=>{
+        this.cdRef.detectChanges();
         // this.order = data.find((o: any) => o.userId === order.userId);
         //  this.getOrderDetails()},
       },

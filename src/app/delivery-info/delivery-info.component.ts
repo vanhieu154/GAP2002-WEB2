@@ -2,7 +2,7 @@
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ProductService } from '../product.service';
-import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { CartService } from '../cart.service';
 import { Order, OrderItem } from '../order'  ;
 import { OrderService } from '../order.service';
 import { CartItem } from '../cart';
+import { LocationService } from '../location.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,20 +41,21 @@ export class DeliveryInfoComponent {
   IsCartProduct=false;
   order=new Order()
   tempOrder:any[]=[]
+  phoneNumber: FormControl;
 public fullname:string=''
 public email:string=''
 public phone:string=''
 public address:string=''
 public province:string=''
 public district:string=''
-public districts: string[] =['Chọn Quận/ Huyện'];
+// public districts: string[] =['Chọn Quận/ Huyện'];
 selectedProvince =null;
 selectedDistrict =null;
 public selectedOption:string=''
 public selectedPrice: any = null;
 public selectedPay='Thanh toán khi nhận hàng (COD)';
 selectedAddress=new Address();
-
+name:FormControl;
 displayPage: any;
 myAddresss:any[] = [];
 account=new User();
@@ -63,7 +65,9 @@ public cartItemCount = 0;
 tempCartProduct: any[]=[]
 tempCart:any[]=[]
 allProduct:any[]=[]
-  constructor(private formBuilder: FormBuilder,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService) {
+formAddress!:FormGroup
+
+  constructor(private locationService: LocationService,private cdRef: ChangeDetectorRef,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService,private _formBuilder: FormBuilder) {
     this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
     this.tempOrder= JSON.parse(localStorage.getItem('Order') || '{}');
     for (let i = 0; i < this.tempOrder.length; i++) {
@@ -102,12 +106,25 @@ allProduct:any[]=[]
     this.order.cDate=new Date()
     const idsToRemove = this.tempOrder.map(order => order._id);
     this.tempCartProduct = this.cartProducts.filter(product => !idsToRemove.includes(product._id));
-    // const accountcc=this.account
-    // accountcc.cart=this.tempCartProduct
-    // console.log(this.tempCartProduct);
-
-    // console.log( accountcc);
-
+    this.name = new FormControl(this.account.name, Validators.required);
+    this.phoneNumber = new FormControl(this.account.phoneNumber, [
+      Validators.required,
+      Validators.pattern(/^(03|05|08|09)\d{8}$/),
+    ]);
+    this.formAddress = this._formBuilder.group({
+      hovaten: ['', Validators.required],
+      phonenumber: ['', Validators.required],
+      city: ['', Validators.required],
+      district: ['', Validators.required],
+      ward: ['', Validators.required],
+      diachicuthe: ['', Validators.required],
+      addressType: ['', Validators.required],
+      IsDefault: [true]
+    });
+    this.locationService.getCities().subscribe( {
+      next:(data)=>{this.cities=data},
+      error:(err)=>(this.errMessage=err)
+    });
   }
 
   selectAddress(address: Address) {
@@ -118,7 +135,6 @@ activeContent = 'content1';
     this.activeContent = content;
   }
 
-
 public ngOnInit(): void{
   if (this.selectedAddress.city == "Thành phố Hồ Chí Minh") {
       this.selectedOption = 'Giao hàng trong tỉnh'
@@ -128,6 +144,7 @@ public ngOnInit(): void{
       this.selectedOption = 'Giao hàng ngoài tỉnh'
       return;
     }
+
 }
 
 
@@ -162,15 +179,20 @@ public showText() {
 
 
   get totalShip(): number {
-    if (this.selectedAddress.city === null) {
-      return 0;
+    if(this.selectedAddress != null){
+      if (this.selectedAddress.city === null) {
+        return 0;
+      }
+     else if (this.selectedAddress.city === 'Thành phố Hồ Chí Minh') {
+        return 20000;
+      }
+      else {
+        return 40000;
+      }
+    }else{
+      return 0
     }
-   else if (this.selectedAddress.city === 'Thành phố Hồ Chí Minh') {
-      return 20000;
-    }
-    else {
-      return 40000;
-    }
+
   }
 
 
@@ -207,11 +229,66 @@ public showText() {
     this.cartService.createCartproduct(this.allProduct)
 
   }
+  isFormInvalid = false;
+  showmodal=false;
+  showModal(){
+    this.showmodal=true
+    console.log(this.showmodal);
+
+  }
+  hideModal(){
+    this.showmodal=false
+    this.isFormInvalid=false
+  }
+  addressSubmit(){
+    if (this.formAddress.valid) {
+      console.log(this.formAddress.value);
+      this.addressService.addAddressToUser(this.account._id,this.formAddress.value).subscribe({
+        next:(data)=>{this.myAddresss=data},
+        error:(err)=>{this.errMessage=err}
+      })
+      this.cdRef.detectChanges();
+      this.hideModal()
+    } else {
+      this.isFormInvalid = true;
+    }
+
+  }
+  cities: any[] = [];
+  districts: any[] = [];
+  Wards: any[] = [];
+  onCityChange(): void {
+    this.districts = [];
+    this.Wards=[];
+    const selectedCity = this.cities.find(city => city.Name == this.formAddress.controls['city'].value);
+
+    if (selectedCity) {
+      this.districts = selectedCity.Districts;
+    }
 
 
+  }
+  onDistrictChange():void{
+    this.Wards=[];
+    const selectedDistrict = this.districts.find(district=>district.Name == this.formAddress.controls['district'].value);
+    if(selectedDistrict){
+      this.Wards=selectedDistrict.Wards;
+    }
+  }
+  getErrorNameMessage() {
+    if (this.name.hasError('required')||this.formAddress.controls['hovaten'].hasError('required')) {
+      return '*Vui lòng nhập họ và tên';
+    }
 
+    return this.name.hasError('name') ? 'Họ và tên không hợp lệ' : '';
+  }
+  getErrorPhoneMessage() {
+    if (this.phoneNumber.hasError('required')||this.formAddress.controls['phonenumber'].hasError('required')) {
+      return '*Vui lòng nhập số điện thoại';
+    }
 
-
+    return this.phoneNumber.hasError('pattern') ? '*Số điện thoại không hợp lệ' : '';
+  }
 }
 @Component({
   selector: 'dialog-elements-example-dialog',
