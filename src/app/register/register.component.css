@@ -24,8 +24,6 @@
   padding: 20px 0 20px;
   overflow: hidden;
   margin-top: 92px;
-  background: linear-gradient(to right,#724e34e4, #dac5ba);
-
 }
 .form{
   width: 40%;
@@ -57,6 +55,7 @@
   padding-bottom: 10px;
   border-radius: 3px;
   width: 200px;
+  color: var(--darkbrown);
 }
 .btn-dangky:hover{
   background-color: var(--darkbrown);
@@ -134,6 +133,10 @@ input.example-right-align::-webkit-inner-spin-button {
 }
 .mat-mdc-button.mat-unthemed {
   --mdc-text-button-label-text-color: var(--darkbrown);
+}
+
+.mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+  background-color: none;
 }
 @media (max-width: 1023px) and (min-width: 740px) {
   .blog{
