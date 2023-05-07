@@ -7,7 +7,7 @@
   border-radius: 3px;
   cursor: pointer;
 }
-a{
+a, ul,li{
   color: var(--black);
   text-decoration: none;
 }

@@ -362,17 +362,16 @@ label {
 }
 
 /* Chờ xác nhận */
-.myaccount-body-right-top-wait-confirm{
+.cover-order-container{
   /* display: none; */
   margin: 30px;
-
+  height: 420px;
 }
-#wait-confirm-container{
+.order-container{
   border: 2px solid rosybrown;
   border-radius: 10px;
-  justify-content: space-around;
 }
-#wait-confirm-container p{
+.order-container p{
   margin-top: 15px;
 
 }

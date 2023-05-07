@@ -21,10 +21,10 @@ export class ChitietspComponent implements OnInit{
   items: any[] = [];
   a:number=1;
   panelOpenState = false;
+  productEvaluate:any[]=[]
   public allProducts: IProduct[] = [];
   constructor(private authService:AuthService ,private cartService: CartService,public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router) {
     this.allProducts = [];
-
     activateRoute.paramMap.subscribe(
       (param)=>{
         this.id=param.get('id')
@@ -32,6 +32,14 @@ export class ChitietspComponent implements OnInit{
         {
           this._service.getProduct(this.id).subscribe({
             next:(data)=>{this.product=data},
+            error:(err)=>{this.errMessage=err}
+          })
+          this._service.getEvaluates(this.id).subscribe({
+            next:(data)=>{
+              this.productEvaluate=data,
+              console.log(data);
+
+            },
             error:(err)=>{this.errMessage=err}
           })
         }
@@ -45,6 +53,7 @@ export class ChitietspComponent implements OnInit{
       },
       error:(err)=>{this.errMessage=err}
     })
+
   }
   addProduct() {
     if(this.authService.isLoggedIn==false){

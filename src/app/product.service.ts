@@ -74,6 +74,32 @@ export class ProductService {
     retry(3),
     catchError(this.handleError))
   }
+  postEvaluate(aEvaluate:any):Observable<any>
+  {
+    const headers=new HttpHeaders().set("Content-Type","application/json;charset=utf-8")
+    const requestOptions:Object={
+      headers:headers,
+      responseType:"text"
+    }
+    return this._http.post<any>("http://localhost:4000/productEvaluate",JSON.stringify(aEvaluate),requestOptions).pipe(
+      map(res=>res as any),
+      retry(3),
+      catchError(this.handleError)
+    )
+  }
+  getEvaluates(_id:string):Observable<any>
+  {
+    const headers=new HttpHeaders().set("Content-Type","text/plain;charset=utf-8")
+    const requestOptions:Object={
+      headers:headers,
+      responseType:"text"
+    }
+    return this._http.get<any>("http://localhost:4000/productEvaluate/"+_id,requestOptions).pipe(
+      map(res=>JSON.parse(res) as Array<any>),
+      retry(3),
+      catchError(this.handleError)
+    )
+  }
   handleError(error:HttpErrorResponse){
     return throwError(()=>new Error(error.message))
   }

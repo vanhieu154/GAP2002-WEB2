@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { MyErrorStateMatcher } from './MyErrorStateMatcher';
 
 import {  FormGroupDirective, NgForm } from '@angular/forms';
@@ -14,6 +14,9 @@ import { AddressService } from '../address.service';
 import { AuthService } from '../auth.service';
 import { MatStepper } from '@angular/material/stepper';
 import { OrderService } from '../order.service';
+import { Order, OrderDetail, OrderAddress } from '../order';
+import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
@@ -31,7 +34,7 @@ export class AccountPageComponent implements OnInit {
   myProfileP=true;
 
   myOrder=false;
-  myOrderDetail=false;
+  myOrderDetail=true;
 
 
 
@@ -60,35 +63,63 @@ export class AccountPageComponent implements OnInit {
 
   defaultAddress=new Address()
 
+  order:any[]=[]
   waitConfirmOrder:any[]=[];
   waitPickUp:any[]=[]
   inDelivering:any[]=[]
   delivered:any[]=[]
   cancelled:any[]=[]
 
-  constructor(private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService, private orderService:OrderService) {
-    this.cities=[]
-    console.log(this.waitPickUp.length);
+  waitConfirmOrderDetails: any[] = [];
+  waitPickUpDetails:any[]=[]
+  inDeliveringDetails:any[]=[]
+  deliveredDetails:any[]=[]
+  cancelledDetails:any[]=[]
 
-    // this.orderService.getOrders().subscribe({
-    //   next:(data)=>{
-    //     this.waitConfirmOrder = data.filter((order: { status: number; }) => order.status === 0 );
-    //     this.waitPickUp = data.filter((order: { status: number; }) => order.status === 1 );
-    //     this.inDelivering = data.filter((order: { status: number; }) => order.status === 2 );
-    //     this.delivered = data.filter((order: { status: number; }) => order.status === 3 );
-    //     this.cancelled = data.filter((order: { status: number; }) => order.status === 4 );
-    //   },
-    //   error:(err)=>{this.errMesage=err}
-    // })
+  waitConfirmOrderAddress:any[]=[];
+  waitPickUpAddress:any[]=[]
+  inDeliveringAddress:any[]=[]
+  deliveredAddress:any[]=[]
+  cancelledAddress:any[]=[]
+
+  waitConfirmOrderlength:number=0;
+  waitPickUplength:number=0
+  inDeliveringlength:number=0
+  deliveredlength:number=0
+  cancelledlength:number=0
+  constructor(private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService, private orderService:OrderService,private pService:ProductService) {
+    this.cities=[]
+    this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
+    // this.getOrderDetails()
+    this.orderService.getOrders(this.account._id).subscribe({
+      next:(data)=>{
+        this.order=data
+
+        this.getOrderDetailsForStatus(this.order,this.waitConfirmOrder,this.waitConfirmOrderDetails,this.waitConfirmOrderAddress,0)
+         this.waitConfirmOrderlength=this.waitConfirmOrder.length
+        this.getOrderDetailsForStatus(this.order,this.waitPickUp,this.waitPickUpDetails,this. waitPickUpAddress,1)
+          this.waitPickUplength=this.waitPickUp.length+this.waitConfirmOrderlength
+        this.getOrderDetailsForStatus(this.order,this.inDelivering,this.inDeliveringDetails,this.inDeliveringAddress,2)
+          this.inDeliveringlength=this.inDelivering.length+this.waitPickUplength
+        this.getOrderDetailsForStatus(this.order,this.delivered,this.deliveredDetails,this.deliveredAddress,3)
+          this.deliveredlength=this.delivered.length+this.inDeliveringlength
+        this.getOrderDetailsForStatus(this.order,this.cancelled,this.cancelledDetails,this.cancelledAddress,4)
+
+        console.log(this.waitConfirmOrderDetails);
+
+        console.log(this.waitConfirmOrderlength);
+        console.log(this.cancelledDetails);
+
+
+        // this.cancelledlength=this.cancelled.length+this.deliveredlength
+      },
+      error:(err)=>{this.errMesage=err}
+    })
+
     this.locationService.getCities().subscribe( {
       next:(data)=>{this.cities=data},
       error:(err)=>(this.errMesage=err)
-
     });
-
-    this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
-    // this.acc = new FormControl(this.account.username, [Validators.required]);
-    // this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
     this.name = new FormControl(this.account.name, Validators.required);
     this.email = new FormControl(this.account.email);
     this.dob = new FormControl(this.account.dob, Validators.required);
@@ -110,15 +141,36 @@ export class AccountPageComponent implements OnInit {
       next: (data) => {
         this.myAddresss = data
         this.defaultAddress= data.find((p: { IsDefault: boolean; })=>p.IsDefault==true)
-
-
       },
       error: (err) => { this.errMesage = err; }
     });
   }
   formAddress!:FormGroup
-
-
+  getOrderDetailsForStatus(orders: Order[],conditionOrder:any[], detailsArray: any[], addressArray: any[], status: number) {
+    for (let i = 0; i < orders.length; i++) {
+      if (orders[i].status === status) {
+        conditionOrder.push(orders[i])
+        this.orderService.getOrderDetail(orders[i]._id).subscribe({
+          next: (data) => {
+            detailsArray.push([]);
+            detailsArray[i]=data;
+          },
+          error: (err) => {
+            this.errMesage = err;
+          },
+        });
+        this.orderService.getOrderAddress(orders[i]._id).subscribe({
+          next: (data) => {
+            addressArray.push([]);
+            addressArray[i]=data;
+          },
+          error: (err) => {
+            this.errMesage = err;
+          },
+        })
+      }
+    }
+  }
   fixProfile(){
     this.allowFix=!this.allowFix
     if (this.allowFix) {
@@ -209,7 +261,7 @@ export class AccountPageComponent implements OnInit {
       IsDefault: [true]
     });
     // this.myAddresss = JSON.parse(localStorage.getItem('Address') || '{}');
-    this.secondFormGroup.valueChanges.subscribe((value)=>{
+    this.secondFormGroup.valueChanges.subscribe((_value)=>{
       this.secondFormGroup.setErrors({'secondCtrl':true})
     })
 
@@ -336,7 +388,7 @@ export class AccountPageComponent implements OnInit {
   checkNewPassRes:string=''
   checkNewPassStatus:boolean=true
   checkNewPassValidator(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       if (control.value == '') {
         resolve({ emptyPassword: true }); // Giá trị rỗng
       } else if (control.value == this.firstFormGroup.controls['firstCtrl'].value) {
@@ -403,7 +455,41 @@ export class AccountPageComponent implements OnInit {
   }
 
 
+  updateOrder(order:any){
+    order.status=4
+    this.orderService.updateOrder(order).subscribe({
+      next:(data)=>{
+        // this.order = data.find((o: any) => o.userId === order.userId);
+        //  this.getOrderDetails()},
+      },
+      error:(err)=>{this.errMesage=err}
+    })
+  }
 
+  selectedRating:string='';
+  comment:string='';
+  productEvaluate=new Product();
+
+  showEvaluate(o:any){
+    this.productEvaluate=o
+  }
+
+  sendEvaluate(){
+    const reviewData = {
+      productId: this.productEvaluate._id,
+      cusName:this.account.name,
+      rating: this.selectedRating,
+      comment: this.comment
+    };
+
+
+    this.pService.postEvaluate(reviewData).subscribe({
+      next:(data)=>{console.log(data);
+      },
+      error:(err)=>{this.errMesage=err}
+
+    })
+  }
 
 
 

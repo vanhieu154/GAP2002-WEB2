@@ -33,7 +33,7 @@ export class CartService {
       account.cart.cartItems = []; // Khởi tạo 'cartItems' là một mảng trống nếu không tồn tại
     }
     const _id = account._id;
-    let cartItemss=account.cart.cartItems
+    let cartItemss=account.cart
     console.log();
     cartItemss.push(new CartItem(product._id, quantity));
     console.log(cartItemss);
@@ -77,7 +77,10 @@ export class CartService {
   public createCartproduct(allProducts:IProduct[]){
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     this.cartAddProduct=[]
-    let cartItemss=account.cart.cartItems
+    if (!account.cart.cartItems) {
+      account.cart.cartItems = []; // Khởi tạo 'cartItems' là một mảng trống nếu không tồn tại
+    }
+    let cartItemss=account.cart
     console.log(cartItemss);
 
     if(cartItemss.length>0)
@@ -140,7 +143,7 @@ export class CartService {
   public deleteProductDB(i:number):Observable<Cart>{
     const account = JSON.parse(sessionStorage.getItem('Account') || '{}');
     let CartP= JSON.parse(sessionStorage.getItem('Cart')||'{}')
-    let cartItemss=account.cart.cartItems
+    let cartItemss=account.cart
     const _id = account._id;
     cartItemss.splice(i,1)
     CartP.splice(i,1)

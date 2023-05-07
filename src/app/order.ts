@@ -20,3 +20,23 @@ export class OrderItem {
     public discount:number=0,
   ) {}
 }
+
+export interface OrderDetail {
+  productID: string;
+  qty: number;
+  discount: number;
+  }
+
+export interface OrderAddress {
+  _id: any;
+  hovaten: string;
+  phonenumber: number;
+  district: string;
+  city: string;
+  ward: string;
+  diachicuthe: string;
+  addressType: string;
+  IsDefault: boolean;
+  cDate: Date;
+  }
+

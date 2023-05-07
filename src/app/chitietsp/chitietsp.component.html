@@ -122,6 +122,25 @@
   </div>
 </div>
 </div>
+
+<div class="relative-product-container" >
+    <h2>Đánh giá sản phẩm</h2>
+    <ng-container *ngFor="let p of productEvaluate">
+    <ul>
+      <li>
+        <div class="review-header">
+          <span class="review-rating">Đánh giá khách hàng: {{p.rating}}</span>
+        </div>
+        <div class="review-body">
+          <p>Tên khách hàng:{{p.cusName}}</p>
+          <p>Bình luận khách hàng:{{p.comment}}</p>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+</div>
+
+
 <div class="relative-product-container" style="overflow: hidden">
     <h2>Sản phẩm có liên quan</h2>
     <div class="contaier ">

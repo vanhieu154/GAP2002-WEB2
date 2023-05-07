@@ -182,7 +182,7 @@ public showText() {
     this.order.total=this.tong
     this.order.addressID=this.selectedAddress._id
     console.log(this.order);
-    this.orderService.postProduct(this.order).subscribe({
+    this.orderService.postOrder(this.order).subscribe({
       next:(data)=>{
         this.order=data
         localStorage.removeItem('Order')
@@ -195,7 +195,7 @@ public showText() {
     for (let i = 0; i < this.tempCartProduct.length; i++) {
       this.tempCart.push(new CartItem(this.tempCartProduct[i]._id, this.tempCartProduct[i].quantity));
     }
-    // this.account.cart=this.tempCart
+    this.account.cart=this.tempCart
     this.cartService.updateCart(this.account._id,this.tempCart).subscribe({
       next:(data)=>{
         this.account=data,
