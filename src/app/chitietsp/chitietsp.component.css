@@ -47,8 +47,8 @@ a, ul,li{
   font-size: 1.4rem;
   padding: 0 5px;
   color: var(--red-color);
-  border: rgb(121, 121, 121) solid 0.5px;
-  background-color: rgb(205, 204, 204);
+  border: var(--discount-color) solid 0.5px;
+  background-color: var(--discount-color);
 }
 .product-detial-container{
   padding: 30px;
