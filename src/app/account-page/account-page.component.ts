@@ -471,7 +471,8 @@ export class AccountPageComponent implements OnInit {
       productId: this.productEvaluate._id,
       cusName:this.account.name,
       rating: this.selectedRating,
-      comment: this.comment
+      comment: this.comment,
+      cDate: new Date(),
     };
 
 

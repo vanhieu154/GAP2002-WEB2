@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { CartService } from '../cart.service';
 import { CartItem } from '../cart';
 import { AuthService } from '../auth.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-chitietsp',
@@ -18,11 +19,17 @@ export class ChitietspComponent implements OnInit{
   errMessage:string=''
   id:any;
   products:any;
-  items: any[] = [];
   a:number=1;
   panelOpenState = false;
   productEvaluate:any[]=[]
+  showProductEvaluate:any[]=[]
   public allProducts: IProduct[] = [];
+  totalItems: number = 100;
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  currentPage: number = 0;
+  // items: any[] = [...Array(this.totalItems).keys()].map(i => `Item ${i + 1}`);
+  itemsOnPage: any[] = [];
   constructor(private authService:AuthService ,private cartService: CartService,public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router) {
     this.allProducts = [];
     activateRoute.paramMap.subscribe(
@@ -30,22 +37,23 @@ export class ChitietspComponent implements OnInit{
         this.id=param.get('id')
         if(this.id!=null)
         {
+          this._service.getEvaluates(this.id).subscribe({
+            next:(data)=>{
+              this.productEvaluate=data,
+              this.totalItems = data.length;
+              this.itemsOnPage = data.slice(0, this.pageSize);
+            },
+            error:(err)=>{this.errMessage=err}
+          })
           this._service.getProduct(this.id).subscribe({
             next:(data)=>{this.product=data},
             error:(err)=>{this.errMessage=err}
           })
-          this._service.getEvaluates(this.id).subscribe({
-            next:(data)=>{
-              this.productEvaluate=data,
-              console.log(data);
 
-            },
-            error:(err)=>{this.errMessage=err}
-          })
         }
       }
     )
-
+    this.updateItemsOnPage();
     this._service.getProducts().subscribe({
       next:(data: IProduct[])=>{
         this.products=data.filter(p => p.Hang == this.product.Hang).slice(0,6)
@@ -54,6 +62,17 @@ export class ChitietspComponent implements OnInit{
       error:(err)=>{this.errMessage=err}
     })
 
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updateItemsOnPage();
+  }
+
+  updateItemsOnPage(): void {
+    const startIndex = this.currentPage * this.pageSize;
+    this.itemsOnPage = this.productEvaluate.slice(startIndex, startIndex + this.pageSize);
   }
   addProduct() {
     if(this.authService.isLoggedIn==false){

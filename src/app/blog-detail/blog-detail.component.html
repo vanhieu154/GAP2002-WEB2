@@ -10,48 +10,29 @@
     </div>
     <div class="row bottom">
       <div class="col-4 text-center container ">
-        <p style="font-size: 20px;font-weight:bold;color:#6B4932;
-        ">BÀI VIẾT MỚI NHẤT</p>
-        <hr class="hr__style">
-        <div class="row">
-          <div class="col-3 img--blog">
-            <a routerLink="/BlogDetail"><img class="img__blog" src="./assets/Img/img_blog.png" alt=""></a>
+        <p style="font-size: 20px;font-weight:bold;color:#6B4932;">BÀI VIẾT MỚI NHẤT</p>
+        <ng-container *ngFor="let b of blogs">
+          <hr class="hr__style">
+          <div class="row">
+            <div class="col-3 img--blog">
+              <a (click)="Detail(b)"><img class="img__blog" src="{{b.img}}" alt=""></a>
+            </div>
+            <div class="col"><p style="text-align: left;"><a (click)="Detail(b)" class="brown">{{b.title}}</a>
+               <br> {{b.author}}
+               <br>{{b.displayDate | date: 'dd/MM/yyyy'}}</p></div>
+            <hr class="hr_style">
           </div>
-          <div class="col"><p style="text-align: left;"><a routerLink="/BlogDetail" class="brown">Lợi ích của quần áo cũ đem lại</a> <br> Võ Thị Nhung <br>05.11.2023</p></div>
-          <hr class="hr_style">
-          <img src="./assets/Img/Gap-Logo.webp" alt="">
-        </div>
-        </div>
+        </ng-container>
+      </div>
 
 
         <div class="col ">
-          <h3 class="title__tinTuc"> Lợi ích của quần áo cũ đem lại</h3>
+          <h3 class="title__tinTuc"> {{blog.title}}</h3>
            <div class="title__right">
-                <p>Người viết: Võ Thị Nhung lúc 11:25 05.11.2022</p>
-                <div class="gioithieu">
-                    Ô nhiễm môi trường phần lướn là do rác thải quá nhiều và hầu như không được xử lý đúng cách. Để giảm thiểu tình trạng này, nhiều người chọn giải pháp tái chế đồ đạc đã qua sử dụng điển hình là chai nhựa, quần áo cũ,... Hãy cùng GAP 2002 tìm hiểu rõ hơn về những lợi ích của việc tái chế quần áo cũ và có kế hoạch thực hiện ngày, bạn nhé!
-                </div>
-                <br>
+                <p>Người viết: {{blog.author}} lúc {{blog.displayDate| date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+                <div innerHTML="{{blog.description}}">
 
-                <ol>
-                    <li class="title__blog--large">Giảm tỷ lệ ô nhiễm</li>
-                        <div>
-                            <p> Khi bạn bỏ quần áo chung nguồn rác thải, chúng không được xử lý kịp thời và bị dồn ứ sẽ gây mùi khó chịu và dễ lan ra ngoài. <br>
-                            Hơn nữa chúng cũng rất khỏ phân hủy khi bạc vứt vào môi trường.
-                            </p>
-                            <img src="./assets/Img/img_blog.png" class="img--large">
-                        </div>
-                    <li class="title__blog--large">Tiết kiệm tiền bạc</li>
-                        <div>
-                        Thay vì hàng tháng bạn tốn khá nhiều tiền vào việc sắm sửa đồ mới, vậy tại sao bạn không nghĩ đến việc <a class="color--green">
-                        tái chế quần áo cũ</a> và khoác lên cho chúng những ý tưởng mới mẻ hơn. Đây là cách tốt nhất để vừa tiết kiệm tiền, vừa <a class="color--green">bảo vệ môi trường</a>. Bạn có thể tham khảo rất nhiều cách làm trang phục tái chế trên GAP 2002 để biến hóa những bộ trang phục cũ của mình.
-                        </div>
-                        <br>
-                    <li class="title__blog--large">Tái chế có thể giảm bớt việc khai thác tài nguyên </li>
-                        <div>
-                            Nghe có vẻ lạ, nhưng kỳ thực là việc tái chế giúp <a class="color--green"> tiết kiệm điện, tiết kiệm nước</a> và các loại chi phí khác so với việc sản xuất những thứ mới. Ví dụ như bạn có thể xem những số liệu sau đây. Với 155 áo quần có thể tái chế tiết kiệm được 1,5 triệu lít nước; 1,9 triệu cây xanh; 500 000W điện.
-                        </div>
-                </ol>
+                </div>
            </div>
         </div>
 

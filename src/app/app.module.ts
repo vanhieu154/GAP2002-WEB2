@@ -47,6 +47,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatPaginatorModule } from '@angular/material/paginator'; // import MatPaginatorModule ở đây
 
 @NgModule({
   declarations: [
@@ -101,6 +102,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
+    MatPaginatorModule,
+
 
   ],
   providers: [DatePipe],

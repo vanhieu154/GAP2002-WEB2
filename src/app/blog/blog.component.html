@@ -9,32 +9,36 @@
   </div>
   <div class="row bottom">
     <div class="col-4 text-center container ">
-      <p style="font-size: 20px;font-weight:bold;color:#6B4932;
-      ">BÀI VIẾT MỚI NHẤT</p>
-      <hr class="hr__style">
-      <div class="row">
-        <div class="col-3 img--blog">
-          <a routerLink="/BlogDetail"><img class="img__blog" src="./assets/Img/img_blog.png" alt=""></a>
-
+      <p style="font-size: 20px;font-weight:bold;color:#6B4932;">BÀI VIẾT MỚI NHẤT</p>
+      <ng-container *ngFor="let b of blogs">
+        <hr class="hr__style">
+        <div class="row">
+          <div class="col-3 img--blog">
+            <a (click)="Detail(b)"><img class="img__blog" src="{{b.img}}" alt=""></a>
+          </div>
+          <div class="col"><p style="text-align: left;"><a (click)="Detail(b)" class="brown">{{b.title}}</a>
+             <br> {{b.author}}
+             <br>{{b.displayDate | date: 'dd/MM/yyyy'}}</p></div>
+          <hr class="hr_style">
         </div>
-        <div class="col"><p style="text-align: left;"><a routerLink="/BlogDetail" class="brown">Lợi ích của quần áo cũ đem lại</a> <br> Võ Thị Nhung <br>05.11.2023</p></div>
-        <hr class="hr_style">
-      </div>
-      </div>
-      <div class="col ">
-        <p style="font-size: 2.4rem;font-weight:bold;color:#6B4932;">Tin tức</p>
+      </ng-container>
+    </div>
+
+    <div class="col ">
+      <p style="font-size: 2.4rem;font-weight:bold;color:#6B4932;">Tin tức</p>
+      <ng-container *ngFor="let b of blogs">
         <div class="row">
           <div class="col-4">
-            <a routerLink="/BlogDetail"><img class="img__blog" src="./assets/Img/img_blog.png" alt=""></a>
-
+            <a (click)="Detail(b)"><img class="img__blog" src="{{b.img}}" alt=""></a>
           </div>
-          <div class="col"><p><a routerLink="/BlogDetail" class="brown">Lợi ích của quần áo cũ đem lại </a><br>
-            Người viết: Võ Thị Nhung <br>
-            05.11.2023 <br>
-            Đây là trang blog của cửa hàng. Bạn có thể dùng blog để quảng bá sản phẩm mới, chia sẻ trải nghiệm của khách hàng,...
+          <div class="col"><p><a (click)="Detail(b)" class="brown">{{b.title}} </a><br>
+            Người viết: {{b.author}}  <br>
+            {{b.displayDate | date: 'dd/MM/yyyy'}} <br>
             </p></div>
           </div>
-      </div>
+      </ng-container>
+
+    </div>
 
   </div>
 
