@@ -24,7 +24,6 @@ import { PromotionPageComponent } from './promotion-page/promotion-page.componen
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { IconModule } from '@visurel/iconify-angular';
-import { OtpForgetPassComponent } from './otp-forget-pass/otp-forget-pass.component';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { PaymentComponent } from './payment/payment.component';
 import { SetUpPasswordComponent } from './set-up-password/set-up-password.component';

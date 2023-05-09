@@ -22,7 +22,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { SetUpPasswordComponent } from './set-up-password/set-up-password.component';
 import { DeliveryInfoComponent } from './delivery-info/delivery-info.component';
 import { ChangeSuccessComponent } from './change-success/change-success.component';
-import { OtpForgetPassComponent } from './otp-forget-pass/otp-forget-pass.component';
 
 const routes: Routes = [
   {
@@ -72,9 +71,6 @@ const routes: Routes = [
   },
   {
     path:"otp_register/:phoneNumber",component:OtpRegisterComponent
-  },
-  {
-    path:"otp_forgetPass",component:OtpForgetPassComponent
   },
   {
     path:"forgetPass",component:ForgetPassComponent
