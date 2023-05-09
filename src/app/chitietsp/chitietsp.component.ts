@@ -46,14 +46,15 @@ export class ChitietspComponent implements OnInit{
             error:(err)=>{this.errMessage=err}
           })
           this._service.getProduct(this.id).subscribe({
-            next:(data)=>{this.product=data},
+            next:(data)=>{this.product=data,
+    console.log(data.Hinhanh[0])
+  },
             error:(err)=>{this.errMessage=err}
           })
 
         }
       }
     )
-    this.updateItemsOnPage();
     this._service.getProducts().subscribe({
       next:(data: IProduct[])=>{
         this.products=data.filter(p => p.Hang == this.product.Hang).slice(0,6)

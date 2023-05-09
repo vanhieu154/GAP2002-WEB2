@@ -15,7 +15,10 @@
 
           <ng-container *ngFor="let item of product.Hinhanh; let i=index">
             <div [ngClass]="{'active' :i==0}" class='item' [attr.data-bs-target]="'#productDetailSlider'" [attr.data-bs-slide-to]="i" [attr.aria-label]="'Slide ' + (i+1)" alt=''>
-              <img  class='w-100' src="./assets/Img/sanpham/{{product.Hinhanh[i]}}" />
+              <img  class='w-100' src="{{item}}" />
+              <!-- <img class="w-100" src="{{product.Hinhanh[i]}}" /> -->
+              <!-- <div class="w-100" style="background-image: url('{{ product.Hinhanh[i] }}'); height:95px; background-size:contain ; background-repeat: no-repeat;"></div> -->
+              <!-- <img class="w-100" src='{{product.Hinhanh[i]}}' alt="" > -->
             </div>
           </ng-container>
 
@@ -27,7 +30,9 @@
 
               <ng-container *ngFor="let item of product.Hinhanh; let i=index">
                 <div [ngClass]="{'active' :i==0}"  class='carousel-item'  data-bs-interval='5000'>
-                  <img src="./assets/Img/sanpham/{{product.Hinhanh[i]}}" class='d-block w-100' alt=''>
+                  <!-- <img class='d-block w-100'   src='{{product.Hinhanh[i]}}' alt="" > -->
+                  <img src="{{item}}" class='d-block w-100' >
+              <!-- <div class="d-block w-100" style="background-image: url('{{ product.Hinhanh[i] }}'); height:550px; background-size:cover;"></div> -->
                 </div>
               </ng-container>
 
@@ -92,8 +97,8 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="product__description">
-              <p style="margin: 3px;" class="product__description__line" *ngFor="let d of product.Mota">{{d}}</p>
-              <!-- <p style="margin: 3px;" class="product__description__line" innerHTML="{{product.Mota}}"></p> -->
+              <!-- <p style="margin: 3px;" class="product__description__line" *ngFor="let d of product.Mota">{{d}}</p> -->
+              <p style="margin: 3px;" class="product__description__line" innerHTML="{{product.Mota}}"></p>
             </div>
           </mat-expansion-panel>
         <!-- </mat-accordion> -->
@@ -122,43 +127,7 @@
   </div>
 </div>
 </div>
-
-<div class="relative-product-container box container">
-    <h2 style="margin-top: 10px;">Đánh giá sản phẩm</h2>
-  <ng-container *ngIf="productEvaluate.length>0">
-    <div class="row reviews">
-
-    <ng-container *ngFor="let p of itemsOnPage">
-        <div class="col">
-          <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 32 32" style="color: #d2beb4;">
-            <path fill="currentColor" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"></path>
-            <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"></path>
-          </svg>
-        </div>
-        <div class="col-11">
-          <div class="row info review-rating">
-            <div class="row">Tên khách hàng: {{p.cusName}}</div>
-            <div class="row">Khách hàng đánh giá: {{p.rating}}</div>
-          </div>
-          <div class="row review-body">Bình luận: {{p.comment}}</div>
-        </div>
-        <hr>
-    </ng-container>
-    <mat-paginator [length]="totalItems"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="onPageChange($event)">
-  </mat-paginator>
-  <!-- <ngx-pagination [collectionSize]="totalItems" [(page)]="currentPage" [pageSize]="pageSize"></ngx-pagination> -->
-  </div>
-
-  </ng-container>
-  <ng-container *ngIf="productEvaluate.length==0">
-    <h2>Sản phẩm chưa có ai đánh giá hãy là người đầu tiên mua và đánh giá</h2>
-  </ng-container>
-</div>
-
-<div class="relative-product-container" style="overflow: hidden">
+<!-- <div class="relative-product-container" style="overflow: hidden">
     <h2>Sản phẩm có liên quan</h2>
     <div class="contaier ">
         <div class=" home-product-item-wrapper">
@@ -203,4 +172,4 @@
           </div>
         </div>
     </div>
-</div>
+</div> -->
