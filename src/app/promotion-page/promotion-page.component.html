@@ -11,7 +11,7 @@
   <img class="w-100" src="./assets/Img/Voucher/VOUCHER1.png" alt="">
 </div>
 <div class="row" >
-  <div class="col-7 voucher-hot__100k row">
+  <!-- <div class="col-7 voucher-hot__100k row">
       <div class="col-5 voucher-hot__100k-img">
           <img class="w-100" src="./assets/Img/Voucher/voucher 100k.png" alt="">
       </div>
@@ -46,6 +46,48 @@
           <p>Đơn tối thiểu 800K Không giới hạn giá trị khuyến mã tối đa </p>
           <button class="voucher-hot-save ">Lưu</button>
       </div>
+  </div> -->
+  <div class="voucher-today-container row">
+    <div class="col-4 row voucher-today">
+        <div class="col-5 voucher-today-img">
+            <img class="w-100" src="./assets/Img/Voucher/voucher10k.png" alt="">
+        </div>
+        <div class="col-7 voucher-today__content">
+            <h2>Giảm 10%</h2>
+            <p>Đơn tối thiểu 100K</p>
+            <button class="voucher-today-save ">Lưu</button>
+        </div>
+    </div>
+    <div class="col-4 row voucher-today">
+        <div class="col-5 voucher-today-img">
+            <img class="w-100" src="./assets/Img/Voucher/voucher 5.png" alt="">
+        </div>
+        <div class="col-7 voucher-today__content">
+            <h2>Giảm 10%</h2>
+            <p>Đơn tối thiểu 300K Giảm tối đa  </p>
+            <button class="voucher-today-save ">Lưu</button>
+        </div>
+    </div>
+    <div class="col-4 row voucher-today">
+        <div class="col-5 voucher-today-img">
+            <img class="w-100" src="./assets/Img/Voucher/voucher10.png" alt="">
+        </div>
+        <div class="col-7 voucher-today__content">
+            <h2>Giảm 10%</h2>
+            <p>Đơn tối thiểu 300k Giảm tối đa 15k </p>
+            <button class="voucher-today-save ">Lưu</button>
+        </div>
+    </div>
+    <div class="col-4 row voucher-today">
+        <div class="col-5 voucher-today-img">
+            <img class="w-100" src="./assets/Img/Voucher/voucher 5.png" alt="">
+        </div>
+        <div class="col-7 voucher-today__content">
+            <h2>Giảm 10%</h2>
+            <p>Đơn tối thiểu 300k Giảm tối đa 40k</p>
+            <button class="voucher-today-save ">Lưu</button>
+        </div>
+    </div>
   </div>
 </div>
 <div class="countDown-container">
@@ -53,25 +95,25 @@
   <div class="row">
       <div class="col-lg-1 col-md-2 col-2 countDown-time-container">
           <div class="countDown-time">
-              00
+            {{ days }}
           </div>
           <h3>Ngày</h3>
       </div>
       <div class="col-lg-1 col-md-2 col-2 countDown-time-container">
           <div class="countDown-time">
-              00
+            {{ hours }}
           </div>
           <h3>Giờ</h3>
       </div>
       <div class="col-lg-1 col-md-2 col-2 countDown-time-container">
           <div class="countDown-time">
-              00
+            {{ minutes }}
           </div>
           <h3>Phút</h3>
       </div>
       <div class="col-lg-1 col-md-2 col-2 countDown-time-container">
           <div class="countDown-time">
-              00
+            {{ seconds }}
           </div>
           <h3>Giây</h3>
       </div>
@@ -87,55 +129,4 @@
       </div>
   </form>
 
-</div>
-
-
-
-
-
-
-<div class="voucher-today-header col-4">
-  <img class="w-100" src="./assets/Img/Voucher/VOUCHER2.png" alt="">
-</div>
-<div class="voucher-today-container row">
-  <div class="col-4 row voucher-today">
-      <div class="col-5 voucher-today-img">
-          <img class="w-100" src="./assets/Img/Voucher/voucher10k.png" alt="">
-      </div>
-      <div class="col-7 voucher-today__content">
-          <h2>Giảm 10%</h2>
-          <p>Đơn tối thiểu 100K</p>
-          <button class="voucher-today-save ">Lưu</button>
-      </div>
-  </div>
-  <div class="col-4 row voucher-today">
-      <div class="col-5 voucher-today-img">
-          <img class="w-100" src="./assets/Img/Voucher/voucher 5.png" alt="">
-      </div>
-      <div class="col-7 voucher-today__content">
-          <h2>Giảm 10%</h2>
-          <p>Đơn tối thiểu 300K Giảm tối đa  </p>
-          <button class="voucher-today-save ">Lưu</button>
-      </div>
-  </div>
-  <div class="col-4 row voucher-today">
-      <div class="col-5 voucher-today-img">
-          <img class="w-100" src="./assets/Img/Voucher/voucher10.png" alt="">
-      </div>
-      <div class="col-7 voucher-today__content">
-          <h2>Giảm 10%</h2>
-          <p>Đơn tối thiểu 300k Giảm tối đa 15k </p>
-          <button class="voucher-today-save ">Lưu</button>
-      </div>
-  </div>
-  <div class="col-4 row voucher-today">
-      <div class="col-5 voucher-today-img">
-          <img class="w-100" src="./assets/Img/Voucher/voucher 5.png" alt="">
-      </div>
-      <div class="col-7 voucher-today__content">
-          <h2>Giảm 10%</h2>
-          <p>Đơn tối thiểu 300k Giảm tối đa 40k</p>
-          <button class="voucher-today-save ">Lưu</button>
-      </div>
-  </div>
 </div>

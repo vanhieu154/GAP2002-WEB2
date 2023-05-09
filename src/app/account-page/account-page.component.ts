@@ -82,34 +82,9 @@ export class AccountPageComponent implements OnInit {
   deliveredAddress:any[]=[]
   cancelledAddress:any[]=[]
 
-  waitConfirmOrderlength:number=0;
-  waitPickUplength:number=0
-  inDeliveringlength:number=0
-  deliveredlength:number=0
-  cancelledlength:number=0
   constructor(private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService, private orderService:OrderService,private pService:ProductService) {
     this.cities=[]
     this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
-    // this.getOrderDetails()
-    this.orderService.getOrders(this.account._id).subscribe({
-      next:(data)=>{
-        this.order=data
-
-        this.getOrderDetailsForStatus(this.order,this.waitConfirmOrder,this.waitConfirmOrderDetails,this.waitConfirmOrderAddress,0)
-         this.waitConfirmOrderlength=this.waitConfirmOrder.length
-        this.getOrderDetailsForStatus(this.order,this.waitPickUp,this.waitPickUpDetails,this. waitPickUpAddress,1)
-          this.waitPickUplength=this.waitPickUp.length+this.waitConfirmOrderlength
-        this.getOrderDetailsForStatus(this.order,this.inDelivering,this.inDeliveringDetails,this.inDeliveringAddress,2)
-          this.inDeliveringlength=this.inDelivering.length+this.waitPickUplength
-        this.getOrderDetailsForStatus(this.order,this.delivered,this.deliveredDetails,this.deliveredAddress,3)
-          this.deliveredlength=this.delivered.length+this.inDeliveringlength
-        this.getOrderDetailsForStatus(this.order,this.cancelled,this.cancelledDetails,this.cancelledAddress,4)
-
-        // this.cancelledlength=this.cancelled.length+this.deliveredlength
-      },
-      error:(err)=>{this.errMesage=err}
-    })
-
     this.locationService.getCities().subscribe( {
       next:(data)=>{this.cities=data},
       error:(err)=>(this.errMesage=err)
@@ -140,30 +115,62 @@ export class AccountPageComponent implements OnInit {
     });
   }
   formAddress!:FormGroup
-  getOrderDetailsForStatus(orders: Order[],conditionOrder:any[], detailsArray: any[], addressArray: any[], status: number) {
-    for (let i = 0; i < orders.length; i++) {
-      if (orders[i].status === status) {
-        conditionOrder.push(orders[i])
-        this.orderService.getOrderDetail(orders[i]._id).subscribe({
-          next: (data) => {
-            detailsArray.push([]);
-            detailsArray[i]=data;
-          },
-          error: (err) => {
-            this.errMesage = err;
-          },
-        });
-        this.orderService.getOrderAddress(orders[i]._id).subscribe({
-          next: (data) => {
-            addressArray.push([]);
-            addressArray[i]=data;
-          },
-          error: (err) => {
-            this.errMesage = err;
-          },
-        })
+async getOrderDetails(): Promise<void> {
+        try {
+          this.order = await this.orderService.getOrders(this.account._id).toPromise();
+
+          await this.getOrderDetailsForStatus(this.order, this.waitConfirmOrder, this.waitConfirmOrderDetails, this.waitConfirmOrderAddress, 0);
+
+          await this.getOrderDetailsForStatus(this.order, this.waitPickUp, this.waitPickUpDetails, this.waitPickUpAddress, 1);
+
+          await this.getOrderDetailsForStatus(this.order, this.inDelivering, this.inDeliveringDetails, this.inDeliveringAddress, 2);
+
+          await this.getOrderDetailsForStatus(this.order, this.delivered, this.deliveredDetails, this.deliveredAddress, 3);
+
+          await this.getOrderDetailsForStatus(this.order, this.cancelled, this.cancelledDetails, this.cancelledAddress, 4);
+
+        } catch (err) {
+          this.errMesage = err;
+        }
+      }
+
+async getOrderDetailsForStatus(orders: Order[], conditionOrder: any[], detailsArray: any[], addressArray: any[], status: number) {
+  for (let i = 0; i < orders.length; i++) {
+    if (orders[i].status === status) {
+      conditionOrder.push(orders[i]);
+
+      try {
+        const orderDetail = await this.orderService.getOrderDetail(orders[i]._id).toPromise();
+        detailsArray.push(orderDetail);
+      } catch (err) {
+        this.errMesage = err;
+      }
+
+      try {
+        const orderAddress = await this.orderService.getOrderAddress(orders[i]._id).toPromise();
+        addressArray.push(orderAddress);
+      } catch (err) {
+        this.errMesage = err;
       }
     }
+  }
+}
+  ngOnInit() {
+    this.formAddress = this._formBuilder.group({
+      hovaten: ['', Validators.required],
+      phonenumber: ['', Validators.required],
+      city: ['', Validators.required],
+      district: ['', Validators.required],
+      ward: ['', Validators.required],
+      diachicuthe: ['', Validators.required],
+      addressType: ['', Validators.required],
+      IsDefault: [true]
+    });
+    this.getOrderDetails();
+
+    // this.myAddresss = JSON.parse(localStorage.getItem('Address') || '{}');
+
+
   }
   fixProfile(){
     this.allowFix=!this.allowFix
@@ -243,21 +250,7 @@ export class AccountPageComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    this.formAddress = this._formBuilder.group({
-      hovaten: ['', Validators.required],
-      phonenumber: ['', Validators.required],
-      city: ['', Validators.required],
-      district: ['', Validators.required],
-      ward: ['', Validators.required],
-      diachicuthe: ['', Validators.required],
-      addressType: ['', Validators.required],
-      IsDefault: [true]
-    });
-    // this.myAddresss = JSON.parse(localStorage.getItem('Address') || '{}');
 
-
-  }
 
   getErrorNameMessage() {
     if (this.name.hasError('required')||this.formAddress.controls['hovaten'].hasError('required')) {
@@ -450,12 +443,30 @@ export class AccountPageComponent implements OnInit {
     order.status=4
     this.orderService.updateOrder(order).subscribe({
       next:(data)=>{
+        this.waitConfirmOrder=[];
+        this.waitPickUp=[]
+        this.inDelivering=[]
+        this.delivered=[]
+        this.cancelled=[]
+
+        this.waitConfirmOrderDetails = [];
+        this.waitPickUpDetails=[]
+        this.inDeliveringDetails=[]
+        this.deliveredDetails=[]
+        this.cancelledDetails=[]
+
+        this.waitConfirmOrderAddress=[];
+        this.waitPickUpAddress=[]
+        this.inDeliveringAddress=[]
+        this.deliveredAddress=[]
+        this.cancelledAddress=[]
+
+        this.getOrderDetails();
         this.cdRef.detectChanges();
-        // this.order = data.find((o: any) => o.userId === order.userId);
-        //  this.getOrderDetails()},
       },
       error:(err)=>{this.errMesage=err}
     })
+
   }
 
   selectedRating:string='';

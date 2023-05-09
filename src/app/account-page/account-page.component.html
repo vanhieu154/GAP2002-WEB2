@@ -419,17 +419,17 @@
                     <div class="row" style="padding: 8px;">
                       <div class="col">
                         Mã đơn hàng: {{order._id}} <br> <br>
-                        Tên người nhận:{{ waitPickUpAddress[i+this.waitConfirmOrderlength]?.[0]?.hovaten}} <br>
-                        Số điện thoại: {{ waitPickUpAddress[i+this.waitConfirmOrderlength]?.[0]?.phonenumber}}
+                        Tên người nhận:{{ waitPickUpAddress[i]?.[0]?.hovaten}} <br>
+                        Số điện thoại: {{ waitPickUpAddress[i]?.[0]?.phonenumber}}
                       </div>
                       <div class="col">
-                        Địa chỉ: {{waitPickUpAddress[i+this.waitConfirmOrderlength]?.[0]?.diachicuthe}}
-                        ,{{waitPickUpAddress[i+this.waitConfirmOrderlength]?.[0]?.ward}}
-                        ,{{waitPickUpAddress[i+this.waitConfirmOrderlength]?.[0]?.district}}
-                        ,{{waitPickUpAddress[i+this.waitConfirmOrderlength]?.[0]?.city}}
+                        Địa chỉ: {{waitPickUpAddress[i]?.[0]?.diachicuthe}}
+                        ,{{waitPickUpAddress[i]?.[0]?.ward}}
+                        ,{{waitPickUpAddress[i]?.[0]?.district}}
+                        ,{{waitPickUpAddress[i]?.[0]?.city}}
                       </div>
                     </div>
-                    <ng-container *ngFor="let p of waitPickUpDetails[i+this.waitConfirmOrderlength];let j = index">
+                    <ng-container *ngFor="let p of waitPickUpDetails[i];let j = index">
                       <!-- <button (click)="log(p)">Log</button> -->
                       <div class="row">
                         <div class="col">
@@ -486,17 +486,17 @@
                     <div class="row" style="padding: 8px;">
                       <div class="col">
                         Mã đơn hàng: {{order._id}} <br> <br>
-                        Tên người nhận:{{ inDeliveringAddress[i+this.waitPickUplength]?.[0]?.hovaten}} <br>
-                        Số điện thoại: {{ inDeliveringAddress[i+this.waitPickUplength]?.[0]?.phonenumber}}
+                        Tên người nhận:{{ inDeliveringAddress[i]?.[0]?.hovaten}} <br>
+                        Số điện thoại: {{ inDeliveringAddress[i]?.[0]?.phonenumber}}
                       </div>
                       <div class="col">
-                        Địa chỉ: {{inDeliveringAddress[i+this.waitPickUplength]?.[0]?.diachicuthe}}
-                        ,{{inDeliveringAddress[i+this.waitPickUplength]?.[0]?.ward}}
-                        ,{{inDeliveringAddress[i+this.waitPickUplength]?.[0]?.district}}
-                        ,{{inDeliveringAddress[i+this.waitPickUplength]?.[0]?.city}}
+                        Địa chỉ: {{inDeliveringAddress[i]?.[0]?.diachicuthe}}
+                        ,{{inDeliveringAddress[i]?.[0]?.ward}}
+                        ,{{inDeliveringAddress[i]?.[0]?.district}}
+                        ,{{inDeliveringAddress[i]?.[0]?.city}}
                       </div>
                     </div>
-                    <ng-container *ngFor="let p of inDeliveringDetails[i+this.waitPickUplength];let j = index">
+                    <ng-container *ngFor="let p of inDeliveringDetails[i];let j = index">
                       <!-- <button (click)="log(p)">Log</button> -->
                       <div class="row">
                         <div class="col">
@@ -551,17 +551,17 @@
                     <div class="row" style="padding: 8px;">
                       <div class="col">
                         Mã đơn hàng: {{order._id}} <br> <br>
-                        Tên người nhận:{{ deliveredAddress[i+this.inDeliveringlength]?.[0]?.hovaten}} <br>
-                        Số điện thoại: {{ deliveredAddress[i+this.inDeliveringlength]?.[0]?.phonenumber}}
+                        Tên người nhận:{{ deliveredAddress[i]?.[0]?.hovaten}} <br>
+                        Số điện thoại: {{ deliveredAddress[i]?.[0]?.phonenumber}}
                       </div>
                       <div class="col">
-                        Địa chỉ: {{deliveredAddress[i+this.inDeliveringlength]?.[0]?.diachicuthe}}
-                        ,{{deliveredAddress[i+this.inDeliveringlength]?.[0]?.ward}}
-                        ,{{deliveredAddress[i+this.inDeliveringlength]?.[0]?.district}}
-                        ,{{deliveredAddress[i+this.inDeliveringlength]?.[0]?.city}}
+                        Địa chỉ: {{deliveredAddress[i]?.[0]?.diachicuthe}}
+                        ,{{deliveredAddress[i]?.[0]?.ward}}
+                        ,{{deliveredAddress[i]?.[0]?.district}}
+                        ,{{deliveredAddress[i]?.[0]?.city}}
                       </div>
                     </div>
-                    <ng-container *ngFor="let p of deliveredDetails[i+this.inDeliveringlength];let j = index">
+                    <ng-container *ngFor="let p of deliveredDetails[i];let j = index">
                       <div class="row">
                         <div class="col">
                           <p style="text-align: left;margin-left: 5%;">{{p.Hang}}</p>
@@ -615,17 +615,17 @@
                     <div class="row" style="padding: 8px;">
                       <div class="col">
                         Mã đơn hàng: {{order._id}} <br> <br>
-                        Tên người nhận:{{ cancelledAddress[i+this.deliveredlength]?.[0]?.hovaten}} <br>
-                        Số điện thoại: {{ cancelledAddress[i+this.deliveredlength]?.[0]?.phonenumber}}
+                        Tên người nhận:{{ cancelledAddress[i]?.[0]?.hovaten}} <br>
+                        Số điện thoại: {{ cancelledAddress[i]?.[0]?.phonenumber}}
                       </div>
                       <div class="col">
-                        Địa chỉ: {{cancelledAddress[i+this.deliveredlength]?.[0]?.diachicuthe}}
-                        ,{{cancelledAddress[i+this.deliveredlength]?.[0]?.ward}}
-                        ,{{cancelledAddress[i+this.deliveredlength]?.[0]?.district}}
-                        ,{{cancelledAddress[i+this.deliveredlength]?.[0]?.city}}
+                        Địa chỉ: {{cancelledAddress[i]?.[0]?.diachicuthe}}
+                        ,{{cancelledAddress[i]?.[0]?.ward}}
+                        ,{{cancelledAddress[i]?.[0]?.district}}
+                        ,{{cancelledAddress[i]?.[0]?.city}}
                       </div>
                     </div>
-                    <ng-container *ngFor="let p of cancelledDetails[i+this.deliveredlength];let j = index">
+                    <ng-container *ngFor="let p of cancelledDetails[i];let j = index">
                       <div class="row">
                         <div class="col">
                           <p style="text-align: left;margin-left: 5%;">{{p.Hang}}</p>
