@@ -1,0 +1,20 @@
+
+button{
+  background-color: #b8a898;
+  height: 40px;
+  margin-top: 5px;
+  width: 65px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+}
+button:hover{
+  background-color: #6B4932;
+  color: white;
+border: 0px;
+}
+button:active{
+  opacity: 0.8;
+  background-color:#6B4932;
+  border: 0px;
+}

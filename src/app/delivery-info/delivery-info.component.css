@@ -246,7 +246,7 @@ mat-error{
   font-size: 1.2rem;
 }
 .mdc-text-field--filled .mdc-line-ripple::after {
-  border-bottom-color: var(--mdc-theme-primary, var(--darkbrown));
+  border-bottom-color: var(--mdc-theme-primary, var(--lightgrey));
 }
 .mat-mdc-form-field-error {
   display: block;
@@ -263,7 +263,7 @@ mat-error{
   color: var(--black);
 }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: var(--grey);
+  color: var(--black);
 }
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
@@ -419,9 +419,7 @@ padding-right: 20px;
   color: var(--red);
 }
 
-.lienhe span{
-  /* margin-left: 10px; */
-}
+
 img{
   position: relative;
 }

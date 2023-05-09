@@ -2,7 +2,8 @@ import {  Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { AuthService } from '../auth.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,7 @@ export class CartComponent {
   tempProduct:any[]=[]
   productLocation:number=0;
   cartItemCount: number=0;
-  constructor(private cartService:CartService,private router:Router,private authService:AuthService){
+  constructor(private cartService:CartService,private router:Router,private authService:AuthService, public dialog: MatDialog){
 
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true;
@@ -98,27 +99,44 @@ export class CartComponent {
 
     }
   }
-  deleteP(c:any){
+  deleteP(c: any) {
     this.getProductLocation(c)
-    if(sessionStorage.getItem('checkLogin') === '1'){
-      this.cartService.deleteProductDB(this.productLocation)
-      .subscribe({
-        next: (cart) => {
-          console.log('Cart updated:', cart);
-        },
-        error: (error) => {
-          console.log('Error updating cart:', error);
-        },
-        complete: () => {
-          console.log('Add to cart completed');
-        }
-      });
-    }else{
-      this.cartService.deleteProduct(this.productLocation);
 
-    }
-    this.updateTotalPrice()
+    // Tạo một hộp thoại xác nhận xóa
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: '417px',
+      data: {}
+    });
+
+    // Xử lý hành động khi người dùng bấm nút Yes hoặc No trong hộp thoại
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Nếu người dùng bấm Yes, thực hiện xóa sản phẩm
+        if (sessionStorage.getItem('checkLogin') === '1') {
+          this.cartService.deleteProductDB(this.productLocation)
+            .subscribe({
+              next: (cart) => {
+                console.log('Cart updated:', cart);
+                alert('Product deleted successfully!');
+              },
+              error: (error) => {
+                console.log('Error updating cart:', error);
+              },
+              complete: () => {
+                console.log('Add to cart completed');
+              }
+            });
+        } else {
+          this.cartService.deleteProduct(this.productLocation);
+        }
+        this.updateTotalPrice();
+      } else {
+        // Nếu người dùng bấm No, không có gì xảy ra
+        console.log('Delete canceled')
+      }
+    });
   }
+
   MinusP(c:any){
     this.getProductLocation(c)
     const i=this.productLocation

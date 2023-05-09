@@ -47,7 +47,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatPaginatorModule } from '@angular/material/paginator'; // import MatPaginatorModule ở đây
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { LackInformationComponent } from './lack-information/lack-information.component'; // import MatPaginatorModule ở đây
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'; // import MatP
     SetUpPasswordComponent,
     DeliveryInfoComponent,
     ChangeSuccessComponent,
+    LackInformationComponent,
 
   ],
   imports: [
