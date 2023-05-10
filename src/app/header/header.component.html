@@ -208,14 +208,14 @@
                   <mat-checkbox [(ngModel)]="p.completed">
                     <div class='row'>
                     <div class='col-2'>
-                      <img class='w-100' src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
+                      <img src="{{p.Hinhanh[0]}}" class='d-block w-100' >
                     </div>
                     <div style='position: relative; text-align: left;' class='col-10'>
                       <div class='header__cart-item__delete'>
                         <i class='fa-solid fa-xmark' (click)="deleteP(i);showCart()"></i>
                       </div>
                       <div class='header__cart-item__infor'>
-                        <div class='header__cart-item__header'>{{p.TenSP}}</div>
+                        <div class='header__cart-item__header' style="word-wrap: break-word;">{{p.TenSP}}</div>
                         <div class='header__cart-item__price-container row'>
                           <div class='col-7'>
                             <div class='header__cart-item__price'>
