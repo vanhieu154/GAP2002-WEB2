@@ -250,6 +250,7 @@ export class HeaderComponent implements OnInit  {
     this.authService.isLoggedIn=false;
     this.cartService.cartAddProduct = [];
     this.cartService.cartUpdated.next();
+    this.router.navigate(['/'])
   }
   deleteP(i:number){
     if(sessionStorage.getItem('checkLogin') === '1'){
