@@ -48,7 +48,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LackInformationComponent } from './lack-information/lack-information.component'; // import MatPaginatorModule ở đây
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 @NgModule({
   declarations: [
@@ -104,8 +104,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
-    MatPaginatorModule,
-    SlickCarouselModule
+    MatPaginatorModule
 
   ],
   providers: [DatePipe],
