@@ -6,7 +6,7 @@ export class Promotion {
   public LoaiPromotion: string="",
   public Mota: string[]=[],
   public Gia: number=0,
-  public SanphamApdung: string="",
+  public SanphamApdung: string[]=[],
   public Ngaybatdau: string="",
   public Ngayketthuc: string="",
   public cDate:Date=new Date()){}

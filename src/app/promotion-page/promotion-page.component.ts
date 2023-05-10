@@ -4,6 +4,7 @@ import { Coupon } from '../coupon';
 import { ProductService } from '../product.service';
 import { Product } from '../product';
 import { Router } from '@angular/router';
+import { Promotion } from '../promotion';
 
 @Component({
   selector: 'app-promotion-page',
@@ -22,6 +23,7 @@ export class PromotionPageComponent implements OnInit {
   page:number=1
   displayedCoupons: Coupon[] = [];
   promotionProduct:Product[]=[]
+  promotion=new Promotion()
   constructor(private router:Router, private promotionService:PromotionService, private productService:ProductService){
     this.promotionService.getCoupons().subscribe({
       next: (data) => {
@@ -33,10 +35,26 @@ export class PromotionPageComponent implements OnInit {
           const couponEndDate = new Date(coupon.Ngayketthuc);
           return couponEndDate > today;
         });
-
         this.displayedCoupons=this.coupons.slice(0,3)
       },
       error: (err) => { this.errMessage = err; }
+    });
+    this.promotionService.getPromotions().subscribe({
+      next: (data) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        this.promotion = data.filter((promotion: { Ngaybatdau: string ; Ngayketthuc: string ; }) => {
+          const ngayBatDau = new Date(promotion.Ngaybatdau);
+          const ngayKetThuc = new Date(promotion.Ngayketthuc);
+          return ngayBatDau <= today && ngayKetThuc > today;
+        });
+        console.log(this.promotion);
+
+      },
+      error: (err) => {
+        this.errMessage = err;
+      }
     });
     this.productService.getProducts().subscribe({
       next:(data)=>{this.promotionProduct=data.filter((p: { Discount: number; })=>p.Discount>0)},
