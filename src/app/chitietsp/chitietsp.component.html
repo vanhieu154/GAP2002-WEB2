@@ -61,14 +61,14 @@
       <hr>
       <div id="product__price">
 
-        <div *ngIf="product.Discount >0">
+        <!-- <div *ngIf="product.Discount >0">   bỏ do không còn giảm giá mặc định
           <span class="product__discount" >-{{product.Discount}}%</span>
           <span class="product__price-current">{{(product.Price - product.Discount*product.Price/100).toLocaleString('vi-VN')}}đ</span>
           <span class="product__price-old">{{product.Price.toLocaleString('vi-VN')}}đ</span>
-        </div>
-        <div *ngIf="product.Discount ==0">
+        </div> -->
+        <!-- <div *ngIf="product.Discount ==0"> -->
           <span class="product__price-current">{{product.Price.toLocaleString('vi-VN')}}đ</span>
-        </div>
+        <!-- </div> -->
       </div>
       <hr>
       <div class="product__size-container">
