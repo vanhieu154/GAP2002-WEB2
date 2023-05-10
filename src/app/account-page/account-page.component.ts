@@ -17,6 +17,8 @@ import { OrderService } from '../order.service';
 import { Order, OrderDetail, OrderAddress } from '../order';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
@@ -82,7 +84,7 @@ export class AccountPageComponent implements OnInit {
   deliveredAddress:any[]=[]
   cancelledAddress:any[]=[]
 
-  constructor(private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService, private orderService:OrderService,private pService:ProductService) {
+  constructor(private router:Router,private cartService:CartService,  private el: ElementRef,private cdRef: ChangeDetectorRef,private _formBuilder: FormBuilder,public datePipe: DatePipe,private locationService: LocationService,private addressService:AddressService,private authService:AuthService, private orderService:OrderService,private pService:ProductService) {
     this.cities=[]
     this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
     this.locationService.getCities().subscribe( {
@@ -495,7 +497,16 @@ async getOrderDetailsForStatus(orders: Order[], conditionOrder: any[], detailsAr
     })
   }
 
-
+  onLogout(){
+    this.account=new User();
+    sessionStorage.removeItem('checkLogin');
+    sessionStorage.removeItem('Account');
+    sessionStorage.removeItem('Cart')
+    this.authService.isLoggedIn=false;
+    this.cartService.cartAddProduct = [];
+    this.cartService.cartUpdated.next();
+    this.router.navigate(['/'])
+  }
 
 
 

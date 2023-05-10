@@ -27,13 +27,63 @@ a{
   font-size: 3.2rem;
   line-height: 30px;
 }
+.voucher-container{
+  display: none;
+}
+.voucher {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  /* width: 300px; */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-color: #8b606d;
+  border:3px;
+  margin: 10px;
+}
+.voucher-header img {
+  position: relative;
+  width: 100%;
+}
 
+
+
+.voucher-body {
+  padding: 10px;
+}
+
+.voucher-body h4 {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.voucher-body p {
+  font-size: 14px;
+  margin: 0;
+}
+.voucher-button {
+  background-color: #d2beb4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 60%;
+  margin: 5px;
+}
+
+.voucher-button:hover {
+  background-color: #fff;
+  color: #d2beb4;
+  border: 1px solid #d2beb4;
+}
 .row{
 
   justify-content: center;
   /* align-items: center; */
   overflow-x: hidden;
-  max-width: 99vw ;
+  max-width: 100vw ;
 }
 .voucher-hot__100k{
   margin-top: 30px ;
