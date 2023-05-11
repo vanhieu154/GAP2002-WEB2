@@ -3,6 +3,7 @@ import { IProduct, Product } from '../product';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
 import { NavService } from '../nav.service';
+import { PromotionService } from '../promotion.service';
 
 @Component({
   selector: 'app-trangchu',
@@ -16,8 +17,8 @@ export class TrangchuComponent implements OnInit{
 
   errMessage:string=''
   http: any;
-
-  constructor(private _service: ProductService,private router:Router,private navService:NavService){
+  promotion:any=[]
+  constructor(private promotionService:PromotionService,private _service: ProductService,private router:Router,private navService:NavService){
     let tempProducts: IProduct[];
     this._service.getProducts().subscribe({
       next:(data: IProduct[])=>{
@@ -28,6 +29,14 @@ export class TrangchuComponent implements OnInit{
       },
       error:(err)=>{this.errMessage=err}
     })
+    this.promotionService.getActivatePromotions().subscribe({
+      next: (data) => {
+        this.promotion=data},
+      error: (err) => {
+        this.errMessage = err;
+      }
+    });
+
   }
   modal!: HTMLElement;
   ngOnInit() {

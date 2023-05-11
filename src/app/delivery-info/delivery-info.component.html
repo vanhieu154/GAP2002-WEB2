@@ -329,11 +329,16 @@
         </tr>
 
         <tr>
-          <td style="text-align: left;padding-left: 10px; ">Sử dụng coupon</td>
-        <td colspan="4" style="color: red; text-align: right;">
-            <Button style=" width: 100%;" class="button--gui"> Sử dụng </Button>
-       </td>
-         </tr>
+          <td style="text-align: left;padding-left: 10px; "  >Sử dụng coupon</td>
+          <td colspan="4" style="color: red; text-align: right;">
+            <ng-container *ngIf="noDiscount==true">
+              <span > Bạn không thể áp dụng voucher với đơn hàng đã có sản phẩm khuyến mãi</span>
+            </ng-container>
+            <ng-container *ngIf="noDiscount==false">
+              <Button style=" width: 100%;" class="button--gui" (click)="chooseVoucher()"> Sử dụng </Button>
+            </ng-container>
+          </td>
+        </tr>
         <tr >
           <td style="text-align: left; padding-left: 10px; padding-bottom: 30px;" >Tổng cộng</td>
  <!-- **Bỏ thuộc tính trái-->          <td colspan="3" style="color: red; text-align: right; padding-bottom: 30px;"> <b style="color: red; text-align: right; padding-right: 20px ;">{{tong.toLocaleString('vi-VN')}}<u>đ</u></b></td>
@@ -351,4 +356,27 @@
 
 </div>
 
+  <div class="modal" [class.activate]="showchooseVoucher">
+    <div class="modal__overlay" (click)="closechooseVoucher()">
+      <div class="row  voucher-container">
+        <ng-container  *ngFor="let c of userCoupon">
+          <div class="voucher col-4">
+            <div class="row voucher-header">
+              <img src="{{c.Hinhanh}}" alt="voucher" width="100%" height="100%">
+            </div>
+            <div class="row voucher-body">
+              <h4>Mã giảm giá: {{c.TenCoupon}}</h4>
+              <p [innerHTML]="c.Noidung"></p>
+              <p>Hạn sử dụng</p>
+            <p> {{c.Ngaybatdau | date: 'dd/MM/yyyy'}} - {{c.Ngayketthuc | date: 'dd/MM/yyyy'}}</p>
+            </div>
+            <div class="  text-center" >
+              <button class=" voucher-button" (click)="applyDiscount(c)">Apply code</button>
+            </div>
+          </div>
 
+        </ng-container>
+
+      </div>
+    </div>
+  </div>

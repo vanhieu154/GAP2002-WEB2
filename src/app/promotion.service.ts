@@ -50,14 +50,14 @@ export class PromotionService {
       catchError(this.handleError)
     )
   }
-  getActivatePromotions():Observable<any>
+  getActivatePromotionsPage():Observable<any>
   {
     const headers=new HttpHeaders().set("Content-Type","text/plain;charset=utf-8")
     const requestOptions:Object={
       headers:headers,
       responseType:"text"
     }
-    return this._http.get<any>("http://localhost:4000/ActivatePromotions",requestOptions).pipe(
+    return this._http.get<any>("http://localhost:4000/ActivatePromotionsPage",requestOptions).pipe(
       map(res=>JSON.parse(res) as Array<Promotion>),
       retry(3),
       catchError(this.handleError)
@@ -72,6 +72,19 @@ export class PromotionService {
     }
     return this._http.get<any>("http://localhost:4000/ActivatePromotionsProduct",requestOptions).pipe(
       map(res=>JSON.parse(res) as Array<Product>),
+      retry(3),
+      catchError(this.handleError)
+    )
+  }
+  getActivatePromotions():Observable<any>
+  {
+    const headers=new HttpHeaders().set("Content-Type","text/plain;charset=utf-8")
+    const requestOptions:Object={
+      headers:headers,
+      responseType:"text"
+    }
+    return this._http.get<any>("http://localhost:4000/ActivatePromotions",requestOptions).pipe(
+      map(res=>JSON.parse(res) as Array<Promotion>),
       retry(3),
       catchError(this.handleError)
     )

@@ -6,6 +6,7 @@ import { NavService } from '../nav.service';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
 import { IProduct } from '../product';
+import { PromotionService } from '../promotion.service';
 
 @Component({
   selector: 'app-header',
@@ -34,7 +35,8 @@ export class HeaderComponent implements OnInit  {
   cartProducts: any[]=[];
   allProducts:any[]=[];
   tempProduct:any=null
-  constructor(private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
+  promotion:any=[]
+  constructor(private promotionService:PromotionService,private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true;
       cartService.loadCartDB();
@@ -80,6 +82,14 @@ export class HeaderComponent implements OnInit  {
     else{
       this.hideBox()
     }
+
+    this.promotionService.getActivatePromotions().subscribe({
+      next: (data) => {
+        this.promotion=data},
+      error: (err) => {
+        this.errMessage = err;
+      }
+    });
   }
   hideBox(): void {
     this.showLoginBox = false;
@@ -142,13 +152,13 @@ export class HeaderComponent implements OnInit  {
       this.cartService.addToCartDB(this.cartProducts[i], -1)
       .subscribe({
         next: (cart) => {
-          console.log('Cart updated:', cart);
+          // console.log('Cart updated:', cart);
         },
         error: (error) => {
-          console.log('Error updating cart:', error);
+          // console.log('Error updating cart:', error);
         },
         complete: () => {
-          console.log('Add to cart completed');
+          // console.log('Add to cart completed');
         }
       });
       sessionStorage.setItem("Cart", JSON.stringify(this.cartProducts));
@@ -183,13 +193,13 @@ export class HeaderComponent implements OnInit  {
       this.cartService.addToCartDB(this.cartProducts[i], 1)
       .subscribe({
         next: (cart) => {
-          console.log('Cart updated:', cart);
+          // console.log('Cart updated:', cart);
         },
         error: (error) => {
-          console.log('Error updating cart:', error);
+          // console.log('Error updating cart:', error);
         },
         complete: () => {
-          console.log('Add to cart completed');
+          // console.log('Add to cart completed');
         }
       });
       sessionStorage.setItem("Cart", JSON.stringify(this.cartProducts));
@@ -215,13 +225,13 @@ export class HeaderComponent implements OnInit  {
               this.cartService.addToCartDB(tempCart[i],tempCart[i].quantity )
               .subscribe({
                 next: (cart) => {
-                  console.log('Cart updated:', cart);
+                  // console.log('Cart updated:', cart);
                 },
                 error: (error) => {
-                  console.log('Error updating cart:', error);
+                  // console.log('Error updating cart:', error);
                 },
                 complete: () => {
-                  console.log('Add to cart completed');
+                  // console.log('Add to cart completed');
                 }
               });
             }
@@ -231,7 +241,7 @@ export class HeaderComponent implements OnInit  {
           this.cartProducts = this.cartService.cartAddProduct;
           this.cartService.createCartproduct(this.allProducts);
         }else{
-          console.log("Đăng nhập thất bại");
+          alert("Đăng nhập thất bại");
 
         }
 
@@ -257,13 +267,10 @@ export class HeaderComponent implements OnInit  {
       this.cartService.deleteProductDB(i)
       .subscribe({
         next: (cart) => {
-          console.log('Cart updated:', cart);
+          // console.log('Cart updated:', cart);
         },
         error: (error) => {
-          console.log('Error updating cart:', error);
-        },
-        complete: () => {
-          console.log('Add to cart completed');
+          // console.log('Error updating cart:', error);
         }
       });
     }else{
@@ -293,17 +300,18 @@ export class HeaderComponent implements OnInit  {
   }
   createOrder(){
     // this.tempProduct=null
-    this.tempProduct=this.cartProducts.filter(c=>c.completed==true)
-    if(this.tempProduct.length>0){
-      console.log( this.tempProduct);
+    if(sessionStorage.getItem('checkLogin') === '1'){
+      this.tempProduct=this.cartProducts.filter(c=>c.completed==true)
+      if(this.tempProduct.length>0){
+        console.log( this.tempProduct);
 
-      localStorage.setItem('Order',JSON.stringify(this.tempProduct))
-      this.router.navigate(['/DeliveryInfor'])
+        localStorage.setItem('Order',JSON.stringify(this.tempProduct))
+        this.router.navigate(['/DeliveryInfor'])
+      }else{
+        alert('chưa có sản phẩm trong giỏ hàng');
+      }
     }else{
-
-
-      console.log('chưa có sản phẩm trong giỏ hàng');
-
+      alert("Bạn chưa đăng nhập")
 
     }
   }

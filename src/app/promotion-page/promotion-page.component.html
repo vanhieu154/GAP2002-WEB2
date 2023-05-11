@@ -6,7 +6,7 @@
 </nav>
 <div class="banner">
   <!-- <img class="w-100" src="./assets/Img/4.png" alt=""> -->
-  <img class="w-100" src="./assets/Img/4.png" alt="">
+  <img class="w-100" src="{{promotion.Hinhanh}}" alt="">
 </div>
 
 <div>
@@ -15,7 +15,9 @@
       <mat-expansion-panel-header>
         <mat-panel-title class="info">THÔNG TIN VỀ CHƯƠNG TRÌNH </mat-panel-title>
       </mat-expansion-panel-header>
-      <p class="description"></p>
+      <p class="description" innerHTML="{{promotion.Mota}}">
+
+      </p>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
@@ -55,7 +57,7 @@
 </div>
 
 <div class="countDown-container">
-  <h1>SẮP DIỄN RA:</h1>
+  <h1>{{promotionStatus}}</h1>
   <div class="row">
       <div class="col-lg-1 col-md-2 col-2 countDown-time-container">
           <div class="countDown-time">
@@ -88,6 +90,7 @@
       <img class="w-100" src="./assets/Img/Voucher/VOUCHER3.png" alt="">
   </div>
   <div class="row ">
+    <h1 style="TEXT-ALIGN: center;">Sản Phẩm Được Bán {{promotion.LoaiPromotion}} <span *ngIf="promotion.Gia>0">{{promotion.Gia.toLocaleString('vi-VN')}}đ</span><span *ngIf="promotion.Gia<0">{{promotion.Gia}}%</span></h1>
     <div class="col-xl-2 col-lg-3 col-4 product"  *ngFor="let p of  promotionProduct">
       <button class="home-product-item w-100"  name="maSp" id="{{p.MaSP}}" value="{{p.MaSP}}" (click)="Detail(p)">
         <!-- <div class="home-product-item__img" style="background-image: url('./assets/Img/sanpham/{{ p.Hinhanh[0] }}')"></div> -->
@@ -99,10 +102,25 @@
           </div>
         </div>
         <div *ngIf="p.Discount > 0">
-          <div class="home-product-item__price">
-            <span class="home-product-item__price-current">{{(p.Price - p.Discount*p.Price/100).toLocaleString('vi-VN') }}đ</span>
-            <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN') }}đ</span>
-          </div>
+          <ng-container *ngIf="p.Discount<100">
+            <div class="home-product-item__price">
+              <span class="home-product-item__price-current">{{(p.Price - p.Discount*p.Price/100).toLocaleString('vi-VN') }}đ</span>
+              <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN') }}đ</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="p.Discount>100 && promotion.LoaiPromotion=='Đồng Giá' ">
+            <div class="home-product-item__price">
+              <span class="home-product-item__price-current">{{(p.Discount).toLocaleString('vi-VN') }}đ</span>
+              <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN') }}đ</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="p.Discount>100 && promotion.LoaiPromotion=='Giảm Giá' ">
+            <div class="home-product-item__price">
+              <span class="home-product-item__price-current">{{(p.Price-p.Discount).toLocaleString('vi-VN') }}đ</span>
+              <span class="home-product-item__price-old">{{p.Price.toLocaleString('vi-VN') }}đ</span>
+            </div>
+          </ng-container>
+
         </div>
         <div class="home-product-item__action">
           <span class="home-product-item__like home-product-item__like--liked">
@@ -118,12 +136,26 @@
           <i class="fa-solid fa-check"></i>
           <span>Yêu thích</span>
         </div>
-        <!-- <div *ngIf="p.Discount > 0">
-          <div class="home-product-item__sale-off">
-            <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
-            <div class="home-product-item__sale-off-label">GIẢM</div>
-          </div>
-        </div> -->
+        <div *ngIf="p.Discount > 0">
+          <ng-container *ngIf="p.Discount<100">
+            <div class="home-product-item__sale-off">
+              <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
+              <div class="home-product-item__sale-off-label">GIẢM</div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="p.Discount>100 && promotion.LoaiPromotion=='Đồng Giá' ">
+            <div class="home-product-item__sale-off">
+              <div class="home-product-item__sale-off-label" style="font-size: 1.0 rem; line-height: 1.0rem;">ĐỒNG GIÁ</div>
+              <div class="home-product-item__sale-off-percent">{{p.Discount /1000}}K</div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="p.Discount>100 && promotion.LoaiPromotion=='Giảm Giá' ">
+            <div class="home-product-item__sale-off">
+              <div class="home-product-item__sale-off-percent">{{p.Discount/1000}}K</div>
+              <div class="home-product-item__sale-off-label">GIẢM</div>
+            </div>
+          </ng-container>
+        </div>
       </button>
     </div>
   </div>

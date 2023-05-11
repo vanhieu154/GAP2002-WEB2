@@ -27,6 +27,7 @@ export class PromotionPageComponent implements OnInit {
   promotionProduct:Product[]=[]
   promotion:any=[]
   user=new User()
+  promotionStatus:string=''
   constructor(private router:Router, private promotionService:PromotionService, private productService:ProductService,private authService:AuthService){
     if(sessionStorage.getItem('checkLogin') === '1'){
       this.user=JSON.parse(sessionStorage.getItem('Account') || '{}')
@@ -47,9 +48,20 @@ export class PromotionPageComponent implements OnInit {
       },
       error: (err) => { this.errMessage = err; }
     });
-    this.promotionService.getActivatePromotions().subscribe({
+    this.promotionService.getActivatePromotionsPage().subscribe({
     next: (data) => {
       this.promotion=data
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const promotionStartDate= new Date(this.promotion.Ngaybatdau)
+      if(promotionStartDate>today){
+        this.promotionStatus="SẮP DIỄN RA:"
+        this.launchDate=new Date(this.promotion.Ngaybatdau).getTime()
+      }else{
+        this.promotionStatus="ĐANG DIỄN RA:"
+        this.launchDate=new Date(this.promotion.Ngayketthuc).getTime()
+      }
+
     },
     error: (err) => {
       this.errMessage = err;
@@ -62,10 +74,7 @@ export class PromotionPageComponent implements OnInit {
       },
       error:(err)=>{this.errMessage=err}
     })
-    this.productService.getProducts().subscribe({
-      next:(data)=>{this.promotionProduct=data.filter((p: { Discount: number; })=>p.Discount>0)},
-      error:(err)=>{this.errMessage=err}
-    })
+
   }
   isDisabled(promotionId: any): boolean {
     return this.user.discount.some((discount) => discount.DiscountID === promotionId);

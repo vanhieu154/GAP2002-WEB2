@@ -2,10 +2,10 @@
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ProductService } from '../product.service';
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddressService } from '../address.service';
 import { User } from '../user';
 import { Address } from '../address';
@@ -14,6 +14,8 @@ import { Order, OrderItem } from '../order'  ;
 import { OrderService } from '../order.service';
 import { CartItem } from '../cart';
 import { LocationService } from '../location.service';
+import { PromotionService } from '../promotion.service';
+import { Coupon } from '../coupon';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -67,9 +69,12 @@ tempCart:any[]=[]
 allProduct:any[]=[]
 formAddress!:FormGroup
 AllOrder:any[]=[]
-  constructor(private locationService: LocationService,private cdRef: ChangeDetectorRef,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService,private _formBuilder: FormBuilder) {
+userCoupon:any[]=[]
+noDiscount:boolean=false
+  constructor(private promotionService:PromotionService,private locationService: LocationService,private cdRef: ChangeDetectorRef,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService,private _formBuilder: FormBuilder) {
     this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
     this.tempOrder= JSON.parse(localStorage.getItem('Order') || '{}');
+    this.noDiscount = this.tempOrder.some(order => order.Discount > 0);
     for (let i = 0; i < this.tempOrder.length; i++) {
       this.pay+=this.tempOrder[i].total
     }
@@ -128,6 +133,12 @@ AllOrder:any[]=[]
     this.orderService.getAllOrder().subscribe({
       next:(data)=>{this.AllOrder=data},
       error:(err)=>(this.errMessage=err)
+    })
+    this.promotionService.getUserPromotions(this.account._id).subscribe({
+      next:(data)=>{this.userCoupon=data
+      console.log(data);
+      },
+      error:(err)=>{this.errMessage=err}
     })
   }
 
@@ -200,38 +211,12 @@ public showText() {
   }
 
 
-  get tong(): number {
-    return this.totalShip  + this.pay;
-  }
 
   completeOrder(){
     this.order.total=this.tong
     this.order.addressID=this.selectedAddress._id
     this.order.SalesOrder=`SO${String(this.AllOrder.length).padStart(4, '0')}`
     console.log(this.order);
-    // this.orderService.postOrder(this.order).subscribe({
-    //   next:(data)=>{
-    //     this.order=data
-    //     localStorage.removeItem('Order')
-    //   },
-    //   error:(err)=>{this.errMessage=err}
-    // })
-    // const idsToRemove = this.tempOrder.map(order => order._id);
-    // this.tempCartProduct = this.cartProducts.filter(product => !idsToRemove.includes(product._id));
-
-    // for (let i = 0; i < this.tempCartProduct.length; i++) {
-    //   this.tempCart.push(new CartItem(this.tempCartProduct[i]._id, this.tempCartProduct[i].quantity));
-    // }
-    // this.account.cart=this.tempCart
-    // this.cartService.updateCart(this.account._id,this.tempCart).subscribe({
-    //   next:(data)=>{
-    //     this.account=data,
-    //     console.log(data);
-    //   },
-    //   error:(err)=>{this.errMessage=err}
-    // })
-    // sessionStorage.setItem("Account",JSON.stringify(this.account))
-    // this.cartService.createCartproduct(this.allProduct)
 
   }
   isFormInvalid = false;
@@ -294,7 +279,41 @@ public showText() {
 
     return this.phoneNumber.hasError('pattern') ? '*Số điện thoại không hợp lệ' : '';
   }
+  chosenCoupon=new Coupon()
+  showchooseVoucher:boolean=false
+  chooseVoucher(): void {
+    this.showchooseVoucher=true
+  }
+  closechooseVoucher(): void {
+    this.showchooseVoucher = false;
+  }
+  discount:number=0
+  get tong(): number {
+    return this.totalShip  + this.pay -this.discount;
+  }
+  applyDiscount(c:any){
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const couponStartDate= new Date(c.Ngaybatdau)
+    const couponEndDate= new Date(c.Ngayketthuc)
+    const total = this.tong
+    if(this.pay>c.Dieukiengiam && today>couponStartDate && today<couponEndDate){
+      if(c.Giatrigiam < 100){
+        this.discount=total*c.Giatrigiam/100
+      }else{
+        this.discount=c.Giatrigiam
+      }
+    }
+    else{
+      console.log("Bạn không đủ điều kiện sử dụng mã giảm giá");
+
+    }
+    console.log(this.discount);
+
+  }
+
 }
+
 @Component({
   selector: 'dialog-elements-example-dialog',
   templateUrl: 'dialog-elements-example-dialog.html',

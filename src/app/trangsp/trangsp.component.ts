@@ -4,6 +4,7 @@ import { Product } from '../product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../product';
 import { NavService } from '../nav.service';
+import { PromotionService } from '../promotion.service';
 
 @Component({
   selector: 'app-trangsp',
@@ -26,7 +27,8 @@ export class TrangspComponent implements OnInit {
 	selectedPrices: any = [];
 	search: string = '';
 	cate: string = '';
-	constructor(private _service: ProductService, private router: Router, private navService: NavService, private route: ActivatedRoute) {
+  promotion:any=[]
+	constructor(private promotionService:PromotionService,  private _service: ProductService, private router: Router, private navService: NavService, private route: ActivatedRoute) {
 		this._service.getProducts().subscribe({
 			next: (data: IProduct[]) => {
 				this.products = data;
@@ -91,7 +93,13 @@ export class TrangspComponent implements OnInit {
 				this.errMessage = err
 			}
 		})
-
+    this.promotionService.getActivatePromotions().subscribe({
+      next: (data) => {
+        this.promotion=data},
+      error: (err) => {
+        this.errMessage = err;
+      }
+    });
 	}
 
 	ngOnInit() {

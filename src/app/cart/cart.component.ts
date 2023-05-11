@@ -241,18 +241,17 @@ export class CartComponent {
   }
 
   createOrder(){
+    if(sessionStorage.getItem('checkLogin') === '1'){
     this.tempProduct=this.cartProduct.filter(c=>c.completed==true)
     if(this.tempProduct.length>0){
       localStorage.setItem('Order',JSON.stringify(this.tempProduct))
       this.router.navigate(['/DeliveryInfor'])
     }else{
-
-
-      console.log('chưa có sản phẩm trong giỏ hàng');
-
-
+      alert('chưa có sản phẩm trong giỏ hàng');
     }
-
+    }else{
+    alert("Bạn chưa đăng nhập")
+    }
   }
 
 

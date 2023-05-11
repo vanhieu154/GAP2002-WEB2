@@ -7,6 +7,7 @@ import data from '@iconify/icons-mdi/target';
 import { IProduct } from './product';
 import { AuthService } from './auth.service';
 import { User } from './user';
+import { PromotionService } from './promotion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,15 @@ export class CartService {
   public cartAddProduct:any[]=[];
   errMessage: string='dd';
   public products:any[]=[];
-  constructor(private http: HttpClient,private productService:ProductService,private authService:AuthService ) {
-
+  promotion:any=[]
+  constructor(private promotionService:PromotionService,private http: HttpClient,private authService:AuthService ) {
+    this.promotionService.getActivatePromotions().subscribe({
+      next: (data) => {
+        this.promotion=data},
+      error: (err) => {
+        this.errMessage = err;
+      }
+    });
 
   }
 
@@ -91,8 +99,17 @@ export class CartService {
             this.cartAddProduct[this.cartAddProduct.length] = allProducts[i];
             this.cartAddProduct[this.cartAddProduct.length - 1].quantity = cartItemss[j].quantity;
             this.cartAddProduct[this.cartAddProduct.length - 1].completed=false
-            if(allProducts[i].Discount>0){
-              this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price-allProducts[i].Price*allProducts[i].Discount /100
+            if(allProducts[i].Discount>0 ){
+              if(allProducts[i].Discount <100){
+                this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price-allProducts[i].Price*allProducts[i].Discount /100
+              }else{
+                if(this.promotion.LoaiPromotion=='Đồng Giá' ){
+                this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Discount
+                }else{
+                this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price-allProducts[i].Discount
+                }
+              }
+
             }else{
               this.cartAddProduct[this.cartAddProduct.length - 1].price =allProducts[i].Price
             }
@@ -109,8 +126,17 @@ export class CartService {
   public addToCart(product: any,quantity:number) {
     this.cartAddProduct[this.cartAddProduct.length] = product;
     this.cartAddProduct[this.cartAddProduct.length - 1].quantity = quantity;
-    if(product.Discount>0){
-      this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Price-product.Price*product.Discount /100
+    if(product.Discount>0 ){
+      if(product.Discount <100){
+        this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Price-product.Price*product.Discount /100
+      }else{
+        if(this.promotion.LoaiPromotion=='Đồng Giá' ){
+        this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Discount
+        }else{
+        this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Price-product.Discount
+        }
+      }
+
     }else{
       this.cartAddProduct[this.cartAddProduct.length - 1].price =product.Price
     }

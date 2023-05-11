@@ -220,13 +220,32 @@
                           <div class='col-7'>
                             <div class='header__cart-item__price'>
                               <ng-container *ngIf="p.Discount>0">
-                                <span class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}
-                                  <u>đ</u>
-                                </span>
-                                <span class='header__cart-item__price-old'>{{(p.Price).toLocaleString('vi-VN')}}
-                                  <u>đ</u>
-                                </span>
+                                <ng-container *ngIf="p.Discount<100">
+                                  <span class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}
+                                    <u>đ</u>
+                                  </span>
+                                  <span class='header__cart-item__price-old'>{{(p.Price).toLocaleString('vi-VN')}}
+                                    <u>đ</u>
+                                  </span>
+                                </ng-container>
+                                <ng-container *ngIf="p.Discount>100 && promotion.LoaiPromotion=='Đồng Giá' ">
+                                  <span class='header__cart-item__price-current'>{{(p.Discount).toLocaleString('vi-VN')}}
+                                    <u>đ</u>
+                                  </span>
+                                  <span class='header__cart-item__price-old'>{{(p.Price).toLocaleString('vi-VN')}}
+                                    <u>đ</u>
+                                  </span>
+                                </ng-container>
+                                <ng-container *ngIf="p.Discount>100 && promotion.LoaiPromotion=='Giảm Giá' ">
+                                  <span class='header__cart-item__price-current'>{{(p.Price-p.Discount).toLocaleString('vi-VN')}}
+                                    <u>đ</u>
+                                  </span>
+                                  <span class='header__cart-item__price-old'>{{(p.Price).toLocaleString('vi-VN')}}
+                                    <u>đ</u>
+                                  </span>
+                                </ng-container>
                               </ng-container>
+
                               <ng-container *ngIf="p.Discount==0">
                                 <span class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}}
                                   <u>đ</u>

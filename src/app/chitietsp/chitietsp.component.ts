@@ -7,6 +7,7 @@ import { CartService } from '../cart.service';
 import { CartItem } from '../cart';
 import { AuthService } from '../auth.service';
 import { PageEvent } from '@angular/material/paginator';
+import { PromotionService } from '../promotion.service';
 
 @Component({
   selector: 'app-chitietsp',
@@ -30,7 +31,8 @@ export class ChitietspComponent implements OnInit{
   currentPage: number = 0;
   // items: any[] = [...Array(this.totalItems).keys()].map(i => `Item ${i + 1}`);
   itemsOnPage: any[] = [];
-  constructor(private authService:AuthService ,private cartService: CartService,public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router) {
+  promotion:any=[]
+  constructor(private promotionService:PromotionService,private authService:AuthService ,private cartService: CartService,public dialog: MatDialog,private activateRoute:ActivatedRoute,private _service: ProductService,private router:Router) {
     this.allProducts = [];
     activateRoute.paramMap.subscribe(
       (param)=>{
@@ -60,7 +62,13 @@ export class ChitietspComponent implements OnInit{
       },
       error:(err)=>{this.errMessage=err}
     })
-
+    this.promotionService.getActivatePromotions().subscribe({
+      next: (data) => {
+        this.promotion=data},
+      error: (err) => {
+        this.errMessage = err;
+      }
+    });
   }
 
   onPageChange(event: PageEvent): void {
@@ -81,10 +89,10 @@ export class ChitietspComponent implements OnInit{
       this.cartService.addToCartDB(this.product, this.a)
       .subscribe({
         next: (cart) => {
-          console.log('Cart updated:', cart);
+          // console.log('Cart updated:', cart);
         },
         error: (error) => {
-          console.log('Error updating cart:', error);
+          // console.log('Error updating cart:', error);
         }
       });
       this.cartService.createCartproduct(this.allProducts)
