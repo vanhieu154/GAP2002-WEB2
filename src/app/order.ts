@@ -1,6 +1,7 @@
 export class Order {
   constructor(
     public _id: any = null,
+    public SalesOrder:string="",
     public userId:string="",
     public orderItems: OrderItem[] = [],
     public discountID: string ="",

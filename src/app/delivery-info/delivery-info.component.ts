@@ -66,7 +66,7 @@ tempCartProduct: any[]=[]
 tempCart:any[]=[]
 allProduct:any[]=[]
 formAddress!:FormGroup
-
+AllOrder:any[]=[]
   constructor(private locationService: LocationService,private cdRef: ChangeDetectorRef,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService,private _formBuilder: FormBuilder) {
     this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
     this.tempOrder= JSON.parse(localStorage.getItem('Order') || '{}');
@@ -125,6 +125,10 @@ formAddress!:FormGroup
       next:(data)=>{this.cities=data},
       error:(err)=>(this.errMessage=err)
     });
+    this.orderService.getAllOrder().subscribe({
+      next:(data)=>{this.AllOrder=data},
+      error:(err)=>(this.errMessage=err)
+    })
   }
 
   selectAddress(address: Address) {
@@ -203,30 +207,31 @@ public showText() {
   completeOrder(){
     this.order.total=this.tong
     this.order.addressID=this.selectedAddress._id
+    this.order.SalesOrder=`SO${String(this.AllOrder.length).padStart(4, '0')}`
     console.log(this.order);
-    this.orderService.postOrder(this.order).subscribe({
-      next:(data)=>{
-        this.order=data
-        localStorage.removeItem('Order')
-      },
-      error:(err)=>{this.errMessage=err}
-    })
-    const idsToRemove = this.tempOrder.map(order => order._id);
-    this.tempCartProduct = this.cartProducts.filter(product => !idsToRemove.includes(product._id));
+    // this.orderService.postOrder(this.order).subscribe({
+    //   next:(data)=>{
+    //     this.order=data
+    //     localStorage.removeItem('Order')
+    //   },
+    //   error:(err)=>{this.errMessage=err}
+    // })
+    // const idsToRemove = this.tempOrder.map(order => order._id);
+    // this.tempCartProduct = this.cartProducts.filter(product => !idsToRemove.includes(product._id));
 
-    for (let i = 0; i < this.tempCartProduct.length; i++) {
-      this.tempCart.push(new CartItem(this.tempCartProduct[i]._id, this.tempCartProduct[i].quantity));
-    }
-    this.account.cart=this.tempCart
-    this.cartService.updateCart(this.account._id,this.tempCart).subscribe({
-      next:(data)=>{
-        this.account=data,
-        console.log(data);
-      },
-      error:(err)=>{this.errMessage=err}
-    })
-    sessionStorage.setItem("Account",JSON.stringify(this.account))
-    this.cartService.createCartproduct(this.allProduct)
+    // for (let i = 0; i < this.tempCartProduct.length; i++) {
+    //   this.tempCart.push(new CartItem(this.tempCartProduct[i]._id, this.tempCartProduct[i].quantity));
+    // }
+    // this.account.cart=this.tempCart
+    // this.cartService.updateCart(this.account._id,this.tempCart).subscribe({
+    //   next:(data)=>{
+    //     this.account=data,
+    //     console.log(data);
+    //   },
+    //   error:(err)=>{this.errMessage=err}
+    // })
+    // sessionStorage.setItem("Account",JSON.stringify(this.account))
+    // this.cartService.createCartproduct(this.allProduct)
 
   }
   isFormInvalid = false;
