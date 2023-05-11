@@ -14,9 +14,15 @@ import { Cart } from "./cart";
       public cDate:Date=new Date(),
       public cart:Cart []=[],
       public order:string[] =[],
-      public discount:string[] =[],
+      public discount:Discount[] =[],
       public Address:string []=[]
     ){}
   }
 
 
+export class Discount{
+  constructor(
+    public DiscountID:any=null,
+    public IsActive:boolean=true
+  ){}
+}

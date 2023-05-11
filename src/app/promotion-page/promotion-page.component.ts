@@ -5,6 +5,8 @@ import { ProductService } from '../product.service';
 import { Product } from '../product';
 import { Router } from '@angular/router';
 import { Promotion } from '../promotion';
+import { Discount, User } from '../user';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-promotion-page',
@@ -23,8 +25,12 @@ export class PromotionPageComponent implements OnInit {
   page:number=1
   displayedCoupons: Coupon[] = [];
   promotionProduct:Product[]=[]
-  promotion=new Promotion()
-  constructor(private router:Router, private promotionService:PromotionService, private productService:ProductService){
+  promotion:any=[]
+  user=new User()
+  constructor(private router:Router, private promotionService:PromotionService, private productService:ProductService,private authService:AuthService){
+    if(sessionStorage.getItem('checkLogin') === '1'){
+      this.user=JSON.parse(sessionStorage.getItem('Account') || '{}')
+    }
     this.promotionService.getCoupons().subscribe({
       next: (data) => {
         this.page=Math.ceil(data.length/3)
@@ -34,32 +40,78 @@ export class PromotionPageComponent implements OnInit {
           today.setHours(0, 0, 0, 0);
           const couponEndDate = new Date(coupon.Ngayketthuc);
           return couponEndDate > today;
+
         });
+
         this.displayedCoupons=this.coupons.slice(0,3)
       },
       error: (err) => { this.errMessage = err; }
     });
+
+    // this.promotionService.getPromotions().subscribe({
+    //   next: (data) => {
+    //     const today = new Date();
+    //     today.setHours(0, 0, 0, 0);
+
+    //     // this.promotion
+    //     let tempPromotion = data.filter((promotion: { Ngaybatdau: string ; Ngayketthuc: string ; }) => {
+    //       const ngayBatDau = new Date(promotion.Ngaybatdau);
+    //       const ngayKetThuc = new Date(promotion.Ngayketthuc);
+    //       return ngayBatDau <= today && ngayKetThuc > today;
+    //     });
+    //     if(tempPromotion.length===0){
+
+    //     }
+    //     // if(this.promotion == [])
+
+    //     console.log(this.promotion);
+
+    //   },
+    //   error: (err) => {
+    //     this.errMessage = err;
+    //   }
+    // });
     this.promotionService.getPromotions().subscribe({
-      next: (data) => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+  next: (data) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-        this.promotion = data.filter((promotion: { Ngaybatdau: string ; Ngayketthuc: string ; }) => {
-          const ngayBatDau = new Date(promotion.Ngaybatdau);
-          const ngayKetThuc = new Date(promotion.Ngayketthuc);
-          return ngayBatDau <= today && ngayKetThuc > today;
-        });
-        console.log(this.promotion);
-
-      },
-      error: (err) => {
-        this.errMessage = err;
-      }
+    let tempPromotion = data.filter((promotion: { Ngaybatdau: string; Ngayketthuc: string }) => {
+      const ngayBatDau = new Date(promotion.Ngaybatdau);
+      const ngayKetThuc = new Date(promotion.Ngayketthuc);
+      return ngayBatDau <= today && ngayKetThuc > today;
     });
+
+    if (tempPromotion.length === 0) {
+      const nearestPromotion = data.reduce((nearest: Date, promotion: { Ngaybatdau: string; Ngayketthuc: string }) => {
+        const ngayBatDau = new Date(promotion.Ngaybatdau);
+        if (ngayBatDau > nearest && ngayBatDau <= today) {
+          return ngayBatDau;
+        }
+        return nearest;
+      }, new Date(0));
+
+      tempPromotion = data.filter((promotion: { Ngaybatdau: string; Ngayketthuc: string }) => {
+        const ngayBatDau = new Date(promotion.Ngaybatdau);
+        const ngayKetThuc = new Date(promotion.Ngayketthuc);
+        return ngayBatDau === nearestPromotion && ngayKetThuc > today;
+      });
+    }
+    console.log(data);
+
+    console.log(tempPromotion);
+  },
+  error: (err) => {
+    this.errMessage = err;
+  }
+});
     this.productService.getProducts().subscribe({
       next:(data)=>{this.promotionProduct=data.filter((p: { Discount: number; })=>p.Discount>0)},
       error:(err)=>{this.errMessage=err}
     })
+  }
+  isDisabled(promotionId: any): boolean {
+    return this.user.discount.some((discount) => discount.DiscountID === promotionId);
   }
   ngOnInit() {
     setInterval(() => {
@@ -106,5 +158,22 @@ export class PromotionPageComponent implements OnInit {
     }
   }
 
+  saveCoupon(_id:any){
+    if(sessionStorage.getItem('checkLogin') === '1'){
+      // let account=JSON.parse(sessionStorage.getItem('Account') || '{}')
+      this.user.discount.push(new Discount(_id,true))
+      console.log(new Discount(_id,true));
 
+      console.log(this.user);
+      sessionStorage.setItem('Account',JSON.stringify(this.user))
+      this.authService.updateUser(this.user).subscribe({
+        next:(data)=>{this.user=data},
+        error:(err)=>{this.errMessage=err}
+      })
+
+    }else{
+      console.log("bạn chưa đăng nhập");
+
+    }
+  }
 }

@@ -72,7 +72,16 @@ a{
   width: 60%;
   margin: 5px;
 }
-
+.voucher-recive{
+  background-color: #d2beb4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  width: 60%;
+  margin: 5px;
+}
 .voucher-button:hover {
   background-color: #fff;
   color: #d2beb4;

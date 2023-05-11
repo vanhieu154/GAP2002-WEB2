@@ -36,6 +36,19 @@ export class PromotionService {
       catchError(this.handleError)
     )
   }
+  getUserPromotions(_id:any):Observable<any>
+  {
+    const headers=new HttpHeaders().set("Content-Type","text/plain;charset=utf-8")
+    const requestOptions:Object={
+      headers:headers,
+      responseType:"text"
+    }
+    return this._http.get<any>("http://localhost:4000/user_coupon/"+_id,requestOptions).pipe(
+      map(res=>JSON.parse(res) as Array<Coupon>),
+      retry(3),
+      catchError(this.handleError)
+    )
+  }
   handleError(error:HttpErrorResponse){
     return throwError(()=>new Error(error.message))
   }

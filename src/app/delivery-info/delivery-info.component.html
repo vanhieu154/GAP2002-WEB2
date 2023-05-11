@@ -302,18 +302,18 @@
         <tr  *ngFor="let p of tempOrder;let i=index">
 
           <td style="word-wrap: break-word; width: 150px;" >
-            <img style="min-width: 30px;" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt=''>
+            <img style="min-width: 30px;" src="{{p.Hinhanh[0]}}" alt=''>
           </td>
           <td style="word-wrap: break-word; max-width: 50px;" >{{p.TenSP}}</td>
           <td style="word-wrap: break-word; max-width: 10px;">{{p.quantity}}</td>
           <td style="word-wrap: break-word; max-width: 80px;">
             <ng-container *ngIf="p.Discount>0">
-              <div class='header__cart-item__price-current'>{{(p.Price-p.Price*p.Discount/100).toLocaleString('vi-VN')}}<u>đ</u> <span class="header__cart-item__price-old">{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span> </div>
-              <div><b>Tổng:</b>  <br> {{p.quantity}} * {{((p.Price-p.Price*p.Discount/100)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+              <div class='header__cart-item__price-current'> <span class="header__cart-item__price-old">{{(p.Price).toLocaleString('vi-VN')}}<u>đ</u></span> </div>
+              <div><b>Tổng: </b>{{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
             </ng-container>
             <ng-container *ngIf="p.Discount==0">
               <div class='header__cart-item__price-current'>{{((p.Price)).toLocaleString('vi-VN')}} <u>đ</u></div>
-              <div><b>Tổng:</b> <br> {{p.quantity}} * {{((p.Price)).toLocaleString('vi-VN')}}<u>đ</u> <br> = {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
+              <div><b>Tổng:</b> {{p.total.toLocaleString('vi-VN')}}<u>đ</u></div>
             </ng-container>
           </td>
         </tr>
