@@ -112,19 +112,18 @@ export class CartComponent {
     // Tạo một hộp thoại xác nhận xóa
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '417px',
-      data: {}
+      height: '220px',
     });
 
-    // Xử lý hành động khi người dùng bấm nút Yes hoặc No trong hộp thoại
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result === true){
         // Nếu người dùng bấm Yes, thực hiện xóa sản phẩm
         if (sessionStorage.getItem('checkLogin') === '1') {
           this.cartService.deleteProductDB(this.productLocation)
             .subscribe({
               next: (cart) => {
                 console.log('Cart updated:', cart);
-                alert('Product deleted successfully!');
+                // alert('Product deleted successfully!');
               },
               error: (error) => {
                 console.log('Error updating cart:', error);

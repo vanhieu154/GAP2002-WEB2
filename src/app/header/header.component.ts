@@ -6,7 +6,13 @@ import { NavService } from '../nav.service';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
 import { IProduct } from '../product';
+<<<<<<< Updated upstream
 import { PromotionService } from '../promotion.service';
+=======
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { LackInformationComponent } from '../lack-information/lack-information.component';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-header',
@@ -35,8 +41,12 @@ export class HeaderComponent implements OnInit  {
   cartProducts: any[]=[];
   allProducts:any[]=[];
   tempProduct:any=null
+<<<<<<< Updated upstream
   promotion:any=[]
   constructor(private promotionService:PromotionService,private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
+=======
+  constructor(private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService,public dialog: MatDialog)  {
+>>>>>>> Stashed changes
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true;
       cartService.loadCartDB();
@@ -212,7 +222,9 @@ export class HeaderComponent implements OnInit  {
 
     }
   }
+
   onLogin(): void {
+
     this.authService.login(this.username, this.password).subscribe({
       next: (data) => {
         this.user = data;
@@ -240,8 +252,21 @@ export class HeaderComponent implements OnInit  {
           this.cartItemCount = this.cartService.cartAddProduct.length;
           this.cartProducts = this.cartService.cartAddProduct;
           this.cartService.createCartproduct(this.allProducts);
+          const dialogRef = this.dialog.open(SuccessDialogComponent, {
+            width: '417px',
+            height: '220px',
+          });
+          dialogRef.afterClosed().subscribe();
         }else{
+<<<<<<< Updated upstream
           alert("Đăng nhập thất bại");
+=======
+          const dialogRef = this.dialog.open(LackInformationComponent, {
+            width: '417px',
+            height: '220px',
+          });
+          dialogRef.afterClosed().subscribe();
+>>>>>>> Stashed changes
 
         }
 
@@ -260,6 +285,11 @@ export class HeaderComponent implements OnInit  {
     this.authService.isLoggedIn=false;
     this.cartService.cartAddProduct = [];
     this.cartService.cartUpdated.next();
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      width: '417px',
+      height: '220px',
+    });
+    dialogRef.afterClosed().subscribe();
     this.router.navigate(['/'])
   }
   deleteP(i:number){
