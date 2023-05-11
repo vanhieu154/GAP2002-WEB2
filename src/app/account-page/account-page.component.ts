@@ -117,7 +117,7 @@ export class AccountPageComponent implements OnInit {
       },
       error: (err) => { this.errMesage = err; }
     });
-    this.promotionService.getUserPromotions(this.account._id).subscribe({
+    this.promotionService.getUserActiveCoupon(this.account._id).subscribe({
       next:(data)=>{this.userCoupon=data
       console.log(data);
       },

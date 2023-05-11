@@ -16,6 +16,7 @@ import { CartItem } from '../cart';
 import { LocationService } from '../location.service';
 import { PromotionService } from '../promotion.service';
 import { Coupon } from '../coupon';
+import { AuthService } from '../auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -71,7 +72,7 @@ formAddress!:FormGroup
 AllOrder:any[]=[]
 userCoupon:any[]=[]
 noDiscount:boolean=false
-  constructor(private promotionService:PromotionService,private locationService: LocationService,private cdRef: ChangeDetectorRef,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService,private _formBuilder: FormBuilder) {
+  constructor(private authService:AuthService,  private promotionService:PromotionService,private locationService: LocationService,private cdRef: ChangeDetectorRef,private router:Router,private productService:ProductService,public dialog: MatDialog, public addressService:AddressService,public cartService:CartService,private orderService:OrderService,private _formBuilder: FormBuilder) {
     this.account=JSON.parse(sessionStorage.getItem('Account') || '{}')
     this.tempOrder= JSON.parse(localStorage.getItem('Order') || '{}');
     this.noDiscount = this.tempOrder.some(order => order.Discount > 0);
@@ -134,14 +135,12 @@ noDiscount:boolean=false
       next:(data)=>{this.AllOrder=data},
       error:(err)=>(this.errMessage=err)
     })
-    this.promotionService.getUserPromotions(this.account._id).subscribe({
+    this.promotionService.getUserActiveCoupon(this.account._id).subscribe({
       next:(data)=>{this.userCoupon=data
-      console.log(data);
       },
       error:(err)=>{this.errMessage=err}
     })
   }
-
   selectAddress(address: Address) {
     this.selectedAddress=address
   }
@@ -209,15 +208,69 @@ public showText() {
     }
 
   }
+  applyedDiscount:any=[]
+  applyDiscount(c:any){
+    this.applyedDiscount=c
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const couponStartDate= new Date(c.Ngaybatdau)
+    const couponEndDate= new Date(c.Ngayketthuc)
+    if(this.pay>c.Dieukiengiam && today>couponStartDate && today<couponEndDate){
+      if(c.Giatrigiam < 100){
+        this.discount=this.pay*c.Giatrigiam/100
+      }else{
+        this.discount=c.Giatrigiam
+      }
+      this.applyedDiscount=c
+    }
+    else{
+      console.log("Bạn không đủ điều kiện sử dụng mã giảm giá");
 
+    }
+    console.log(this.discount);
+
+  }
 
   completeOrder(){
     this.order.total=this.tong
     this.order.addressID=this.selectedAddress._id
     this.order.SalesOrder=`SO${String(this.AllOrder.length).padStart(4, '0')}`
     console.log(this.order);
+    this.order.discountID=this.applyedDiscount._id
+    this.orderService.postOrder(this.order).subscribe({
+      next:(data)=>{
+        this.order=data
+        localStorage.removeItem('Order')
+      },
+      error:(err)=>{this.errMessage=err}
+    })
+    const idsToRemove = this.tempOrder.map(order => order._id);
+    this.tempCartProduct = this.cartProducts.filter(product => !idsToRemove.includes(product._id));
 
+    for (let i = 0; i < this.tempCartProduct.length; i++) {
+      this.tempCart.push(new CartItem(this.tempCartProduct[i]._id, this.tempCartProduct[i].quantity));
+    }
+    this.account.cart=this.tempCart
+    this.cartService.updateCart(this.account._id,this.tempCart).subscribe({
+      next:(data)=>{
+        this.account=data
+      },
+      error:(err)=>{this.errMessage=err}
+    })
+    this.authService.updateUser(this.account).subscribe({
+      next:(data)=>{
+        this.account=data
+      },
+      error:(err)=>{this.errMessage=err}
+    })
+    const discount = this.account.discount.find((d) => d.DiscountID === this.applyedDiscount._id);
+    if (discount) {
+      discount.IsActive = false;
+    }
+
+    sessionStorage.setItem("Account",JSON.stringify(this.account))
+    this.cartService.createCartproduct(this.allProduct)
   }
   isFormInvalid = false;
   showmodal=false;
@@ -291,26 +344,7 @@ public showText() {
   get tong(): number {
     return this.totalShip  + this.pay -this.discount;
   }
-  applyDiscount(c:any){
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const couponStartDate= new Date(c.Ngaybatdau)
-    const couponEndDate= new Date(c.Ngayketthuc)
-    const total = this.tong
-    if(this.pay>c.Dieukiengiam && today>couponStartDate && today<couponEndDate){
-      if(c.Giatrigiam < 100){
-        this.discount=total*c.Giatrigiam/100
-      }else{
-        this.discount=c.Giatrigiam
-      }
-    }
-    else{
-      console.log("Bạn không đủ điều kiện sử dụng mã giảm giá");
 
-    }
-    console.log(this.discount);
-
-  }
 
 }
 

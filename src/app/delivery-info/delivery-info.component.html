@@ -334,6 +334,10 @@
             <ng-container *ngIf="noDiscount==true">
               <span > Bạn không thể áp dụng voucher với đơn hàng đã có sản phẩm khuyến mãi</span>
             </ng-container>
+            <ng-container *ngIf="applyedDiscount.length>0" >
+              Đã áp dụng mã: {{applyedDiscount.MaCoupon}} <br>
+              Đã giảm: {{applyedDiscount.Giatrigiam}}% giá trị đơn hàng
+            </ng-container>
             <ng-container *ngIf="noDiscount==false">
               <Button style=" width: 100%;" class="button--gui" (click)="chooseVoucher()"> Sử dụng </Button>
             </ng-container>
