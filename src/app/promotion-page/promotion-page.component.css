@@ -401,11 +401,22 @@ a{
 
 
 
+/* --------THÔNG TIN VỀ CHƯƠNG TRÌNH KHUYẾN MÃI */
+.mat-expansion-panel {
+  background: var(--lightpink);
+  color: #fff;
+}
 
-
-
-
-
+.mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+    background: var(--lightpink);
+}
+.info{
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.description{
+  color: black;
+}
 
 
 
