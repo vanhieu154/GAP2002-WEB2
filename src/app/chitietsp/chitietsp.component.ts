@@ -46,9 +46,7 @@ export class ChitietspComponent implements OnInit{
             error:(err)=>{this.errMessage=err}
           })
           this._service.getProduct(this.id).subscribe({
-            next:(data)=>{this.product=data,
-    console.log(data.Hinhanh[0])
-  },
+            next:(data)=>{this.product=data},
             error:(err)=>{this.errMessage=err}
           })
 
