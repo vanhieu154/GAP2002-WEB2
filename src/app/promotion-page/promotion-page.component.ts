@@ -47,64 +47,21 @@ export class PromotionPageComponent implements OnInit {
       },
       error: (err) => { this.errMessage = err; }
     });
-
-    // this.promotionService.getPromotions().subscribe({
-    //   next: (data) => {
-    //     const today = new Date();
-    //     today.setHours(0, 0, 0, 0);
-
-    //     // this.promotion
-    //     let tempPromotion = data.filter((promotion: { Ngaybatdau: string ; Ngayketthuc: string ; }) => {
-    //       const ngayBatDau = new Date(promotion.Ngaybatdau);
-    //       const ngayKetThuc = new Date(promotion.Ngayketthuc);
-    //       return ngayBatDau <= today && ngayKetThuc > today;
-    //     });
-    //     if(tempPromotion.length===0){
-
-    //     }
-    //     // if(this.promotion == [])
-
-    //     console.log(this.promotion);
-
-    //   },
-    //   error: (err) => {
-    //     this.errMessage = err;
-    //   }
-    // });
-    this.promotionService.getPromotions().subscribe({
-  next: (data) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    let tempPromotion = data.filter((promotion: { Ngaybatdau: string; Ngayketthuc: string }) => {
-      const ngayBatDau = new Date(promotion.Ngaybatdau);
-      const ngayKetThuc = new Date(promotion.Ngayketthuc);
-      return ngayBatDau <= today && ngayKetThuc > today;
-    });
-
-    if (tempPromotion.length === 0) {
-      const nearestPromotion = data.reduce((nearest: Date, promotion: { Ngaybatdau: string; Ngayketthuc: string }) => {
-        const ngayBatDau = new Date(promotion.Ngaybatdau);
-        if (ngayBatDau > nearest && ngayBatDau <= today) {
-          return ngayBatDau;
-        }
-        return nearest;
-      }, new Date(0));
-
-      tempPromotion = data.filter((promotion: { Ngaybatdau: string; Ngayketthuc: string }) => {
-        const ngayBatDau = new Date(promotion.Ngaybatdau);
-        const ngayKetThuc = new Date(promotion.Ngayketthuc);
-        return ngayBatDau === nearestPromotion && ngayKetThuc > today;
-      });
+    this.promotionService.getActivatePromotions().subscribe({
+    next: (data) => {
+      this.promotion=data
+    },
+    error: (err) => {
+      this.errMessage = err;
     }
-    console.log(data);
-
-    console.log(tempPromotion);
-  },
-  error: (err) => {
-    this.errMessage = err;
-  }
-});
+    });
+    this.promotionService.getActivatePromotionsProduct().subscribe({
+      next:(data)=>{
+        this.promotionProduct=data
+        console.log(data);
+      },
+      error:(err)=>{this.errMessage=err}
+    })
     this.productService.getProducts().subscribe({
       next:(data)=>{this.promotionProduct=data.filter((p: { Discount: number; })=>p.Discount>0)},
       error:(err)=>{this.errMessage=err}
