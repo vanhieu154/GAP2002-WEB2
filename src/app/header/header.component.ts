@@ -6,14 +6,11 @@ import { NavService } from '../nav.service';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
 import { IProduct } from '../product';
-<<<<<<< Updated upstream
-import { PromotionService } from '../promotion.service';
-=======
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LackInformationComponent } from '../lack-information/lack-information.component';
->>>>>>> Stashed changes
-
+import { PromotionService } from '../promotion.service';
+import { NoProductDialogComponent } from '../no-product-dialog/no-product-dialog.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -41,12 +38,8 @@ export class HeaderComponent implements OnInit  {
   cartProducts: any[]=[];
   allProducts:any[]=[];
   tempProduct:any=null
-<<<<<<< Updated upstream
   promotion:any=[]
-  constructor(private promotionService:PromotionService,private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService)  {
-=======
-  constructor(private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService,public dialog: MatDialog)  {
->>>>>>> Stashed changes
+  constructor(private promotionService:PromotionService,private cartService: CartService,private renderer: Renderer2, private elementRef: ElementRef,public authService: AuthService,private router:Router,private navService: NavService,private productService:ProductService,public dialog: MatDialog,private promontionService:PromotionService,)  {
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true;
       cartService.loadCartDB();
@@ -258,15 +251,11 @@ export class HeaderComponent implements OnInit  {
           });
           dialogRef.afterClosed().subscribe();
         }else{
-<<<<<<< Updated upstream
-          alert("Đăng nhập thất bại");
-=======
           const dialogRef = this.dialog.open(LackInformationComponent, {
             width: '417px',
             height: '220px',
           });
           dialogRef.afterClosed().subscribe();
->>>>>>> Stashed changes
 
         }
 
@@ -338,7 +327,11 @@ export class HeaderComponent implements OnInit  {
         localStorage.setItem('Order',JSON.stringify(this.tempProduct))
         this.router.navigate(['/DeliveryInfor'])
       }else{
-        alert('chưa có sản phẩm trong giỏ hàng');
+        const dialogRef = this.dialog.open(NoProductDialogComponent, {
+          width: '417px',
+          height: '220px',
+        });
+        dialogRef.afterClosed().subscribe();
       }
     }else{
       alert("Bạn chưa đăng nhập")

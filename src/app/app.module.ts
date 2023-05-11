@@ -48,7 +48,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LackInformationComponent } from './lack-information/lack-information.component';
-import { SuccessDialogComponent } from './success-dialog/success-dialog.component'; // import MatPaginatorModule ở đây
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { LackConditionComponent } from './lack-condition/lack-condition.component';
+import { NoProductDialogComponent } from './no-product-dialog/no-product-dialog.component'; // import MatPaginatorModule ở đây
 
 
 @NgModule({
@@ -78,6 +80,8 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
     ChangeSuccessComponent,
     LackInformationComponent,
     SuccessDialogComponent,
+    LackConditionComponent,
+    NoProductDialogComponent,
 
   ],
   imports: [

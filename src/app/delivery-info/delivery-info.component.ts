@@ -17,6 +17,8 @@ import { LocationService } from '../location.service';
 import { PromotionService } from '../promotion.service';
 import { Coupon } from '../coupon';
 import { AuthService } from '../auth.service';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { LackConditionComponent } from '../lack-condition/lack-condition.component';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -211,12 +213,18 @@ public showText() {
   applyedDiscount:any=[]
   applyDiscount(c:any){
     this.applyedDiscount=c
-
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      width: '417px',
+      height: '220px',
+    });
+    dialogRef.afterClosed().subscribe();
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const couponStartDate= new Date(c.Ngaybatdau)
     const couponEndDate= new Date(c.Ngayketthuc)
-    if(this.pay>c.Dieukiengiam && today>couponStartDate && today<couponEndDate){
+    if(this.pay>c.Dieukiengiam && today>couponStartDate && today<couponEndDate)
+
+    {
       if(c.Giatrigiam < 100){
         this.discount=this.pay*c.Giatrigiam/100
       }else{
@@ -225,7 +233,11 @@ public showText() {
       this.applyedDiscount=c
     }
     else{
-      console.log("Bạn không đủ điều kiện sử dụng mã giảm giá");
+      const dialogRef = this.dialog.open(LackConditionComponent, {
+        width: '417px',
+        height: '220px',
+      });
+      dialogRef.afterClosed().subscribe();
 
     }
     console.log(this.discount);
