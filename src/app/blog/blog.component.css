@@ -52,6 +52,13 @@ p{
     color: #B8A898;
     font-size: large;
 }
+.mat-mdc-paginator {
+  background: var(--lightpink);
+  color: var(--darkbrown);
+}
+.mat-mdc-form-field {
+  color:var(--darkbrown);
+}
 @media (max-width: 1023px) and (min-width: 740px) {
     .blog{
         margin-top: 128px;

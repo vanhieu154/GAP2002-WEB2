@@ -131,6 +131,13 @@ a{
 .gioithieu{
   font-weight: bold;
 }
+.mat-mdc-paginator {
+  background: var(--lightpink);
+  color: var(--darkbrown);
+}
+.mat-mdc-form-field {
+  color:var(--darkbrown);
+}
 @media (max-width: 1023px) and (min-width: 740px) {
   .breadcrumb{
       margin-top: 128px;

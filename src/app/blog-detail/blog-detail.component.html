@@ -10,8 +10,8 @@
     </div>
     <div class="row bottom">
       <div class="col-4 text-center container ">
-        <p style="font-size: 20px;font-weight:bold;color:#6B4932;">BÀI VIẾT MỚI NHẤT</p>
-        <ng-container *ngFor="let b of blogs">
+        <p style="font-size: 20px;font-weight:bold;color:#6B4932; text-align: center;">BÀI VIẾT MỚI NHẤT</p>
+        <ng-container *ngFor="let b of itemsOnPage1">
           <hr class="hr__style">
           <div class="row">
             <div class="col-3 img--blog">
@@ -20,9 +20,14 @@
             <div class="col"><p style="text-align: left;"><a (click)="Detail(b)" class="brown">{{b.title}}</a>
                <br> {{b.author}}
                <br>{{b.displayDate | date: 'dd/MM/yyyy'}}</p></div>
-            <hr class="hr_style">
           </div>
         </ng-container>
+        <hr class="hr_style">
+        <mat-paginator [length]="totalBlogs1"
+        [pageSize]="pageSize1"
+        [pageSizeOptions]="pageSizeOptions1"
+        (page)="onPageChange1($event)">
+        </mat-paginator>
       </div>
 
 
