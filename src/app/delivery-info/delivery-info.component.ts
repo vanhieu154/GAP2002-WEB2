@@ -213,11 +213,6 @@ public showText() {
   applyedDiscount:any=[]
   applyDiscount(c:any){
     this.applyedDiscount=c
-    const dialogRef = this.dialog.open(SuccessDialogComponent, {
-      width: '417px',
-      height: '220px',
-    });
-    dialogRef.afterClosed().subscribe();
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const couponStartDate= new Date(c.Ngaybatdau)
@@ -231,6 +226,11 @@ public showText() {
         this.discount=c.Giatrigiam
       }
       this.applyedDiscount=c
+      const dialogRef = this.dialog.open(SuccessDialogComponent, {
+        width: '417px',
+        height: '220px',
+      });
+      dialogRef.afterClosed().subscribe();
     }
     else{
       const dialogRef = this.dialog.open(LackConditionComponent, {
