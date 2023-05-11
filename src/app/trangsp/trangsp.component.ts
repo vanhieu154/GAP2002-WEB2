@@ -169,6 +169,11 @@ export class TrangspComponent implements OnInit {
 	}
 
 	Detail(p: any) {
+    p.ClickCounter= p.ClickCounter+1
+    this._service.putProduct(p).subscribe({
+      next:(data)=>{p=data},
+      error:(err)=>{this.errMessage=err}
+    })
 		this.router.navigate(['chitietsp', p._id])
 	}
 

@@ -137,9 +137,9 @@
 
 
 
-                <h1 class="product__header">Sản phẩm khuyến mãi</h1>
+                <h1 class="product__header">Sản phẩm được yêu thích</h1>
                 <div class="row" id="discount_product">
-                  <div class="col-xl-2 col-lg-3 col-4 product"  *ngFor="let p of discountProduct">
+                  <div class="col-xl-2 col-lg-3 col-4 product"  *ngFor="let p of likedProduct">
                     <button class="home-product-item w-100"  name="maSp" id="{{p.MaSP}}" value="{{p.MaSP}}" (click)="Detail(p)">
                       <div class="home-product-item__img" style="background-image: url('./assets/Img/sanpham/{{ p.Hinhanh[0] }}')"></div>
                       <h4 class="home-product-item__name">{{p.TenSP}}</h4>
@@ -157,10 +157,10 @@
                         <div class="home-product-item__grand">{{p.Hang}}</div>
                           <!-- <div class="home-product-item__origin-name">Nhật bản</div> -->
                       </div>
-                      <!-- <div class="home-product-item__favor">
+                      <div class="home-product-item__favor" *ngIf="p.ClickCounter > 10">
                         <i class="fa-solid fa-check"></i>
                         <span>Yêu thích</span>
-                      </div> -->
+                      </div>
                         <div class="home-product-item__sale-off">
                           <div class="home-product-item__sale-off-percent">{{p.Discount}}%</div>
                           <div class="home-product-item__sale-off-label">GIẢM</div>

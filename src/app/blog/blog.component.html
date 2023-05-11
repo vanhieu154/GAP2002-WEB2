@@ -21,7 +21,7 @@
              <br>{{b.displayDate | date: 'dd/MM/yyyy'}}</p></div>
         </div>
       </ng-container>
-      <mat-paginator [length]="totalBlogs"
+      <mat-paginator [length]="totalBlogs1"
       [pageSize]="pageSize1"
       [pageSizeOptions]="pageSizeOptions1"
       (page)="onPageChange1($event)">
@@ -42,7 +42,7 @@
             </p></div>
           </div>
       </ng-container>
-      <mat-paginator [length]="totalBlogs"
+      <mat-paginator [length]="totalBlogs2"
       [pageSize]="pageSize2"
       [pageSizeOptions]="pageSizeOptions2"
       (page)="onPageChange2($event)">

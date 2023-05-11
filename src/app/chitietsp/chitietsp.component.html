@@ -192,7 +192,7 @@
                   <div class="home-product-item__grand">{{p.Hang}}</div>
                     <div class="home-product-item__origin-name">Nhật bản</div>
                 </div>
-                <div class="home-product-item__favor">
+                <div class="home-product-item__favor" *ngIf="p.ClickCounter > 10">
                   <i class="fa-solid fa-check"></i>
                   <span>Yêu thích</span>
                 </div>

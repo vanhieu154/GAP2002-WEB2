@@ -12,7 +12,7 @@ import { NavService } from '../nav.service';
 export class TrangchuComponent implements OnInit{
   product=new Product();
   products:IProduct[] =[];
-  discountProduct:IProduct[] =[]
+  likedProduct:IProduct[] =[]
 
   errMessage:string=''
   http: any;
@@ -23,8 +23,8 @@ export class TrangchuComponent implements OnInit{
       next:(data: IProduct[])=>{
         tempProducts = data.slice(0, 6);
         this.products = tempProducts;
-        this.discountProduct = data.filter(p => p.Discount > 0);
-        this.discountProduct = this.discountProduct.filter(p => !this.products.some(dp => dp.MaSP === p.MaSP)).slice(0, 6);
+        this.likedProduct = data.filter(p => p.ClickCounter > 10);
+        this.likedProduct = this.likedProduct.filter(p => !this.products.some(dp => dp.MaSP === p.MaSP)).slice(0, 6);
       },
       error:(err)=>{this.errMessage=err}
     })
@@ -201,10 +201,14 @@ export class TrangchuComponent implements OnInit{
   }
 
 
-  Detail(p:any){
-    this.router.navigate(['chitietsp',p._id])
-    window.scrollTo(0, 0);
-  }
+	Detail(p: any) {
+    p.ClickCounter= p.ClickCounter+1
+    this._service.putProduct(p).subscribe({
+      next:(data)=>{p=data},
+      error:(err)=>{this.errMessage=err}
+    })
+		this.router.navigate(['chitietsp', p._id])
+	}
 
   toProductPage(i:number){
     this.navService.productSearch(i);

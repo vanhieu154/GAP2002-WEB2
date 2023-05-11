@@ -12,7 +12,8 @@ import { PageEvent } from '@angular/material/paginator';
 export class BlogComponent {
   blogs:any[]=[]
   errMessage: any;
-  totalBlogs:number=1
+  totalBlogs1:number=1
+  totalBlogs2:number=1
   pageSize1: number = 3
   pageSizeOptions1: number[] = [3, 6, 9];
   pageSize2: number = 3
@@ -25,7 +26,8 @@ export class BlogComponent {
     this._service.getBlogs().subscribe({
       next:(data)=>{
         this.blogs=data
-        this.totalBlogs=data.length
+        this.totalBlogs1=data.length
+        this.totalBlogs2=data.length
         this.itemsOnPage1=data.slice(0,this.pageSize1)
         this.itemsOnPage2=data.slice(0,this.pageSize2)
       },

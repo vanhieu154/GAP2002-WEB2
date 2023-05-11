@@ -4,6 +4,7 @@ import { CartService } from '../cart.service';
 import { AuthService } from '../auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,8 @@ export class CartComponent {
   tempProduct:any[]=[]
   productLocation:number=0;
   cartItemCount: number=0;
-  constructor(private cartService:CartService,private router:Router,private authService:AuthService, public dialog: MatDialog){
+  errMessage: any;
+  constructor(private cartService:CartService,private router:Router,private authService:AuthService, public dialog: MatDialog, private _pService:ProductService){
 
     if (sessionStorage.getItem('checkLogin') === '1') {
       authService.isLoggedIn=true;
@@ -89,6 +91,11 @@ export class CartComponent {
     return completedItems.length > 0 && completedItems.length < brandItems.length;
   }
 	Detail(p: any) {
+    p.ClickCounter= p.ClickCounter+1
+    this._pService.putProduct(p).subscribe({
+      next:(data)=>{p=data},
+      error:(err)=>{this.errMessage=err}
+    })
 		this.router.navigate(['chitietsp', p._id])
 	}
   getProductLocation(p:any){
