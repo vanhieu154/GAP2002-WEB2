@@ -19,7 +19,6 @@
           <div class="col"><p style="text-align: left;"><a (click)="Detail(b)" class="brown">{{b.title}}</a>
              <br> {{b.author}}
              <br>{{b.displayDate | date: 'dd/MM/yyyy'}}</p></div>
-          <hr class="hr_style">
         </div>
       </ng-container>
       <mat-paginator [length]="totalBlogs"
@@ -27,6 +26,7 @@
       [pageSizeOptions]="pageSizeOptions1"
       (page)="onPageChange1($event)">
     </mat-paginator>
+      <hr class="hr_style">
     </div>
 
     <div class="col ">
