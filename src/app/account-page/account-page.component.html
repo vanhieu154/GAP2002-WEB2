@@ -351,7 +351,7 @@
                     <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
                     <div class="row" style="padding: 8px;">
                       <div class="col">
-                        Mã đơn hàng: {{order._id}} <br> <br>
+                        Mã đơn hàng: {{order.SalesOrder}} <br> <br>
                         Tên người nhận:{{ waitConfirmOrderAddress[i]?.[0]?.hovaten}} <br>
                         Số điện thoại: {{ waitConfirmOrderAddress[i]?.[0]?.phonenumber}}
                       </div>
@@ -372,7 +372,7 @@
                       <hr class="hr_style">
                       <div class="row" style="align-items: center">
                         <div class="col-2">
-                          <img class="img-order" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt="">
+                          <img class="img-order" src="{{p.Hinhanh[0]}}" alt="">
                         </div>
                         <div class="col information" style="padding-left: 20px;">
                           <p>{{p.TenSP}}</p>
@@ -418,7 +418,7 @@
                     <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
                     <div class="row" style="padding: 8px;">
                       <div class="col">
-                        Mã đơn hàng: {{order._id}} <br> <br>
+                        Mã đơn hàng: {{order.SalesOrder}} <br> <br>
                         Tên người nhận:{{ waitPickUpAddress[i]?.[0]?.hovaten}} <br>
                         Số điện thoại: {{ waitPickUpAddress[i]?.[0]?.phonenumber}}
                       </div>
@@ -439,7 +439,7 @@
                       <hr class="hr_style">
                       <div class="row" style="align-items: center">
                         <div class="col-2">
-                          <img class="img-order" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt="">
+                          <img class="img-order" src="{{p.Hinhanh[0]}}" alt="">
                         </div>
                         <div class="col information" style="padding-left: 20px;">
                           <p>{{p.TenSP}}</p>
@@ -485,7 +485,7 @@
                     <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
                     <div class="row" style="padding: 8px;">
                       <div class="col">
-                        Mã đơn hàng: {{order._id}} <br> <br>
+                        Mã đơn hàng: {{order.SalesOrder}} <br> <br>
                         Tên người nhận:{{ inDeliveringAddress[i]?.[0]?.hovaten}} <br>
                         Số điện thoại: {{ inDeliveringAddress[i]?.[0]?.phonenumber}}
                       </div>
@@ -506,7 +506,7 @@
                       <hr class="hr_style">
                       <div class="row" style="align-items: center">
                         <div class="col-2">
-                          <img class="img-order" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt="">
+                          <img class="img-order" src="{{p.Hinhanh[0]}}" alt="">
                         </div>
                         <div class="col information" style="padding-left: 20px;">
                           <p>{{p.TenSP}}</p>
@@ -550,7 +550,7 @@
                     <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
                     <div class="row" style="padding: 8px;">
                       <div class="col">
-                        Mã đơn hàng: {{order._id}} <br> <br>
+                        Mã đơn hàng: {{order.SalesOrder}} <br> <br>
                         Tên người nhận:{{ deliveredAddress[i]?.[0]?.hovaten}} <br>
                         Số điện thoại: {{ deliveredAddress[i]?.[0]?.phonenumber}}
                       </div>
@@ -570,7 +570,7 @@
                       <hr class="hr_style">
                       <div class="row" style="align-items: center">
                         <div class="col-2">
-                          <img class="img-order" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt="">
+                          <img class="img-order" src="{{p.Hinhanh[0]}}" alt="">
                         </div>
                         <div class="col information" style="padding-left: 20px;">
                           <p>{{p.TenSP}}</p>
@@ -614,7 +614,7 @@
                     <hr style="border:1px solid rgb(20, 19, 19);margin-top: 20px;margin-left: 5px; background-color: black;">
                     <div class="row" style="padding: 8px;">
                       <div class="col">
-                        Mã đơn hàng: {{order._id}} <br> <br>
+                        Mã đơn hàng: {{order.SalesOrder}} <br> <br>
                         Tên người nhận:{{ cancelledAddress[i]?.[0]?.hovaten}} <br>
                         Số điện thoại: {{ cancelledAddress[i]?.[0]?.phonenumber}}
                       </div>
@@ -634,7 +634,7 @@
                       <hr class="hr_style">
                       <div class="row" style="align-items: center">
                         <div class="col-2">
-                          <img class="img-order" src="./assets/Img/sanpham/{{p.Hinhanh[0]}}" alt="">
+                          <img class="img-order" src="{{p.Hinhanh[0]}}" alt="">
                         </div>
                         <div class="col information" style="padding-left: 20px;">
                           <p>{{p.TenSP}}</p>

@@ -119,7 +119,6 @@ export class AccountPageComponent implements OnInit {
     });
     this.promotionService.getUserActiveCoupon(this.account._id).subscribe({
       next:(data)=>{this.userCoupon=data
-      console.log(data);
       },
       error:(err)=>{this.errMesage=err}
     })
@@ -211,7 +210,6 @@ async getOrderDetailsForStatus(orders: Order[], conditionOrder: any[], detailsAr
   }
   onSubmit() {
     const user = this.getUserFromForm();
-    console.log(user);
     this.allowFix=!this.allowFix
     this.authService.updateUser(user).subscribe({
       next:(data)=>{
@@ -220,7 +218,6 @@ async getOrderDetailsForStatus(orders: Order[], conditionOrder: any[], detailsAr
       },
       error:(err)=>{this.errMesage=err}
     })
-    console.log(this.account);
 
 
   }
@@ -365,7 +362,6 @@ async getOrderDetailsForStatus(orders: Order[], conditionOrder: any[], detailsAr
     if(this.firstFormGroup.invalid){
       this.logOldPasswword=true
     }else{
-      console.log(this.firstFormGroup.controls['firstCtrl'].value);
 
       this.authService.confirmPass(this.account._id,this.firstFormGroup.controls['firstCtrl'].value).subscribe({
         next:(data)=>{
