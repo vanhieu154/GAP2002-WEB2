@@ -388,10 +388,10 @@ async getOrderDetailsForStatus(orders: Order[], conditionOrder: any[], detailsAr
       }
     });
   }
-  // secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['', (Validators.required, Validators.minLength(6))]});
-  secondFormGroup: FormGroup = this._formBuilder.group({
-    secondCtrl: ['', [Validators.required, this.checkNewPassValidator.bind(this),Validators.minLength(6)]],
-  });
+  secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['', (Validators.required, Validators.minLength(6))]});
+  // secondFormGroup: FormGroup = this._formBuilder.group({
+  //   secondCtrl: ['', [Validators.required, this.checkNewPassValidator.bind(this),Validators.minLength(6)]],
+  // });
   checkNewPass(){
     if(this.secondFormGroup.valid){
       this.stepper.next();
